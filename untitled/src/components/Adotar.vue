@@ -6,11 +6,15 @@
         </div>
         <br>
         <div class="w3-row">
-            <div class="w3-col m6 w3-padding-large">
-                <input type="image" src="../assets/cao.png" width="60" height="60">
+            <div class="w3-col m6">
+                <a href="">
+                    <img border="0" alt="W3Schools" src="../assets/cao.png" width="350" height="350">
+                </a>
             </div>
-            <div class="w3-col m6 w3-padding-large">
-                <input type="image" src="../assets/gato.png">
+            <div class="w3-col m6">
+                <a href="">
+                    <img border="0" alt="W3Schools" src="../assets/gato.png" width="780" height="450">
+                </a>
             </div>
         </div>
     </div>
