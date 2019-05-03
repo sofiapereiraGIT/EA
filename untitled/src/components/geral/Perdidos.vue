@@ -1,16 +1,15 @@
 <template>
     <div>
         <div class="w3-content w3-container w3-padding-64">
-            <h3 class="texto w3-center">Antes de adotar informe-se...</h3>
-            <h3 class="w3-center">textinho</h3>
+            <h3 class="texto w3-center">Ajude a encontrar estes animais</h3>
         </div>
         <br>
         <div class="w3-row">
             <div class="w3-col m6 w3-padding-large">
-                <input type="image" src="../assets/cao.png" width="60" height="60">
+                <input type="image" src="../../assets/cao.png" width="60" height="60">
             </div>
             <div class="w3-col m6 w3-padding-large">
-                <input type="image" src="../assets/gato.png">
+                <input type="image" src="../../assets/gato.png">
             </div>
         </div>
     </div>
@@ -18,7 +17,7 @@
 
 <script>
 export default {
-  name: 'Adotar'
+  name: 'Perdidos'
 }
 </script>
 
