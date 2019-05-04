@@ -8,12 +8,12 @@
         <div class="w3-row">
             <div class="w3-col m6">
                 <a href="">
-                    <img border="0" alt="W3Schools" src="../assets/cao.png" width="350" height="350">
+                    <img border="0" alt="W3Schools" src="../../assets/cao.png" width="350" height="350">
                 </a>
             </div>
             <div class="w3-col m6">
                 <a href="">
-                    <img border="0" alt="W3Schools" src="../assets/gato.png" width="780" height="450">
+                    <img border="0" alt="W3Schools" src="../../assets/gato.png" width="780" height="450">
                 </a>
             </div>
         </div>
