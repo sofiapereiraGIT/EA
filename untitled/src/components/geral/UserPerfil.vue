@@ -4,8 +4,8 @@
             <div class="w3-col m6 w3-container">
                 <img src="/w3images/map.jpg" class="w3-image w3-round" style="width:100%"><br>
                 <br>
-                <a href="url">Veja os cães desta entidade</a><br>
-                <a href="url">Veja os gatos desta entidade</a>
+                <a href="url">Veja os cães deste utilizador</a><br>
+                <a href="url">Veja os gatos deste utilizador</a>
             </div>
             <div class="w3-col m4 w3-panel">
                 <div class="w3-large w3-margin-bottom">
