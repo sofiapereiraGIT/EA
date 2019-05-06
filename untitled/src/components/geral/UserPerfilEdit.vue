@@ -1,42 +1,83 @@
 <template>
     <div>
-        <div class="w3-row w3-padding-32 w3-section">
-            <div class="w3-col m6 w3-container">
-                <img src="/w3images/map.jpg" class="w3-image w3-round" style="width:100%"><br>
-                <br>
-                <a href="url">Veja os cães deste utilizador</a><br>
-                <a href="url">Veja os gatos deste utilizador</a>
+        <form action="/action_page.php" target="_blank">
+            <div class="w3-row w3-padding-32 w3-section">
+                <div class="w3-col m6 w3-container">
+                    <img src="/w3images/map.jpg" class="w3-image w3-round" style="width:100%"><br>
+                    <br>
+                    <button type="button">Carregar Imagem</button>
+                </div>
+                <div class="w3-col m3 w3-panel">
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fas fa-user fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Nome" required name="nome">
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Descrição" required name="descricao">
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="email" placeholder="Email" required name="email">
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Contacto" required name="contacto">
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Concelho" required name="concelho">
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col m3 w3-panel">
+                    <div class="w3-container w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="password" placeholder="Password" required name="password">
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="password" placeholder="Confirme Password" required name="password2">
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <button type="button">Guardar</button>
+                    </div>
+                </div>
             </div>
-            <div class="w3-col m4 w3-panel">
-                <form action="/action_page.php" target="_blank">
-                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Nome" required name="Nome">
-                        </div>
-                    </div>
-                    <div class="w3-row-padding" style="margin:0 -600px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Descrição" required name="Descrição">
-                        </div>
-                    </div>
-                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-                        </div>
-                    </div>
-                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Contacto" required name="Contacto">
-                        </div>
-                    </div>
-                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Concelho" required name="Concelho">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </form>
     </div>
 </template>
 

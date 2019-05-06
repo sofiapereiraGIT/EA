@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div class="w3-content w3-container w3-padding-64">
-            <h3 class="texto w3-center">Antes de adotar informe-se...</h3>
-            <h3 class="w3-center">textinho</h3>
+        <div class="w3-row">
+            <div class="w3-content w3-container w3-padding-64">
+                <h3 class="texto w3-center">Antes de adotar informe-se...</h3>
+                <h3 class="w3-center">textinho</h3>
+            </div>
         </div>
         <br>
         <div class="w3-row">

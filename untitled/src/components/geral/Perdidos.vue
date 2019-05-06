@@ -1,9 +1,10 @@
 <template>
     <div>
-        <div class="w3-content w3-container w3-padding-64">
-            <h3 class="texto w3-center">Ajude a encontrar estes animais</h3>
+        <div class="w3-row">
+            <div class="w3-content w3-container w3-padding-64">
+                <h3 class="texto w3-center">Ajude a encontrar estes animais</h3>
+            </div>
         </div>
-        <br>
         <div class="w3-row">
             <div class="w3-container w3-col l3 m1 w3-hide-small"></div>
             <div class="w3-col l2 m4">
