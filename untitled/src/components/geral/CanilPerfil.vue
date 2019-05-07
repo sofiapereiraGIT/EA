@@ -4,8 +4,8 @@
             <div class="w3-col m6 w3-container">
                 <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image"><br>
                 <br>
-                <a href="url">Veja os cães desta entidade</a><br>
-                <a href="url">Veja os gatos desta entidade</a>
+                <router-link to="/AdotarCaes">Veja os cães desta entidade</router-link><br>
+                <router-link to="/AdotarGatos">Veja os gatos desta entidade</router-link>
             </div>
             <div class="w3-col m6 w3-container">
                 <div class="w3-col m12 w3-panel">

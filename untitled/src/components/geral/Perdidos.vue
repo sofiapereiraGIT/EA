@@ -8,14 +8,14 @@
         <div class="w3-row">
             <div class="w3-container w3-col l3 m1 w3-hide-small"></div>
             <div class="w3-col l2 m4">
-                <a href="">
+                <router-link to="/PerdidosCaes">
                     <img border="0" alt="W3Schools" src="../../assets/cao.png" width="350" height="350">
-                </a>
+                </router-link>
             </div>
             <div class="w3-col m5">
-                <a href="">
+                <router-link to="/PerdidosGatos">
                     <img border="0" alt="W3Schools" src="../../assets/gato.png" width="780" height="450">
-                </a>
+                </router-link>
             </div>
             <div class="w3-container w3-col l3 m1 w3-hide-small"></div>
         </div>

@@ -18,38 +18,38 @@
         <!-- TODO: organizar canis pelo nome do concelho e dentro disso, pelo nome do canil -->
         <div class="w3-row-padding" style="margin-top: 25px;">
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/logo.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/homepage.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
@@ -58,38 +58,38 @@
         <!-- Second Photo Grid-->
         <div class="w3-row-padding">
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <a href="#">
+                <router-link to="/CanilPerfil">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </a>
+                </router-link>
                 <div class="w3-container w3-white">
-                    <a href="#" style="text-decoration: none; color: black"><strong>Nome</strong></a>
+                    <router-link to="/CanilPerfil" style="text-decoration: none; color: black"><strong>Nome</strong></router-link>
                     <p style=" line-height: 0.1;">Concelho</p>
                 </div>
             </div>

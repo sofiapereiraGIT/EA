@@ -6,12 +6,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="w3-bar" id="myNavbar">
             <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-            <a href="#home" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</a>
-            <a href="/login" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-user"></i> LOGIN</a>
-            <a href="#aboutus" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-drivers-license-o"></i> SOBRE NÓS</a>
-            <a href="#perdidos" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-paw"></i> PERDIDOS</a>
-            <a href="#adocao" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fas fa-hand-holding-heart"></i> ADOÇÃO</a>
-            <a href="#canis" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fas fa-globe"></i> CANIS</a>
+            <router-link to="/" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</router-link>
+            <router-link to="/Login" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-user"></i> LOGIN</router-link>
+            <router-link to="/AboutUs" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-drivers-license-o"></i> SOBRE NÓS</router-link>
+            <router-link to="/Perdidos" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-paw"></i> PERDIDOS</router-link>
+            <router-link to="/Adotar" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fas fa-hand-holding-heart"></i> ADOÇÃO</router-link>
+            <router-link to="/Canis" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fas fa-globe"></i> CANIS</router-link>
         </div>
     </div>
 </template>
