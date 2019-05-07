@@ -1,5 +1,5 @@
 <template>
-    <div class="w3-main" style="padding:50px;">
+    <div class="w3-main" style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
         <!-- Sticky Filter Concelho -->
@@ -16,7 +16,7 @@
 
         <!-- First Photo Grid-->
         <!-- TODO: organizar canis pelo nome do concelho e dentro disso, pelo nome do canil -->
-        <div class="w3-row-padding">
+        <div class="w3-row-padding" style="margin-top: 25px;">
             <div class="w3-quarter w3-container w3-margin-bottom">
                 <a href="#">
                     <img src="../../assets/logo.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">

@@ -3,33 +3,16 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
         <!-- Title -->
-        <h1 style="text-shadow:1px 1px 0 #444"><strong>Gatos</strong></h1>
+        <h1 style="text-shadow:1px 1px 0 #444"><strong>Cães</strong></h1>
+
+        <!-- Slogan -->
+        <h2><strong>Ajude a encontrar estes animais.</strong></h2>
 
         <!-- Sticky Filters -->
         <div class="w3-row-padding" style="position: -webkit-sticky; position: sticky; top: 30px; background-color: white; padding-top: 20px">
             <div class="navbar" style="margin-bottom: 25px;">
                 <div class="dropdown">
                     <button class="dropbtn">Concelho
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Canil
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Estado
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
@@ -163,7 +146,7 @@
 
 <script>
 export default {
-  name: 'AdotarGatos'
+  name: 'PerdidosCaes'
 }
 </script>
 

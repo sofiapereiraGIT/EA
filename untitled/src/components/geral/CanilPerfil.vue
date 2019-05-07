@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="w3-row w3-padding-32 w3-section">
+        <div class="w3-row w3-padding-32 w3-section" style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
             <div class="w3-col m6 w3-container">
-                <img src="/w3images/map.jpg" class="w3-image w3-round" style="width:100%"><br>
+                <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image"><br>
                 <br>
                 <a href="url">Veja os cães desta entidade</a><br>
                 <a href="url">Veja os gatos desta entidade</a>
@@ -78,5 +78,11 @@ export default {
 </script>
 
 <style scoped>
-
+    .img {
+        height: 300px;
+        width: 300px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        object-fit: cover;
+    }
 </style>

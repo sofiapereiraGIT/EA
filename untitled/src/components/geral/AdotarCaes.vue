@@ -1,5 +1,5 @@
 <template>
-    <div class="w3-main" style="padding:50px;">
+    <div class="w3-main" style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
         <!-- Title -->
@@ -112,7 +112,7 @@
         </div>
 
         <!-- First Photo Grid-->
-        <div class="w3-row-padding">
+        <div class="w3-row-padding" style="margin-top: 25px;">
             <div class="w3-quarter w3-container w3-margin-bottom">
                 <a href="#">
                     <img src="../../assets/logo.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
@@ -178,10 +178,10 @@ export default {
 
     .navbar {
         overflow: hidden;
-        background-color: #333;
+        background-color: white;
         display: inline-block;
+        border: 1px solid #555;
     }
-
     .navbar a {
         float: left;
         font-size: 16px;
@@ -200,7 +200,7 @@ export default {
         font-size: 16px;
         border: none;
         outline: none;
-        color: white;
+        color: black;
         padding: 14px 16px;
         background-color: inherit;
         font-family: inherit;
