@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD:untitled/src/components/Login.vue
   <div class="Background">
     <div class="LoginPopUp">
         <h1>LOGIN FORM</h1>
@@ -7,6 +8,16 @@
 </template>
 
 <script>
+=======
+    <div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'Login'
+}
+>>>>>>> c2a67e53cd9c992a1310ac3670d70e2caa955b8d:untitled/src/components/geral/Login.vue
 </script>
 
 <style>

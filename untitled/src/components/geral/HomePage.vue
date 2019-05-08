@@ -36,9 +36,8 @@
     <!-- Texto Para FAT-->
     <div class="w3-content w3-container w3-padding-64">
       <div class="w3-row">
-        <!-- TODO -->
         <div class="w3-col m6 w3-center" style="padding-top: 25px">
-        <img src="../assets/FAT.jpg" class="w3-round w3-image w3-hover-opacity-off">
+        <img src="../../assets/FAT.jpg" class="w3-round w3-image w3-hover-opacity-off">
       </div>
         <div class="w3-col m6 w3-padding-large">
           <h3 class="w3-center">SEJA FAT</h3>
@@ -58,7 +57,7 @@
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
           <div class="w3-col m6 w3-center" style="padding-top: 25px">
-            <img src="../assets/FAT.jpg" class="w3-round w3-image w3-hover-opacity-off">
+            <img src="../../assets/FAT.jpg" class="w3-round w3-image w3-hover-opacity-off">
           </div>
       </div>
     </div>
@@ -81,7 +80,7 @@ export default {
 
 /* First image (Logo. Full height) */
 .bgimg-1 {
-  background-image: url('../assets/homepage.jpg');
+  background-image: url('../../assets/homepage.jpg');
   min-height: 100%;
 }
 

@@ -1,20 +1,18 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
     <Header/>
-    <HomePage/>
+    <router-view/>
     <Footer/>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import HomePage from '@/components/HomePage'
+import Header from '@/components/geral/layout/Header'
+import Footer from '@/components/geral/layout/Footer'
 
 export default {
   name: 'App',
-  components: { Header, Footer, HomePage }
+  components: { Header, Footer }
 }
 </script>
 
@@ -24,7 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: black;
+  margin-top: 100px;
 }
 </style>
