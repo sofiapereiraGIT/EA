@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Carlos Pedrosa(Universidade do Minho)
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Animal" table="Animal" lazy="false" discriminator-value="Animal">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<discriminator column="Discriminator" type="string"/>
+		<property name="emailUti" column="EmailUti" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="fotografia" column="Fotografia" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="sexo" column="Sexo" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="idade" column="Idade" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="raça" column="Raça" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="porte" column="Porte" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="corPelo" column="CorPelo" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="compPelo" column="CompPelo" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="estado" column="Estado" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="descricao" column="Descricao" type="string" length="255" not-null="false" lazy="false"/>
+		<subclass name="Cao" discriminator-value="Cao" lazy="false">
+		</subclass>
+		<subclass name="Gato" discriminator-value="Gato" lazy="false">
+		</subclass>
+	</class>
+</hibernate-mapping>
