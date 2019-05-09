@@ -18,14 +18,6 @@
                     </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
                         <div class="w3-col m1">
-                            <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
-                        </div>
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Descrição" required name="descricao">
-                        </div>
-                    </div>
-                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
-                        <div class="w3-col m1">
                             <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
@@ -48,14 +40,16 @@
                             <input class="w3-input w3-border" type="text" placeholder="Concelho" required name="concelho">
                         </div>
                     </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input class="w3-input w3-border" type="text" placeholder="Descrição" required name="descricao">
+                        </div>
+                    </div>
                 </div>
                 <div class="w3-col m3 w3-panel">
-                    <div class="w3-container w3-row-padding" style="margin:0 -200px 8px -16px">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
                         <div class="w3-col m1">
                             <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>

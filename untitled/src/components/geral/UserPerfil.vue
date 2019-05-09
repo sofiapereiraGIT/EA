@@ -4,8 +4,8 @@
             <div class="w3-col m6 w3-container">
                 <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image"><br>
                 <br>
-                <router-link href="/AdotarCaes">Veja os cães deste utilizador</router-link><br>
-                <router-link href="/AdotarGatos">Veja os gatos deste utilizador</router-link>
+                <router-link to="/AdotarCaes">Veja os cães deste utilizador</router-link><br>
+                <router-link to="/AdotarGatos">Veja os gatos deste utilizador</router-link>
             </div>
             <div class="w3-col m4 w3-panel">
                 <div class="w3-row-padding w3-container" style="clear: both; float: left">
