@@ -1,0 +1,213 @@
+2019-05-09 14:29:44,449 INFO  [org.jboss.modules] (main) JBoss Modules version 1.9.0.Final
+2019-05-09 14:29:44,890 INFO  [org.jboss.msc] (main) JBoss MSC version 1.4.5.Final
+2019-05-09 14:29:44,899 INFO  [org.jboss.threads] (main) JBoss Threads version 2.3.3.Final
+2019-05-09 14:29:45,015 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 16.0.0.Final (WildFly Core 8.0.0.Final) starting
+2019-05-09 14:29:45,016 DEBUG [org.jboss.as.config] (MSC service thread 1-2) Configured system properties:
+	[Standalone] = 
+	awt.toolkit = sun.awt.X11.XToolkit
+	file.encoding = UTF-8
+	file.encoding.pkg = sun.io
+	file.separator = /
+	http.nonProxyHosts = localhost,127.0.0.1,sofia
+	java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
+	java.awt.headless = true
+	java.awt.printerjob = sun.print.PSPrinterJob
+	java.class.path = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/jboss-modules.jar
+	java.class.version = 52.0
+	java.endorsed.dirs = /usr/lib/jvm/java-8-oracle/jre/lib/endorsed
+	java.ext.dirs = /usr/lib/jvm/java-8-oracle/jre/lib/ext:/usr/java/packages/lib/ext
+	java.home = /usr/lib/jvm/java-8-oracle/jre
+	java.io.tmpdir = /tmp
+	java.library.path = /usr/lib/jvm/java-8-oracle/jre/lib/amd64:/usr/lib/jvm/java-8-oracle/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+	java.net.preferIPv4Stack = true
+	java.runtime.name = Java(TM) SE Runtime Environment
+	java.runtime.version = 1.8.0_201-b09
+	java.specification.name = Java Platform API Specification
+	java.specification.vendor = Oracle Corporation
+	java.specification.version = 1.8
+	java.util.logging.manager = org.jboss.logmanager.LogManager
+	java.vendor = Oracle Corporation
+	java.vendor.url = http://java.oracle.com/
+	java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+	java.version = 1.8.0_201
+	java.vm.info = mixed mode
+	java.vm.name = Java HotSpot(TM) 64-Bit Server VM
+	java.vm.specification.name = Java Virtual Machine Specification
+	java.vm.specification.vendor = Oracle Corporation
+	java.vm.specification.version = 1.8
+	java.vm.vendor = Oracle Corporation
+	java.vm.version = 25.201-b09
+	javax.management.builder.initial = org.jboss.as.jmx.PluggableMBeanServerBuilder
+	jboss.home.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final
+	jboss.host.name = sofia
+	jboss.modules.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/modules
+	jboss.modules.system.pkgs = org.jboss.byteman
+	jboss.node.name = sofia
+	jboss.qualified.host.name = sofia
+	jboss.server.base.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone
+	jboss.server.config.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/configuration
+	jboss.server.data.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/data
+	jboss.server.deploy.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/data/content
+	jboss.server.log.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/log
+	jboss.server.name = sofia
+	jboss.server.persist.config = true
+	jboss.server.temp.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/tmp
+	line.separator = 
+
+	logging.configuration = file:/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/configuration/logging.properties
+	module.path = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/modules
+	org.jboss.boot.log.file = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/log/server.log
+	org.jboss.resolver.warning = true
+	os.arch = amd64
+	os.name = Linux
+	os.version = 4.15.0-48-generic
+	path.separator = :
+	sun.arch.data.model = 64
+	sun.boot.class.path = /usr/lib/jvm/java-8-oracle/jre/lib/resources.jar:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar:/usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar:/usr/lib/jvm/java-8-oracle/jre/classes
+	sun.boot.library.path = /usr/lib/jvm/java-8-oracle/jre/lib/amd64
+	sun.cpu.endian = little
+	sun.cpu.isalist = 
+	sun.io.unicode.encoding = UnicodeLittle
+	sun.java.command = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/jboss-modules.jar -mp /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/modules org.jboss.as.standalone -Djboss.home.dir=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final -Djboss.server.base.dir=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone -c standalone-full.xml
+	sun.java.launcher = SUN_STANDARD
+	sun.jnu.encoding = UTF-8
+	sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+	sun.os.patch.level = unknown
+	user.country = US
+	user.country.format = PT
+	user.dir = /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/bin
+	user.home = /home/sofia
+	user.language = en
+	user.language.format = pt
+	user.name = sofia
+	user.timezone = Europe/Lisbon
+2019-05-09 14:29:45,017 DEBUG [org.jboss.as.config] (MSC service thread 1-2) VM Arguments: -D[Standalone] -Xms128m -Xmx512m -Dhttp.nonProxyHosts=localhost,127.0.0.1,sofia -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Dorg.jboss.boot.log.file=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/log/server.log -Dlogging.configuration=file:/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/configuration/logging.properties 
+2019-05-09 14:29:45,645 INFO  [org.wildfly.security] (ServerService Thread Pool -- 24) ELY00001: WildFly Elytron version 1.8.0.Final
+2019-05-09 14:29:46,122 INFO  [org.jboss.as.controller.management-deprecated] (Controller Boot Thread) WFLYCTL0028: Attribute 'security-realm' in the resource at address '/core-service=management/management-interface=http-interface' is deprecated, and may be removed in a future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+2019-05-09 14:29:46,149 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 19) WFLYCTL0028: Attribute 'security-realm' in the resource at address '/subsystem=undertow/server=default-server/https-listener=https' is deprecated, and may be removed in a future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+2019-05-09 14:29:46,161 WARN  [org.wildfly.extension.messaging-activemq] (ServerService Thread Pool -- 9) WFLYMSGAMQ0101: Invalid value xa for transaction, legal values are [local, none, xa], default value is applied.
+2019-05-09 14:29:46,202 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0039: Creating http management service using socket-binding (management-http)
+2019-05-09 14:29:46,216 INFO  [org.xnio] (MSC service thread 1-6) XNIO version 3.6.5.Final
+2019-05-09 14:29:46,225 INFO  [org.xnio.nio] (MSC service thread 1-6) XNIO NIO Implementation Version 3.6.5.Final
+2019-05-09 14:29:46,264 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 53) WFLYCLINF0001: Activating Infinispan subsystem.
+2019-05-09 14:29:46,279 INFO  [org.wildfly.iiop.openjdk] (ServerService Thread Pool -- 52) WFLYIIOP0001: Activating IIOP Subsystem
+2019-05-09 14:29:46,290 INFO  [org.jboss.as.jaxrs] (ServerService Thread Pool -- 55) WFLYRS0016: RESTEasy version 3.6.3.Final
+2019-05-09 14:29:46,304 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 54) WFLYIO001: Worker 'default' has auto-configured to 16 core threads with 128 task threads based on your 8 available processors
+2019-05-09 14:29:46,305 INFO  [org.wildfly.extension.microprofile.config.smallrye._private] (ServerService Thread Pool -- 64) WFLYCONF0001: Activating WildFly MicroProfile Config Subsystem
+2019-05-09 14:29:46,316 INFO  [org.jboss.as.connector] (MSC service thread 1-1) WFLYJCA0009: Starting JCA Subsystem (WildFly/IronJacamar 1.4.12.Final)
+2019-05-09 14:29:46,321 INFO  [org.wildfly.extension.microprofile.health.smallrye] (ServerService Thread Pool -- 65) WFLYHEALTH0001: Activating Eclipse MicroProfile Health Subsystem
+2019-05-09 14:29:46,324 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 45) WFLYJCA0004: Deploying JDBC-compliant driver class org.h2.Driver (version 1.4)
+2019-05-09 14:29:46,330 INFO  [org.jboss.as.jsf] (ServerService Thread Pool -- 60) WFLYJSF0007: Activated the following JSF Implementations: [main]
+2019-05-09 14:29:46,331 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = h2
+2019-05-09 14:29:46,338 INFO  [org.wildfly.extension.microprofile.opentracing] (ServerService Thread Pool -- 67) WFLYTRACEXT0001: Activating MicroProfile OpenTracing Subsystem
+2019-05-09 14:29:46,340 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 68) WFLYNAM0001: Activating Naming Subsystem
+2019-05-09 14:29:46,346 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 74) WFLYSEC0002: Activating Security Subsystem
+2019-05-09 14:29:46,348 INFO  [org.jboss.as.security] (MSC service thread 1-4) WFLYSEC0001: Current PicketBox version=5.0.3.Final
+2019-05-09 14:29:46,361 INFO  [org.jboss.remoting] (MSC service thread 1-3) JBoss Remoting version 5.0.8.Final
+2019-05-09 14:29:46,361 WARN  [org.jboss.as.txn] (ServerService Thread Pool -- 76) WFLYTX0013: The node-identifier attribute on the /subsystem=transactions is set to the default value. This is a danger for environments running multiple servers. Please make sure the attribute value is unique.
+2019-05-09 14:29:46,372 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0002: Unbound mail session [java:jboss/mail/Default]
+2019-05-09 14:29:46,381 INFO  [org.wildfly.extension.microprofile.metrics.smallrye] (ServerService Thread Pool -- 66) WFLYMETRICS0001: Activating Eclipse MicroProfile Metrics Subsystem
+2019-05-09 14:29:46,389 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 78) WFLYWS0002: Activating WebServices Extension
+2019-05-09 14:29:46,404 INFO  [io.smallrye.metrics] (MSC service thread 1-8) Converted [2] config entries and added [4] replacements
+2019-05-09 14:29:46,415 INFO  [io.smallrye.metrics] (MSC service thread 1-8) Converted [3] config entries and added [14] replacements
+2019-05-09 14:29:46,430 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0003: Undertow 2.0.19.Final starting
+2019-05-09 14:29:46,473 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-8) WFLYJCA0010: Unbound data source [java:jboss/datasources/ExampleDS]
+2019-05-09 14:29:46,476 INFO  [org.jboss.as.ejb3] (MSC service thread 1-5) WFLYEJB0481: Strict pool slsb-strict-max-pool is using a max instance size of 128 (per class), which is derived from thread worker pool sizing.
+2019-05-09 14:29:46,477 INFO  [org.jboss.as.ejb3] (MSC service thread 1-4) WFLYEJB0482: Strict pool mdb-strict-max-pool is using a max instance size of 32 (per class), which is derived from the number of CPUs on this host.
+2019-05-09 14:29:46,484 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0001: Bound mail session [java:jboss/mail/Default]
+2019-05-09 14:29:46,489 INFO  [org.jboss.as.naming] (MSC service thread 1-1) WFLYNAM0003: Starting Naming Service
+2019-05-09 14:29:46,645 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 77) WFLYUT0014: Creating file handler for path '/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/welcome-content' with options [directory-listing: 'false', follow-symlink: 'false', case-sensitive: 'true', safe-symlink-paths: '[]']
+2019-05-09 14:29:46,648 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0012: Started server default-server.
+2019-05-09 14:29:46,655 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0018: Host default-host starting
+2019-05-09 14:29:46,893 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0006: Undertow HTTP listener default listening on 127.0.0.1:8080
+2019-05-09 14:29:46,912 INFO  [org.jboss.as.ejb3] (MSC service thread 1-7) WFLYEJB0493: EJB subsystem suspension complete
+2019-05-09 14:29:46,990 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-7) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+2019-05-09 14:29:47,010 INFO  [org.jboss.as.patching] (MSC service thread 1-1) WFLYPAT0050: WildFly Full cumulative patch ID is: base, one-off patches include: none
+2019-05-09 14:29:47,022 WARN  [org.jboss.as.domain.management.security] (MSC service thread 1-8) WFLYDM0111: Keystore /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/configuration/application.keystore not found, it will be auto generated on first use with a self signed certificate for host localhost
+2019-05-09 14:29:47,033 INFO  [org.wildfly.iiop.openjdk] (MSC service thread 1-2) WFLYIIOP0009: CORBA ORB Service started
+2019-05-09 14:29:47,053 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-1) WFLYDS0013: Started FileSystemDeploymentService for directory /home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/deployments
+2019-05-09 14:29:47,150 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0006: Undertow HTTPS listener https listening on 127.0.0.1:8443
+2019-05-09 14:29:47,155 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221000: live Message Broker is starting with configuration Broker Configuration (clustered=false,journalDirectory=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/data/activemq/journal,bindingsDirectory=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/data/activemq/bindings,largeMessagesDirectory=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/data/activemq/largemessages,pagingDirectory=/home/sofia/Desktop/Uni/4 ANO/EA/Projeto (AA+SI)/EA (GIT)/wildfly-16.0.0.Final/standalone/data/activemq/paging)
+2019-05-09 14:29:47,189 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221012: Using AIO Journal
+2019-05-09 14:29:47,215 INFO  [org.jboss.ws.common.management] (MSC service thread 1-7) JBWS022052: Starting JBossWS 5.2.4.Final (Apache CXF 3.2.7) 
+2019-05-09 14:29:47,246 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221043: Protocol module found: [artemis-server]. Adding protocol support for: CORE
+2019-05-09 14:29:47,247 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221043: Protocol module found: [artemis-amqp-protocol]. Adding protocol support for: AMQP
+2019-05-09 14:29:47,247 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221043: Protocol module found: [artemis-hornetq-protocol]. Adding protocol support for: HORNETQ
+2019-05-09 14:29:47,247 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221043: Protocol module found: [artemis-stomp-protocol]. Adding protocol support for: STOMP
+2019-05-09 14:29:47,301 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221034: Waiting indefinitely to obtain live lock
+2019-05-09 14:29:47,301 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221035: Live Server Obtained live lock
+2019-05-09 14:29:47,814 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-4) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor acceptor
+2019-05-09 14:29:47,814 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-2) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor acceptor
+2019-05-09 14:29:47,814 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-1) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor-throughput acceptor
+2019-05-09 14:29:47,814 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-6) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor-throughput acceptor
+2019-05-09 14:29:48,055 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221007: Server is now live
+2019-05-09 14:29:48,055 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 80) AMQ221001: Apache ActiveMQ Artemis Message Broker version 2.6.3.jbossorg-00014 [default, nodeID=838e1612-725e-11e9-a0d1-005056c00008] 
+2019-05-09 14:29:48,065 INFO  [org.wildfly.extension.messaging-activemq] (ServerService Thread Pool -- 80) WFLYMSGAMQ0002: Bound messaging object to jndi name java:/ConnectionFactory
+2019-05-09 14:29:48,108 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-8) WFLYJCA0007: Registered connection factory java:/JmsXA
+2019-05-09 14:29:48,109 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-5) WFLYJCA0011: Unbound JCA ConnectionFactory [java:/JmsXA]
+2019-05-09 14:29:48,109 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-6) WFLYJCA0119: Unbinding connection factory named java:/JmsXA to alias java:jboss/DefaultJMSConnectionFactory
+2019-05-09 14:29:48,135 INFO  [org.wildfly.extension.messaging-activemq] (ServerService Thread Pool -- 81) WFLYMSGAMQ0002: Bound messaging object to jndi name java:jboss/exported/jms/RemoteConnectionFactory
+2019-05-09 14:29:48,153 INFO  [org.apache.activemq.artemis.ra] (MSC service thread 1-8) AMQ151007: Resource adaptor started
+2019-05-09 14:29:48,153 INFO  [org.jboss.as.connector.services.resourceadapters.ResourceAdapterActivatorService$ResourceAdapterActivator] (MSC service thread 1-8) IJ020002: Deployed: file://RaActivatoractivemq-ra
+2019-05-09 14:29:48,154 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-3) WFLYJCA0002: Bound JCA ConnectionFactory [java:/JmsXA]
+2019-05-09 14:29:48,154 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-5) WFLYJCA0118: Binding connection factory named java:/JmsXA to alias java:jboss/DefaultJMSConnectionFactory
+2019-05-09 14:29:48,237 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0212: Resuming server
+2019-05-09 14:29:48,239 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
+2019-05-09 14:29:48,239 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+2019-05-09 14:29:48,239 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 16.0.0.Final (WildFly Core 8.0.0.Final) started in 4089ms - Started 345 of 572 services (340 services are lazy, passive or on-demand)
+2019-05-09 14:29:52,074 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 2) WFLYDS0004: Found BackendEA.war in deployment directory. To trigger deployment create a file called BackendEA.war.dodeploy
+2019-05-09 14:29:52,098 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-5) WFLYSRV0027: Starting deployment of "BackendEA.war" (runtime-name: "BackendEA.war")
+2019-05-09 14:29:53,342 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+2019-05-09 14:29:53,343 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.fabric.jdbc.FabricMySQLDriver (version 5.1)
+2019-05-09 14:29:53,392 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-7) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:29:53,392 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-7) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:29:53,423 INFO  [org.infinispan.factories.GlobalComponentRegistry] (MSC service thread 1-1) ISPN000128: Infinispan version: Infinispan 'Infinity Minus ONE +2' 9.4.8.Final
+2019-05-09 14:29:53,707 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 81) WFLYCLINF0002: Started client-mappings cache from ejb container
+2019-05-09 14:29:53,805 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 81) WFLYUT0021: Registered web context: '/BackendEA' for server 'default-server'
+2019-05-09 14:29:53,865 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 1) WFLYSRV0010: Deployed "BackendEA.war" (runtime-name : "BackendEA.war")
+2019-05-09 14:30:38,948 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-7) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:30:38,948 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:30:38,949 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 81) WFLYUT0022: Unregistered web context: '/BackendEA' from server 'default-server'
+2019-05-09 14:30:39,077 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) WFLYSRV0028: Stopped deployment BackendEA.war (runtime-name: BackendEA.war) in 130ms
+2019-05-09 14:30:39,079 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) WFLYSRV0027: Starting deployment of "BackendEA.war" (runtime-name: "BackendEA.war")
+2019-05-09 14:30:39,603 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+2019-05-09 14:30:39,604 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.fabric.jdbc.FabricMySQLDriver (version 5.1)
+2019-05-09 14:30:39,614 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:30:39,614 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:30:39,621 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 86) WFLYUT0021: Registered web context: '/BackendEA' for server 'default-server'
+2019-05-09 14:30:39,636 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 1) WFLYSRV0016: Replaced deployment "BackendEA.war" with deployment "BackendEA.war"
+2019-05-09 14:31:13,146 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:31:13,146 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:31:13,146 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 86) WFLYUT0022: Unregistered web context: '/BackendEA' from server 'default-server'
+2019-05-09 14:31:13,166 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) WFLYSRV0028: Stopped deployment BackendEA.war (runtime-name: BackendEA.war) in 21ms
+2019-05-09 14:31:13,179 INFO  [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0009: Undeployed "BackendEA.war" (runtime-name: "BackendEA.war")
+2019-05-09 14:31:14,666 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 2) WFLYDS0004: Found BackendEA.war in deployment directory. To trigger deployment create a file called BackendEA.war.dodeploy
+2019-05-09 14:32:14,702 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) WFLYSRV0027: Starting deployment of "BackendEA.war" (runtime-name: "BackendEA.war")
+2019-05-09 14:32:15,221 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+2019-05-09 14:32:15,222 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.fabric.jdbc.FabricMySQLDriver (version 5.1)
+2019-05-09 14:32:15,231 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:32:15,231 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:32:15,237 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 87) WFLYUT0021: Registered web context: '/BackendEA' for server 'default-server'
+2019-05-09 14:32:15,246 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 1) WFLYSRV0010: Deployed "BackendEA.war" (runtime-name : "BackendEA.war")
+2019-05-09 14:33:10,299 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:33:10,299 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:33:10,300 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 88) WFLYUT0022: Unregistered web context: '/BackendEA' from server 'default-server'
+2019-05-09 14:33:10,321 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-2) WFLYSRV0028: Stopped deployment BackendEA.war (runtime-name: BackendEA.war) in 22ms
+2019-05-09 14:33:10,322 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-7) WFLYSRV0027: Starting deployment of "BackendEA.war" (runtime-name: "BackendEA.war")
+2019-05-09 14:33:10,881 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+2019-05-09 14:33:10,882 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.fabric.jdbc.FabricMySQLDriver (version 5.1)
+2019-05-09 14:33:10,895 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-2) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:33:10,897 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:33:10,907 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 89) WFLYUT0021: Registered web context: '/BackendEA' for server 'default-server'
+2019-05-09 14:33:10,922 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 2) WFLYSRV0016: Replaced deployment "BackendEA.war" with deployment "BackendEA.war"
+2019-05-09 14:34:36,004 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:34:36,004 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-7) WFLYJCA0019: Stopped Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:34:36,005 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 89) WFLYUT0022: Unregistered web context: '/BackendEA' from server 'default-server'
+2019-05-09 14:34:36,033 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0028: Stopped deployment BackendEA.war (runtime-name: BackendEA.war) in 28ms
+2019-05-09 14:34:36,034 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-2) WFLYSRV0027: Starting deployment of "BackendEA.war" (runtime-name: "BackendEA.war")
+2019-05-09 14:34:36,499 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.jdbc.Driver (version 5.1)
+2019-05-09 14:34:36,500 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0005: Deploying non-JDBC-compliant driver class com.mysql.fabric.jdbc.FabricMySQLDriver (version 5.1)
+2019-05-09 14:34:36,511 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-6) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.fabric.jdbc.FabricMySQLDriver_5_1
+2019-05-09 14:34:36,511 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0018: Started Driver service with driver-name = BackendEA.war_com.mysql.jdbc.Driver_5_1
+2019-05-09 14:34:36,517 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 91) WFLYUT0021: Registered web context: '/BackendEA' for server 'default-server'
+2019-05-09 14:34:36,526 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 2) WFLYSRV0016: Replaced deployment "BackendEA.war" with deployment "BackendEA.war"
