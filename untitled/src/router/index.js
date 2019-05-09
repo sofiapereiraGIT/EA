@@ -12,6 +12,7 @@ import PerdidosGatos from '../components/geral/PerdidosGatos'
 import UserPerfil from '../components/geral/UserPerfil'
 import AboutUs from '../components/geral/AboutUs'
 import Login from '../components/geral/Login'
+import Registar from '../components/geral/Registar'
 import CanilHomePage from '../components/canil/CanilHomePage'
 import CanilPerfilEdit from '../components/canil/CanilPerfilEdit'
 import UserHomePage from '../components/cidadao/UserHomePage'
@@ -80,6 +81,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/Registar',
+      name: 'Registar',
+      component: Registar
     },
     {
       path: '/CanilHomePage',

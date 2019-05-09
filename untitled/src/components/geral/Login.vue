@@ -21,10 +21,10 @@
           </div>
 
           <div class="text-center w-full">
-            <a class="txt1" href="/Registar">
+            <router-link class="txt1" to="/Registar">
               Create new account
               <i class="fa fa-long-arrow-right"></i>
-            </a>
+            </router-link>
           </div>
         </form>
       </div>
