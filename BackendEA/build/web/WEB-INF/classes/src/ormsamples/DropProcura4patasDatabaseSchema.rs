@@ -1,1 +1,0 @@
-ormsamples.DropProcura4patasDatabaseSchema
