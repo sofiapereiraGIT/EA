@@ -10,11 +10,11 @@
     <div class="w3-row w3-center w3-light-grey w3-padding-16">
       <div class="w3-half w3-section">
         <span class="w3-xlarge">22</span><br>
-        Gatos Para Adotar
+          Cães Para Adotar
       </div>
       <div class="w3-half w3-section">
         <span class="w3-xlarge">39</span><br>
-        Cães Para Adotar
+          Gatos Para Adotar
       </div>
     </div>
     <!-- Texto Para Adoção -->
