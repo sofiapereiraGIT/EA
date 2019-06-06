@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class CanilDAO {
-	public static Canil loadCanilByORMID(String e_mail) throws PersistentException {
+	public static Canil loadCanilByORMID(String email) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return loadCanilByORMID(session, e_mail);
+			return loadCanilByORMID(session, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil getCanilByORMID(String e_mail) throws PersistentException {
+	public static Canil getCanilByORMID(String email) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return getCanilByORMID(session, e_mail);
+			return getCanilByORMID(session, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil loadCanilByORMID(String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Canil loadCanilByORMID(String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return loadCanilByORMID(session, e_mail, lockMode);
+			return loadCanilByORMID(session, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil getCanilByORMID(String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Canil getCanilByORMID(String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return getCanilByORMID(session, e_mail, lockMode);
+			return getCanilByORMID(session, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil loadCanilByORMID(PersistentSession session, String e_mail) throws PersistentException {
+	public static Canil loadCanilByORMID(PersistentSession session, String email) throws PersistentException {
 		try {
-			return (Canil) session.load(procura4patas.Canil.class, e_mail);
+			return (Canil) session.load(procura4patas.Canil.class, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil getCanilByORMID(PersistentSession session, String e_mail) throws PersistentException {
+	public static Canil getCanilByORMID(PersistentSession session, String email) throws PersistentException {
 		try {
-			return (Canil) session.get(procura4patas.Canil.class, e_mail);
+			return (Canil) session.get(procura4patas.Canil.class, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil loadCanilByORMID(PersistentSession session, String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Canil loadCanilByORMID(PersistentSession session, String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Canil) session.load(procura4patas.Canil.class, e_mail, lockMode);
+			return (Canil) session.load(procura4patas.Canil.class, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class CanilDAO {
 		}
 	}
 	
-	public static Canil getCanilByORMID(PersistentSession session, String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Canil getCanilByORMID(PersistentSession session, String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Canil) session.get(procura4patas.Canil.class, e_mail, lockMode);
+			return (Canil) session.get(procura4patas.Canil.class, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

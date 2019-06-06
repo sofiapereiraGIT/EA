@@ -30,6 +30,8 @@ public class AnimalCriteria extends AbstractORMCriteria {
 	public final CharacterExpression compPelo;
 	public final CharacterExpression estado;
 	public final StringExpression descricao;
+	public final StringExpression concelho;
+	public final CharacterExpression discriminator;
 	
 	public AnimalCriteria(Criteria criteria) {
 		super(criteria);
@@ -44,6 +46,8 @@ public class AnimalCriteria extends AbstractORMCriteria {
 		compPelo = new CharacterExpression("compPelo", this);
 		estado = new CharacterExpression("estado", this);
 		descricao = new StringExpression("descricao", this);
+		concelho = new StringExpression("concelho", this);
+		discriminator = new CharacterExpression("discriminator", this);
 	}
 	
 	public AnimalCriteria(PersistentSession session) {

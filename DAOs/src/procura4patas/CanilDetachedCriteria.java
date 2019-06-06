@@ -19,70 +19,63 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class CanilDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final StringExpression e_mail;
+	public final StringExpression email;
 	public final StringExpression password;
 	public final StringExpression nome;
 	public final StringExpression fotografia;
 	public final StringExpression concelho;
 	public final StringExpression telemovel;
 	public final StringExpression descricao;
-	public final CollectionExpression animaisAdotar;
-	public final CollectionExpression listaPedidosAd;
+	public final CollectionExpression animais;
+	public final CollectionExpression listaPedidos;
 	public final StringExpression morada;
 	public final StringExpression horario;
 	public final StringExpression siteOficial;
 	public final StringExpression facebook;
 	public final StringExpression instagram;
-	public final CollectionExpression listaPedidosFAT;
 	
 	public CanilDetachedCriteria() {
 		super(procura4patas.Canil.class, procura4patas.CanilCriteria.class);
-		e_mail = new StringExpression("e_mail", this.getDetachedCriteria());
+		email = new StringExpression("email", this.getDetachedCriteria());
 		password = new StringExpression("password", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		fotografia = new StringExpression("fotografia", this.getDetachedCriteria());
 		concelho = new StringExpression("concelho", this.getDetachedCriteria());
 		telemovel = new StringExpression("telemovel", this.getDetachedCriteria());
 		descricao = new StringExpression("descricao", this.getDetachedCriteria());
-		animaisAdotar = new CollectionExpression("ORM_AnimaisAdotar", this.getDetachedCriteria());
-		listaPedidosAd = new CollectionExpression("ORM_ListaPedidosAd", this.getDetachedCriteria());
+		animais = new CollectionExpression("ORM_Animais", this.getDetachedCriteria());
+		listaPedidos = new CollectionExpression("ORM_ListaPedidos", this.getDetachedCriteria());
 		morada = new StringExpression("morada", this.getDetachedCriteria());
 		horario = new StringExpression("horario", this.getDetachedCriteria());
 		siteOficial = new StringExpression("siteOficial", this.getDetachedCriteria());
 		facebook = new StringExpression("facebook", this.getDetachedCriteria());
 		instagram = new StringExpression("instagram", this.getDetachedCriteria());
-		listaPedidosFAT = new CollectionExpression("ORM_ListaPedidosFAT", this.getDetachedCriteria());
 	}
 	
 	public CanilDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, procura4patas.CanilCriteria.class);
-		e_mail = new StringExpression("e_mail", this.getDetachedCriteria());
+		email = new StringExpression("email", this.getDetachedCriteria());
 		password = new StringExpression("password", this.getDetachedCriteria());
 		nome = new StringExpression("nome", this.getDetachedCriteria());
 		fotografia = new StringExpression("fotografia", this.getDetachedCriteria());
 		concelho = new StringExpression("concelho", this.getDetachedCriteria());
 		telemovel = new StringExpression("telemovel", this.getDetachedCriteria());
 		descricao = new StringExpression("descricao", this.getDetachedCriteria());
-		animaisAdotar = new CollectionExpression("ORM_AnimaisAdotar", this.getDetachedCriteria());
-		listaPedidosAd = new CollectionExpression("ORM_ListaPedidosAd", this.getDetachedCriteria());
+		animais = new CollectionExpression("ORM_Animais", this.getDetachedCriteria());
+		listaPedidos = new CollectionExpression("ORM_ListaPedidos", this.getDetachedCriteria());
 		morada = new StringExpression("morada", this.getDetachedCriteria());
 		horario = new StringExpression("horario", this.getDetachedCriteria());
 		siteOficial = new StringExpression("siteOficial", this.getDetachedCriteria());
 		facebook = new StringExpression("facebook", this.getDetachedCriteria());
 		instagram = new StringExpression("instagram", this.getDetachedCriteria());
-		listaPedidosFAT = new CollectionExpression("ORM_ListaPedidosFAT", this.getDetachedCriteria());
 	}
 	
-	public FATDetachedCriteria createListaPedidosFATCriteria() {
-		return new FATDetachedCriteria(createCriteria("ORM_ListaPedidosFAT"));
+	public AnimalDetachedCriteria createAnimaisCriteria() {
+		return new AnimalDetachedCriteria(createCriteria("ORM_Animais"));
 	}
 	
-	public AnimalDetachedCriteria createAnimaisAdotarCriteria() {
-		return new AnimalDetachedCriteria(createCriteria("ORM_AnimaisAdotar"));
-	}
-	
-	public AdocaoDetachedCriteria createListaPedidosAdCriteria() {
-		return new AdocaoDetachedCriteria(createCriteria("ORM_ListaPedidosAd"));
+	public PedidoDetachedCriteria createListaPedidosCriteria() {
+		return new PedidoDetachedCriteria(createCriteria("ORM_ListaPedidos"));
 	}
 	
 	public Canil uniqueCanil(PersistentSession session) {

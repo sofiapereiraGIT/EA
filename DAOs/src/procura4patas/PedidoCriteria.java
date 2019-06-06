@@ -27,6 +27,7 @@ public class PedidoCriteria extends AbstractORMCriteria {
 	public final DateExpression data;
 	public final CharacterExpression estado;
 	public final DateExpression dataUltimoContacto;
+	public final CharacterExpression discriminator;
 	
 	public PedidoCriteria(Criteria criteria) {
 		super(criteria);
@@ -38,6 +39,7 @@ public class PedidoCriteria extends AbstractORMCriteria {
 		data = new DateExpression("data", this);
 		estado = new CharacterExpression("estado", this);
 		dataUltimoContacto = new DateExpression("dataUltimoContacto", this);
+		discriminator = new CharacterExpression("discriminator", this);
 	}
 	
 	public PedidoCriteria(PersistentSession session) {

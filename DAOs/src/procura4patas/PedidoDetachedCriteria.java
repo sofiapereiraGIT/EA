@@ -27,6 +27,7 @@ public class PedidoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final DateExpression data;
 	public final CharacterExpression estado;
 	public final DateExpression dataUltimoContacto;
+	public final CharacterExpression discriminator;
 	
 	public PedidoDetachedCriteria() {
 		super(procura4patas.Pedido.class, procura4patas.PedidoCriteria.class);
@@ -38,6 +39,7 @@ public class PedidoDetachedCriteria extends AbstractORMDetachedCriteria {
 		data = new DateExpression("data", this.getDetachedCriteria());
 		estado = new CharacterExpression("estado", this.getDetachedCriteria());
 		dataUltimoContacto = new DateExpression("dataUltimoContacto", this.getDetachedCriteria());
+		discriminator = new CharacterExpression("discriminator", this.getDetachedCriteria());
 	}
 	
 	public PedidoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -50,6 +52,7 @@ public class PedidoDetachedCriteria extends AbstractORMDetachedCriteria {
 		data = new DateExpression("data", this.getDetachedCriteria());
 		estado = new CharacterExpression("estado", this.getDetachedCriteria());
 		dataUltimoContacto = new DateExpression("dataUltimoContacto", this.getDetachedCriteria());
+		discriminator = new CharacterExpression("discriminator", this.getDetachedCriteria());
 	}
 	
 	public UtilizadorComumDetachedCriteria createUtilizadorComumCriteria() {

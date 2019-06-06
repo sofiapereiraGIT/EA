@@ -19,10 +19,10 @@ import org.hibernate.LockMode;
 import java.util.List;
 
 public class UtilizadorDAO {
-	public static Utilizador loadUtilizadorByORMID(String e_mail) throws PersistentException {
+	public static Utilizador loadUtilizadorByORMID(String email) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return loadUtilizadorByORMID(session, e_mail);
+			return loadUtilizadorByORMID(session, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador getUtilizadorByORMID(String e_mail) throws PersistentException {
+	public static Utilizador getUtilizadorByORMID(String email) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return getUtilizadorByORMID(session, e_mail);
+			return getUtilizadorByORMID(session, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +41,10 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador loadUtilizadorByORMID(String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Utilizador loadUtilizadorByORMID(String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return loadUtilizadorByORMID(session, e_mail, lockMode);
+			return loadUtilizadorByORMID(session, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -52,10 +52,10 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador getUtilizadorByORMID(String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Utilizador getUtilizadorByORMID(String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = Procura4patasPersistentManager.instance().getSession();
-			return getUtilizadorByORMID(session, e_mail, lockMode);
+			return getUtilizadorByORMID(session, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +63,9 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador loadUtilizadorByORMID(PersistentSession session, String e_mail) throws PersistentException {
+	public static Utilizador loadUtilizadorByORMID(PersistentSession session, String email) throws PersistentException {
 		try {
-			return (Utilizador) session.load(procura4patas.Utilizador.class, e_mail);
+			return (Utilizador) session.load(procura4patas.Utilizador.class, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador getUtilizadorByORMID(PersistentSession session, String e_mail) throws PersistentException {
+	public static Utilizador getUtilizadorByORMID(PersistentSession session, String email) throws PersistentException {
 		try {
-			return (Utilizador) session.get(procura4patas.Utilizador.class, e_mail);
+			return (Utilizador) session.get(procura4patas.Utilizador.class, email);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador loadUtilizadorByORMID(PersistentSession session, String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Utilizador loadUtilizadorByORMID(PersistentSession session, String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Utilizador) session.load(procura4patas.Utilizador.class, e_mail, lockMode);
+			return (Utilizador) session.load(procura4patas.Utilizador.class, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class UtilizadorDAO {
 		}
 	}
 	
-	public static Utilizador getUtilizadorByORMID(PersistentSession session, String e_mail, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Utilizador getUtilizadorByORMID(PersistentSession session, String email, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Utilizador) session.get(procura4patas.Utilizador.class, e_mail, lockMode);
+			return (Utilizador) session.get(procura4patas.Utilizador.class, email, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

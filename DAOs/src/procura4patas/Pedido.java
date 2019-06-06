@@ -17,6 +17,23 @@ public class Pedido {
 	public Pedido() {
 	}
 	
+	private void this_setOwner(Object owner, int key) {
+		if (key == ORMConstants.KEY_PEDIDO_ANIMAL) {
+			this.animal = (procura4patas.Animal) owner;
+		}
+		
+		else if (key == ORMConstants.KEY_PEDIDO_UTILIZADORCOMUM) {
+			this.utilizadorComum = (procura4patas.UtilizadorComum) owner;
+		}
+	}
+	
+	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
+		public void setOwner(Object owner, int key) {
+			this_setOwner(owner, key);
+		}
+		
+	};
+	
 	private int ID;
 	
 	private procura4patas.UtilizadorComum utilizadorComum;
@@ -28,6 +45,8 @@ public class Pedido {
 	private char estado;
 	
 	private java.util.Date dataUltimoContacto;
+	
+	private char discriminator;
 	
 	private void setID(int value) {
 		this.ID = value;
@@ -63,6 +82,14 @@ public class Pedido {
 	
 	public java.util.Date getDataUltimoContacto() {
 		return dataUltimoContacto;
+	}
+	
+	public void setDiscriminator(char value) {
+		this.discriminator = value;
+	}
+	
+	public char getDiscriminator() {
+		return discriminator;
 	}
 	
 	public void setAnimal(procura4patas.Animal value) {

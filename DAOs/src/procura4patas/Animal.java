@@ -39,6 +39,10 @@ public class Animal {
 	
 	private String descricao;
 	
+	private String concelho;
+	
+	private char discriminator;
+	
 	private void setID(int value) {
 		this.ID = value;
 	}
@@ -129,6 +133,22 @@ public class Animal {
 	
 	public String getDescricao() {
 		return descricao;
+	}
+	
+	public void setConcelho(String value) {
+		this.concelho = value;
+	}
+	
+	public String getConcelho() {
+		return concelho;
+	}
+	
+	public void setDiscriminator(char value) {
+		this.discriminator = value;
+	}
+	
+	public char getDiscriminator() {
+		return discriminator;
 	}
 	
 	public String toString() {

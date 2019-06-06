@@ -23,23 +23,23 @@ public class Utilizador {
 		if (!(aObj instanceof Utilizador))
 			return false;
 		Utilizador utilizador = (Utilizador)aObj;
-		if ((getE_mail() != null && !getE_mail().equals(utilizador.getE_mail())) || (getE_mail() == null && utilizador.getE_mail() != null))
+		if ((getEmail() != null && !getEmail().equals(utilizador.getEmail())) || (getEmail() == null && utilizador.getEmail() != null))
 			return false;
 		return true;
 	}
 	
 	public int hashCode() {
 		int hashcode = 0;
-		hashcode = hashcode + (getE_mail() == null ? 0 : getE_mail().hashCode());
+		hashcode = hashcode + (getEmail() == null ? 0 : getEmail().hashCode());
 		return hashcode;
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == ORMConstants.KEY_UTILIZADOR_ANIMAISADOTAR) {
-			return ORM_animaisAdotar;
+		if (key == ORMConstants.KEY_UTILIZADOR_ANIMAIS) {
+			return ORM_animais;
 		}
-		else if (key == ORMConstants.KEY_UTILIZADOR_LISTAPEDIDOSAD) {
-			return ORM_listaPedidosAd;
+		else if (key == ORMConstants.KEY_UTILIZADOR_LISTAPEDIDOS) {
+			return ORM_listaPedidos;
 		}
 		
 		return null;
@@ -52,7 +52,7 @@ public class Utilizador {
 		
 	};
 	
-	private String e_mail;
+	private String email;
 	
 	private String password;
 	
@@ -66,20 +66,20 @@ public class Utilizador {
 	
 	private String descricao;
 	
-	private java.util.Set ORM_animaisAdotar = new java.util.HashSet();
+	private java.util.Set ORM_animais = new java.util.HashSet();
 	
-	private java.util.Set ORM_listaPedidosAd = new java.util.HashSet();
+	private java.util.Set ORM_listaPedidos = new java.util.HashSet();
 	
-	public void setE_mail(String value) {
-		this.e_mail = value;
+	public void setEmail(String value) {
+		this.email = value;
 	}
 	
-	public String getE_mail() {
-		return e_mail;
+	public String getEmail() {
+		return email;
 	}
 	
 	public String getORMID() {
-		return getE_mail();
+		return getEmail();
 	}
 	
 	public void setPassword(String value) {
@@ -130,28 +130,28 @@ public class Utilizador {
 		return descricao;
 	}
 	
-	private void setORM_AnimaisAdotar(java.util.Set value) {
-		this.ORM_animaisAdotar = value;
+	private void setORM_Animais(java.util.Set value) {
+		this.ORM_animais = value;
 	}
 	
-	private java.util.Set getORM_AnimaisAdotar() {
-		return ORM_animaisAdotar;
+	private java.util.Set getORM_Animais() {
+		return ORM_animais;
 	}
 	
-	public final procura4patas.AnimalSetCollection animaisAdotar = new procura4patas.AnimalSetCollection(this, _ormAdapter, ORMConstants.KEY_UTILIZADOR_ANIMAISADOTAR, ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final procura4patas.AnimalSetCollection animais = new procura4patas.AnimalSetCollection(this, _ormAdapter, ORMConstants.KEY_UTILIZADOR_ANIMAIS, ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
-	private void setORM_ListaPedidosAd(java.util.Set value) {
-		this.ORM_listaPedidosAd = value;
+	private void setORM_ListaPedidos(java.util.Set value) {
+		this.ORM_listaPedidos = value;
 	}
 	
-	private java.util.Set getORM_ListaPedidosAd() {
-		return ORM_listaPedidosAd;
+	private java.util.Set getORM_ListaPedidos() {
+		return ORM_listaPedidos;
 	}
 	
-	public final procura4patas.AdocaoSetCollection listaPedidosAd = new procura4patas.AdocaoSetCollection(this, _ormAdapter, ORMConstants.KEY_UTILIZADOR_LISTAPEDIDOSAD, ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final procura4patas.PedidoSetCollection listaPedidos = new procura4patas.PedidoSetCollection(this, _ormAdapter, ORMConstants.KEY_UTILIZADOR_LISTAPEDIDOS, ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
-		return String.valueOf(getE_mail());
+		return String.valueOf(getEmail());
 	}
 	
 }

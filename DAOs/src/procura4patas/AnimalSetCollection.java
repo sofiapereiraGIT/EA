@@ -81,6 +81,8 @@ public class AnimalSetCollection extends org.orm.util.ORMSet {
 	 * <li>compPelo</li>
 	 * <li>estado</li>
 	 * <li>descricao</li>
+	 * <li>concelho</li>
+	 * <li>discriminator</li>
 	 * </ul>
 	 * @return The persistent objects sorted array
 	 */
@@ -102,6 +104,8 @@ public class AnimalSetCollection extends org.orm.util.ORMSet {
 	 * <li>compPelo</li>
 	 * <li>estado</li>
 	 * <li>descricao</li>
+	 * <li>concelho</li>
+	 * <li>discriminator</li>
 	 * </ul>
 	 * @param ascending true for ascending, false for descending
 	 * @return The persistent objects sorted array

@@ -30,6 +30,8 @@ public class AnimalDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CharacterExpression compPelo;
 	public final CharacterExpression estado;
 	public final StringExpression descricao;
+	public final StringExpression concelho;
+	public final CharacterExpression discriminator;
 	
 	public AnimalDetachedCriteria() {
 		super(procura4patas.Animal.class, procura4patas.AnimalCriteria.class);
@@ -44,6 +46,8 @@ public class AnimalDetachedCriteria extends AbstractORMDetachedCriteria {
 		compPelo = new CharacterExpression("compPelo", this.getDetachedCriteria());
 		estado = new CharacterExpression("estado", this.getDetachedCriteria());
 		descricao = new StringExpression("descricao", this.getDetachedCriteria());
+		concelho = new StringExpression("concelho", this.getDetachedCriteria());
+		discriminator = new CharacterExpression("discriminator", this.getDetachedCriteria());
 	}
 	
 	public AnimalDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -59,6 +63,8 @@ public class AnimalDetachedCriteria extends AbstractORMDetachedCriteria {
 		compPelo = new CharacterExpression("compPelo", this.getDetachedCriteria());
 		estado = new CharacterExpression("estado", this.getDetachedCriteria());
 		descricao = new StringExpression("descricao", this.getDetachedCriteria());
+		concelho = new StringExpression("concelho", this.getDetachedCriteria());
+		discriminator = new CharacterExpression("discriminator", this.getDetachedCriteria());
 	}
 	
 	public Animal uniqueAnimal(PersistentSession session) {

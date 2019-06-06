@@ -36,11 +36,11 @@
     <DriverFiles>&lt;&lt;MySQL Connector/J 8.0.15&gt;&gt;</DriverFiles>
     <Dialect>org.hibernate.dialect.MySQLDialect</Dialect>
     <DriverClass>com.mysql.jdbc.Driver</DriverClass>
-    <URL>jdbc:mysql://localhost/procura4patas</URL>
+    <URL>jdbc:mysql://localhost:3306/procura4patas</URL>
     <UserName>p4p</UserName>
     <EncryptedPassword>7F0BC8794E859022C6638467A3F886BA</EncryptedPassword>
     <HostName>localhost</HostName>
-    <PortNO></PortNO>
+    <PortNO>3306</PortNO>
     <DBName>procura4patas</DBName>
     <ServiceName></ServiceName>
     <ServerName></ServerName>
