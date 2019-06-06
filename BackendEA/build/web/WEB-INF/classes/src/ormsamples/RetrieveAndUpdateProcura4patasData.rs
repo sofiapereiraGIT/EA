@@ -1,1 +1,0 @@
-ormsamples.RetrieveAndUpdateProcura4patasData
