@@ -51,6 +51,7 @@ public class ExemploServlet extends HttpServlet {
         
         try {
             response.setContentType("application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
             PrintWriter out = response.getWriter();
             out.println("{");
             out.println("First Name: Devesh,");
