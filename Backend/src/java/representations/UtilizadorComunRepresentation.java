@@ -18,10 +18,10 @@ public class UtilizadorComunRepresentation extends UtilizadorRepresentation{
     
     @JsonCreator
     public UtilizadorComunRepresentation(@JsonProperty("email") String e, @JsonProperty("password") String p, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, 
-            @JsonProperty("concelho") String c, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d, 
-            @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa, @JsonProperty("pedidosAdocao") List<AnimalRepresentation> ap) {
+            @JsonProperty("concelho") String c, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d, @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa, 
+            @JsonProperty("pedidosAdocao") List<AnimalRepresentation> pa, @JsonProperty("animaisPerdidos") List<AnimalRepresentation> ap) {
         
-        super(e, p, n, f, d, c, t, aa);
+        super(e, p, n, f, d, c, t, aa, pa);
         this.animaisPerdidos = ap;
     }
 }

@@ -5,7 +5,10 @@
  */
 package beans;
 
+import java.util.List;
 import javax.ejb.Local;
+import org.orm.PersistentSession;
+import procura4patas.Canil;
 
 /**
  *
@@ -13,5 +16,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface CanilBeanLocal {
-    
+    public List<Canil> getCanis(PersistentSession sessao);
+
+    Canil getCanil(PersistentSession sessao, String email);
 }

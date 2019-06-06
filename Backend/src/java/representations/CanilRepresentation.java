@@ -18,7 +18,6 @@ public class CanilRepresentation extends UtilizadorRepresentation{
     private String siteOficial;
     private String facebook;
     private String instagram;
-    private List<AnimalRepresentation> listaPedidosAd;
     private List<AnimalRepresentation> listaPedidosFAT;
        
     @JsonCreator
@@ -28,13 +27,12 @@ public class CanilRepresentation extends UtilizadorRepresentation{
             @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa, @JsonProperty("pedidosAdocao") List<AnimalRepresentation> pa, 
             @JsonProperty("pedidosFAT") List<AnimalRepresentation> fat) {
         
-        super(e, p, n, f, d, c, t, aa);
+        super(e, p, n, f, d, c, t, aa, pa);
         this.morada = m;
         this.horario = h;
         this.siteOficial = s;
         this.facebook = fa;
         this.instagram = i;
-        this.listaPedidosAd = pa;
         this.listaPedidosFAT = fat;
     }
     

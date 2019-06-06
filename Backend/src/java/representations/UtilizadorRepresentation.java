@@ -22,11 +22,12 @@ public class UtilizadorRepresentation {
     private String telemovel;
     private String descricao;
     private List<AnimalRepresentation> animaisAdotar;
+    private List<AnimalRepresentation> listaPedidosAd;
        
     @JsonCreator
     public UtilizadorRepresentation(@JsonProperty("email") String e, @JsonProperty("password") String p, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, 
             @JsonProperty("concelho") String c, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d, 
-            @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa) {
+            @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa, @JsonProperty("pedidosAdocao") List<AnimalRepresentation> pa) {
         
         this.email = e;
         this.password = p;
@@ -36,5 +37,6 @@ public class UtilizadorRepresentation {
         this.concelho = c;
         this.telemovel = t;
         this.animaisAdotar = aa;
+        this.listaPedidosAd = pa;
     }
 }
