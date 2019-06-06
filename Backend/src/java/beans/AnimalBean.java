@@ -33,14 +33,13 @@ public class AnimalBean implements AnimalBeanLocal {
     public List getCaesAdotar(PersistentSession session) {
         List caesAdotar = null;
         
-        /*try {
-            caesAdotar = CaoDAO.queryCao(null, null);
-        } catch (PersistentException ex) {
-            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         try {
+            session.beginTransaction();
             caesAdotar = AnimalDAO.queryAnimal(session, "Discriminator = Cao", null);
-        } catch (PersistentException ex) {
+            /*OU??? caesAdotar = CaoDAO.queryCao(null, null);*/
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -51,7 +50,9 @@ public class AnimalBean implements AnimalBeanLocal {
         List caesPerdidos = null;
         
         try {
+            session.beginTransaction();
             List animaisPerdidos = AnimalPerdidoDAO.queryAnimalPerdido(session, null, null);
+            session.getTransaction().commit();
             
             animaisPerdidos.stream().forEach((o) -> {
                 AnimalPerdido an = (AnimalPerdido) o;
@@ -60,7 +61,8 @@ public class AnimalBean implements AnimalBeanLocal {
                     caesPerdidos.add(o);
                 }
             });
-        } catch (PersistentException ex) {
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -70,14 +72,13 @@ public class AnimalBean implements AnimalBeanLocal {
     public List getGatosAdotar(PersistentSession session) {
         List gatosAdotar = null;
         
-        /*try {
-            gatosAdotar = GatoDAO.queryGato(null, null);
-        } catch (PersistentException ex) {
-            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         try {
+            session.beginTransaction();
             gatosAdotar = AnimalDAO.queryAnimal(session, "Discriminator = Gato", null);
-        } catch (PersistentException ex) {
+            /*OU??? gatosAdotar = GatoDAO.queryGato(null, null);*/
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -88,7 +89,9 @@ public class AnimalBean implements AnimalBeanLocal {
         List gatosPerdidos = null;
         
         try {
+            session.beginTransaction();
             List animaisPerdidos = AnimalPerdidoDAO.queryAnimalPerdido(session, null, null);
+            session.getTransaction().commit();
             
             animaisPerdidos.stream().forEach((o) -> {
                 AnimalPerdido an = (AnimalPerdido) o;
@@ -97,7 +100,8 @@ public class AnimalBean implements AnimalBeanLocal {
                     gatosPerdidos.add(o);
                 }
             });
-        } catch (PersistentException ex) {
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -110,12 +114,18 @@ public class AnimalBean implements AnimalBeanLocal {
         String UtilizadorEmail = user.getE_mail();
         
         try {
+            session.beginTransaction();
+            
             Query query = session.createSQLQuery("INSERT INTO Animal\n" +
                     "(UtilizadorE-mail, Nome, Fotografia, Sexo, Idade, Raça, Porte, CorPelo, CompPelo, Estado, Descricao, Discriminator)\n" +
                     "VALUES \n" +
                     "("+UtilizadorEmail+", "+nome+", "+fotografia+", "+sexo+", "+idade+", "+raça+
                     ", "+porte+", "+corPelo+", "+compPelo+", "+estado+", "+descricao+", "+discriminator+");");
-        } catch (PersistentException ex) {
+            
+            query.executeUpdate();
+            session.getTransaction().commit();
+        } catch(Exception e){
+            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -128,30 +138,33 @@ public class AnimalBean implements AnimalBeanLocal {
         try {
             session.beginTransaction();
             
-            addAnimal(session, user, nome, fotografia, sexo, idade, raça, porte, corPelo, compPelo, estado, descricao, discriminator);
-            
-            //ANIMAL PERDIDO !!!!!!! TODO
-            session.createSQLQuery("INSERT INTO AnimalPerdido\n" +
-                    "(UtilizadorComumUtilizadorE-mail, AnimalID, Concelho)\n" +
+            Query query1 = session.createSQLQuery("INSERT INTO Animal\n" +
+                    "(UtilizadorE-mail, Nome, Fotografia, Sexo, Idade, Raça, Porte, CorPelo, CompPelo, Estado, Descricao, Discriminator)\n" +
                     "VALUES \n" +
                     "("+UtilizadorEmail+", "+nome+", "+fotografia+", "+sexo+", "+idade+", "+raça+
                     ", "+porte+", "+corPelo+", "+compPelo+", "+estado+", "+descricao+", "+discriminator+");");
-                        
-            try{
-                session.getTransaction().commit();
-            }
-            catch(Exception e){
-                session.getTransaction().rollback();
-            }            
-        } catch (PersistentException ex) {
+            
+            query1.executeUpdate();
+            
+            //ANIMAL PERDIDO !!!!!!! TODO
+            Query query2 = session.createSQLQuery("INSERT INTO AnimalPerdido\n" +
+                    "(UtilizadorComumUtilizadorE-mail, AnimalID, Concelho)\n" +
+                    "VALUES \n" +
+                    "("+UtilizadorEmail+", "+AnimalID+", "+concelho+");");
+            
+            query2.executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
             session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
     }
     
-    public void updateAnimal(PersistentSession session){ 
-      
+    public void updateAnimal(PersistentSession session, String ID, String nome, String fotografia, char sexo, char idade,
+        String raça, char porte, String corPelo, char compPelo, char estado, String descricao, String discriminator){ 
+        
+        Animal animal;
+        AnimalDAO.getAnimalByORMID(session, ID);
     }
     
     public void updateAnimalPerdido(PersistentSession session){ 
