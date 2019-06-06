@@ -5,27 +5,21 @@
  */
 package servlets;
 
-import beans.ExampleBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import procura4patas.Canil;
 
 /**
  *
- * @author carlos
+ * @author sofia
  */
-@WebServlet(name = "Canis", urlPatterns = {"/Canis"})
-public class Canis extends HttpServlet {
-    @EJB
-    private ExampleBeanLocal exampleBean;
+@WebServlet(name = "UpdateAnimalPerdido", urlPatterns = {"/UpdateAnimalPerdido"})
+public class UpdateAnimalPerdido extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,47 +30,20 @@ public class Canis extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        
-        System.out.println("Boas");
-        
-        List x = exampleBean.businessMethod();
-        
-        System.out.println("X = " + x);
-        
-        
-        Canil c = new Canil();
-        c.setE_mail("boas");
-        
-        try {
-            response.setContentType("application/json");
-            PrintWriter out = response.getWriter();
-            out.println("{");
-            out.println("First Name: Devesh,");
-            out.println("Last Name: Sharma");
-            out.println("}");
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateAnimalPerdido</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateAnimalPerdido at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        /*
-        String json = "{name:John,age:30,city:New York}";
-        
-        String x2 = "{ boas }";
-        
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        
-        try {
-            PrintWriter out = response.getWriter();
-            out.print(json);
-            out.flush();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

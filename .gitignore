@@ -4,6 +4,10 @@
 ../npm-debug.log*
 ../yarn-debug.log*
 ../yarn-error.log*
+.DS_Store
+DAOs/.DS_Store
+DAOs/src/.DS_Store
+wildfly-16.0.0.Final/modules/system/layers/base/org/.DS_Store
 
 # Editor directories and files
 ../.idea
@@ -12,3 +16,6 @@
 *.ntvs*
 *.njsproj
 *.sln
+/Backend/nbproject/private/
+/Backend/build/
+/Backend/dist/
