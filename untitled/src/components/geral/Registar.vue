@@ -51,7 +51,6 @@
             <input type="submit" class="button" value="Registar">
           </div>
         </div>
-
         <div class="sign-up-htm row">
           <div class="column">
           <div class="group">
