@@ -16,6 +16,6 @@ wildfly-16.0.0.Final/modules/system/layers/base/org/.DS_Store
 *.ntvs*
 *.njsproj
 *.sln
-/Backend/nbproject/private/
-/Backend/build/
-/Backend/dist/
+/Procura4PatasBackend/nbproject/private/
+/Procura4PatasBackend/dist/
+/Procura4PatasBackend/build/
