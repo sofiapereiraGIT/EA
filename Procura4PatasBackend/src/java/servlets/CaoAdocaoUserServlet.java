@@ -63,7 +63,11 @@ public class CaoAdocaoUserServlet extends HttpServlet {
             Utilizador user = new Utilizador();
             user = UtilizadorDAO.getUtilizadorByORMID("d1@gmail.com");
             Utilizador u1 = new Utilizador();
-            P4P.getCaoAdocaoUser(sessao, user);
+            List<Animal> animais = P4P.getCaoAdocaoUser(sessao, user);
+            
+            for(Animal a : animais) {
+                System.out.println(a.getDiscriminator());
+            }
        
             
         } catch (PersistentException ex) {
