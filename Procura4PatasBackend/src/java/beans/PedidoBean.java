@@ -6,9 +6,11 @@
 package beans;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -21,6 +23,7 @@ import procura4patas.AnimalDAO;
 import procura4patas.Pedido;
 import procura4patas.PedidoDAO;
 import procura4patas.Utilizador;
+import procura4patas.UtilizadorComum;
 
 /**
  *
@@ -31,19 +34,34 @@ public class PedidoBean implements PedidoBeanLocal {
     
     @Override
     public void adotarAnimal(PersistentSession sessao, Animal anim, Utilizador user) {
-        Calendar c = Calendar.getInstance();
-        Date data = c.getTime();
-        DateFormat f = DateFormat.getDateInstance();
         
-       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd").format(c.data);
+       Date dNow = new Date();
+       SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+      
+       Pedido p = new Pedido();
+       p.setAnimal(anim);
+       p.setData(dNow);
+       p.setDataUltimoContacto(null);
+       p.setDiscriminator('p');
+       p.setEstado('c');
+       p.setUtilizadorComum((UtilizadorComum) user);
+       
+    }
+    
+    @Override
+    public void serFatAnimal(PersistentSession sessao, Animal anim, Utilizador user) {
         
-        Pedido p;
-        //p.setAnimal(anim);
-       // p.setData(sdf);
-        p.setDataUltimoContacto(null);
-           
-     
-        
+       Date dNow = new Date();
+       SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+      
+       Pedido p = new Pedido();
+       p.setAnimal(anim);
+       p.setData(dNow);
+       p.setDataUltimoContacto(null);
+       p.setDiscriminator('f');
+       p.setEstado('c');
+       p.setUtilizadorComum((UtilizadorComum) user);
+       
     }
     
 }
