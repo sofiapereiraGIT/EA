@@ -97,22 +97,22 @@
         <!-- First Photo Grid-->
         <div class="w3-row-padding" style="margin-top: 25px;">
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/logo.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/homepage.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
@@ -121,22 +121,22 @@
         <!-- Second Photo Grid-->
         <div class="w3-row-padding">
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
             <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="#">
+                <router-link to="/VerAnimalPerdido">
                     <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>

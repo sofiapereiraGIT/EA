@@ -116,7 +116,7 @@
             <label for="check"><span class="icon"></span> Aceito os termos e condições</label>
           </div>
           <div class="group">
-            <input type="submit" class="button" value="Registar">
+            <input type="submit" class="button" value="Registar"> <!-- mandar para o perfil do user ou canil-->
           </div>
         </div>
         </div>
