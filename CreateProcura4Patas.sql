@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `procura4patas`.`Animal` (
   `Concelho` VARCHAR(255) NULL DEFAULT NULL,
   `Discriminator` CHAR(1) NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `FKAnimal549890` (`UtilizadorEmail` ASC) VISIBLE,
+  INDEX `FKAnimal549890` (`UtilizadorEmail` ASC),
   CONSTRAINT `FKAnimal549890`
     FOREIGN KEY (`UtilizadorEmail`)
     REFERENCES `procura4patas`.`utilizador` (`Email`))
@@ -75,9 +75,9 @@ CREATE TABLE IF NOT EXISTS `procura4patas`.`Pedido` (
   `DataUltimoContacto` DATE NULL DEFAULT NULL,
   `Discriminator` CHAR(1) NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `FKPedido124302` (`AnimalID` ASC) VISIBLE,
-  INDEX `FKPedido970999` (`UtilizadorComumUtilizadorEmail` ASC) VISIBLE,
-  INDEX `FKPedido576596` (`UtilizadorEmail` ASC) VISIBLE,
+  INDEX `FKPedido124302` (`AnimalID` ASC),
+  INDEX `FKPedido970999` (`UtilizadorComumUtilizadorEmail` ASC),
+  INDEX `FKPedido576596` (`UtilizadorEmail` ASC),
   CONSTRAINT `FKPedido124302`
     FOREIGN KEY (`AnimalID`)
     REFERENCES `procura4patas`.`animal` (`ID`),
