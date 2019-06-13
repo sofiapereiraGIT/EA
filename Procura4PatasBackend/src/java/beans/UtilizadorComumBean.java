@@ -24,7 +24,7 @@ import procura4patas.UtilizadorDAO;
 public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
 
     @Override
-    public UtilizadorComum getUtilizadorComun(PersistentSession sessao, String email) {
+    public UtilizadorComum getUtilizadorComum(PersistentSession sessao, String email) {
         UtilizadorComum uc = null;
         
         try {
@@ -37,7 +37,7 @@ public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
     }
 
     @Override
-    public boolean addUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
+    public boolean addUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
         boolean criado = false;
         
         Utilizador ut = new Utilizador();
@@ -83,7 +83,30 @@ public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
     }
 
     @Override
-    public boolean updateUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
-        return false;
+    public boolean updateUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
+        boolean atualizado = false;
+        
+        try {
+            Utilizador ut = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
+            ut.setPassword(pass);
+            ut.setNome(nome);
+            ut.setConcelho(concelho);
+        
+            if(!foto.equals("")) ut.setFotografia(foto);
+            else ut.setFotografia(null);
+        
+            if(!tlm.equals("")) ut.setTelemovel(tlm);
+            else ut.setTelemovel(null);
+        
+            if(!descricao.equals("")) ut.setDescricao(descricao);
+            else ut.setDescricao(null);
+            
+            atualizado = UtilizadorDAO.refresh(ut);
+           
+        } catch (PersistentException ex) {
+            Logger.getLogger(UtilizadorComumBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return atualizado;
     }
 }

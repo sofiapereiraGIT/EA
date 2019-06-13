@@ -16,9 +16,9 @@ import procura4patas.UtilizadorComum;
 @Local
 public interface UtilizadorComumBeanLocal {
 
-    public UtilizadorComum getUtilizadorComun(PersistentSession sessao, String email);
+    public UtilizadorComum getUtilizadorComum(PersistentSession sessao, String email);
 
-    public boolean addUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
+    public boolean addUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
 
-    public boolean updateUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
+    public boolean updateUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
 }
