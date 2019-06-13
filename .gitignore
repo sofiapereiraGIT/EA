@@ -19,9 +19,9 @@ wildfly-16.0.0.Final/modules/system/layers/base/org/.DS_Store
 **/dist/
 **/build/
 **/.DS_Store
-**/nbproject/private/
-**/nbproject/project.xml
-**/nbproject/ant-deploy.xml
-**/nbproject/build-impl.xml
-**/nbproject/project.properties
-**/nbproject/genfiles.properties
+**/private/
+**/project.xml
+**/ant-deploy.xml
+**/build-impl.xml
+**/project.properties
+**/genfiles.properties
