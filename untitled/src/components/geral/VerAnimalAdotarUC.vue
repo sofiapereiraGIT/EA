@@ -10,7 +10,7 @@
                     </div>
                     <br>
                         <div>
-                            <router-link class="txt1" to="/Registar">
+                            <router-link class="txt1" to="/UserPerfil">
                                 Inserir nome da pessoa ou canil
                             </router-link>
                         </div>

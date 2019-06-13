@@ -5,8 +5,8 @@
       <hr>
       <form>
         <label>
-          <select style="width: 100%">
-            <option value="0">Tipo: Todos</option>
+          <select style="width: 100%; height: 30px; background-color: white">
+            <option value="0">Tipo</option>
             <option value="1">Cão</option>
             <option value="2">Gato</option>
           </select>
@@ -14,8 +14,8 @@
         <br>
         <br>
         <label>
-          <select style="width: 100%">
-            <option value="0">Estado: Todos</option>
+          <select style="width: 100%; height: 30px; background-color: white">
+            <option value="0">Estado</option>
             <option value="1">Adotado</option>
             <option value="2">Não Adotado</option>
             <option value="3">Encontrado</option>
@@ -34,21 +34,32 @@
       <br>
       <br>
       <div class="animalCol">
-        <img src="../assets/cat2.jpg" alt="Snow" style="width:100%">
+          <!-- mandar para perdido ou adotar-->
+          <router-link to="#">
+            <img src="../../assets/cat2.jpg" alt="Snow" style="width:100%">
+          </router-link>
       </div>
       <div class="animalCol">
-        <img src="../assets/cat2.jpg" alt="Forest" style="width:100%">
+          <!-- mandar para perdido ou adotar-->
+          <router-link to="#">
+            <img src="../../assets/cat2.jpg" alt="Forest" style="width:100%">
+          </router-link>
       </div>
       <div class="animalCol">
-        <img src="../assets/cat2.jpg" alt="Mountains" style="width:100%">
+          <!-- mandar para perdido ou adotar-->
+          <router-link to="#">
+            <img src="../../assets/cat2.jpg" alt="Mountains" style="width:100%">
+          </router-link>
       </div>
       <div class="animalCol">
-        <img src="../assets/cat2.jpg" alt="Mountains" style="width:100%">
+          <!-- mandar para perdido ou adotar-->
+          <router-link to="#">
+            <img src="../../assets/cat2.jpg" alt="Mountains" style="width:100%">
+          </router-link>
       </div>
     </div>
-    <button class="button">Adicionar Animal</button>
-    <button class="button">Comunicar Desaparecimento</button>
-    <button class="button" style="float: left; margin-left: 1%">Voltar</button>
+    <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
+    <button class="button" @click="$router.push('#')">Comunicar Desaparecimento</button>
   </div>
 </template>
 
