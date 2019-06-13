@@ -93,7 +93,7 @@
         <br>
         <br>
         <button class="button">Registar</button>
-        <button class="button">Cancelar</button>
+        <button @click="$router.push('#')" class="button">Cancelar</button> <!-- mandar para o perfil do cidadao ou canil-->
       </form>
     </div>
   </div>
@@ -108,7 +108,7 @@
     height: 100vh;
     margin-top: 38px;
     border: 1px solid black;
-    background: url("../assets/cao2.jpg");
+    background: url("../../assets/cao2.jpg");
   }
   .transbox {
     opacity: 0.7;
