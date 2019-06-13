@@ -23,6 +23,6 @@ public interface CanilBeanLocal {
     public boolean addCanil(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao, 
             String morada, String horario, String site, String face, String insta);
 
-    public void updateCanil(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao, 
+    public boolean updateCanil(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao, 
             String morada, String horario, String site, String face, String insta);
 }
