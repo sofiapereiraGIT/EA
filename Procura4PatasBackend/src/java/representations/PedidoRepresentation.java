@@ -20,13 +20,16 @@ public class PedidoRepresentation {
     //private java.util.Date data;
     private char estado;
     //private java.util.Date dataUltimoContacto;
+    private char discriminator;
+        
     @JsonCreator
-    public PedidoRepresentation(@JsonProperty("id") int id, @JsonProperty("utilizadorComun") UtilizadorComunRepresentation uc, @JsonProperty("animal") AnimalRepresentation a, 
-            @JsonProperty("estado") char e) {
+    public PedidoRepresentation(@JsonProperty("id") int id, @JsonProperty("utilizadorComun") UtilizadorComunRepresentation uc, 
+            @JsonProperty("animal") AnimalRepresentation a, @JsonProperty("estado") char e, @JsonProperty("estado") char d) {
         
         this.ID = id;
         this.utilizadorComum = uc;
         this.animal = a;
         this.estado = e;
+        this.discriminator = d;
     }
 }

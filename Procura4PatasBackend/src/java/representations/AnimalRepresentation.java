@@ -22,11 +22,14 @@ public class AnimalRepresentation {
     private char compPelo;
     private char estado;
     private String descricao;
+    private String concelho;
+    private char discriminator;
        
     @JsonCreator
     public AnimalRepresentation(@JsonProperty("id") int id, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, @JsonProperty("sexo") char s, 
             @JsonProperty("idade") char i, @JsonProperty("raça") String r, @JsonProperty("porte") char p, @JsonProperty("corPelo") String cp, 
-            @JsonProperty("compPelo") char cm, @JsonProperty("estado") char e, @JsonProperty("descricao") String d) {
+            @JsonProperty("compPelo") char cm, @JsonProperty("estado") char e, @JsonProperty("descricao") String d, @JsonProperty("descricao") String c, 
+            @JsonProperty("estado") char di) {
         
         this.ID = id;
         this.nome = n;
@@ -39,5 +42,7 @@ public class AnimalRepresentation {
         this.compPelo = cm;
         this.estado = e;
         this.descricao = d;
+        this.concelho = c;
+        this.discriminator = di;
     }
 }

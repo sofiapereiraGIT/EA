@@ -14,14 +14,12 @@ import javax.json.Json;
  * @author salete
  */
 public class UtilizadorComunRepresentation extends UtilizadorRepresentation{
-    private List<AnimalRepresentation> animaisPerdidos;   
     
     @JsonCreator
-    public UtilizadorComunRepresentation(@JsonProperty("email") String e, @JsonProperty("password") String p, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, 
-            @JsonProperty("concelho") String c, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d, @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa, 
-            @JsonProperty("pedidosAdocao") List<AnimalRepresentation> pa, @JsonProperty("animaisPerdidos") List<AnimalRepresentation> ap) {
+    public UtilizadorComunRepresentation(@JsonProperty("email") String e, @JsonProperty("password") String p, @JsonProperty("nome") String n, 
+            @JsonProperty("fotografia") String f, @JsonProperty("concelho") String c, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d, 
+            @JsonProperty("animaisAdotar") List<AnimalRepresentation> aa, @JsonProperty("pedidosAdocao") List<AnimalRepresentation> pa) {
         
         super(e, p, n, f, d, c, t, aa, pa);
-        this.animaisPerdidos = ap;
     }
 }
