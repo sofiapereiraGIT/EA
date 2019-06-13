@@ -113,7 +113,69 @@ public class CanilBean implements CanilBeanLocal {
     }
 
     @Override
-    public void updateCanil(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao, 
+    public boolean updateCanil(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao, 
             String morada, String horario, String site, String face, String insta) {
+        
+        boolean atualizado = false;
+        
+        try {
+            Utilizador ut = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
+            ut.setPassword(pass);
+            ut.setNome(nome);
+            ut.setConcelho(concelho);
+        
+            if(!foto.equals("")) ut.setFotografia(foto);
+            else ut.setFotografia(null);
+        
+            if(!tlm.equals("")) ut.setTelemovel(tlm);
+            else ut.setTelemovel(null);
+        
+            if(!descricao.equals("")) ut.setDescricao(descricao);
+            else ut.setDescricao(null);
+            
+            Canil c = CanilDAO.getCanilByORMID(sessao, email);
+            c.setMorada(morada);
+        
+            if(!horario.equals("")) c.setHorario(horario);
+            else c.setHorario(null);
+            
+            if(!site.equals("")) c.setSiteOficial(site);
+            else c.setSiteOficial(null);
+        
+            if(!face.equals("")) c.setFacebook(face);
+            else c.setFacebook(null);
+        
+            if(!insta.equals("")) c.setInstagram(insta);
+            else c.setInstagram(null);
+            
+            try {
+                sessao.beginTransaction();
+            
+                atualizado = UtilizadorDAO.refresh(ut);
+            
+                if(atualizado){
+                    atualizado = CanilDAO.refresh(c);
+                    
+                    if(atualizado){
+                        try{
+                            sessao.getTransaction().commit();
+                        } catch (Exception e){
+                            sessao.getTransaction().rollback();
+                            atualizado = false;
+                        }
+                    }
+                }
+                else sessao.getTransaction().rollback();
+            
+            } catch (PersistentException ex) {
+                sessao.getTransaction().rollback();
+                atualizado = false;
+            }
+           
+        } catch (PersistentException ex) {
+            Logger.getLogger(UtilizadorComumBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return atualizado;
     }
 }
