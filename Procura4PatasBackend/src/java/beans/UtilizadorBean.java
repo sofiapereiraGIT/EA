@@ -40,5 +40,64 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         return onlyDogs;
     }
     
+    @Override
+    public List<Animal> getGatoAdocaoUser(PersistentSession sessao, Utilizador user) {
+        
+        List<Animal> animalTotal = new ArrayList<>();
+        animalTotal = Arrays.asList(user.animais.toArray());
+        List<Animal> onlyCats = new ArrayList<>();
+        
+        if(animalTotal != null) {
+        animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+            onlyCats.add(a);
+        });
+        }
+        
+        return onlyCats;
+    }
+    
+    @Override
+    public List<Animal> getTodosCaes(PersistentSession sessao, Utilizador user) {
+        
+        List<Animal> animalTotal = new ArrayList<>();
+        animalTotal = Arrays.asList(user.animais.toArray());
+        List<Animal> todosCaes = new ArrayList<>();
+        
+        if(animalTotal != null) {
+        animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
+            todosCaes.add(a);
+        });
+        }
+        
+        return todosCaes;
+    }
+    
+    
+    @Override
+    public List<Animal> getTodosGatos(PersistentSession sessao, Utilizador user) {
+        
+        List<Animal> animalTotal = new ArrayList<>();
+        animalTotal = Arrays.asList(user.animais.toArray());
+        List<Animal> todosGatos = new ArrayList<>();
+        
+        if(animalTotal != null) {
+        animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+            todosGatos.add(a);
+        });
+        }
+        
+        return todosGatos;
+    }
+    
+    @Override
+    public List<Animal> getPedidosUser(PersistentSession sessao, Utilizador user) {
+        
+        List<Animal> pedidosTotal = new ArrayList<>();
+        pedidosTotal = (List<Animal>) (user.listaPedidos);
+        
+        return pedidosTotal;  
+    }
+    
+    
     
 }
