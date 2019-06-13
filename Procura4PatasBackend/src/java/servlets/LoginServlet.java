@@ -5,33 +5,24 @@
  */
 package servlets;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import procura4patas.Animal;
 import procura4patas.P4P;
-import procura4patas.Procura4patasPersistentManager;
 import procura4patas.Utilizador;
-import procura4patas.UtilizadorDAO;
 import src.Util;
+
 /**
  *
  * @author davidsousa
  */
-@WebServlet(name = "CaoAdocaoUserServlet", urlPatterns = {"/CaoAdocaoUserServlet"})
-public class CaoAdocaoUserServlet extends HttpServlet {
-
- 
-
+@WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,22 +36,35 @@ public class CaoAdocaoUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    
-    
-      
-            PersistentSession session = Util.getSession(request);
-            HttpSession hs = request.getSession();
-            Utilizador user = (Utilizador) hs.getAttribute("user");
+        
+        PersistentSession session = Util.getSession(request);
+        
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        
+            if(email!=null && password!=null) {
+            try {
+                Utilizador u = P4P.login(session, email, password);  
+                if(u!=null) {
+                    
+                    request.getSession().setAttribute("user", u);
+                    response.setContentType("application/json");
+                    response.addHeader("Access-Control-Allow-Origin", "*");
+                    PrintWriter out = response.getWriter();
+                    out.println("OK");
+                    out.flush();
+                    out.close();
+                 
+                } else {
+                    response.sendError(400);
+                }
             
-            if(user!=null) {
-                List<Animal> animais = P4P.getCaoAdocaoUser(session, user);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        
-         
-       
             
-       
-        
+        }
+
         
         
         
