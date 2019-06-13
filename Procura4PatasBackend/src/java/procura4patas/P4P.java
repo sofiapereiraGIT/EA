@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 
 /**
@@ -24,10 +25,32 @@ public class P4P {
     static UtilizadorBeanLocal utilizadorBean = lookupUtilizadorBeanLocal();
     static UtilizadorComumBeanLocal utilizadorComumBean = lookupUtilizadorComumBeanLocal();
     static CanilBeanLocal canilBean = lookupCanilBeanLocal();
+    
+    
+    public static Utilizador login(PersistentSession session, String email, String password) throws PersistentException {
+        return UtilizadorDAO.loadUtilizadorByQuery(session, "email='"+email+"' AND password='"+password+"'", "ID");
+    }
+    
    
-    public static List<Animal> getCaoAdocaoUser(PersistentSession sessao,Utilizador user) {
+    public static List<Animal> getCaoAdocaoUser(PersistentSession sessao, Utilizador user) {
          return utilizadorBean.getCaoAdocaoUser(sessao, user);
     }
+    
+     public List<Animal> getGatoAdocaoUser(PersistentSession sessao, Utilizador user) {
+        return utilizadorBean.getGatoAdocaoUser(sessao, user);
+    }
+     
+     public List<Animal> getTodosCaes(PersistentSession sessao, Utilizador user) {
+         return utilizadorBean.getTodosCaes(sessao, user);
+     }
+     
+     public List<Animal> getTodosGatos(PersistentSession sessao, Utilizador user) {
+         return utilizadorBean.getTodosGatos(sessao, user);
+     }
+     
+     public List<Animal> getPedidosUser(PersistentSession sessao, Utilizador user) {
+         return utilizadorBean.getPedidosUser(sessao, user);
+     }
     
     public static UtilizadorComum getUtilizadorComun(PersistentSession sessao, String email){
         return utilizadorComumBean.getUtilizadorComum(sessao, email);
@@ -57,6 +80,10 @@ public class P4P {
         return canilBean.updateCanil(sessao, email, pass, nome, foto, concelho, tlm, descricao, morada, horario, site, face, insta);
     }
     
+    
+    
+    
+    /* Lookups para os beans */
     private static UtilizadorBeanLocal lookupUtilizadorBeanLocal() {
         try {
             Context c = new InitialContext();
