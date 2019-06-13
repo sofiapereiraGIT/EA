@@ -7,11 +7,17 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.P4P;
 import procura4patas.Utilizador;
@@ -35,37 +41,8 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-        PersistentSession session = Util.getSession(request);
-        
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-            if(email!=null && password!=null) {
-            try {
-                Utilizador u = P4P.login(session, email, password);  
-                if(u!=null) {
-                    
-                    request.getSession().setAttribute("user", u);
-                    response.setContentType("application/json");
-                    response.addHeader("Access-Control-Allow-Origin", "*");
-                    PrintWriter out = response.getWriter();
-                    out.println("OK");
-                    out.flush();
-                    out.close();
-                 
-                } else {
-                    response.sendError(400);
-                }
-            
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-        }
-
-        
+         
         
         
     }
@@ -94,9 +71,40 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         try {
+            System.out.println("[POST] PASSEI AQUI");
+            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+            System.out.println("Body " + body);
+            
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(body);
+            
+            response.setContentType("text/html;charset=UTF-8");
+            
+            PersistentSession session = Util.getSession(request);
+            String email = (String) json.get("email");
+            String password = (String) json.get("password");
+        
+            if(email!=null && password!=null) {
+                Utilizador u = P4P.login(session, email, password);  
+                if(u!=null) {
+                   request.getSession().setAttribute("user", u);
+                   response.setContentType("application/json");
+                   response.addHeader("Access-Control-Allow-Origin", "*");
+                   PrintWriter out = response.getWriter();
+                   out.println("OK");
+                   out.flush();
+                   out.close();
+                } 
+                else response.sendError(400);
+            }
+            else response.sendError(400);
+            
+        } catch (ParseException | PersistentException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendError(400);
+        }
     }
 
     /**
