@@ -6,6 +6,8 @@
 package beans;
 
 import javax.ejb.Local;
+import org.orm.PersistentSession;
+import procura4patas.UtilizadorComum;
 
 /**
  *
@@ -13,5 +15,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface UtilizadorComumBeanLocal {
-    
+
+    public UtilizadorComum getUtilizadorComun(PersistentSession sessao, String email);
+
+    public boolean addUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
+
+    public boolean updateUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
 }

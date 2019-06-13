@@ -1,1 +1,1 @@
-# GitHub Para o trabalho prático de EA
+# GitHub Para o Trabalho Prático de EA
