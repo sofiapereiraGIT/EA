@@ -22,5 +22,7 @@ public interface UtilizadorBeanLocal {
     List<Animal> getTodosCaes(PersistentSession sessao, Utilizador user);
     List<Animal> getTodosGatos(PersistentSession sessao, Utilizador user);
     List<Animal> getPedidosUser(PersistentSession sessao, Utilizador user);
+
+    Utilizador login(PersistentSession session, String email, String password);
    
 }

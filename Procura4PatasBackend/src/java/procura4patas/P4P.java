@@ -9,8 +9,6 @@ import beans.CanilBeanLocal;
 import beans.UtilizadorBeanLocal;
 import beans.UtilizadorComumBeanLocal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -28,7 +26,7 @@ public class P4P {
     
     
     public static Utilizador login(PersistentSession session, String email, String password) throws PersistentException {
-        return UtilizadorDAO.loadUtilizadorByQuery(session, "email='"+email+"' AND password='"+password+"'", "ID");
+        return utilizadorBean.login(session, email, password);
     }
     
    
@@ -52,15 +50,15 @@ public class P4P {
          return utilizadorBean.getPedidosUser(sessao, user);
      }
     
-    public static UtilizadorComum getUtilizadorComun(PersistentSession sessao, String email){
+    public static UtilizadorComum getUtilizadorComum(PersistentSession sessao, String email){
         return utilizadorComumBean.getUtilizadorComum(sessao, email);
     }
 
-    public static boolean addUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao){
+    public static boolean addUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao){
         return utilizadorComumBean.addUtilizadorComum(sessao, email, pass, nome, foto, concelho, tlm, descricao);
     }
 
-    public static boolean updateUtilizadorComun(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao){
+    public static boolean updateUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao){
         return utilizadorComumBean.updateUtilizadorComum(sessao, email, pass, nome, foto, concelho, tlm, descricao);
     }
     
@@ -79,9 +77,6 @@ public class P4P {
         
         return canilBean.updateCanil(sessao, email, pass, nome, foto, concelho, tlm, descricao, morada, horario, site, face, insta);
     }
-    
-    
-    
     
     /* Lookups para os beans */
     private static UtilizadorBeanLocal lookupUtilizadorBeanLocal() {

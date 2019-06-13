@@ -30,23 +30,6 @@ import src.Util;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-         
-        
-        
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,7 +42,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
     }
 
     /**
@@ -81,29 +64,42 @@ public class LoginServlet extends HttpServlet {
             JSONObject json = (JSONObject) parser.parse(body);
             
             response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
             
             PersistentSession session = Util.getSession(request);
             String email = (String) json.get("email");
             String password = (String) json.get("password");
         
-            if(email!=null && password!=null) {
+            if( email != null && password != null ) {
                 Utilizador u = P4P.login(session, email, password);  
-                if(u!=null) {
+                if( u != null ) {
                    request.getSession().setAttribute("user", u);
-                   response.setContentType("application/json");
-                   response.addHeader("Access-Control-Allow-Origin", "*");
                    PrintWriter out = response.getWriter();
                    out.println("OK");
                    out.flush();
                    out.close();
                 } 
-                else response.sendError(400);
+                else {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    PrintWriter out = response.getWriter();
+                    out.flush();
+                    out.close();
+                }
             }
-            else response.sendError(400);
+            else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                PrintWriter out = response.getWriter();
+                out.flush();
+                out.close();
+            }
             
         } catch (ParseException | PersistentException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendError(400);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            PrintWriter out = response.getWriter();
+            out.flush();
+            out.close();
         }
     }
 

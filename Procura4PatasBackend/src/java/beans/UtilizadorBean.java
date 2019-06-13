@@ -23,7 +23,17 @@ import procura4patas.UtilizadorDAO;
  */
 @Stateless
 public class UtilizadorBean implements UtilizadorBeanLocal {
-
+    
+    @Override
+    public Utilizador login(PersistentSession session, String email, String password) {
+        try {
+            Utilizador user = UtilizadorDAO.loadUtilizadorByQuery(session, "email='"+email+"' AND password='"+password+"'", "nome");
+            return user;
+        } catch (PersistentException ex) {
+            return null;
+        }
+    }
+    
     @Override
     public List<Animal> getCaoAdocaoUser(PersistentSession sessao, Utilizador user) {
         
@@ -97,7 +107,4 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         
         return pedidosTotal;  
     }
-    
-    
-    
 }

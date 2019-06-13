@@ -126,7 +126,7 @@ public class AnimalBean implements AnimalBeanLocal {
             session.getTransaction().commit();
         } catch(Exception e){
             session.getTransaction().rollback();
-            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+           // Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -146,7 +146,7 @@ public class AnimalBean implements AnimalBeanLocal {
             
             query1.executeUpdate();
             
-            //ANIMAL PERDIDO !!!!!!! TODO
+            /* ANIMAL PERDIDO !!!!!!! TODO
             Query query2 = session.createSQLQuery("INSERT INTO AnimalPerdido\n" +
                     "(UtilizadorComumUtilizadorE-mail, AnimalID, Concelho)\n" +
                     "VALUES \n" +
@@ -154,6 +154,7 @@ public class AnimalBean implements AnimalBeanLocal {
             
             query2.executeUpdate();
             session.getTransaction().commit();
+                    */
         } catch (Exception ex) {
             session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,8 +164,8 @@ public class AnimalBean implements AnimalBeanLocal {
     public void updateAnimal(PersistentSession session, String ID, String nome, String fotografia, char sexo, char idade,
         String raça, char porte, String corPelo, char compPelo, char estado, String descricao, String discriminator){ 
         
-        Animal animal;
-        AnimalDAO.getAnimalByORMID(session, ID);
+        // Animal animal;
+        // AnimalDAO.getAnimalByORMID(session, ID);
     }
     
     public void updateAnimalPerdido(PersistentSession session){ 

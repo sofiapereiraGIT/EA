@@ -41,7 +41,9 @@ export default {
   }),
   methods: {
     login () {
-      axios.post('http://localhost:8080/procura4patas/login', JSON.stringify(this.credentials)).then()
+      axios.post('http://localhost:8080/procura4patas/Login', JSON.stringify(this.credentials))
+        .then(response => { alert(response.data) })
+        .catch(e => { alert(e.toString()) })
     }
   }
 }
