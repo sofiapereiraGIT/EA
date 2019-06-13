@@ -9,10 +9,10 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author carlos
+ * @author davidsousa
  */
 @Stateless
-public class ExampleBean implements ExampleBeanLocal {
+public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

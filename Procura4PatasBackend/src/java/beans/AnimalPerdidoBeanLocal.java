@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package representations;
+package beans;
+
+import javax.ejb.Local;
 
 /**
  *
- * @author carlos
+ * @author davidsousa
  */
-public class ExampleClass {
+@Local
+public interface AnimalPerdidoBeanLocal {
     
 }

@@ -9,9 +9,9 @@ import javax.ejb.Local;
 
 /**
  *
- * @author carlos
+ * @author davidsousa
  */
 @Local
-public interface ExampleBeanLocal {
+public interface AnimalBeanLocal {
     
 }
