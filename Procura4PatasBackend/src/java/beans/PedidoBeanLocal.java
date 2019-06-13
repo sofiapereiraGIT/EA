@@ -18,6 +18,7 @@ import procura4patas.Utilizador;
 @Local
 public interface PedidoBeanLocal {
     void adotarAnimal(PersistentSession sessao, Animal anim, Utilizador user);
+    void serFatAnimal(PersistentSession sessao, Animal anim, Utilizador user);
     
     
 }
