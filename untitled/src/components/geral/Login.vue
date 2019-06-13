@@ -8,15 +8,15 @@
           </div>
           <br>
           <div class="wrap-input100 validate-input m-b-10">
-            <label><input class="input100" type="text" name="username" placeholder="Username" required></label>
+            <label><input v-model="credentials.email" class="input100" type="text" name="username" placeholder="Username" required></label>
           </div>
 
           <div class="wrap-input100 validate-input m-b-10">
-            <label><input class="input100" type="password" name="pass" placeholder="Password" required></label>
+            <label><input v-model="credentials.password" class="input100" type="password" name="pass" placeholder="Password" required></label>
           </div>
 
           <div>
-            <button class="login100-form-btn">Login</button>
+            <button class="login100-form-btn" @click="login">Login</button>
             <br>
           </div>
 
@@ -33,6 +33,18 @@
 </template>
 
 <script>
+import axios from 'axios'
+export default {
+  name: 'Login',
+  data: () => ({
+    credentials: {}
+  }),
+  methods: {
+    login () {
+      axios.post('http://localhost:8080/procura4patas/login', JSON.stringify(this.credentials)).then()
+    }
+  }
+}
 </script>
 
 <style>
