@@ -5,7 +5,14 @@
  */
 package beans;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import org.hibernate.Query;
+import org.orm.PersistentSession;
+import procura4patas.AnimalDAO;
+import procura4patas.Utilizador;
 
 /**
  *
@@ -16,4 +23,157 @@ public class AnimalBean implements AnimalBeanLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    
+    public List getCaesAdotar(PersistentSession session) {
+        List caesAdotar = null;
+        
+        try {
+            session.beginTransaction();
+            caesAdotar = AnimalDAO.queryAnimal(session, "Discriminator = c AND Estado = a", null);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return caesAdotar;
+    }
+
+    
+    public List getGatosAdotar(PersistentSession session) {
+        List gatosAdotar = null;
+        
+        try {
+            session.beginTransaction();
+            gatosAdotar = AnimalDAO.queryAnimal(session, "Discriminator = g AND Estado = a", null);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return gatosAdotar;
+    }
+    
+    public List getCaesPerdidos(PersistentSession session) {
+        List caesPerdidos = null;
+        
+        try {
+            session.beginTransaction();
+            caesPerdidos = AnimalDAO.queryAnimal(session, "Discriminator = c AND Estado = p", null);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return caesPerdidos;
+    }
+
+    public List getGatosPerdidos(PersistentSession session) {
+        List gatosPerdidos = null;
+        
+        try {
+            session.beginTransaction();
+            gatosPerdidos = AnimalDAO.queryAnimal(session, "Discriminator = g AND Estado = p", null);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return gatosPerdidos;
+    }
+    
+    public void addAnimal(PersistentSession session, Utilizador user, String nome, String fotografia, char sexo, char idade,
+        String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
+        
+        String UtilizadorEmail = user.getEmail();
+        
+        if(nome.equals("")){
+            nome = "Null";
+        }
+        
+        if(fotografia.equals("")){
+            fotografia = "Null";
+        }
+        
+        if (descricao.equals("")){
+            descricao = "Null";
+        }
+        
+        if (concelho.equals("")){
+            concelho = "Null";
+        }       
+        
+        try {
+            session.beginTransaction();
+            
+            Query query = session.createSQLQuery("INSERT INTO Animal\n" +
+                    "(UtilizadorEmail, Nome, Fotografia, Sexo, Idade, Raça, Porte, CorPelo, CompPelo, Estado, Descricao, Concelho, Discriminator)\n" +
+                    "VALUES \n" +
+                    "("+UtilizadorEmail+", "+nome+", "+fotografia+", "+sexo+", "+idade+", "+raca+
+                    ", "+porte+", "+corPelo+", "+compPelo+", "+estado+", "+descricao+", "+concelho+", "+discriminator+");");
+            
+            query.executeUpdate();
+            
+            session.getTransaction().commit();
+        } catch(Exception ex){
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
+        String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
+        
+        if(nome.equals("")){
+            nome = "Null";
+        }
+        
+        if(fotografia.equals("")){
+            fotografia = "Null";
+        }
+        
+        if (descricao.equals("")){
+            descricao = "Null";
+        }
+        
+        if (concelho.equals("")){
+            concelho = "Null";
+        }    
+        
+        try {
+            session.beginTransaction();
+            
+            Query query = session.createSQLQuery("UPDATE Animal\n" +
+                    "SET Nome = "+nome+", Fotografia = "+fotografia+", Sexo = "+sexo+", Idade = "+idade+
+                    ", Raça = "+raca+", Porte = "+porte+", CorPelo = "+corPelo+", CompPelo = "+compPelo+
+                    ", Estado = "+estado+", Descricao = "+descricao+", Concelho = "+concelho+", Discriminator = "+discriminator+"\n"+
+                    "WHERE ID = "+ID+";");
+                                
+            query.executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    public void deleteAnimalPerdido(PersistentSession session, int ID){ 
+        try {
+            session.beginTransaction();
+            
+            Query query = session.createSQLQuery("DELETE FROM Animal\n"+
+                    "WHERE ID = "+ID+" AND Estado = p;");
+            
+            query.executeUpdate();
+            
+            session.getTransaction().commit();
+        } catch(Exception ex){
+            session.getTransaction().rollback();
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

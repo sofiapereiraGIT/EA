@@ -5,7 +5,11 @@
  */
 package beans;
 
+import java.util.List;
 import javax.ejb.Local;
+import org.orm.PersistentSession;
+import procura4patas.Animal;
+import procura4patas.Utilizador;
 
 /**
  *
@@ -13,5 +17,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface PedidoBeanLocal {
+    void adotarAnimal(PersistentSession sessao, Animal anim, Utilizador user);
+    
     
 }

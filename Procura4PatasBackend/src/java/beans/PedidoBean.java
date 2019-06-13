@@ -5,7 +5,22 @@
  */
 package beans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import org.orm.PersistentException;
+import org.orm.PersistentSession;
+import procura4patas.Animal;
+import procura4patas.AnimalDAO;
+import procura4patas.Pedido;
+import procura4patas.PedidoDAO;
+import procura4patas.Utilizador;
 
 /**
  *
@@ -13,7 +28,22 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class PedidoBean implements PedidoBeanLocal {
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
+    @Override
+    public void adotarAnimal(PersistentSession sessao, Animal anim, Utilizador user) {
+        Calendar c = Calendar.getInstance();
+        Date data = c.getTime();
+        DateFormat f = DateFormat.getDateInstance();
+        
+       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd").format(c.data);
+        
+        Pedido p;
+        //p.setAnimal(anim);
+       // p.setData(sdf);
+        p.setDataUltimoContacto(null);
+           
+     
+        
+    }
+    
 }

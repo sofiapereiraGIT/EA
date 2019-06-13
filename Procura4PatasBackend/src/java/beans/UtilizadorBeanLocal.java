@@ -18,5 +18,9 @@ import procura4patas.Utilizador;
 @Local
 public interface UtilizadorBeanLocal {
     List<Animal> getCaoAdocaoUser(PersistentSession sessao, Utilizador user);
+    List<Animal> getGatoAdocaoUser(PersistentSession sessao, Utilizador user);
+    List<Animal> getTodosCaes(PersistentSession sessao, Utilizador user);
+    List<Animal> getTodosGatos(PersistentSession sessao, Utilizador user);
+    List<Animal> getPedidosUser(PersistentSession sessao, Utilizador user);
    
 }
