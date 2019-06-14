@@ -38,56 +38,50 @@ public class PedidoBean implements PedidoBeanLocal {
         
         boolean ok = true;
         
-      try {
-       Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-       Date dNow = new Date();
-       SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Date dNow = new Date();
+            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
        
-       Pedido p = new Pedido();
-       p.setAnimal(anim);
-       p.setData(dNow);
-       p.setDataUltimoContacto(null);
-       p.setDiscriminator('p');
-       p.setEstado('c');
-       p.setUtilizadorComum((UtilizadorComum) user);
-       ok = PedidoDAO.save(p);
+            Pedido p = new Pedido();
+            p.setAnimal(anim);
+            p.setData(dNow);
+            p.setDataUltimoContacto(null);
+            p.setDiscriminator('p');
+            p.setEstado('c');
+            p.setUtilizadorComum((UtilizadorComum) user);
+            ok = PedidoDAO.save(p);
+            
+        } catch (PersistentException ex) {
+            System.out.println(ex);
+        }
+       
+        return ok;
+    }
+    
+    @Override
+    public boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
+        
+        boolean ok  = true;
+        
+        try{
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Date dNow = new Date();
+            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+      
+            Pedido p = new Pedido();
+            p.setAnimal(anim);
+            p.setData(dNow);
+            p.setDataUltimoContacto(null);
+            p.setDiscriminator('f');
+            p.setEstado('c');
+            p.setUtilizadorComum((UtilizadorComum) user);
+            ok = PedidoDAO.save(p);
        
         } catch (PersistentException ex) {
             System.out.println(ex);
         }
        
         return ok;
-       
-       
-       
     }
-    
-    @Override
-    public boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
-        
-      boolean ok  = true;
-        
-      try{
-       Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-       Date dNow = new Date();
-       SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-      
-      
-       Pedido p = new Pedido();
-       p.setAnimal(anim);
-       p.setData(dNow);
-       p.setDataUltimoContacto(null);
-       p.setDiscriminator('f');
-       p.setEstado('c');
-       p.setUtilizadorComum((UtilizadorComum) user);
-       ok = PedidoDAO.save(p);
-       
-        } catch (PersistentException ex) {
-            System.out.println(ex);
-        }
-       
-       return ok;
-       
-    }
-    
 }

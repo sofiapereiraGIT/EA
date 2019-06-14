@@ -21,4 +21,5 @@ public interface UtilizadorComumBeanLocal {
     public boolean addUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
 
     public boolean updateUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao);
+
 }
