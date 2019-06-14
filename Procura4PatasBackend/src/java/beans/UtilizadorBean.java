@@ -8,8 +8,6 @@ package beans;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
@@ -39,21 +37,19 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         
         List<Animal> onlyDogs = new ArrayList<>();
         
-       try {
-           
-        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-        List<Animal> animalTotal = new ArrayList<>();
-        animalTotal = Arrays.asList(user.animais.toArray());
-        
-        if(animalTotal != null) {
-        animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
-            onlyDogs.add(a);
-        });
+        try {
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            List<Animal> animalTotal = new ArrayList<>();
+            animalTotal = Arrays.asList(user.animais.toArray());
+            
+            if(animalTotal != null) {
+                animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
+                onlyDogs.add(a);
+                });
+            }
+        } catch(PersistentException e) {
+            System.out.println(e);
         }
-        
-       } catch(PersistentException e) {
-         System.out.println(e);
-       }
        
         return onlyDogs;
     }
@@ -64,22 +60,20 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Animal> onlyCats = new ArrayList<>();
         
         try {
-        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-        List<Animal> animalTotal = new ArrayList<>();
-        animalTotal = Arrays.asList(user.animais.toArray());
-      
-        
-        if(animalTotal != null) {
-        animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
-            onlyCats.add(a);
-        });
-        }
-        
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            List<Animal> animalTotal = new ArrayList<>();
+            animalTotal = Arrays.asList(user.animais.toArray());
+
+            if(animalTotal != null) {
+                animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+                onlyCats.add(a);
+                });
+            }
         } catch(PersistentException e) {
             System.out.println(e);
         }
         
-      return onlyCats;
+        return onlyCats;
     }
     
     @Override
@@ -87,18 +81,16 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         
         List<Animal> todosCaes = new ArrayList<>();
         
-       try {
-        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-        List<Animal> animalTotal = new ArrayList<>();
-        animalTotal = Arrays.asList(user.animais.toArray());
-        
-        
-        if(animalTotal != null) {
-        animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
-            todosCaes.add(a);
-        });
-        }
-        
+        try {
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            List<Animal> animalTotal = new ArrayList<>();
+            animalTotal = Arrays.asList(user.animais.toArray());
+
+            if(animalTotal != null) {
+                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
+                    todosCaes.add(a);
+                });
+            }
         } catch(PersistentException e) {
             System.out.println(e);
         }
@@ -106,26 +98,22 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         return todosCaes;
     }
     
-    
     @Override
     public List<Animal> getTodosGatos(PersistentSession sessao, String email) {
         
         List<Animal> todosGatos = new ArrayList<>();
         
-        
-       try {
-        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-        List<Animal> animalTotal = new ArrayList<>();
-        animalTotal = Arrays.asList(user.animais.toArray());
-        
-        
-        if(animalTotal != null) {
-        animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
-            todosGatos.add(a);
-        });
-        }
-        
-       } catch(PersistentException e) {
+        try {
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            List<Animal> animalTotal = new ArrayList<>();
+            animalTotal = Arrays.asList(user.animais.toArray());
+
+            if(animalTotal != null) {
+                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+                    todosGatos.add(a);
+                });
+            }
+        } catch(PersistentException e) {
             System.out.println(e);
         }
         
@@ -138,13 +126,11 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Animal> pedidosTotal = new ArrayList<>();
         
         try {
-        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-        pedidosTotal = (List<Animal>) (user.listaPedidos);
-        
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            pedidosTotal = (List<Animal>) (user.listaPedidos);
         } catch(PersistentException e) {
             System.out.println(e);
         }
-        
         
         return pedidosTotal;  
     }

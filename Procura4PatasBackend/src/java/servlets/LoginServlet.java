@@ -19,7 +19,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import procura4patas.P4P;
+import src.P4P;
 import procura4patas.Utilizador;
 import src.Util;
 

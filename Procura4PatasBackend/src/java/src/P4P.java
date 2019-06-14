@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package procura4patas;
+package src;
 
 import beans.AnimalBeanLocal;
 import beans.CanilBeanLocal;
@@ -16,6 +16,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
+import procura4patas.Animal;
+import procura4patas.Canil;
+import procura4patas.Utilizador;
+import procura4patas.UtilizadorComum;
 
 /**
  *

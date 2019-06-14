@@ -19,10 +19,15 @@ import procura4patas.Utilizador;
 public interface UtilizadorBeanLocal {
     
     Utilizador login(PersistentSession session, String email, String password);
+    
     List<Animal> getCaoAdocaoUser(PersistentSession sessao, String email);
+    
     List<Animal> getGatoAdocaoUser(PersistentSession sessao, String email);
+    
     List<Animal> getTodosCaes(PersistentSession sessao, String email);
+    
     List<Animal> getTodosGatos(PersistentSession sessao, String email);
+    
     List<Animal> getPedidosUser(PersistentSession sessao, String email);
     
 }

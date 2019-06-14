@@ -25,7 +25,7 @@ public class PedidoRepresentation {
         
     @JsonCreator
     public PedidoRepresentation(@JsonProperty("id") int id, @JsonProperty("utilizadorComun") UtilizadorComunRepresentation uc, 
-            @JsonProperty("animal") AnimalRepresentation a, @JsonProperty("estado") char e, @JsonProperty("estado") char d,
+            @JsonProperty("animal") AnimalRepresentation a, @JsonProperty("estado") char e, @JsonProperty("discriminator") char d,
             @JsonProperty("data") Date da, @JsonProperty("dataUltimoContacto") Date dc) {
         
         this.ID = id;
