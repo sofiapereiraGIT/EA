@@ -7,7 +7,10 @@ package src;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Procura4patasPersistentManager;
 
@@ -44,5 +47,18 @@ public class Util {
         }
         
         return session;
+    }
+    
+    public static PersistentSession getSessionWithoutAut(HttpServletRequest request) {
+            
+        PersistentSession sessao = null;
+        
+        try {
+            sessao = Procura4patasPersistentManager.instance().getSession();
+        } catch (PersistentException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return sessao;
     }
 }
