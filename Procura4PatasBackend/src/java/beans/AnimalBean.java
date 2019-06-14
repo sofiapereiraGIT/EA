@@ -12,7 +12,6 @@ import javax.ejb.Stateless;
 import org.hibernate.Query;
 import org.orm.PersistentSession;
 import procura4patas.AnimalDAO;
-import procura4patas.Utilizador;
 
 /**
  *
@@ -85,7 +84,7 @@ public class AnimalBean implements AnimalBeanLocal {
         return gatosPerdidos;
     }
     
-    public void addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
+    public boolean addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
         
         if(nome.equals("")){
@@ -116,13 +115,15 @@ public class AnimalBean implements AnimalBeanLocal {
             query.executeUpdate();
             
             session.getTransaction().commit();
+            return true;
         } catch(Exception ex){
-            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+            session.getTransaction().rollback();
+            return false;
         }
     }
     
-    public void updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
+    public boolean updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
         
         if(nome.equals("")){
@@ -153,13 +154,15 @@ public class AnimalBean implements AnimalBeanLocal {
             query.executeUpdate();
 
             session.getTransaction().commit();
+            return true;
         } catch (Exception ex) {
-            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+            session.getTransaction().rollback();
+            return false;
         }        
     }
     
-    public void deleteAnimalPerdido(PersistentSession session, int ID){ 
+    public boolean deleteAnimalPerdido(PersistentSession session, int ID){ 
         try {
             session.beginTransaction();
             
@@ -169,9 +172,11 @@ public class AnimalBean implements AnimalBeanLocal {
             query.executeUpdate();
             
             session.getTransaction().commit();
+            return true;
         } catch(Exception ex){
-            session.getTransaction().rollback();
             Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+            session.getTransaction().rollback();
+            return false;
         }
     }
 }
