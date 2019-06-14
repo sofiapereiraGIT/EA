@@ -7,18 +7,24 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.orm.PersistentSession;
+import procura4patas.Animal;
+import representations.AnimalRepresentation;
+import src.P4P;
+import src.Util;
 
 /**
  *
  * @author sofia
  */
-@WebServlet(name = "GetCaesAdotar", urlPatterns = {"/GetCaesAdotar"})
-public class GetCaesAdotarServlet extends HttpServlet {
+@WebServlet(name = "CaesAdotarServlet", urlPatterns = {"/CaesAdotar"})
+public class CaesAdotarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +37,34 @@ public class GetCaesAdotarServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetCaesAdotar</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetCaesAdotar at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+            response.setContentType("application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+            response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+            
+            PersistentSession session = Util.getSessionWithoutAut(request);
+            List caesAdotar = P4P.getCaesAdotar(session);
+            
+            PrintWriter out = response.getWriter();           
+            out.println("{ \"caes\" :");
+            out.println("[");
+                    
+            for(int i=0; i<caesAdotar.size(); i++){
+                Animal cao = (Animal) caesAdotar.get(i);
+                
+                out.print(new AnimalRepresentation(cao.getID(), cao.getNome(), cao.getFotografia(), cao.getSexo(), 
+                            cao.getIdade(), cao.getRaça(), cao.getPorte(), cao.getCorPelo(),  cao.getCompPelo(), cao.getEstado(),
+                            cao.getDescricao(), cao.getConcelho(), cao.getDiscriminator()));
+                
+                if(i<=caesAdotar.size()-1) out.println(",");
+            }
+            
+            out.println("]");
+            out.println("}");
+            out.flush();
+            out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
