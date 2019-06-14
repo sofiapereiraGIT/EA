@@ -85,10 +85,8 @@ public class AnimalBean implements AnimalBeanLocal {
         return gatosPerdidos;
     }
     
-    public void addAnimal(PersistentSession session, Utilizador user, String nome, String fotografia, char sexo, char idade,
+    public void addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
-        
-        String UtilizadorEmail = user.getEmail();
         
         if(nome.equals("")){
             nome = "Null";
