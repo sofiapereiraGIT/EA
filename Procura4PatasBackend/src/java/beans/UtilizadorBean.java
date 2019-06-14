@@ -35,11 +35,15 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
     }
     
     @Override
-    public List<Animal> getCaoAdocaoUser(PersistentSession sessao, Utilizador user) {
+    public List<Animal> getCaoAdocaoUser(PersistentSession sessao, String email) {
         
+        List<Animal> onlyDogs = new ArrayList<>();
+        
+       try {
+           
+        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
         List<Animal> animalTotal = new ArrayList<>();
         animalTotal = Arrays.asList(user.animais.toArray());
-        List<Animal> onlyDogs = new ArrayList<>();
         
         if(animalTotal != null) {
         animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
@@ -47,15 +51,23 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         });
         }
         
+       } catch(PersistentException e) {
+         System.out.println(e);
+       }
+       
         return onlyDogs;
     }
     
     @Override
-    public List<Animal> getGatoAdocaoUser(PersistentSession sessao, Utilizador user) {
+    public List<Animal> getGatoAdocaoUser(PersistentSession sessao, String email) {
         
+        List<Animal> onlyCats = new ArrayList<>();
+        
+        try {
+        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
         List<Animal> animalTotal = new ArrayList<>();
         animalTotal = Arrays.asList(user.animais.toArray());
-        List<Animal> onlyCats = new ArrayList<>();
+      
         
         if(animalTotal != null) {
         animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
@@ -63,15 +75,23 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         });
         }
         
-        return onlyCats;
+        } catch(PersistentException e) {
+            System.out.println(e);
+        }
+        
+      return onlyCats;
     }
     
     @Override
-    public List<Animal> getTodosCaes(PersistentSession sessao, Utilizador user) {
+    public List<Animal> getTodosCaes(PersistentSession sessao, String email) {
         
+        List<Animal> todosCaes = new ArrayList<>();
+        
+       try {
+        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
         List<Animal> animalTotal = new ArrayList<>();
         animalTotal = Arrays.asList(user.animais.toArray());
-        List<Animal> todosCaes = new ArrayList<>();
+        
         
         if(animalTotal != null) {
         animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
@@ -79,16 +99,25 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         });
         }
         
+        } catch(PersistentException e) {
+            System.out.println(e);
+        }
+        
         return todosCaes;
     }
     
     
     @Override
-    public List<Animal> getTodosGatos(PersistentSession sessao, Utilizador user) {
+    public List<Animal> getTodosGatos(PersistentSession sessao, String email) {
         
+        List<Animal> todosGatos = new ArrayList<>();
+        
+        
+       try {
+        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
         List<Animal> animalTotal = new ArrayList<>();
         animalTotal = Arrays.asList(user.animais.toArray());
-        List<Animal> todosGatos = new ArrayList<>();
+        
         
         if(animalTotal != null) {
         animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
@@ -96,14 +125,26 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         });
         }
         
+       } catch(PersistentException e) {
+            System.out.println(e);
+        }
+        
         return todosGatos;
     }
     
     @Override
-    public List<Animal> getPedidosUser(PersistentSession sessao, Utilizador user) {
+    public List<Animal> getPedidosUser(PersistentSession sessao, String email) {
         
         List<Animal> pedidosTotal = new ArrayList<>();
+        
+        try {
+        Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
         pedidosTotal = (List<Animal>) (user.listaPedidos);
+        
+        } catch(PersistentException e) {
+            System.out.println(e);
+        }
+        
         
         return pedidosTotal;  
     }

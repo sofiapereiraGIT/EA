@@ -24,6 +24,7 @@ import procura4patas.Pedido;
 import procura4patas.PedidoDAO;
 import procura4patas.Utilizador;
 import procura4patas.UtilizadorComum;
+import procura4patas.UtilizadorDAO;
 
 /**
  *
@@ -33,12 +34,15 @@ import procura4patas.UtilizadorComum;
 public class PedidoBean implements PedidoBeanLocal {
     
     @Override
-    public boolean adotarAnimal(PersistentSession sessao, Animal anim, Utilizador user) {
+    public boolean adotarAnimal(PersistentSession sessao, Animal anim, String email) {
         
+        boolean ok = true;
+        
+      try {
+       Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
        Date dNow = new Date();
        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-       boolean ok = true;
-      
+       
        Pedido p = new Pedido();
        p.setAnimal(anim);
        p.setData(dNow);
@@ -46,11 +50,10 @@ public class PedidoBean implements PedidoBeanLocal {
        p.setDiscriminator('p');
        p.setEstado('c');
        p.setUtilizadorComum((UtilizadorComum) user);
-        
-        try {
-            ok = PedidoDAO.save(p);
+       ok = PedidoDAO.save(p);
+       
         } catch (PersistentException ex) {
-            Logger.getLogger(PedidoBean.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
        
         return ok;
@@ -60,11 +63,15 @@ public class PedidoBean implements PedidoBeanLocal {
     }
     
     @Override
-    public boolean serFatAnimal(PersistentSession sessao, Animal anim, Utilizador user) {
+    public boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
         
+      boolean ok  = true;
+        
+      try{
+       Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
        Date dNow = new Date();
        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-       boolean ok  = true;
+      
       
        Pedido p = new Pedido();
        p.setAnimal(anim);
@@ -73,11 +80,10 @@ public class PedidoBean implements PedidoBeanLocal {
        p.setDiscriminator('f');
        p.setEstado('c');
        p.setUtilizadorComum((UtilizadorComum) user);
+       ok = PedidoDAO.save(p);
        
-       try {
-            ok = PedidoDAO.save(p);
         } catch (PersistentException ex) {
-            Logger.getLogger(PedidoBean.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
        
        return ok;
