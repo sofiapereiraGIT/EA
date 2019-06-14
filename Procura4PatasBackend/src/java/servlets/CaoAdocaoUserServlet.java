@@ -46,22 +46,6 @@ public class CaoAdocaoUserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     
-    
-      
-            PersistentSession session = Util.getSession(request);
-            HttpSession hs = request.getSession();
-            Utilizador user = (Utilizador) hs.getAttribute("user");
-            
-            if(user!=null) {
-                List<Animal> animais = P4P.getCaoAdocaoUser(session, user);
-            }
-        
-         
-       
-            
-       
-        
-        
         
         
     }

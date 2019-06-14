@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import route from '../../router/index'
 import axios from 'axios'
 export default {
   name: 'Login',
