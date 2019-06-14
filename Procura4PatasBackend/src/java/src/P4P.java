@@ -50,29 +50,29 @@ public class P4P {
         return animalBean.getGatosPerdidos(session);
     }
     
-    public boolean addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
+    public static boolean addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
         return animalBean.addAnimal(session, UtilizadorEmail, nome, fotografia, sexo, idade, raca, porte, corPelo, compPelo, estado,
                 descricao, concelho, discriminator);
     }
     
-    public boolean updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
+    public static boolean updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
         return animalBean.updateAnimal(session, ID, nome, fotografia, sexo, idade, raca, porte, corPelo, compPelo, estado,
                 descricao, concelho, discriminator);
     }
     
-    public boolean deleteAnimalPerdido(PersistentSession session, int ID){ 
+    public static boolean deleteAnimalPerdido(PersistentSession session, int ID){ 
         return animalBean.deleteAnimalPerdido(session, ID);
     }
     
     /** pedidoBean methods **/
     
-    public boolean adotarAnimal(PersistentSession sessao, Animal anim, String email) {
+    public static boolean adotarAnimal(PersistentSession sessao, Animal anim, String email) {
         return pedidoBean.adotarAnimal(sessao, anim, email);
     }
     
-    public boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
+    public static boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
         return pedidoBean.serFatAnimal(sessao, anim, email);
     }
     
@@ -86,19 +86,19 @@ public class P4P {
          return utilizadorBean.getCaoAdocaoUser(sessao, email);
     }
     
-    public List<Animal> getGatoAdocaoUser(PersistentSession sessao, String email) {
+    public static List<Animal> getGatoAdocaoUser(PersistentSession sessao, String email) {
        return utilizadorBean.getGatoAdocaoUser(sessao, email);
     }
      
-    public List<Animal> getTodosCaes(PersistentSession sessao, String email) {
+    public static List<Animal> getTodosCaes(PersistentSession sessao, String email) {
         return utilizadorBean.getTodosCaes(sessao, email);
     }
      
-    public List<Animal> getTodosGatos(PersistentSession sessao, String email) {
+    public static List<Animal> getTodosGatos(PersistentSession sessao, String email) {
         return utilizadorBean.getTodosGatos(sessao, email);
     }
      
-    public List<Animal> getPedidosUser(PersistentSession sessao, String email) {
+    public static List<Animal> getPedidosUser(PersistentSession sessao, String email) {
         return utilizadorBean.getPedidosUser(sessao, email);
     }
      
