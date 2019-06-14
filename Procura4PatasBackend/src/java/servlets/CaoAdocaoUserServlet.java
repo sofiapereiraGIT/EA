@@ -9,12 +9,17 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
@@ -27,11 +32,28 @@ import src.Util;
  *
  * @author davidsousa
  */
-@WebServlet(name = "CaoAdocaoUserServlet", urlPatterns = {"/CaoAdocaoUserServlet"})
+@WebServlet(name = "CaoAdocaoUserServlet", urlPatterns = {"/CaoAdocaoUser"})
 public class CaoAdocaoUserServlet extends HttpServlet {
 
  
-
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException
+    {
+        System.out.println("[OPTIONS] PASSEI AQUI 2");
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PrintWriter out = response.getWriter();
+        out.flush();
+        out.close();
+    }
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +68,33 @@ public class CaoAdocaoUserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     
-        
+         try {
+            response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+            response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+             
+            System.out.println("[POST] PASSEI AQUI");
+            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+            System.out.println("Body " + body);
+            
+            JSONParser parser = new JSONParser();
+            JSONObject json;
+            json = (JSONObject) parser.parse(body);
+            
+            String email = (String) json.get("email");
+            PersistentSession session = Util.getSession(request, email);
+            
+            List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,email);
+            
+            // Enviar JSON ARRAY
+            
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(GatoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
