@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
-import procura4patas.P4P;
+import src.P4P;
 import procura4patas.Procura4patasPersistentManager;
 import procura4patas.Utilizador;
 import procura4patas.UtilizadorDAO;
