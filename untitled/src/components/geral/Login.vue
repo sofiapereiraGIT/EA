@@ -19,20 +19,20 @@
             <button class="login100-form-btn" @click="login">Login</button>
             <br>
           </div>
-
+        </form>
           <div class="text-center w-full">
             <router-link class="txt1" to="/Registar">
               Create new account
               <i class="fa fa-long-arrow-right"></i>
             </router-link>
           </div>
-        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import route from '../../router/index'
 import axios from 'axios'
 export default {
   name: 'Login',
@@ -41,9 +41,18 @@ export default {
   }),
   methods: {
     login () {
-      axios.post('http://localhost:8080/procura4patas/Login', JSON.stringify(this.credentials))
-        .then(response => { alert(response.data) })
+      let data = this.credentials
+
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios.post('http://localhost:8080/procura4patas/Login', data)
+        .then(response => { console.log(response.data) })
         .catch(e => { alert(e.toString()) })
+      // console.log('boas')
+      // route.push('/homepage')
+      /*
+       fetch('http://localhost:8080/procura4patas/Login', {method: 'POST', body: JSON.stringify(this.credentials)})
+         .then(alert('BOAS'))
+       */
     }
   }
 }

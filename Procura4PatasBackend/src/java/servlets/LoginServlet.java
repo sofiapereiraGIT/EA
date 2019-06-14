@@ -44,6 +44,24 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         // processRequest(request, response);
     }
+    
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException
+    {
+        System.out.println("[OPTIONS] PASSEI AQUI 2");
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PrintWriter out = response.getWriter();
+        out.flush();
+        out.close();
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -55,28 +73,30 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         try {
+        try {
+            response.setContentType("application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+            response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+             
             System.out.println("[POST] PASSEI AQUI");
             String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
             System.out.println("Body " + body);
             
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(body);
-            
-            response.setContentType("text/html;charset=UTF-8");
-            response.setContentType("application/json");
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            
+
             PersistentSession session = Util.getSession(request);
             String email = (String) json.get("email");
             String password = (String) json.get("password");
-        
+            
             if( email != null && password != null ) {
                 Utilizador u = P4P.login(session, email, password);  
                 if( u != null ) {
                    request.getSession().setAttribute("user", u);
                    PrintWriter out = response.getWriter();
-                   out.println("OK");
+                   out.println("{ OK: Tudo Fixe e que oh mano e que tudo fixe? }");
                    out.flush();
                    out.close();
                 } 
