@@ -87,20 +87,25 @@ public class LoginServlet extends HttpServlet {
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(body);
 
-            PersistentSession session = Util.getSession(request);
+            
             String email = (String) json.get("email");
             String password = (String) json.get("password");
+            
+            PersistentSession session = Util.getSession(request, email);
             
             if( email != null && password != null ) {
                 Utilizador u = P4P.login(session, email, password);  
                 if( u != null ) {
-                   request.getSession().setAttribute("user", u);
+                   
+                   Util.addSession(session, email);
                    PrintWriter out = response.getWriter();
                    out.println("{ OK: Tudo Fixe e que oh mano e que tudo fixe? }");
                    out.flush();
                    out.close();
                 } 
                 else {
+                    
+                    
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     PrintWriter out = response.getWriter();
                     out.flush();

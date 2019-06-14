@@ -17,12 +17,12 @@ import procura4patas.Utilizador;
  */
 @Local
 public interface UtilizadorBeanLocal {
-    List<Animal> getCaoAdocaoUser(PersistentSession sessao, Utilizador user);
-    List<Animal> getGatoAdocaoUser(PersistentSession sessao, Utilizador user);
-    List<Animal> getTodosCaes(PersistentSession sessao, Utilizador user);
-    List<Animal> getTodosGatos(PersistentSession sessao, Utilizador user);
-    List<Animal> getPedidosUser(PersistentSession sessao, Utilizador user);
-
+    
     Utilizador login(PersistentSession session, String email, String password);
-   
+    List<Animal> getCaoAdocaoUser(PersistentSession sessao, String email);
+    List<Animal> getGatoAdocaoUser(PersistentSession sessao, String email);
+    List<Animal> getTodosCaes(PersistentSession sessao, String email);
+    List<Animal> getTodosGatos(PersistentSession sessao, String email);
+    List<Animal> getPedidosUser(PersistentSession sessao, String email);
+    
 }
