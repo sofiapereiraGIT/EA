@@ -7,7 +7,8 @@
         <div class="w3-bar" id="myNavbar">
             <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
             <router-link to="/" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</router-link>
-            <router-link to="/Login" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-user"></i> LOGIN</router-link>
+            <router-link to="/Login" class="w3-bar-item w3-button w3-hide-small" style="float:right" v-if="user == null"><i class="fa fa-user"></i> LOGIN</router-link>
+            <md-button class="w3-bar-item w3-button w3-hide-small" style="float:right" v-if="user != null" v-on:click="logout()"><i class="fa fa-user"></i> LOGOUT</md-button>
             <router-link to="/AboutUs" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-drivers-license-o"></i> SOBRE NÓS</router-link>
             <router-link to="/Perdidos" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-paw"></i> PERDIDOS</router-link>
             <router-link to="/Adotar" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fas fa-hand-holding-heart"></i> ADOÇÃO</router-link>
@@ -17,8 +18,30 @@
 </template>
 
 <script>
+import router from '../../../router/index'
 export default {
-  name: 'Header'
+  name: 'Header',
+  data () {
+    return {
+      user: null
+    }
+  },
+  mounted: function () {
+    if (this.$session.has('user')) {
+      this.user = this.$session.get('user')
+    }
+  },
+  methods: {
+    logout () {
+      if (this.$session.has('user')) {
+        alert('Fizeste Logout')
+        this.$session.remove('user')
+        this.user = null
+        router.push('/')
+        this.$forceUpdate()
+      }
+    }
+  }
 }
 // Change style of navbar on scroll
 window.onscroll = function () { myFunction() }

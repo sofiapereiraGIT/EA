@@ -1,5 +1,6 @@
 <template>
   <div class="limiter">
+    <h2 v-if="wrongCredentials == 1">Email ou password incorretos.</h2>
     <div class="container-login100">
       <div class="wrap-login100 p-t-190 p-b-30">
         <form class="login100-form validate-form" @submit.prevent="login">
@@ -14,7 +15,7 @@
           <div class="wrap-input100 validate-input m-b-10">
             <label><input v-model="credentials.password" class="input100" type="password" name="pass" placeholder="Password" required></label>
           </div>
-
+          <p style="color: red" v-if="wrongCredentials === 1">Email ou password incorretos.</p>
           <div>
             <input type="submit" class="login100-form-btn" placeholder="Login"/>
             <br>
@@ -33,11 +34,12 @@
 
 <script>
 import axios from 'axios'
-//  import route from '../../router/index'
+import route from '../../router/index'
 
 export default {
   name: 'Login',
   data: () => ({
+    wrongCredentials: 0,
     credentials: {}
   }),
   methods: {
@@ -45,14 +47,10 @@ export default {
       axios.defaults.headers['Content-Type'] = 'application/json'
       axios.post('http://localhost:8080/procura4patas/Login', this.credentials)
         .then(response => {
-          alert(response.data)
-          /*
           this.$session.start()
-          this.$session.set(this.credentials.email, this.credentials.password)
-          alert(this.$session)
-          */
-          // route.push('/HomePage')
-        }).catch(e => { alert(e.toString()) })
+          this.$session.set('user', this.credentials.email)
+          route.push('/')
+        }).catch(e => { this.wrongCredentials = 1 })
     }
   }
 }
