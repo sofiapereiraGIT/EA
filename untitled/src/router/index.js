@@ -24,10 +24,13 @@ import EditAnimalPerdido from '../components/cidadao/EditAnimalPerdido'
 import VerAnimalAdotarUC from '../components/geral/VerAnimalAdotarUC'
 import VerAnimalPerdido from '../components/geral/VerAnimalPerdido'
 import Pedidos from '../components/Common/Pedidos'
+import VueSession from 'vue-session'
 
 Vue.use(Router)
+Vue.use(VueSession)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

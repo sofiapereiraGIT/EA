@@ -2,7 +2,7 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100 p-t-190 p-b-30">
-        <form class="login100-form validate-form">
+        <form class="login100-form validate-form" @submit.prevent="login">
           <div class="login100-form-avatar">
             <img src="../../assets/user.png" width="60px" height="60px" alt="AVATAR">
           </div>
@@ -16,7 +16,7 @@
           </div>
 
           <div>
-            <button class="login100-form-btn" @click="login">Login</button>
+            <input type="submit" class="login100-form-btn" placeholder="Login"/>
             <br>
           </div>
         </form>
@@ -33,6 +33,8 @@
 
 <script>
 import axios from 'axios'
+//  import route from '../../router/index'
+
 export default {
   name: 'Login',
   data: () => ({
@@ -40,18 +42,17 @@ export default {
   }),
   methods: {
     login () {
-      let data = this.credentials
-
       axios.defaults.headers['Content-Type'] = 'application/json'
-      axios.post('http://localhost:8080/procura4patas/Login', data)
-        .then(response => { console.log(response.data) })
-        .catch(e => { alert(e.toString()) })
-      // console.log('boas')
-      // route.push('/homepage')
-      /*
-       fetch('http://localhost:8080/procura4patas/Login', {method: 'POST', body: JSON.stringify(this.credentials)})
-         .then(alert('BOAS'))
-       */
+      axios.post('http://localhost:8080/procura4patas/Login', this.credentials)
+        .then(response => {
+          alert(response.data)
+          /*
+          this.$session.start()
+          this.$session.set(this.credentials.email, this.credentials.password)
+          alert(this.$session)
+          */
+          // route.push('/HomePage')
+        }).catch(e => { alert(e.toString()) })
     }
   }
 }
