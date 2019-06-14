@@ -11,25 +11,25 @@ import com.fasterxml.jackson.annotation.*;
  * @author salete
  */
 public class AnimalRepresentation {
-    private int ID;
-    private String nome;
-    private String fotografia;
-    private char sexo;
-    private char idade;
-    private String raça;
-    private char porte;
-    private String corPelo;
-    private char compPelo;
-    private char estado;
-    private String descricao;
-    private String concelho;
-    private char discriminator;
+    private final int ID;
+    private final String nome;
+    private final String fotografia;
+    private final char sexo;
+    private final char idade;
+    private final String raça;
+    private final char porte;
+    private final String corPelo;
+    private final char compPelo;
+    private final char estado;
+    private final String descricao;
+    private final String concelho;
+    private final char discriminator;
        
     @JsonCreator
     public AnimalRepresentation(@JsonProperty("id") int id, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, @JsonProperty("sexo") char s, 
             @JsonProperty("idade") char i, @JsonProperty("raça") String r, @JsonProperty("porte") char p, @JsonProperty("corPelo") String cp, 
-            @JsonProperty("compPelo") char cm, @JsonProperty("estado") char e, @JsonProperty("descricao") String d, @JsonProperty("descricao") String c, 
-            @JsonProperty("estado") char di) {
+            @JsonProperty("compPelo") char cm, @JsonProperty("estado") char e, @JsonProperty("descricao") String d, @JsonProperty("concelho") String c, 
+            @JsonProperty("discriminator") char di) {
         
         this.ID = id;
         this.nome = n;
