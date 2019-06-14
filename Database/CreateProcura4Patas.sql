@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `procura4patas`.`Animal` (
   INDEX `FKAnimal549890` (`UtilizadorEmail` ASC),
   CONSTRAINT `FKAnimal549890`
     FOREIGN KEY (`UtilizadorEmail`)
-    REFERENCES `procura4patas`.`utilizador` (`Email`))
+    REFERENCES `procura4patas`.`Utilizador` (`Email`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `procura4patas`.`Canil` (
   PRIMARY KEY (`UtilizadorEmail`),
   CONSTRAINT `FKCanil576462`
     FOREIGN KEY (`UtilizadorEmail`)
-    REFERENCES `procura4patas`.`utilizador` (`Email`))
+    REFERENCES `procura4patas`.`Utilizador` (`Email`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -80,13 +80,13 @@ CREATE TABLE IF NOT EXISTS `procura4patas`.`Pedido` (
   INDEX `FKPedido576596` (`UtilizadorEmail` ASC),
   CONSTRAINT `FKPedido124302`
     FOREIGN KEY (`AnimalID`)
-    REFERENCES `procura4patas`.`animal` (`ID`),
+    REFERENCES `procura4patas`.`Animal` (`ID`),
   CONSTRAINT `FKPedido576596`
     FOREIGN KEY (`UtilizadorEmail`)
-    REFERENCES `procura4patas`.`utilizador` (`Email`),
+    REFERENCES `procura4patas`.`Utilizador` (`Email`),
   CONSTRAINT `FKPedido970999`
     FOREIGN KEY (`UtilizadorComumUtilizadorEmail`)
-    REFERENCES `procura4patas`.`utilizadorcomum` (`UtilizadorEmail`))
+    REFERENCES `procura4patas`.`UtilizadorComum` (`UtilizadorEmail`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `procura4patas`.`UtilizadorComum` (
   PRIMARY KEY (`UtilizadorEmail`),
   CONSTRAINT `FKUtilizador299204`
     FOREIGN KEY (`UtilizadorEmail`)
-    REFERENCES `procura4patas`.`utilizador` (`Email`))
+    REFERENCES `procura4patas`.`Utilizador` (`Email`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
