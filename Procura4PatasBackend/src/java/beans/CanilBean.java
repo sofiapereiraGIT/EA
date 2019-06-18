@@ -23,7 +23,7 @@ import procura4patas.*;
 public class CanilBean implements CanilBeanLocal {
 
     @Override
-    public List<Canil> getCanis(PersistentSession sessao) {
+    public List getCanis(PersistentSession sessao) {
         List<Canil> lista = new ArrayList<>();
         
         try {
