@@ -90,27 +90,19 @@ public class UpdateUtilizadorComumServlet extends HttpServlet {
             String nome = (String) json.get("nome");
             String foto = (String) json.get("fotografia");
             String concelho = (String) json.get("concelho");
-            String tlm = (String) json.get("tlm");
+            String tlm = (String) json.get("telemovel");
             String descricao = (String) json.get("descricao");
                     
             PersistentSession session = Util.getSession(request, email);
             
-            if( email != null && password != null ) {
-                boolean criado = P4P.updateUtilizadorComum(session, email, password, nome, foto, concelho, tlm, descricao);
+            boolean criado = P4P.updateUtilizadorComum(session, email, password, nome, foto, concelho, tlm, descricao);
                 
-                if(criado) {
-                   PrintWriter out = response.getWriter();
-                   out.println("{ OK }");
-                   out.flush();
-                   out.close();
-                } 
-                else {
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                    PrintWriter out = response.getWriter();
-                    out.flush();
-                    out.close();
-                }
-            }
+            if(criado) {
+               PrintWriter out = response.getWriter();
+               out.println("{ \"msg\": " + criado + "}");
+               out.flush();
+               out.close();
+            } 
             else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 PrintWriter out = response.getWriter();

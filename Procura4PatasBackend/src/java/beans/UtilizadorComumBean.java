@@ -40,40 +40,23 @@ public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
     public boolean addUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
         boolean criado = false;
         
-        Utilizador ut = new Utilizador();
-        ut.setEmail(email);
-        ut.setPassword(pass);
-        ut.setNome(nome);
-        ut.setConcelho(concelho);
-        
-        if(!foto.equals("")) ut.setFotografia(foto);
-        else ut.setFotografia(null);
-        
-        if(!tlm.equals("")) ut.setTelemovel(tlm);
-        else ut.setTelemovel(null);
-        
-        if(!descricao.equals("")) ut.setDescricao(descricao);
-        else ut.setDescricao(null);
+        if(foto == null) foto = "";
+        if(tlm == null) tlm = "";
+        if(descricao == null) descricao = "";
         
         try {
             sessao.beginTransaction();
             
-            criado = UtilizadorDAO.save(ut);
+            Query query = sessao.createSQLQuery("INSERT INTO Utilizador (Email, Password, Nome, Fotografia, Concelho, Telemovel, Descricao)\n " + 
+                    "VALUES ('" + email + "', '" + pass + "', '" + nome + "', '" + foto + "', '" + concelho + "', '" + tlm + "', '" + descricao + "');");
+            query.executeUpdate();
             
-            if(criado){
-                Query query = sessao.createSQLQuery("INSERT INTO UtilizadorComum VALUES(" + email + ")");
-                query.executeUpdate();
-                
-                try{
-                sessao.getTransaction().commit();
-                criado = true;
-                } catch (Exception e){
-                    sessao.getTransaction().rollback();
-                    criado = false;
-                }
-            }
-            else sessao.getTransaction().rollback();
-            
+            Query query2 = sessao.createSQLQuery("INSERT INTO UtilizadorComum VALUES('" + email + "');");
+            query2.executeUpdate();
+
+            sessao.getTransaction().commit();
+            criado = true;
+           
         } catch (PersistentException ex) {
             sessao.getTransaction().rollback();
             criado = false;
@@ -85,26 +68,26 @@ public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
     @Override
     public boolean updateUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
         boolean atualizado = false;
+            
+        if(foto==null) foto = "";
+        if(tlm==null) tlm = "";
+        if(descricao==null) descricao = "";
         
         try {
-            Utilizador ut = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
-            ut.setPassword(pass);
-            ut.setNome(nome);
-            ut.setConcelho(concelho);
-        
-            if(!foto.equals("")) ut.setFotografia(foto);
-            else ut.setFotografia(null);
-        
-            if(!tlm.equals("")) ut.setTelemovel(tlm);
-            else ut.setTelemovel(null);
-        
-            if(!descricao.equals("")) ut.setDescricao(descricao);
-            else ut.setDescricao(null);
+            sessao.beginTransaction();
             
-            atualizado = UtilizadorDAO.refresh(ut);
-           
+            Query query = sessao.createSQLQuery("UPDATE Utilizador\n " + 
+                "SET Password = '" + pass + "', Nome = '" + nome + "', Fotografia = '" + foto + "', Concelho = '" + concelho + 
+                "', Telemovel = '" + tlm + "', Descricao = '" + descricao + "'\n" +
+                "WHERE Email = '" + email + "';");
+            query.executeUpdate();
+            
+            sessao.getTransaction().commit();
+            atualizado = true;
+            
         } catch (PersistentException ex) {
-            Logger.getLogger(UtilizadorComumBean.class.getName()).log(Level.SEVERE, null, ex);
+            sessao.getTransaction().rollback();
+            atualizado = false;
         }
         
         return atualizado;
