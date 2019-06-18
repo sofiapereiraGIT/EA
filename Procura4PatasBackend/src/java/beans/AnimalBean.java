@@ -86,23 +86,7 @@ public class AnimalBean implements AnimalBeanLocal {
     
     public boolean addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
-        
-        if(nome.equals("")){
-            nome = "";
-        }
-        
-        if(fotografia.equals("")){
-            fotografia = "";
-        }
-        
-        if (descricao.equals("")){
-            descricao = "";
-        }
-        
-        if (concelho.equals("")){
-            concelho = "";
-        }       
-        
+       
         try {
             session.beginTransaction();
             
@@ -125,23 +109,7 @@ public class AnimalBean implements AnimalBeanLocal {
     
     public boolean updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
-        
-        if(nome.equals("")){
-            nome = "";
-        }
-        
-        if(fotografia.equals("")){
-            fotografia = "";
-        }
-        
-        if (descricao.equals("")){
-            descricao = "";
-        }
-        
-        if (concelho.equals("")){
-            concelho = "";
-        }    
-        
+                
         try {
             session.beginTransaction();
             
