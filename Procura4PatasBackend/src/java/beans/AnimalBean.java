@@ -28,7 +28,7 @@ public class AnimalBean implements AnimalBeanLocal {
         
         try {
             session.beginTransaction();
-            caesAdotar = AnimalDAO.queryAnimal(session, "Discriminator = c AND Estado = a", null);
+            caesAdotar = AnimalDAO.queryAnimal(session, "Discriminator = 'C' AND Estado = 'E'", null);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -44,7 +44,7 @@ public class AnimalBean implements AnimalBeanLocal {
         
         try {
             session.beginTransaction();
-            gatosAdotar = AnimalDAO.queryAnimal(session, "Discriminator = g AND Estado = a", null);
+            gatosAdotar = AnimalDAO.queryAnimal(session, "Discriminator = 'G' AND Estado = 'E'", null);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -59,7 +59,7 @@ public class AnimalBean implements AnimalBeanLocal {
         
         try {
             session.beginTransaction();
-            caesPerdidos = AnimalDAO.queryAnimal(session, "Discriminator = c AND Estado = p", null);
+            caesPerdidos = AnimalDAO.queryAnimal(session, "Discriminator = 'C' AND Estado = 'P'", null);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -74,7 +74,7 @@ public class AnimalBean implements AnimalBeanLocal {
         
         try {
             session.beginTransaction();
-            gatosPerdidos = AnimalDAO.queryAnimal(session, "Discriminator = g AND Estado = p", null);
+            gatosPerdidos = AnimalDAO.queryAnimal(session, "Discriminator = 'G' AND Estado = 'P'", null);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -167,7 +167,7 @@ public class AnimalBean implements AnimalBeanLocal {
             session.beginTransaction();
             
             Query query = session.createSQLQuery("DELETE FROM Animal\n"+
-                    "WHERE ID = "+ID+" AND Estado = p;");
+                    "WHERE ID = "+ID+" AND Estado = 'P';");
             
             query.executeUpdate();
             
