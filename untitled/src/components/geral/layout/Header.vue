@@ -34,11 +34,10 @@ export default {
   methods: {
     logout () {
       if (this.$session.has('user')) {
-        alert('Fizeste Logout')
         this.$session.remove('user')
         this.user = null
         router.push('/')
-        this.$forceUpdate()
+        // this.$forceUpdate()
       }
     }
   }

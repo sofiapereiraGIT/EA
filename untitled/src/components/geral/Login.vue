@@ -1,6 +1,5 @@
 <template>
   <div class="limiter">
-    <h2 v-if="wrongCredentials == 1">Email ou password incorretos.</h2>
     <div class="container-login100">
       <div class="wrap-login100 p-t-190 p-b-30">
         <form class="login100-form validate-form" @submit.prevent="login">
@@ -49,6 +48,8 @@ export default {
         .then(response => {
           this.$session.start()
           this.$session.set('user', this.credentials.email)
+
+          /* Alterar para saber se se vai apresentar a página do Canil ou UtilizadorComum */
           route.push('/')
         }).catch(e => { this.wrongCredentials = 1 })
     }

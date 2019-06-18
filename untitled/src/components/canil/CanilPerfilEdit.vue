@@ -125,8 +125,15 @@
 </template>
 
 <script>
+import route from '../../router/index'
 export default {
-  name: 'CanilPerfilEdit'
+  name: 'CanilPerfilEdit',
+  mounted: function () {
+    console.log()
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    }
+  }
 }
 </script>
 
