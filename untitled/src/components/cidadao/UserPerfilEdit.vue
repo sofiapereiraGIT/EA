@@ -76,8 +76,20 @@
 </template>
 
 <script>
+import route from '../../router/index'
 export default {
-  name: 'UserPerfilEdit'
+  name: 'UserPerfilEdit',
+  mounted: function () {
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    } else {
+      const value = this.$session.get('user')
+      if (value[1] === 1) {
+        /* Redirecionar para a Página de Acesso Negado */
+        route.push(('/AccessDenied'))
+      }
+    }
+  }
 }
 </script>
 

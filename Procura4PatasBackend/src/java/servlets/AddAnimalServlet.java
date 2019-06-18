@@ -7,16 +7,16 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.orm.PersistentSession;
-import procura4patas.Animal;
 import src.P4P;
 import src.Util;
 
@@ -24,8 +24,8 @@ import src.Util;
  *
  * @author sofia
  */
-@WebServlet(name = "CaesAdotarServlet", urlPatterns = {"/CaesAdotar"})
-public class CaesAdotarServlet extends HttpServlet {
+@WebServlet(name = "AddAnimalServlet", urlPatterns = {"/AddAnimal"})
+public class AddAnimalServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,50 +38,45 @@ public class CaesAdotarServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            response.setContentType("text/html;charset=UTF-8");
+            
             response.setContentType("application/json");
             response.addHeader("Access-Control-Allow-Origin", "*");
             response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+
+            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+            System.out.println("Recebido BODY\n" + body);
             
-            PersistentSession session = Util.getSessionWithoutAut(request);
-            List<Animal> caesAdotar = P4P.getCaesAdotar(session);
-            
-            // Formar JSON
-            JSONObject myJson = new JSONObject();        
-            JSONArray ja = new JSONArray();
-            
-            for(Animal g : caesAdotar) {
-                JSONObject jsonObj = new JSONObject();
-                jsonObj.put("ID",g.getID());
-                jsonObj.put("Nome",g.getNome());
-                jsonObj.put("Fotografia", g.getFotografia());
-                jsonObj.put("Sexo",g.getSexo());
-                jsonObj.put("Idade",g.getIdade());
-                jsonObj.put("Raca",g.getRaça());
-                jsonObj.put("Porte",g.getPorte());
-                jsonObj.put("CorPelo",g.getCorPelo());
-                jsonObj.put("CompPelo",g.getCompPelo());
-                jsonObj.put("Estado",g.getEstado());
-                jsonObj.put("Descricao",g.getDescricao());
-                jsonObj.put("Concelho",g.getConcelho());
-                jsonObj.put("Discriminator",g.getDiscriminator());     
-                ja.add(jsonObj);
-            }
-            
-            myJson.put("caes", ja);
-            System.out.println("JsonArray = " +  myJson.get("caes"));
-            
-            // Enviar JSON
-            out.println(myJson);
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(body);
+
+            String UtilizadorEmail = (String) json.get("email");
+            String nome = (String) json.get("Nome");
+            String fotografia = (String) json.get("Fotografia");
+            char sexo = ((String) json.get("Sexo")).charAt(0);
+            char idade = ((String) json.get("Idade")).charAt(0);
+            String raca = (String) json.get("Raca");
+            char porte = ((String) json.get("Porte")).charAt(0);
+            String corPelo = (String) json.get("CorPelo");
+            char compPelo = ((String) json.get("CompPelo")).charAt(0);
+            char estado = ((String) json.get("Estado")).charAt(0);
+            String descricao = (String) json.get("Descricao");
+            String concelho = (String) json.get("Concelho");
+            char discriminator = ((String) json.get("Discriminator")).charAt(0);
+           
+            PersistentSession session = Util.getSession(request, UtilizadorEmail);
+            boolean criado = P4P.addAnimal(session, UtilizadorEmail, nome, fotografia, sexo, idade,
+                raca, porte, corPelo, compPelo, estado, descricao, concelho, discriminator);
+                
+            out.println("{ \"msg\": "+criado+"}");
             out.flush();
             out.close();
-        }
-        catch(Exception e){
-            System.out.println(e);
+        
+        } catch (Exception ex) {
+            Logger.getLogger(AddAnimalServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

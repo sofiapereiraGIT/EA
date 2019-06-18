@@ -129,20 +129,25 @@ import route from '../../router/index'
 export default {
   name: 'CanilPerfilEdit',
   mounted: function () {
-    console.log()
     if (this.$session.has('user') === false) {
       route.push('/Login')
+    } else {
+      const value = this.$session.get('user')
+      if (value[1] === 0) {
+        /* Redirecionar para a Página de Acesso Negado */
+        route.push(('/AccessDenied'))
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-    .img {
-        height: 300px;
-        width: 300px;
-        overflow-y: hidden;
-        overflow-x: hidden;
-        object-fit: cover;
-    }
+.img {
+    height: 300px;
+    width: 300px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    object-fit: cover;
+}
 </style>

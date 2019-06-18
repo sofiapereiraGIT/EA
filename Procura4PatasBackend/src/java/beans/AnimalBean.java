@@ -88,19 +88,19 @@ public class AnimalBean implements AnimalBeanLocal {
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
         
         if(nome.equals("")){
-            nome = "Null";
+            nome = "";
         }
         
         if(fotografia.equals("")){
-            fotografia = "Null";
+            fotografia = "";
         }
         
         if (descricao.equals("")){
-            descricao = "Null";
+            descricao = "";
         }
         
         if (concelho.equals("")){
-            concelho = "Null";
+            concelho = "";
         }       
         
         try {
@@ -109,8 +109,8 @@ public class AnimalBean implements AnimalBeanLocal {
             Query query = session.createSQLQuery("INSERT INTO Animal\n" +
                     "(UtilizadorEmail, Nome, Fotografia, Sexo, Idade, Raça, Porte, CorPelo, CompPelo, Estado, Descricao, Concelho, Discriminator)\n" +
                     "VALUES \n" +
-                    "("+UtilizadorEmail+", "+nome+", "+fotografia+", "+sexo+", "+idade+", "+raca+
-                    ", "+porte+", "+corPelo+", "+compPelo+", "+estado+", "+descricao+", "+concelho+", "+discriminator+");");
+                    "('"+UtilizadorEmail+"', '"+nome+"', '"+fotografia+"', '"+sexo+"', '"+idade+"', '"+raca+
+                    "', '"+porte+"', '"+corPelo+"', '"+compPelo+"', '"+estado+"', '"+descricao+"', '"+concelho+"', '"+discriminator+"');");
             
             query.executeUpdate();
             
@@ -127,28 +127,28 @@ public class AnimalBean implements AnimalBeanLocal {
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
         
         if(nome.equals("")){
-            nome = "Null";
+            nome = "";
         }
         
         if(fotografia.equals("")){
-            fotografia = "Null";
+            fotografia = "";
         }
         
         if (descricao.equals("")){
-            descricao = "Null";
+            descricao = "";
         }
         
         if (concelho.equals("")){
-            concelho = "Null";
+            concelho = "";
         }    
         
         try {
             session.beginTransaction();
             
             Query query = session.createSQLQuery("UPDATE Animal\n" +
-                    "SET Nome = "+nome+", Fotografia = "+fotografia+", Sexo = "+sexo+", Idade = "+idade+
-                    ", Raça = "+raca+", Porte = "+porte+", CorPelo = "+corPelo+", CompPelo = "+compPelo+
-                    ", Estado = "+estado+", Descricao = "+descricao+", Concelho = "+concelho+", Discriminator = "+discriminator+"\n"+
+                    "SET Nome = '"+nome+"', Fotografia = '"+fotografia+"', Sexo = '"+sexo+"', Idade = '"+idade+
+                    "', Raça = '"+raca+"', Porte = '"+porte+"', CorPelo = '"+corPelo+"', CompPelo = '"+compPelo+
+                    "', Estado = '"+estado+"', Descricao = '"+descricao+"', Concelho = '"+concelho+"', Discriminator = '"+discriminator+"'\n"+
                     "WHERE ID = "+ID+";");
                                 
             query.executeUpdate();

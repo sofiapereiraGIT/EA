@@ -22,14 +22,18 @@ import route from '../../router/index'
 export default {
   name: 'CanilHomePage',
   mounted: function () {
-    var value = this.$session.get('user')
-    if ((this.$session.has('user') === false) || (value[1] === 0)) {
+    if (this.$session.has('user') === false) {
       route.push('/Login')
+    } else {
+      var value = this.$session.get('user')
+      if (value[1] === 0) {
+        /* Redirecionar para a Página de Acesso Negado */
+        route.push(('/AccessDenied'))
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

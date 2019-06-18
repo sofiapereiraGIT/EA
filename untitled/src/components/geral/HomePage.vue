@@ -9,11 +9,11 @@
     <!-- Nº de Gatos e Cães para Adotar-->
     <div class="w3-row w3-center w3-light-grey w3-padding-16">
       <div class="w3-half w3-section">
-        <span class="w3-xlarge">22</span><br>
+        <span class="w3-xlarge">{{nrCaes}}</span><br>
           Cães Para Adotar
       </div>
       <div class="w3-half w3-section">
-        <span class="w3-xlarge">39</span><br>
+        <span class="w3-xlarge">{{nrGatos}}</span><br>
           Gatos Para Adotar
       </div>
     </div>
@@ -65,8 +65,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+  data: () => ({
+    nrCaes: 0,
+    nrGatos: 0
+  }),
+  mounted: function () {
+    axios.defaults.headers['Content-Type'] = 'application/json'
+    axios.post('http://localhost:8080/procura4patas/NumeroAnimais', this.credentials)
+      .then(response => {
+        this.nrCaes = response.data.caes
+        this.nrGatos = response.data.gatos
+        console.log(this.nrCaes)
+        console.log(this.nrGatos)
+      }).catch()
+  }
 }
 </script>
 

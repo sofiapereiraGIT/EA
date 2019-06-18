@@ -68,7 +68,6 @@ public class UtilizadorComumDAO {
 			return (UtilizadorComum) session.load(procura4patas.UtilizadorComum.class, email);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			throw new PersistentException(e);
 		}
 	}
