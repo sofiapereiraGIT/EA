@@ -64,6 +64,15 @@
 </template>
 
 <script>
+import route from '../../router/index'
+export default {
+  name: 'GerirAnimais',
+  mounted: function () {
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    }
+  }
+}
 </script>
 
 <style scoped>

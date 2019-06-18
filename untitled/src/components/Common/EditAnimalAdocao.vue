@@ -73,7 +73,7 @@
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct">
+                                    <select name="slct">
                                         <option selected disabled>Escolha o tipo do pelo</option>
                                         <option value="Liso">Liso</option>
                                         <option value="Ondulado">Ondulado</option>
@@ -81,7 +81,7 @@
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct">
+                                    <select name="slct">
                                         <option selected disabled>Escolha o tamanho do pelo</option>
                                         <option value="Curto">Curto</option>
                                         <option value="Comprido">Comprido</option>
@@ -89,7 +89,7 @@
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct">
+                                    <select name="slct">
                                         <option selected disabled>Escolha o porte</option>
                                         <option value="Grande">Grande porte</option>
                                         <option value="Pequeno">Pequeno porte</option>
@@ -120,8 +120,14 @@
 </template>
 
 <script>
+import route from '../../router/index'
 export default {
-  name: 'UtilizadorAnimalAdocao'
+  name: 'EditAnimalAdocao',
+  mounted: function () {
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    }
+  }
 }
 </script>
 
@@ -442,14 +448,6 @@ export default {
         border: none !important;
     }
 
-    .txt1 {
-        text-align: center;
-        font-family: Poppins-Regular, serif;
-        font-size: 13px;
-        color: #666666;
-        line-height: 1.5;
-    }
-
     .limiter {
         width: 100%;
         margin: 0 auto;
@@ -485,14 +483,6 @@ export default {
         width: 100%;
     }
 
-    .login100-form-title {
-        display: block;
-        font-family: Poppins-Bold,serif;
-        font-size: 30px;
-        color: #333333;
-        line-height: 1.2;
-        text-align: center;
-    }
     .login100-form-title i {
         font-size: 60px;
     }
@@ -517,57 +507,6 @@ export default {
         padding: 0 5px;
     }
 
-    .focus-input100 {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-    }
-
-    .focus-input100::before {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-
-        background: #6a7dfe;
-        background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-        background: -o-linear-gradient(left, #21d4fd, #b721ff);
-        background: -moz-linear-gradient(left, #21d4fd, #b721ff);
-        background: linear-gradient(left, #21d4fd, #b721ff);
-    }
-
-    .focus-input100::after {
-        font-family: Poppins-Regular, serif;
-        font-size: 15px;
-        color: #999999;
-        line-height: 1.2;
-
-        content: attr(data-placeholder);
-        display: block;
-        width: 100%;
-        position: absolute;
-        top: 16px;
-        left: 0px;
-        padding-left: 5px;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
     .input100:focus + .focus-input100::after {
         top: -15px;
     }
@@ -584,68 +523,6 @@ export default {
         width: 100%;
     }
 
-    .btn-show-pass {
-        font-size: 15px;
-        color: #999999;
-
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        align-items: center;
-        position: absolute;
-        height: 100%;
-        top: 0;
-        right: 0;
-        padding-right: 5px;
-        cursor: pointer;
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
-    .container-login100-form-btn {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding-top: 13px;
-    }
-
-    .wrap-login100-form-btn {
-        width: 100%;
-        display: block;
-        position: relative;
-        z-index: 1;
-        border-radius: 25px;
-        overflow: hidden;
-        margin: 0 auto;
-    }
-
-    .login100-form-bgbtn {
-        position: absolute;
-        z-index: -1;
-        width: 300%;
-        height: 100%;
-        background: #a64bf4;
-        background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        background: -o-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        background: -moz-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        background: linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        top: 0;
-        left: -100%;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
     .login100-form-btn {
         font-family: Poppins-Medium, serif;
         font-size: 15px;
@@ -659,14 +536,9 @@ export default {
         display: -ms-flexbox;
         display: inline-block;
         justify-content: right;
-        align-items: right;
         padding: 0 20px;
         width: 40%;
         height: 50px;
-    }
-
-    .wrap-login100-form-btn:hover .login100-form-bgbtn {
-        left: 0;
     }
 
     @media (max-width: 576px) {
@@ -677,67 +549,5 @@ export default {
 
     .validate-input {
         position: relative;
-    }
-
-    .alert-validate::before {
-        content: attr(data-validate);
-        position: absolute;
-        max-width: 70%;
-        background-color: #fff;
-        border: 1px solid #c80000;
-        border-radius: 2px;
-        padding: 4px 25px 4px 10px;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 0;
-        pointer-events: none;
-
-        font-family: Poppins-Regular, serif;
-        color: #c80000;
-        font-size: 13px;
-        line-height: 1.4;
-        text-align: left;
-
-        visibility: hidden;
-        opacity: 0;
-
-        -webkit-transition: opacity 0.4s;
-        -o-transition: opacity 0.4s;
-        -moz-transition: opacity 0.4s;
-        transition: opacity 0.4s;
-    }
-
-    .alert-validate::after {
-        content: "\f06a";
-        font-family: FontAwesome, serif;
-        font-size: 16px;
-        color: #c80000;
-
-        display: block;
-        position: absolute;
-        background-color: #fff;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 5px;
-    }
-
-    .alert-validate:hover:before {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    @media (max-width: 992px) {
-        .alert-validate::before {
-            visibility: visible;
-            opacity: 1;
-        }
     }
 </style>
