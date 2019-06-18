@@ -100,6 +100,15 @@
 </template>
 
 <script>
+import route from '../../router/index'
+export default {
+  name: 'AddAnimalParaAdocao',
+  mounted: function () {
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -24,6 +24,7 @@ import EditAnimalPerdido from '../components/cidadao/EditAnimalPerdido'
 import VerAnimalAdotarUC from '../components/geral/VerAnimalAdotarUC'
 import VerAnimalPerdido from '../components/geral/VerAnimalPerdido'
 import Pedidos from '../components/Common/Pedidos'
+import AccessDenied from '../components/Common/AccessDenied'
 import VueSession from 'vue-session'
 
 Vue.use(Router)
@@ -151,6 +152,11 @@ export default new Router({
       path: '/Pedidos',
       name: 'Pedidos',
       component: Pedidos
+    },
+    {
+      path: '/AccessDenied',
+      name: 'AccessDenied',
+      component: AccessDenied
     }
   ]
 })
