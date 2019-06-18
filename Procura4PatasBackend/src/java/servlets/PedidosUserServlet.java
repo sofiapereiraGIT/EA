@@ -30,6 +30,25 @@ import src.Util;
  */
 @WebServlet(name = "PedidosUserServlet", urlPatterns = {"/PedidosUser"})
 public class PedidosUserServlet extends HttpServlet {
+    
+    
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException
+    {
+        System.out.println("[OPTIONS] PASSEI AQUI 2");
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PrintWriter out = response.getWriter();
+        out.flush();
+        out.close();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
