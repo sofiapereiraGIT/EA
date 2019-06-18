@@ -43,7 +43,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             animalTotal = Arrays.asList(user.animais.toArray());
             
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
+                animalTotal.stream().filter((a) -> (a.getEstado() == 'E' && a.getDiscriminator()=='C')).forEachOrdered((a) -> {
                 onlyDogs.add(a);
                 });
             }
@@ -63,16 +63,17 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
             List<Animal> animalTotal = new ArrayList<>();
             animalTotal = Arrays.asList(user.animais.toArray());
-
+            
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> (a.getEstado() == 'a' && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+     
+                animalTotal.stream().filter((a) -> (a.getEstado() == 'E' && a.getDiscriminator()=='G')).forEachOrdered((a) -> {
                 onlyCats.add(a);
                 });
             }
         } catch(PersistentException e) {
             System.out.println(e);
         }
-        
+          
         return onlyCats;
     }
     
@@ -87,7 +88,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             animalTotal = Arrays.asList(user.animais.toArray());
 
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
+                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'E' || a.getEstado() == 'P') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
                     todosCaes.add(a);
                 });
             }
@@ -109,7 +110,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             animalTotal = Arrays.asList(user.animais.toArray());
 
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'a' || a.getEstado() == 'p') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'E' || a.getEstado() == 'P') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
                     todosGatos.add(a);
                 });
             }
