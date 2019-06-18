@@ -101,11 +101,11 @@ public class GatoAdocaoUserServlet extends HttpServlet {
                 jsonObjArr.put("Idade",g.getIdade());
                 jsonObjArr.put("Sexo",g.getSexo());
                 jsonObjArr.put("Idade",g.getIdade());
-                jsonObjArr.put("Raça",g.getRaça());
+                jsonObjArr.put("Raca",g.getRaça());
                 jsonObjArr.put("Porte",g.getPorte());
                 jsonObjArr.put("CorPelo",g.getCompPelo());
                 jsonObjArr.put("Estado",g.getEstado());
-                jsonObjArr.put("Descrição",g.getDescricao());
+                jsonObjArr.put("Descricao",g.getDescricao());
                 jsonObjArr.put("Concelho",g.getConcelho());
                 jsonObjArr.put("Discriminator",g.getDiscriminator());     
                 ja.add(jsonObjArr);
