@@ -24,8 +24,8 @@ import src.Util;
  *
  * @author sofia
  */
-@WebServlet(name = "CaesAdotarServlet", urlPatterns = {"/CaesAdotar"})
-public class CaesAdotarServlet extends HttpServlet {
+@WebServlet(name = "CaesPerdidosServlet", urlPatterns = {"/CaesPerdidos"})
+public class CaesPerdidosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,14 +48,14 @@ public class CaesAdotarServlet extends HttpServlet {
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
             
             PersistentSession session = Util.getSessionWithoutAut(request);
-            List<Animal> caesAdotar = P4P.getCaesAdotar(session);
+            List<Animal> caesPerdidos = P4P.getCaesPerdidos(session);
             
             // Formar JSON
-            JSONObject myJson = new JSONObject();        
+            JSONObject myJson = new JSONObject();         
             JSONArray ja = new JSONArray();
             
-            for(Animal g : caesAdotar) {
-                JSONObject jsonObj = new JSONObject();
+            for(Animal g : caesPerdidos) {
+                JSONObject jsonObj = new JSONObject();   
                 jsonObj.put("ID",g.getID());
                 jsonObj.put("Nome",g.getNome());
                 jsonObj.put("Fotografia", g.getFotografia());
