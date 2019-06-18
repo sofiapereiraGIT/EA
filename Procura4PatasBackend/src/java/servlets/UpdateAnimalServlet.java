@@ -54,7 +54,7 @@ public class UpdateAnimalServlet extends HttpServlet {
             JSONObject json = (JSONObject) parser.parse(body);
 
             String UtilizadorEmail = (String) json.get("email");
-            System.out.println((json.get("ID")).getClass());
+            int ID = ((Long) json.get("ID")).intValue();
             String nome = (String) json.get("Nome");
             String fotografia = (String) json.get("Fotografia");
             char sexo = ((String) json.get("Sexo")).charAt(0);
@@ -69,10 +69,10 @@ public class UpdateAnimalServlet extends HttpServlet {
             char discriminator = ((String) json.get("Discriminator")).charAt(0);
             
             PersistentSession session = Util.getSession(request, UtilizadorEmail);
-            //boolean criado = P4P.updateAnimal(session, 203, nome, fotografia, sexo, idade,
-            //        raca, porte, corPelo, compPelo, estado, descricao, concelho, discriminator);
+            boolean alterado = P4P.updateAnimal(session, ID, nome, fotografia, sexo, idade,
+                    raca, porte, corPelo, compPelo, estado, descricao, concelho, discriminator);
                 
-            //out.println("{ \"msg\": "+criado+"}");
+            out.println("{ \"msg\": "+alterado+"}");
             out.flush();
             out.close();
         
