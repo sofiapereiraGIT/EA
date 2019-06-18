@@ -17,7 +17,7 @@ import procura4patas.Canil;
 @Local
 public interface CanilBeanLocal {
     
-    public List<Canil> getCanis(PersistentSession sessao);
+    public List getCanis(PersistentSession sessao);
 
     public Canil getCanil(PersistentSession sessao, String email);
 

@@ -33,4 +33,16 @@ public class CanilRepresentation extends UtilizadorRepresentation{
         this.instagram = i;
     }
     
+    @JsonCreator
+    public CanilRepresentation(@JsonProperty("email") String e, @JsonProperty("password") String p, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, 
+            @JsonProperty("concelho") String c, @JsonProperty("morada") String m, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d, 
+            @JsonProperty("horario") String h, @JsonProperty("siteOficial") String s, @JsonProperty("facebook") String fa, @JsonProperty("instagram") String i) {
+        
+        super(e, p, n, f, d, c, t);
+        this.morada = m;
+        this.horario = h;
+        this.siteOficial = s;
+        this.facebook = fa;
+        this.instagram = i;
+    }
 }

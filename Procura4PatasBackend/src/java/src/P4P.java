@@ -134,6 +134,10 @@ public class P4P {
         return canilBean.updateCanil(sessao, email, pass, nome, foto, concelho, tlm, descricao, morada, horario, site, face, insta);
     }
     
+    public static List getCanis(PersistentSession sessao){
+        return canilBean.getCanis(sessao);
+    }
+    
     /* Lookups para os beans */
     
     private static AnimalBeanLocal lookupAnimalBeanLocal() {

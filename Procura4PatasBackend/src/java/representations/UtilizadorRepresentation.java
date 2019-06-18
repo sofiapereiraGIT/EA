@@ -39,4 +39,17 @@ public class UtilizadorRepresentation {
         this.animaisAdotar = aa;
         this.listaPedidosAd = pa;
     }
+    
+    @JsonCreator
+    public UtilizadorRepresentation(@JsonProperty("email") String e, @JsonProperty("password") String p, @JsonProperty("nome") String n, @JsonProperty("fotografia") String f, 
+            @JsonProperty("concelho") String c, @JsonProperty("telemovel") String t, @JsonProperty("descricao") String d) {
+        
+        this.email = e;
+        this.password = p;
+        this.nome = n;
+        this.fotografia = f;
+        this.descricao = d;
+        this.concelho = c;
+        this.telemovel = t;
+    }
 }
