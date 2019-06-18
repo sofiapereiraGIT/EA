@@ -16,11 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
+import representations.AnimalRepresentation;
 import src.P4P;
 import src.Util;
 
@@ -83,15 +85,41 @@ public class GatoAdocaoUserServlet extends HttpServlet {
             
             List<Animal> onlyCats = P4P.getGatoAdocaoUser(session,email);
             
+            JSONObject myJson = new JSONObject();
+            JSONObject jsonObjArr = new JSONObject();
+            myJson.put("email", email);
+            myJson.put("gatos", null);
             
+            JSONArray ja = new JSONArray();
+            
+            for(Animal g : onlyCats) {
+          
+                jsonObjArr.put("ID",g.getID());
+                jsonObjArr.put("Nome",g.getNome());
+                jsonObjArr.put("Fotografia", g.getFotografia());
+                jsonObjArr.put("Sexo",g.getSexo());
+                jsonObjArr.put("Idade",g.getIdade());
+                jsonObjArr.put("Sexo",g.getSexo());
+                jsonObjArr.put("Idade",g.getIdade());
+                jsonObjArr.put("Raça",g.getRaça());
+                jsonObjArr.put("Porte",g.getPorte());
+                jsonObjArr.put("CorPelo",g.getCompPelo());
+                jsonObjArr.put("Estado",g.getEstado());
+                jsonObjArr.put("Descrição",g.getDescricao());
+                jsonObjArr.put("Concelho",g.getConcelho());
+                jsonObjArr.put("Discriminator",g.getDiscriminator());     
+                ja.add(jsonObjArr);
+            }
+            
+            myJson.put("gatos", ja);
+            System.out.println("JsonArray = " +  myJson.get("gatos"));
             
             // Enviar JSON ARRAY
-            
-            
-            
-            
-            
-            
+            PrintWriter out = response.getWriter();
+            out.println(myJson);
+            out.flush();
+            out.close();
+       
         } catch (ParseException ex) {
             Logger.getLogger(GatoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

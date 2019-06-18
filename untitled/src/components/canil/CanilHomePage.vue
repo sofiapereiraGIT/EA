@@ -18,8 +18,15 @@
 </template>
 
 <script>
+import route from '../../router/index'
 export default {
-  name: 'CanilHomePage'
+  name: 'CanilHomePage',
+  mounted: function () {
+    var value = this.$session.get('user')
+    if ((this.$session.has('user') === false) || (value[1] === 0)) {
+      route.push('/Login')
+    }
+  }
 }
 </script>
 

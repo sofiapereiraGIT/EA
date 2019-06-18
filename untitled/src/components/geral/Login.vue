@@ -1,6 +1,5 @@
 <template>
   <div class="limiter">
-    <h2 v-if="wrongCredentials == 1">Email ou password incorretos.</h2>
     <div class="container-login100">
       <div class="wrap-login100 p-t-190 p-b-30">
         <form class="login100-form validate-form" @submit.prevent="login">
@@ -47,9 +46,18 @@ export default {
       axios.defaults.headers['Content-Type'] = 'application/json'
       axios.post('http://localhost:8080/procura4patas/Login', this.credentials)
         .then(response => {
+          var userType = response.data.userType
           this.$session.start()
-          this.$session.set('user', this.credentials.email)
-          route.push('/')
+          this.$session.set('user', [ this.credentials.email, userType ])
+
+          /* UtilizadorComum */
+          if (userType === 0) {
+            route.push('/UserHomePage')
+          }
+          /* Canil */
+          if (userType === 1) {
+            route.push('/CanilHomePage')
+          }
         }).catch(e => { this.wrongCredentials = 1 })
     }
   }
@@ -104,11 +112,6 @@ export default {
     font-family: Poppins-SemiBold;
     src: url('../../fonts/poppins/Poppins-SemiBold.ttf');
   }
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
 
   body, html {
     height: 100%;
@@ -125,10 +128,6 @@ export default {
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
-  }
-
-  h1,h2,h3,h4,h5,h6 {
-    margin: 0;
   }
 
   p {
@@ -199,11 +198,6 @@ export default {
     line-height: 1.5;
   }
 
-  .limiter {
-    width: 100%;
-    margin: 0 auto;
-  }
-
   .container-login100 {
     width: 100%;
     min-height: 100vh;
@@ -211,7 +205,6 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 15px;
     background: url('../../assets/cat.jpg');
   }
 
@@ -365,35 +358,6 @@ export default {
     padding-top: 13px;
   }
 
-  .wrap-login100-form-btn {
-    width: 100%;
-    display: block;
-    position: relative;
-    z-index: 1;
-    border-radius: 25px;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-
-  .login100-form-bgbtn {
-    position: absolute;
-    z-index: -1;
-    width: 300%;
-    height: 100%;
-    background: #a64bf4;
-    background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-    background: -o-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-    background: -moz-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-    background: linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-    top: 0;
-    left: -100%;
-
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-  }
-
   .login100-form-btn {
     font-family: Poppins-Medium, serif;
     font-size: 15px;
@@ -420,72 +384,6 @@ export default {
   @media (max-width: 576px) {
     .wrap-login100 {
       padding: 77px 15px 33px 15px;
-    }
-  }
-
-  .validate-input {
-    position: relative;
-  }
-
-  .alert-validate::before {
-    content: attr(data-validate);
-    position: absolute;
-    max-width: 70%;
-    background-color: #fff;
-    border: 1px solid #c80000;
-    border-radius: 2px;
-    padding: 4px 25px 4px 10px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 0;
-    pointer-events: none;
-
-    font-family: Poppins-Regular, serif;
-    color: #c80000;
-    font-size: 13px;
-    line-height: 1.4;
-    text-align: left;
-
-    visibility: hidden;
-    opacity: 0;
-
-    -webkit-transition: opacity 0.4s;
-    -o-transition: opacity 0.4s;
-    -moz-transition: opacity 0.4s;
-    transition: opacity 0.4s;
-  }
-
-  .alert-validate::after {
-    content: "\f06a";
-    font-family: FontAwesome, serif;
-    font-size: 16px;
-    color: #c80000;
-
-    display: block;
-    position: absolute;
-    background-color: #fff;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 5px;
-  }
-
-  .alert-validate:hover:before {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  @media (max-width: 992px) {
-    .alert-validate::before {
-      visibility: visible;
-      opacity: 1;
     }
   }
 </style>

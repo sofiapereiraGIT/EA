@@ -96,16 +96,14 @@ public class LoginServlet extends HttpServlet {
             if( email != null && password != null ) {
                 Utilizador u = P4P.login(session, email, password);  
                 if( u != null ) {
-                   
+                   int userType = P4P.getUserType(session, email);
                    Util.addSession(session, email);
                    PrintWriter out = response.getWriter();
-                   out.println("{ OK: Tudo Fixe e que oh mano e que tudo fixe? }");
+                   out.println("{ \"userType\": " + userType + " }");
                    out.flush();
                    out.close();
                 } 
                 else {
-                    
-                    
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     PrintWriter out = response.getWriter();
                     out.flush();
@@ -119,7 +117,7 @@ public class LoginServlet extends HttpServlet {
                 out.close();
             }
             
-        } catch (ParseException | PersistentException ex) {
+        } catch (ParseException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             PrintWriter out = response.getWriter();

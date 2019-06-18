@@ -78,8 +78,12 @@ public class P4P {
     
     /** utilizadorBean methods **/
     
-    public static Utilizador login(PersistentSession session, String email, String password) throws PersistentException {
+    public static Utilizador login(PersistentSession session, String email, String password) {
         return utilizadorBean.login(session, email, password);
+    }
+    
+    public static int getUserType(PersistentSession session, String email) {
+        return utilizadorBean.getUserType(session, email);
     }
     
     public static List<Animal> getCaoAdocaoUser(PersistentSession sessao, String email) {

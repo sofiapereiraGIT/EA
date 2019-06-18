@@ -8,11 +8,17 @@ package beans;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
+import procura4patas.Canil;
+import procura4patas.CanilDAO;
 import procura4patas.Utilizador;
+import procura4patas.UtilizadorComum;
+import procura4patas.UtilizadorComumDAO;
 import procura4patas.UtilizadorDAO;
 
 /**
@@ -30,6 +36,25 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         } catch (PersistentException ex) {
             return null;
         }
+    }
+    
+    /**
+     *
+     * @param session
+     * @param email
+     * @return
+     */
+    @Override
+    public int getUserType(PersistentSession session, String email) {
+        try {
+            UtilizadorComum uC = UtilizadorComumDAO.loadUtilizadorComumByORMID(session, email);
+            return 0;
+        } catch (Exception e) {}
+        try {
+            Canil c = CanilDAO.loadCanilByORMID(session, email);
+            return 1;
+        } catch (Exception e) {}
+        return -1;
     }
     
     @Override

@@ -38,6 +38,8 @@ public class CaesAdotarServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        try (PrintWriter out = response.getWriter()) {
+            response.setContentType("text/html;charset=UTF-8");
             response.setContentType("application/json");
             response.addHeader("Access-Control-Allow-Origin", "*");
             response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -46,25 +48,31 @@ public class CaesAdotarServlet extends HttpServlet {
             
             PersistentSession session = Util.getSessionWithoutAut(request);
             List caesAdotar = P4P.getCaesAdotar(session);
-            
-            PrintWriter out = response.getWriter();           
+
             out.println("{ \"caes\" :");
             out.println("[");
-                    
+            
+            /* mudar */
+            
             for(int i=0; i<caesAdotar.size(); i++){
                 Animal cao = (Animal) caesAdotar.get(i);
-                
+
                 out.print(new AnimalRepresentation(cao.getID(), cao.getNome(), cao.getFotografia(), cao.getSexo(), 
                             cao.getIdade(), cao.getRaça(), cao.getPorte(), cao.getCorPelo(),  cao.getCompPelo(), cao.getEstado(),
                             cao.getDescricao(), cao.getConcelho(), cao.getDiscriminator()));
-                
+
                 if(i<=caesAdotar.size()-1) out.println(",");
             }
-            
+
             out.println("]");
             out.println("}");
+            
             out.flush();
             out.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -106,4 +114,21 @@ public class CaesAdotarServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException
+    {
+        System.out.println("[OPTIONS] PASSEI AQUI 2");
+        
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PrintWriter out = response.getWriter();
+        out.flush();
+        out.close();
+    }
 }
