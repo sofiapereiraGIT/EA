@@ -46,11 +46,18 @@ export default {
       axios.defaults.headers['Content-Type'] = 'application/json'
       axios.post('http://localhost:8080/procura4patas/Login', this.credentials)
         .then(response => {
+          var userType = response.data.userType
           this.$session.start()
-          this.$session.set('user', this.credentials.email)
+          this.$session.set('user', [ this.credentials.email, userType ])
 
-          /* Alterar para saber se se vai apresentar a página do Canil ou UtilizadorComum */
-          route.push('/')
+          /* UtilizadorComum */
+          if (userType === 0) {
+            route.push('/UserHomePage')
+          }
+          /* Canil */
+          if (userType === 1) {
+            route.push('/CanilHomePage')
+          }
         }).catch(e => { this.wrongCredentials = 1 })
     }
   }
