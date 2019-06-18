@@ -54,56 +54,28 @@ public class CanilBean implements CanilBeanLocal {
         
         boolean criado = false;
         
-        Utilizador ut = new Utilizador();
-        ut.setEmail(email);
-        ut.setPassword(pass);
-        ut.setNome(nome);
-        ut.setConcelho(concelho);
-        
-        if(!foto.equals("")) ut.setFotografia(foto);
-        else ut.setFotografia(null);
-        
-        if(!tlm.equals("")) ut.setTelemovel(tlm);
-        else ut.setTelemovel(null);
-        
-        if(!descricao.equals("")) ut.setDescricao(descricao);
-        else ut.setDescricao(null);
-        
-        Canil c = new Canil();
-        c.setMorada(morada);
-        
-        if(!horario.equals("")) c.setHorario(horario);
-        else c.setHorario(null);
-            
-        if(!site.equals("")) c.setSiteOficial(site);
-        else c.setSiteOficial(null);
-        
-        if(!face.equals("")) c.setFacebook(face);
-        else c.setFacebook(null);
-        
-        if(!insta.equals("")) c.setInstagram(insta);
-        else c.setInstagram(null);
+        if(foto==null) foto = "";
+        if(tlm==null) tlm = "";
+        if(descricao==null) descricao = "";
+        if(horario==null) horario = "";
+        if(site==null) site = "";
+        if(face==null) face = "";
+        if(insta==null) insta = "";
         
         try {
             sessao.beginTransaction();
             
-            criado = UtilizadorDAO.save(ut);
+            Query query = sessao.createSQLQuery("INSERT INTO Utilizador (Email, Password, Nome, Fotografia, Concelho, Telemovel, Descricao)\n " + 
+                    "VALUES ('" + email + "', '" + pass + "', '" + nome + "', '" + foto + "', '" + concelho + "', '" + tlm + "', '" + descricao + "');");
+            query.executeUpdate();
             
-            if(criado){
-                Query query = sessao.createSQLQuery("INSERT INTO Canil (UtilizadorEmail, Morada, Horario, SiteOficial, Facebook, Instagram) VALUES(" 
-                        + email + ", " + c.getMorada() + ", " + c.getHorario() + ", " + c.getSiteOficial() + ", " + c.getFacebook() + ", " + c.getInstagram() + ")");
-                query.executeUpdate();
+            Query query2 = sessao.createSQLQuery("INSERT INTO Canil\n (Morada, Horario, SiteOficial, Facebook, Instagram, UtilizadorEmail)\n " +
+                    "VALUES ('" + morada + "', '" + horario + "', '" + site + "', '" + face + "', '" + insta + "', '" + email + "');");
+            query2.executeUpdate();
+
+            sessao.getTransaction().commit();
+            criado = true;
                 
-                try{
-                sessao.getTransaction().commit();
-                criado = true;
-                } catch (Exception e){
-                    sessao.getTransaction().rollback();
-                    criado = false;
-                }
-            }
-            else sessao.getTransaction().rollback();
-            
         } catch (PersistentException ex) {
             sessao.getTransaction().rollback();
             criado = false;
@@ -117,65 +89,37 @@ public class CanilBean implements CanilBeanLocal {
             String morada, String horario, String site, String face, String insta) {
         
         boolean atualizado = false;
-        
+            
+        if(foto==null) foto = "";
+        if(tlm==null) tlm = "";
+        if(descricao==null) descricao = "";
+        if(horario==null)  horario = "";
+        if(site==null) site = "";
+        if(face==null) face = "";
+        if(insta==null) insta = "";
+
         try {
-            Utilizador ut = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
-            ut.setPassword(pass);
-            ut.setNome(nome);
-            ut.setConcelho(concelho);
-        
-            if(!foto.equals("")) ut.setFotografia(foto);
-            else ut.setFotografia(null);
-        
-            if(!tlm.equals("")) ut.setTelemovel(tlm);
-            else ut.setTelemovel(null);
-        
-            if(!descricao.equals("")) ut.setDescricao(descricao);
-            else ut.setDescricao(null);
+            sessao.beginTransaction();
+
+            Query query = sessao.createSQLQuery("UPDATE Utilizador\n " + 
+                "SET Password = '" + pass + "', Nome = '" + nome + "', Fotografia = '" + foto + "', Concelho = '" + concelho + 
+                "', Telemovel = '" + tlm + "', Descricao = '" + descricao + "'\n" +
+                "WHERE Email = '" + email + "';");
+            query.executeUpdate();
             
-            Canil c = CanilDAO.getCanilByORMID(sessao, email);
-            c.setMorada(morada);
-        
-            if(!horario.equals("")) c.setHorario(horario);
-            else c.setHorario(null);
-            
-            if(!site.equals("")) c.setSiteOficial(site);
-            else c.setSiteOficial(null);
-        
-            if(!face.equals("")) c.setFacebook(face);
-            else c.setFacebook(null);
-        
-            if(!insta.equals("")) c.setInstagram(insta);
-            else c.setInstagram(null);
-            
-            try {
-                sessao.beginTransaction();
-            
-                atualizado = UtilizadorDAO.refresh(ut);
-            
-                if(atualizado){
-                    atualizado = CanilDAO.refresh(c);
-                    
-                    if(atualizado){
-                        try{
-                            sessao.getTransaction().commit();
-                        } catch (Exception e){
-                            sessao.getTransaction().rollback();
-                            atualizado = false;
-                        }
-                    }
-                }
-                else sessao.getTransaction().rollback();
-            
-            } catch (PersistentException ex) {
-                sessao.getTransaction().rollback();
-                atualizado = false;
-            }
+            Query query2 = sessao.createSQLQuery("UPDATE Canil\n " + 
+                "SET Morada = '" + morada + "', Horario = '" + horario + "', SiteOficial = '" + site + "', Facebook = '" + face + "', Instagram = '" + insta + "'\n" + 
+                "WHERE UtilizadorEmail = '" + email + "';");
+            query2.executeUpdate();
+                
+            sessao.getTransaction().commit();
+            atualizado = true;
            
         } catch (PersistentException ex) {
-            Logger.getLogger(UtilizadorComumBean.class.getName()).log(Level.SEVERE, null, ex);
+            sessao.getTransaction().rollback();
+            atualizado = false;
         }
-        
+            
         return atualizado;
     }
 }
