@@ -94,16 +94,16 @@ public class PedidosUserServlet extends HttpServlet {
             
             for(Animal g : onlyPedidos) {
           
+                jsonObjArr = new JSONObject();
                 jsonObjArr.put("ID",g.getID());
                 jsonObjArr.put("Nome",g.getNome());
                 jsonObjArr.put("Fotografia", g.getFotografia());
                 jsonObjArr.put("Sexo",g.getSexo());
                 jsonObjArr.put("Idade",g.getIdade());
-                jsonObjArr.put("Sexo",g.getSexo());
-                jsonObjArr.put("Idade",g.getIdade());
                 jsonObjArr.put("Raca",g.getRaça());
                 jsonObjArr.put("Porte",g.getPorte());
                 jsonObjArr.put("CorPelo",g.getCompPelo());
+                jsonObjArr.put("CompPelo",g.getCompPelo());
                 jsonObjArr.put("Estado",g.getEstado());
                 jsonObjArr.put("Descricao",g.getDescricao());
                 jsonObjArr.put("Concelho",g.getConcelho());
