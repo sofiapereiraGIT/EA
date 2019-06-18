@@ -88,7 +88,7 @@ public class UpdateCanilServlet extends HttpServlet {
             String nome = (String) json.get("nome");
             String foto = (String) json.get("fotografia");
             String concelho = (String) json.get("concelho");
-            String tlm = (String) json.get("tlm");
+            String tlm = (String) json.get("telemovel");
             String descricao = (String) json.get("descricao");
             String morada = (String) json.get("morada");
             String horario = (String) json.get("horario");
@@ -98,12 +98,12 @@ public class UpdateCanilServlet extends HttpServlet {
                     
             PersistentSession session = Util.getSession(request, email);
             
-            if( email != null && password != null ) {
+            if( email != null) {
                 boolean criado = P4P.updateCanil(session, email, password, nome, foto, concelho, tlm, descricao, morada, horario, site, face, insta);
                 
                 if(criado) {
                    PrintWriter out = response.getWriter();
-                   out.println("{ OK }");
+                   out.println("{ \"msg\": " + criado + "}");
                    out.flush();
                    out.close();
                 } 
