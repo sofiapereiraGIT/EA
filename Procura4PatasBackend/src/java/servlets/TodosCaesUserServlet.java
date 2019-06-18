@@ -28,9 +28,9 @@ import src.Util;
  *
  * @author davidsousa
  */
-@WebServlet(name = "TodosGatosUserServlet", urlPatterns = {"/TodosGatosUser"})
-public class TodosGatosUserServlet extends HttpServlet {
-    
+@WebServlet(name = "TodosCaesUserServlet", urlPatterns = {"/TodosCaesUser"})
+public class TodosCaesUserServlet extends HttpServlet {
+
     
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
@@ -49,7 +49,7 @@ public class TodosGatosUserServlet extends HttpServlet {
         out.flush();
         out.close();
     }
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,6 +62,7 @@ public class TodosGatosUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+     response.setContentType("text/html;charset=UTF-8");
        
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -82,17 +83,17 @@ public class TodosGatosUserServlet extends HttpServlet {
             String email = (String) json.get("email");
             PersistentSession session = Util.getSession(request, email);
             
-            List<Animal> allCats = P4P.getTodosGatos(session, email);
+            List<Animal> allDogs = P4P.getTodosCaes(session, email);
             
-            // Enviar JSON ARRAY
+             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();
             JSONObject jsonObjArr = new JSONObject();
             myJson.put("email", email);
-            myJson.put("gatos", null);
+            myJson.put("caes", null);
             
             JSONArray ja = new JSONArray();
             
-            for(Animal g : allCats) {
+            for(Animal g : allDogs) {
           
                 jsonObjArr.put("ID",g.getID());
                 jsonObjArr.put("Nome",g.getNome());
@@ -111,22 +112,19 @@ public class TodosGatosUserServlet extends HttpServlet {
                 ja.add(jsonObjArr);
             }
             
-            myJson.put("gatos", ja);
-            System.out.println("JsonArray = " +  myJson.get("gatos"));
+            myJson.put("caes", ja);
+            System.out.println("JsonArray = " +  myJson.get("caes"));
             
             // Enviar JSON ARRAY
             PrintWriter out = response.getWriter();
             out.println(myJson);
             out.flush();
             out.close();
-            
+   
             
         } catch (ParseException ex) {
-            Logger.getLogger(TodosGatosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TodosCaesUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

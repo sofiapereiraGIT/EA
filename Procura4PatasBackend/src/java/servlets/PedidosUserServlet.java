@@ -28,27 +28,8 @@ import src.Util;
  *
  * @author davidsousa
  */
-@WebServlet(name = "TodosGatosUserServlet", urlPatterns = {"/TodosGatosUser"})
-public class TodosGatosUserServlet extends HttpServlet {
-    
-    
-    @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-        
-        PrintWriter out = response.getWriter();
-        out.flush();
-        out.close();
-    }
+@WebServlet(name = "PedidosUserServlet", urlPatterns = {"/PedidosUser"})
+public class PedidosUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,7 +43,7 @@ public class TodosGatosUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+        
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.setContentType("application/json");
@@ -82,17 +63,17 @@ public class TodosGatosUserServlet extends HttpServlet {
             String email = (String) json.get("email");
             PersistentSession session = Util.getSession(request, email);
             
-            List<Animal> allCats = P4P.getTodosGatos(session, email);
+            List<Animal> onlyPedidos = P4P.getPedidosUser(session, email);
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();
             JSONObject jsonObjArr = new JSONObject();
             myJson.put("email", email);
-            myJson.put("gatos", null);
+            myJson.put("pedidos", null);
             
             JSONArray ja = new JSONArray();
             
-            for(Animal g : allCats) {
+            for(Animal g : onlyPedidos) {
           
                 jsonObjArr.put("ID",g.getID());
                 jsonObjArr.put("Nome",g.getNome());
@@ -111,22 +92,20 @@ public class TodosGatosUserServlet extends HttpServlet {
                 ja.add(jsonObjArr);
             }
             
-            myJson.put("gatos", ja);
-            System.out.println("JsonArray = " +  myJson.get("gatos"));
+            myJson.put("pedidos", ja);
+            System.out.println("JsonArray = " +  myJson.get("pedidos"));
             
             // Enviar JSON ARRAY
             PrintWriter out = response.getWriter();
             out.println(myJson);
             out.flush();
             out.close();
+       
             
             
         } catch (ParseException ex) {
-            Logger.getLogger(TodosGatosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -90,10 +91,45 @@ public class CaoAdocaoUserServlet extends HttpServlet {
             List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,email);
             
             // Enviar JSON ARRAY
+            JSONObject myJson = new JSONObject();
+            JSONObject jsonObjArr = new JSONObject();
+            myJson.put("email", email);
+            myJson.put("caes", null);
+            
+            JSONArray ja = new JSONArray();
+            
+            for(Animal g : onlyDogs) {
+          
+                jsonObjArr.put("ID",g.getID());
+                jsonObjArr.put("Nome",g.getNome());
+                jsonObjArr.put("Fotografia", g.getFotografia());
+                jsonObjArr.put("Sexo",g.getSexo());
+                jsonObjArr.put("Idade",g.getIdade());
+                jsonObjArr.put("Sexo",g.getSexo());
+                jsonObjArr.put("Idade",g.getIdade());
+                jsonObjArr.put("Raça",g.getRaça());
+                jsonObjArr.put("Porte",g.getPorte());
+                jsonObjArr.put("CorPelo",g.getCompPelo());
+                jsonObjArr.put("Estado",g.getEstado());
+                jsonObjArr.put("Descrição",g.getDescricao());
+                jsonObjArr.put("Concelho",g.getConcelho());
+                jsonObjArr.put("Discriminator",g.getDiscriminator());     
+                ja.add(jsonObjArr);
+            }
+            
+            myJson.put("caes", ja);
+            System.out.println("JsonArray = " +  myJson.get("caes"));
+            
+            // Enviar JSON ARRAY
+            PrintWriter out = response.getWriter();
+            out.println(myJson);
+            out.flush();
+            out.close();
+       
             
             
         } catch (ParseException ex) {
-            Logger.getLogger(GatoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CaoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
