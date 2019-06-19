@@ -52,34 +52,24 @@ public class CanilServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        try {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
 
-        System.out.println("[POST] PASSEI AQUI");
-        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-        System.out.println("Body " + body);
-            
-        JSONParser parser = new JSONParser();
-        JSONObject json;
-        json = (JSONObject) parser.parse(body);
-        
         PersistentSession session;
-        String email = (String) json.get("email");
-        String emailQuemQuero = (String) json.get("emailQuemQuero");
-    
-        if(email  ==  null ) {
+        String email = request.getParameter("email");
+        String emailPedido = request.getParameter("emailPedido");
+
+        if(email  ==  null) {
             session = Util.getSessionWithoutAut(request);
         } else {
             session = Util.getSession(request, email);
         }
 
-        Canil c = P4P.getCanil(session, emailQuemQuero);
+        Canil c = P4P.getCanil(session, emailPedido);
 
         if(c != null){
             JSONObject result = new JSONObject();
@@ -95,7 +85,7 @@ public class CanilServlet extends HttpServlet {
             result.put("site", c.getSiteOficial());
             result.put("facebook", c.getFacebook());
             result.put("instagram", c.getInstagram());
-            
+
             PrintWriter out = response.getWriter();
                out.println(result);
                out.flush();
@@ -107,17 +97,10 @@ public class CanilServlet extends HttpServlet {
             out.flush();
             out.close();
         }
-        } catch (ParseException ex) {
-            Logger.getLogger(CanilServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");

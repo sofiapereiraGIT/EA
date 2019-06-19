@@ -42,26 +42,16 @@ public class CanisServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-       try {
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
     
-        System.out.println("[POST] PASSEI AQUI");
-        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-        System.out.println("Body " + body);
-            
-        JSONParser parser = new JSONParser();
-        JSONObject json;
-        json = (JSONObject) parser.parse(body);
-       
         PersistentSession session;
-        String email = (String) json.get("email");
+        String email = request.getParameter("email");
     
-        if(email  ==  null ) {
+        if(email  ==  null) {
             session = Util.getSessionWithoutAut(request);
         } else {
             session = Util.getSession(request, email);
@@ -92,18 +82,10 @@ public class CanisServlet extends HttpServlet {
            out.println(array);
            out.flush();
            out.close();
-           
-        } catch (ParseException ex) {
-            Logger.getLogger(CanisServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");

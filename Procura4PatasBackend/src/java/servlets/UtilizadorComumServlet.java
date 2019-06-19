@@ -46,11 +46,18 @@ public class UtilizadorComumServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-
+        
+        PersistentSession session;
         String email = request.getParameter("email");
-        PersistentSession session = Util.getSession(request, email);
+        String emailPedido = request.getParameter("emailPedido");
 
-        UtilizadorComum uc = P4P.getUtilizadorComum(session, email);
+        if(email  ==  null) {
+            session = Util.getSessionWithoutAut(request);
+        } else {
+            session = Util.getSession(request, email);
+        }
+        
+        UtilizadorComum uc = P4P.getUtilizadorComum(session, emailPedido);
 
         if(uc != null){
             JSONObject result = new JSONObject();
@@ -76,11 +83,7 @@ public class UtilizadorComumServlet extends HttpServlet {
     }
     
     @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
