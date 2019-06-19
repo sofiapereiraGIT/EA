@@ -68,12 +68,12 @@ public class P4P {
     
     /** pedidoBean methods **/
     
-    public static boolean adotarAnimal(PersistentSession sessao, Animal anim, String email) {
-        return pedidoBean.adotarAnimal(sessao, anim, email);
+    public static boolean adotarAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {
+        return pedidoBean.adotarAnimal(sessao, email, emailUtilComum,id);
     }
     
-    public static boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
-        return pedidoBean.serFatAnimal(sessao, anim, email);
+    public static boolean serFatAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {
+        return pedidoBean.serFatAnimal(sessao, email, emailUtilComum, id);
     }
     
     /** utilizadorBean methods **/

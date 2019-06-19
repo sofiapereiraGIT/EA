@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import src.P4P;
@@ -47,7 +48,23 @@ public class GatosPerdidosServlet extends HttpServlet {
             response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
             
-            PersistentSession session = Util.getSessionWithoutAut(request);
+            System.out.println("[POST] PASSEI AQUI");
+            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+            System.out.println("Body " + body);
+            
+            JSONParser parser = new JSONParser();
+            JSONObject json;
+            json = (JSONObject) parser.parse(body);
+            
+            PersistentSession session;
+            String email = (String) json.get("email");
+              
+            if(email  ==  null ) {
+                session = Util.getSessionWithoutAut(request);
+            } else {
+                session = Util.getSession(request, email);
+            }
+            
             List<Animal> gatosPerdidos = P4P.getGatosPerdidos(session);
             
             // Formar JSON

@@ -53,15 +53,33 @@ public class CanilServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        try {
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
 
-        String email = request.getParameter("email");
-        PersistentSession session = Util.getSession(request, email);
-        Canil c = P4P.getCanil(session, email);
+        System.out.println("[POST] PASSEI AQUI");
+        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+        System.out.println("Body " + body);
+            
+        JSONParser parser = new JSONParser();
+        JSONObject json;
+        json = (JSONObject) parser.parse(body);
+        
+        PersistentSession session;
+        String email = (String) json.get("email");
+        String emailQuemQuero = (String) json.get("emailQuemQuero");
+    
+        if(email  ==  null ) {
+            session = Util.getSessionWithoutAut(request);
+        } else {
+            session = Util.getSession(request, email);
+        }
+
+        Canil c = P4P.getCanil(session, emailQuemQuero);
 
         if(c != null){
             JSONObject result = new JSONObject();
@@ -88,6 +106,9 @@ public class CanilServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.flush();
             out.close();
+        }
+        } catch (ParseException ex) {
+            Logger.getLogger(CanilServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

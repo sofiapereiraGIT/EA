@@ -85,10 +85,17 @@ public class CaoAdocaoUserServlet extends HttpServlet {
             JSONObject json;
             json = (JSONObject) parser.parse(body);
             
+            PersistentSession session;
             String email = (String) json.get("email");
-            PersistentSession session = Util.getSession(request, email);
+            String emailQuemQuero = (String) json.get("emailQuemQuero");
             
-            List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,email);
+            if(email  ==  null ) {
+                session = Util.getSessionWithoutAut(request);
+            } else {
+                session = Util.getSession(request, email);
+            }
+            
+            List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,emailQuemQuero);
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();

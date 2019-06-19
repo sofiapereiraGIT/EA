@@ -80,10 +80,17 @@ public class GatoAdocaoUserServlet extends HttpServlet {
             JSONObject json;
             json = (JSONObject) parser.parse(body);
             
+            PersistentSession session;
             String email = (String) json.get("email");
-            PersistentSession session = Util.getSession(request, email);
+            String emailQuemQuero = (String) json.get("emailQuemQuero");
             
-            List<Animal> onlyCats = P4P.getGatoAdocaoUser(session,email);
+            if(email  ==  null ) {
+                session = Util.getSessionWithoutAut(request);
+            } else {
+                session = Util.getSession(request, email);
+            }
+            
+            List<Animal> onlyCats = P4P.getGatoAdocaoUser(session,emailQuemQuero);
             
             JSONObject myJson = new JSONObject();
             JSONObject jsonObjArr = new JSONObject();

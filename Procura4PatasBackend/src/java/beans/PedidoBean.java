@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import org.hibernate.Query;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
@@ -34,54 +35,76 @@ import procura4patas.UtilizadorDAO;
 public class PedidoBean implements PedidoBeanLocal {
     
     @Override
-    public boolean adotarAnimal(PersistentSession sessao, Animal anim, String email) {
+    public boolean adotarAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {
         
-        boolean ok = true;
+        Date dt  = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String data = sdf.format(dt);
+        
+        char estado = 'P';
+        
+        Date dt2  = new Date();
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dataUltimoContacto = sdf2.format(dt2);
+        char discriminator = 'A';
+        
+        
         
         try {
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-            Date dNow = new Date();
-            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-       
-            Pedido p = new Pedido();
-            p.setAnimal(anim);
-            p.setData(dNow);
-            p.setDataUltimoContacto(null);
-            p.setDiscriminator('p');
-            p.setEstado('c');
-            p.setUtilizadorComum((UtilizadorComum) user);
-            ok = PedidoDAO.save(p);
+    
+            sessao.beginTransaction();
+            
+            Query query = sessao.createSQLQuery("INSERT INTO Pedido\n" +
+                    "(UtilizadorEmail, UtilizadorComumUtilizadorEmail, AnimalID, Data, Estado, DataUltimoContacto, Discriminator)\n" +
+                    "VALUES \n" +
+                    "("+ "'" + email+ "'" + ", "+ "'" + emailUtilComum + "'" + ", "+ id+", " + "'"+data+ "'" + ", "+ "'" + estado+ "'" + ", "+ "'" + dataUltimoContacto+ "'"  + ", "+ "'"  +discriminator + "'"  +");");
+            
+            query.executeUpdate();
+            
+            sessao.getTransaction().commit();
+            return true;
             
         } catch (PersistentException ex) {
             System.out.println(ex);
+            sessao.getTransaction().rollback();
+            return false;
         }
-       
-        return ok;
     }
     
     @Override
-    public boolean serFatAnimal(PersistentSession sessao, Animal anim, String email) {
+    public boolean serFatAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {
         
-        boolean ok  = true;
+        Date dt  = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String data = sdf.format(dt);
         
-        try{
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-            Date dNow = new Date();
-            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-      
-            Pedido p = new Pedido();
-            p.setAnimal(anim);
-            p.setData(dNow);
-            p.setDataUltimoContacto(null);
-            p.setDiscriminator('f');
-            p.setEstado('c');
-            p.setUtilizadorComum((UtilizadorComum) user);
-            ok = PedidoDAO.save(p);
-       
+        char estado = 'P';
+        
+        Date dt2  = new Date();
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dataUltimoContacto = sdf2.format(dt2);
+        char discriminator = 'F';
+        
+        
+        
+        try {
+    
+            sessao.beginTransaction();
+            
+            Query query = sessao.createSQLQuery("INSERT INTO Pedido\n" +
+                    "(UtilizadorEmail, UtilizadorComumUtilizadorEmail, AnimalID, Data, Estado, DataUltimoContacto, Discriminator)\n" +
+                    "VALUES \n" +
+                    "("+ "'" + email+ "'" + ", "+ "'" + emailUtilComum + "'" + ", "+ id+", " + "'"+data+ "'" + ", "+ "'" + estado+ "'" + ", "+ "'" + dataUltimoContacto+ "'"  + ", "+ "'"  +discriminator + "'"  +");");
+            
+            query.executeUpdate();
+            
+            sessao.getTransaction().commit();
+            return true;
+            
         } catch (PersistentException ex) {
             System.out.println(ex);
+            sessao.getTransaction().rollback();
+            return false;
         }
-       
-        return ok;
     }
 }

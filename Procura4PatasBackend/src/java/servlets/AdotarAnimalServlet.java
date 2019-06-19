@@ -7,7 +7,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -15,12 +14,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import procura4patas.Animal;
 import src.P4P;
 import src.Util;
 
@@ -28,9 +26,9 @@ import src.Util;
  *
  * @author davidsousa
  */
-@WebServlet(name = "PedidosUserServlet", urlPatterns = {"/PedidosUser"})
-public class PedidosUserServlet extends HttpServlet {
-    
+@WebServlet(name = "AdotarAnimalServlet", urlPatterns = {"/AdotarAnimal"})
+public class AdotarAnimalServlet extends HttpServlet {
+
     
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
@@ -49,7 +47,7 @@ public class PedidosUserServlet extends HttpServlet {
         out.flush();
         out.close();
     }
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,76 +59,38 @@ public class PedidosUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            response.setContentType("application/json");
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-            response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-             
-            System.out.println("[POST] PASSEI AQUI");
-            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-            System.out.println("Body " + body);
-            
-            JSONParser parser = new JSONParser();
-            JSONObject json;
-            json = (JSONObject) parser.parse(body);
-            
-            PersistentSession session;
-            String email = (String) json.get("email");
-            String emailQuemQuero = (String) json.get("emailQuemQuero");
-    
-            if(email  ==  null ) {
-                 session = Util.getSessionWithoutAut(request);
-            } else {
-                 session = Util.getSession(request, email);
-            }
-            
-            List<Animal> onlyPedidos = P4P.getPedidosUser(session, emailQuemQuero);
-            
-            // Enviar JSON ARRAY
-            JSONObject myJson = new JSONObject();
-            JSONObject jsonObjArr = new JSONObject();
-            myJson.put("email", email);
-            myJson.put("pedidos", null);
-            
-            JSONArray ja = new JSONArray();
-            
-            for(Animal g : onlyPedidos) {
-          
-                jsonObjArr = new JSONObject();
-                jsonObjArr.put("ID",g.getID());
-                jsonObjArr.put("Nome",g.getNome());
-                jsonObjArr.put("Fotografia", g.getFotografia());
-                jsonObjArr.put("Sexo",g.getSexo());
-                jsonObjArr.put("Idade",g.getIdade());
-                jsonObjArr.put("Raca",g.getRaça());
-                jsonObjArr.put("Porte",g.getPorte());
-                jsonObjArr.put("CorPelo",g.getCompPelo());
-                jsonObjArr.put("CompPelo",g.getCompPelo());
-                jsonObjArr.put("Estado",g.getEstado());
-                jsonObjArr.put("Descricao",g.getDescricao());
-                jsonObjArr.put("Concelho",g.getConcelho());
-                jsonObjArr.put("Discriminator",g.getDiscriminator());     
-                ja.add(jsonObjArr);
-            }
-            
-            myJson.put("pedidos", ja);
-            System.out.println("JsonArray = " +  myJson.get("pedidos"));
-            
-            // Enviar JSON ARRAY
-            PrintWriter out = response.getWriter();
-            out.println(myJson);
-            out.flush();
-            out.close();
-       
-            
-            
+       try(PrintWriter out = response.getWriter()) {
+        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        System.out.println("[POST] PASSEI AQUI");
+        
+        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+        System.out.println("Body " + body);
+        
+        JSONParser parser = new JSONParser();
+        JSONObject json;
+        json = (JSONObject) parser.parse(body);
+        String email = (String) json.get("email");
+        String emailUtilComum  = (String) json.get("emailUtilComum");
+        int id = ((Long) json.get("ID")).intValue();
+        
+        PersistentSession session = Util.getSession(request, email);
+        
+        boolean adotado = P4P.adotarAnimal(session,email, emailUtilComum, id);
+  
+         out.println("{ \"msg\": "+adotado+"}");
+         out.flush();
+         out.close();
+        
+        
         } catch (ParseException ex) {
-            Logger.getLogger(PedidosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdotarAnimalServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

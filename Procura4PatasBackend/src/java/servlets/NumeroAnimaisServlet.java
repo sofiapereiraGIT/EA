@@ -8,12 +8,16 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
 import src.P4P;
 import src.Util;
@@ -36,8 +40,8 @@ public class NumeroAnimaisServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+     try {
         response.setContentType("text/html;charset=UTF-8");
-        
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -45,7 +49,22 @@ public class NumeroAnimaisServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
         
-        PersistentSession session = Util.getSessionWithoutAut(request);
+        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+        System.out.println("Body " + body);
+      
+        JSONParser parser = new JSONParser();
+        JSONObject json;
+        json = (JSONObject) parser.parse(body);
+        
+        PersistentSession session;
+        String email = (String) json.get("email"); 
+        
+        if(email  ==  null ) {
+                 session = Util.getSessionWithoutAut(request);
+         } else{
+                 session = Util.getSession(request, email);
+         }
+        
         List caesAdotar = P4P.getCaesAdotar(session);
         List gatosAdotar = P4P.getGatosAdotar(session);
         
@@ -58,6 +77,10 @@ public class NumeroAnimaisServlet extends HttpServlet {
         out.println(myJson);
         out.flush();
         out.close();
+        
+       } catch (ParseException ex) {
+            Logger.getLogger(NumeroAnimaisServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

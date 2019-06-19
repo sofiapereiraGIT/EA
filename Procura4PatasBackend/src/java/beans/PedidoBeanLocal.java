@@ -16,7 +16,7 @@ import procura4patas.Animal;
 @Local
 public interface PedidoBeanLocal {
     
-    boolean adotarAnimal(PersistentSession sessao, Animal anim, String email);
+    boolean adotarAnimal(PersistentSession sessao, String email, String emailUtilComum, int id);
     
-    boolean serFatAnimal(PersistentSession sessao, Animal anim, String email);
+    boolean serFatAnimal(PersistentSession sessao, String email, String emailUtilComum, int id);
 }

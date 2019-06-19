@@ -8,6 +8,8 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
 import procura4patas.Canil;
 import src.P4P;
@@ -38,14 +42,30 @@ public class CanisServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+       try {
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-
-        String email = request.getParameter("email");
-        PersistentSession session = Util.getSession(request, email);
+    
+        System.out.println("[POST] PASSEI AQUI");
+        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+        System.out.println("Body " + body);
+            
+        JSONParser parser = new JSONParser();
+        JSONObject json;
+        json = (JSONObject) parser.parse(body);
+       
+        PersistentSession session;
+        String email = (String) json.get("email");
+    
+        if(email  ==  null ) {
+            session = Util.getSessionWithoutAut(request);
+        } else {
+            session = Util.getSession(request, email);
+        }
 
         List<Canil> canis = P4P.getCanis(session);
         JSONArray array = new JSONArray();
@@ -66,12 +86,16 @@ public class CanisServlet extends HttpServlet {
             result.put("instagram", c.getInstagram());
             
             array.add(result);
-        }
+        } 
 
         PrintWriter out = response.getWriter();
            out.println(array);
            out.flush();
            out.close();
+           
+        } catch (ParseException ex) {
+            Logger.getLogger(CanisServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override

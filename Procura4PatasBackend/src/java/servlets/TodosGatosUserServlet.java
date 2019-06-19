@@ -79,10 +79,17 @@ public class TodosGatosUserServlet extends HttpServlet {
             JSONObject json;
             json = (JSONObject) parser.parse(body);
             
+            PersistentSession session;
             String email = (String) json.get("email");
-            PersistentSession session = Util.getSession(request, email);
+            String emailQuemQuero = (String) json.get("emailQuemQuero");
+    
+            if(email  ==  null ) {
+                 session = Util.getSessionWithoutAut(request);
+            } else {
+                 session = Util.getSession(request, email);
+            }
             
-            List<Animal> allCats = P4P.getTodosGatos(session, email);
+            List<Animal> allCats = P4P.getTodosGatos(session, emailQuemQuero);
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();
