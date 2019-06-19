@@ -29,61 +29,6 @@ import src.Util;
 @WebServlet(name = "NumeroAnimaisServlet", urlPatterns = {"/NumeroAnimais"})
 public class NumeroAnimaisServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-     try {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-        
-        String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-        System.out.println("Body " + body);
-      
-        JSONParser parser = new JSONParser();
-        JSONObject json;
-        json = (JSONObject) parser.parse(body);
-        
-        PersistentSession session;
-        String email = (String) json.get("email"); 
-        
-        if(email  ==  null ) {
-                 session = Util.getSessionWithoutAut(request);
-         } else{
-                 session = Util.getSession(request, email);
-         }
-        
-        List caesAdotar = P4P.getCaesAdotar(session);
-        List gatosAdotar = P4P.getGatosAdotar(session);
-        
-       
-        JSONObject myJson = new JSONObject();
-        myJson.put("gatos",gatosAdotar.size());
-        myJson.put("caes",caesAdotar.size());
-        
-        PrintWriter out = response.getWriter();
-        out.println(myJson);
-        out.flush();
-        out.close();
-        
-       } catch (ParseException ex) {
-            Logger.getLogger(NumeroAnimaisServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -96,7 +41,35 @@ public class NumeroAnimaisServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      
+        response.setContentType("text/html;charset=UTF-8");
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PersistentSession session;
+        String email = (String) request.getParameter("email"); 
+        
+        if(email  ==  null ) {
+              session = Util.getSessionWithoutAut(request);
+         } else {
+              session = Util.getSession(request, email);
+         }
+        
+        List caesAdotar = P4P.getCaesAdotar(session);
+        List gatosAdotar = P4P.getGatosAdotar(session);
+        
+        JSONObject myJson = new JSONObject();
+        myJson.put("gatos",gatosAdotar.size());
+        myJson.put("caes",caesAdotar.size());
+        
+        PrintWriter out = response.getWriter();
+        out.println(myJson);
+        out.flush();
+        out.close();   
     }
     
     @Override
@@ -128,7 +101,6 @@ public class NumeroAnimaisServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

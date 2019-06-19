@@ -56,89 +56,6 @@ public class CaoAdocaoUserServlet extends HttpServlet {
     }
     
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-    
-         try {
-            response.setContentType("text/html;charset=UTF-8");
-            response.setContentType("application/json");
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-            response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-             
-            System.out.println("[POST] PASSEI AQUI");
-            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-            System.out.println("Body " + body);
-            
-            JSONParser parser = new JSONParser();
-            JSONObject json;
-            json = (JSONObject) parser.parse(body);
-            
-            PersistentSession session;
-            String email = (String) json.get("email");
-            String emailQuemQuero = (String) json.get("emailQuemQuero");
-            
-            if(email  ==  null ) {
-                session = Util.getSessionWithoutAut(request);
-            } else {
-                session = Util.getSession(request, email);
-            }
-            
-            List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,emailQuemQuero);
-            
-            // Enviar JSON ARRAY
-            JSONObject myJson = new JSONObject();
-            JSONObject jsonObjArr = new JSONObject();
-            myJson.put("email", email);
-            myJson.put("caes", null);
-            
-            JSONArray ja = new JSONArray();
-            
-            for(Animal g : onlyDogs) {
-                jsonObjArr = new JSONObject();
-                jsonObjArr.put("ID",g.getID());
-                jsonObjArr.put("Nome",g.getNome());
-                jsonObjArr.put("Fotografia", g.getFotografia());
-                jsonObjArr.put("Sexo",g.getSexo());
-                jsonObjArr.put("Idade",g.getIdade());
-                jsonObjArr.put("Raca",g.getRaça());
-                jsonObjArr.put("Porte",g.getPorte());
-                jsonObjArr.put("CorPelo",g.getCompPelo());
-                jsonObjArr.put("CompPelo",g.getCompPelo());
-                jsonObjArr.put("Estado",g.getEstado());
-                jsonObjArr.put("Descricao",g.getDescricao());
-                jsonObjArr.put("Concelho",g.getConcelho());
-                jsonObjArr.put("Discriminator",g.getDiscriminator());     
-                ja.add(jsonObjArr);
-            }
-            
-            myJson.put("caes", ja);
-            System.out.println("JsonArray = " +  myJson.get("caes"));
-            
-            // Enviar JSON ARRAY
-            PrintWriter out = response.getWriter();
-            out.println(myJson);
-            out.flush();
-            out.close();
-       
-            
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(CaoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -152,7 +69,57 @@ public class CaoAdocaoUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PersistentSession session;
+        String email = request.getParameter("email");
+        String emailQuemQuero = request.getParameter("emailQuemQuero");
+        
+        if(email  ==  null ) {
+            session = Util.getSessionWithoutAut(request);
+        } else {
+            session = Util.getSession(request, email);
+        }
+        
+        List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,emailQuemQuero);
+        
+        // Enviar JSON ARRAY
+        JSONObject myJson = new JSONObject();
+        JSONObject jsonObjArr = new JSONObject();
+        myJson.put("email", email);
+        myJson.put("caes", null);
+        JSONArray ja = new JSONArray();
+        for(Animal g : onlyDogs) {
+            jsonObjArr = new JSONObject();
+            jsonObjArr.put("ID",g.getID());
+            jsonObjArr.put("Nome",g.getNome());
+            jsonObjArr.put("Fotografia", g.getFotografia());
+            jsonObjArr.put("Sexo",g.getSexo());
+            jsonObjArr.put("Idade",g.getIdade());
+            jsonObjArr.put("Raca",g.getRaça());
+            jsonObjArr.put("Porte",g.getPorte());
+            jsonObjArr.put("CorPelo",g.getCompPelo());
+            jsonObjArr.put("CompPelo",g.getCompPelo());
+            jsonObjArr.put("Estado",g.getEstado());
+            jsonObjArr.put("Descricao",g.getDescricao());
+            jsonObjArr.put("Concelho",g.getConcelho());
+            jsonObjArr.put("Discriminator",g.getDiscriminator());
+            ja.add(jsonObjArr);
+        }
+        
+        myJson.put("caes", ja);
+        
+        // Enviar JSON ARRAY
+        PrintWriter out = response.getWriter();
+        out.println(myJson);
+        out.flush();
+        out.close();
     }
 
     /**
@@ -166,7 +133,6 @@ public class CaoAdocaoUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

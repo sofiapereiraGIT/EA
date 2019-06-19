@@ -48,8 +48,6 @@ public class PedidoBean implements PedidoBeanLocal {
         String dataUltimoContacto = sdf2.format(dt2);
         char discriminator = 'A';
         
-        
-        
         try {
     
             sessao.beginTransaction();

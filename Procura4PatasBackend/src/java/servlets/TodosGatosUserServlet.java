@@ -50,20 +50,19 @@ public class TodosGatosUserServlet extends HttpServlet {
         out.close();
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-       
-        try {
+        
             response.setContentType("text/html;charset=UTF-8");
             response.setContentType("application/json");
             response.addHeader("Access-Control-Allow-Origin", "*");
@@ -71,17 +70,9 @@ public class TodosGatosUserServlet extends HttpServlet {
             response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
              
-            System.out.println("[POST] PASSEI AQUI");
-            String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-            System.out.println("Body " + body);
-            
-            JSONParser parser = new JSONParser();
-            JSONObject json;
-            json = (JSONObject) parser.parse(body);
-            
             PersistentSession session;
-            String email = (String) json.get("email");
-            String emailQuemQuero = (String) json.get("emailQuemQuero");
+            String email = request.getParameter("email");
+            String emailQuemQuero = request.getParameter("emailQuemQuero");
     
             if(email  ==  null ) {
                  session = Util.getSessionWithoutAut(request);
@@ -125,29 +116,6 @@ public class TodosGatosUserServlet extends HttpServlet {
             out.println(myJson);
             out.flush();
             out.close();
-            
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(TodosGatosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
@@ -161,7 +129,6 @@ public class TodosGatosUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
