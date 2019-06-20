@@ -113,10 +113,11 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             animalTotal = Arrays.asList(user.animais.toArray());
 
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'E' || a.getEstado() == 'P') && a.getDiscriminator()=='c')).forEachOrdered((a) -> {
+                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'E' || a.getEstado() == 'P') && a.getDiscriminator()=='C')).forEachOrdered((a) -> {
                     todosCaes.add(a);
                 });
             }
+            
         } catch(PersistentException e) {
             System.out.println(e);
         }
@@ -135,7 +136,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             animalTotal = Arrays.asList(user.animais.toArray());
 
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'E' || a.getEstado() == 'P') && a.getDiscriminator()=='g')).forEachOrdered((a) -> {
+                animalTotal.stream().filter((a) -> ( (a.getEstado() == 'E' || a.getEstado() == 'P') && a.getDiscriminator()=='G')).forEachOrdered((a) -> {
                     todosGatos.add(a);
                 });
             }
