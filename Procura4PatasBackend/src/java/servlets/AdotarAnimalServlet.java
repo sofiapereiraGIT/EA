@@ -93,6 +93,8 @@ public class AdotarAnimalServlet extends HttpServlet {
         JSONParser parser = new JSONParser();
         JSONObject json;
         json = (JSONObject) parser.parse(body);
+        
+        // Neste caso representa o email da pessoa que possui o animal
         String email = (String) json.get("email");
         
         // Neste caso o emailUtilComum é quem está loggado, representa a pessoa quer adotar.

@@ -96,21 +96,22 @@ public class CaoAdocaoUserServlet extends HttpServlet {
         myJson.put("caes", null);
         JSONArray ja = new JSONArray();
         for(Animal g : onlyDogs) {
-            jsonObjArr = new JSONObject();
-            jsonObjArr.put("ID",g.getID());
-            jsonObjArr.put("Nome",g.getNome());
-            jsonObjArr.put("Fotografia", g.getFotografia());
-            jsonObjArr.put("Sexo",g.getSexo());
-            jsonObjArr.put("Idade",g.getIdade());
-            jsonObjArr.put("Raca",g.getRaça());
-            jsonObjArr.put("Porte",g.getPorte());
-            jsonObjArr.put("CorPelo",g.getCompPelo());
-            jsonObjArr.put("CompPelo",g.getCompPelo());
-            jsonObjArr.put("Estado",g.getEstado());
-            jsonObjArr.put("Descricao",g.getDescricao());
-            jsonObjArr.put("Concelho",g.getConcelho());
-            jsonObjArr.put("Discriminator",g.getDiscriminator());
-            ja.add(jsonObjArr);
+            
+           jsonObjArr = new JSONObject();
+           jsonObjArr.put("ID",g.getID());
+           jsonObjArr.put("Nome",g.getNome());
+           jsonObjArr.put("Fotografia", g.getFotografia());
+           jsonObjArr.put("Sexo", String.valueOf(g.getSexo())  );
+           jsonObjArr.put("Idade",String.valueOf(g.getIdade()));
+           jsonObjArr.put("Raca",g.getRaça());
+           jsonObjArr.put("Porte",String.valueOf(g.getPorte()));
+           jsonObjArr.put("CorPelo",String.valueOf(g.getCorPelo()));
+           jsonObjArr.put("CompPelo",String.valueOf(g.getCompPelo()));
+           jsonObjArr.put("Estado",String.valueOf(g.getEstado()));
+           jsonObjArr.put("Descricao",g.getDescricao());
+           jsonObjArr.put("Concelho",g.getConcelho());
+           jsonObjArr.put("Discriminator",String.valueOf(g.getDiscriminator()));     
+           ja.add(jsonObjArr);   
         }
         
         myJson.put("caes", ja);

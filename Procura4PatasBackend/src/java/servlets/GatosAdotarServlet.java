@@ -66,20 +66,21 @@ public class GatosAdotarServlet extends HttpServlet {
             JSONArray ja = new JSONArray();
             
             for(Animal g : gatosAdotar) {
+                   
                 JSONObject jsonObj = new JSONObject();        
                 jsonObj.put("ID",g.getID());
                 jsonObj.put("Nome",g.getNome());
                 jsonObj.put("Fotografia", g.getFotografia());
-                jsonObj.put("Sexo",g.getSexo());
-                jsonObj.put("Idade",g.getIdade());
+                jsonObj.put("Sexo",String.valueOf(g.getSexo()));
+                jsonObj.put("Idade",String.valueOf(g.getIdade()));
                 jsonObj.put("Raca",g.getRaça());
-                jsonObj.put("Porte",g.getPorte());
-                jsonObj.put("CorPelo",g.getCorPelo());
-                jsonObj.put("CompPelo",g.getCompPelo());
-                jsonObj.put("Estado",g.getEstado());
+                jsonObj.put("Porte",String.valueOf(g.getPorte()));
+                jsonObj.put("CorPelo",String.valueOf(g.getCorPelo()));
+                jsonObj.put("CompPelo",String.valueOf(g.getCompPelo()));
+                jsonObj.put("Estado",String.valueOf(g.getEstado()));
                 jsonObj.put("Descricao",g.getDescricao());
                 jsonObj.put("Concelho",g.getConcelho());
-                jsonObj.put("Discriminator",g.getDiscriminator());     
+                jsonObj.put("Discriminator",String.valueOf(g.getDiscriminator()));     
                 ja.add(jsonObj);
             }
             

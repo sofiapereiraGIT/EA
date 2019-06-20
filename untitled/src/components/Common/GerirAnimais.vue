@@ -5,10 +5,10 @@
       <hr>
       <form>
         <label>
-          <select style="width: 100%; height: 30px; background-color: white">
-            <option value="0">Tipo</option>
-            <option value="1">Cão</option>
-            <option value="2">Gato</option>
+          <select style="width: 100%; height: 30px; background-color: white" v-model="selDiscr">
+            <option value="T">Tipo</option>
+            <option value="C">Cão</option>
+            <option value="G">Gato</option>
           </select>
         </label>
         <br>
@@ -33,30 +33,12 @@
       </label>
       <br>
       <br>
-      <div class="animalCol">
+      <div class="animalCol" v-for="g in animaisFilter" :key="g.ID" >
           <!-- mandar para perdido ou adotar-->
           <router-link to="#">
-            <img src="../../assets/cat2.jpg" alt="Snow" style="width:100%">
+            <img src="../../assets/cat.jpg" style="width:100%" >
           </router-link>
-      </div>
-      <div class="animalCol">
-          <!-- mandar para perdido ou adotar-->
-          <router-link to="#">
-            <img src="../../assets/cat2.jpg" alt="Forest" style="width:100%">
-          </router-link>
-      </div>
-      <div class="animalCol">
-          <!-- mandar para perdido ou adotar-->
-          <router-link to="#">
-            <img src="../../assets/cat2.jpg" alt="Mountains" style="width:100%">
-          </router-link>
-      </div>
-      <div class="animalCol">
-          <!-- mandar para perdido ou adotar-->
-          <router-link to="#">
-            <img src="../../assets/cat2.jpg" alt="Mountains" style="width:100%">
-          </router-link>
-      </div>
+         </div>
     </div>
     <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
     <button class="button" @click="$router.push('#')">Comunicar Desaparecimento</button>
@@ -64,12 +46,47 @@
 </template>
 
 <script>
+import axios from 'axios'
 import route from '../../router/index'
+
 export default {
   name: 'GerirAnimais',
+  data: () => ({
+    gatosList: {},
+    selDiscr: 'T'
+  }),
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
+    }
+
+    axios.defaults.headers['Content-Type'] = 'application/json'
+    axios.get('http://localhost:8080/procura4patas/GatoAdocaoUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
+      .then(response => {
+        console.log(this.$session.get('user')[0])
+        this.gatosList = response.data.gatos
+        console.log(this.gatosList[0].Nome)
+      }).catch()
+  },
+
+  computed: {
+    animaisFilter: function () {
+      var list = []
+
+      if (this.selDiscr === 'T') {
+        list = this.gatosList
+        return list
+      }
+
+      for (var g in this.gatosList) {
+        var gato = this.gatosList[g]
+        console.log(gato)
+        if (gato.Discriminator === this.selDiscr) {
+          list.push(gato)
+        }
+      }
+      return list
     }
   }
 }
