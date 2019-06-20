@@ -1,136 +1,245 @@
 <template>
-  <div>
-  <div class="login-wrap">
-    <div class="login-html">
-      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Utilizador Comum</label>
-      <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Canil</label>
-
-      <div class="login-form ">
-        <div class="sign-in-htm row">
-            <div class="column">
-          <div class="group">
-            <label for="user" class="label">Nome</label>
-            <input id="user" type="text" class="input">
-          </div>
-          <div class="group">
-            <label for="pass" class="label">Email</label>
-            <input id="pass1" type="text" class="input">
-          </div>
-              <div class="group">
-                <label for="user" class="label">Concelho</label>
-                <input id="user2" type="text" class="input">
-              </div>
-            </div>
-            <div class="column">
-          <div class="group">
-            <label for="pass" class="label">Password</label>
-            <input id="pass2" type="password" class="input" data-type="password">
-          </div>
-          <div class="group">
-            <label for="pass" class="label">Confirme a password</label>
-            <input id="pass3" type="password" class="input" data-type="password">
-          </div>
-              <div class="group">
-                <label for="user" class="label">Telemóvel</label>
-                <input id="user" type="text" class="input">
-              </div>
-            </div>
-          <div class="group">
-            <label for="user" class="label">Insira uma foto sua</label>
-            <input type="file">
-          </div>
-          <div class="group">
-            <input id="check" type="checkbox" class="check" checked>
-            <label for="check"><span class="icon"></span> Quero que o meu telemóvel seja visivel pelos outros utilizadores</label>
-          </div>
-          <div class="group">
-            <input id="check" type="checkbox" class="check" checked>
-            <label for="check"><span class="icon"></span> Aceito os termos e condições</label>
-          </div>
-          <div class="group">
-            <input type="submit" class="button" value="Registar">
-          </div>
+    <div class="login-wrap">
+        <br>
+        <div v-if="error===1" class="Error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>Info!</strong> {{ message }}
         </div>
-        <div class="sign-up-htm row">
-          <div class="column">
-          <div class="group">
-            <label for="user" class="label">Nome</label>
-            <input id="user5" type="text" class="input">
-          </div>
-          <div class="group">
-            <label for="user" class="label">Email</label>
-            <input id="user6" type="text" class="input">
-          </div>
-          <div class="group">
-            <label for="pass" class="label">Password</label>
-            <input id="pass" type="password" class="input" data-type="password">
-          </div>
-            <div class="group">
-              <label for="pass" class="label">Confirme a password</label>
-              <input id="pass100" type="password" class="input" data-type="password">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Telemóvel</label>
-              <input id="user8" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Concelho</label>
-              <input id="user8" type="text" class="input">
-            </div>
-          </div>
-          <div class="column">
-          <div class="group">
-
-            <div class="group">
-              <label for="user" class="label">Morada</label>
-              <input id="user8" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Link site oficial</label>
-              <input id="user8" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Link Facebook </label>
-              <input id="user8" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Link Instagram</label>
-              <input id="user8" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Horário</label>
-              <input type="text" class="input">
-            </div>
-          </div>
-          <div class="group">
-            <label for="pass" class="label">Descrição</label>
-            <textarea id="pass" type="text" class="input"></textarea>
-          </div>
-          </div>
-          <div class="group">
-            <label for="user" class="label">Insira uma foto que represente o canil </label>
-            <input type="file">
-          </div>
-          <div class="group">
-            <input id="check" type="checkbox" class="check" checked>
-            <label for="check"><span class="icon"></span> Aceito os termos e condições</label>
-          </div>
-          <div class="group">
-            <input type="submit" class="button" value="Registar"> <!-- mandar para o perfil do user ou canil-->
-          </div>
+        <div v-if="success===1" class="Success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>Info!</strong> {{ message }}
         </div>
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Utilizador Comum</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Canil</label>
+            <div class="login-form ">
+                <!-- Utilizador Comum Tab -->
+                <form @submit.prevent="registarUC">
+                    <div class="sign-in-htm row">
+                        <div class="column">
+                            <div class="group">
+                                <label for="NameUC" class="label">Nome</label>
+                                <input v-model="uc.nome" id="NameUC" type="text" class="input" required>
+                            </div>
+                            <div class="group">
+                                <label for="EmailUC" class="label">Email</label>
+                                <input v-model="uc.email" id="EmailUC" type="email" class="input" required>
+                            </div>
+                            <div class="group">
+                                <label for="ConcelhoUC" class="label">Concelho</label>
+                                <input v-model="uc.concelho" id="ConcelhoUC" type="text" class="input" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="group">
+                                <label for="PassUC" class="label">Password</label>
+                                <input v-model="uc.password" id="PassUC" type="password" class="input" data-type="password" required>
+                            </div>
+                            <div class="group">
+                                <label for="ConfPassUC" class="label">Confirme a password</label>
+                                <input v-model="uc.confPassword" id="ConfPassUC" type="password" class="input" data-type="password" required>
+                            </div>
+                            <div class="group">
+                                <label for="PhoneUC" class="label">Telemóvel</label>
+                                <input v-model="uc.telemovel" id="PhoneUC" type="number" class="input">
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="PhoneUC" class="label">Insira uma foto sua</label>
+                            <input id="PhotoUC" type="file">
+                        </div>
+                        <div class="group">
+                            <input id="CheckBoxUC" type="checkbox" class="check" checked>
+                            <label for="CheckBoxUC"><span class="icon"></span> Quero que o meu telemóvel seja visivel pelos outros utilizadores</label>
+                        </div>
+                        <div class="group">
+                            <input id="TermsUC" type="checkbox" class="check" checked>
+                            <label for="TermsUC"><span class="icon"></span> Aceito os Termos e Condições</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Registar">
+                        </div>
+                    </div>
+                </form>
+                <!-- Canil Tab -->
+                <form @submit.prevent="registarCanil">
+                    <div class="sign-up-htm row">
+                        <div class="column">
+                            <div class="group">
+                                <label for="NameC" class="label">Nome</label>
+                                <input v-model="c.nome" id="NameC" type="text" class="input">
+                            </div>
+                            <div class="group">
+                                <label for="EmailC" class="label">Email</label>
+                                <input v-model="c.email" id="EmailC" type="email" class="input">
+                            </div>
+                            <div class="group">
+                                <label for="PassC" class="label">Password</label>
+                                <input v-model="c.password" id="PassC" type="password" class="input" data-type="password">
+                            </div>
+                            <div class="group">
+                                <label for="CheckBoxC" class="label">Confirme a password</label>
+                                <input v-model="c.confPassword" id="CheckBoxC" type="password" class="input" data-type="password">
+                            </div>
+                            <div class="group">
+                                <label for="PhoneC" class="label">Telemóvel</label>
+                                <input v-model="c.telemovel" id="PhoneC" type="number" class="input">
+                            </div>
+                            <div class="group">
+                                <label for="ConcelhoC" class="label">Concelho</label>
+                                <input v-model="c.concelho" id="ConcelhoC" type="text" class="input">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="group">
+                                <div class="group">
+                                    <label for="MoradaC" class="label">Morada</label>
+                                    <input v-model="c.morada" id="MoradaC" type="text" class="input">
+                                </div>
+                                <div class="group">
+                                    <label for="LinkSiteC" class="label">Link site oficial</label>
+                                    <input v-model="c.site" id="LinkSiteC" type="text" class="input">
+                                </div>
+                                <div class="group">
+                                    <label for="LinkFacebookC" class="label">Link Facebook </label>
+                                    <input v-model="c.facebook" id="LinkFacebookC" type="text" class="input">
+                                </div>
+                                <div class="group">
+                                    <label for="LinkInstagramC" class="label">Link Instagram</label>
+                                    <input v-model="c.instagram" id="LinkInstagramC" type="text" class="input">
+                                </div>
+                                <div class="group">
+                                    <label for="HorarioC" class="label">Horário</label>
+                                    <input v-model="c.horario" id="HorarioC" type="text" class="input">
+                                </div>
+                            </div>
+                            <div class="group">
+                                <label for="DescricaoC" class="label">Descrição</label>
+                                <textarea v-model="c.descricao" id="DescricaoC" class="input"></textarea>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="FotoC" class="label">Insira uma foto que represente o canil </label>
+                            <input id="FotoC" type="file">
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked>
+                            <label for="check"><span class="icon"></span> Aceito os termos e condições</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Registar">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-  </div>
-  </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'Registar'}
+  name: 'Registar',
+  data: () => ({
+    success: 0,
+    error: 0,
+    message: '',
+    uc: {
+      nome: '',
+      email: '',
+      concelho: '',
+      password: '',
+      confPassword: '',
+      telemovel: '',
+      fotografia: ''
+    },
+    c: {
+      nome: '',
+      email: '',
+      password: '',
+      confPassword: '',
+      concelho: '',
+      telemovel: '',
+      morada: '',
+      site: '',
+      facebook: '',
+      instagram: '',
+      horario: '',
+      descricao: '',
+      fotografia: ''
+    }
+  }),
+  methods: {
+    registarUC () {
+      axios.defaults.headers.post['Content-Type'] = 'application/json'
+      if (this.uc.password !== this.uc.confPassword) {
+        this.success = 0
+        this.error = 1
+        this.message = 'As Passwords Não Coincidem'
+      } else {
+        axios.post('http://localhost:8080/procura4patas/UtilizadorComum', this.uc)
+          .then(response => {
+            if (response.data.msg === true) {
+              this.message = 'Foi Registado Com Sucesso'
+              this.error = 0
+              this.success = 1
+            }
+          }).catch(e => {
+            this.message = 'Não Foi Possível Registar o Utilizador'
+            this.success = 0
+            this.error = 1
+          })
+      }
+    },
+    registarCanil () {
+      axios.defaults.headers.post['Content-Type'] = 'application/json'
+      if (this.c.password !== this.c.confPassword) {
+        this.success = 0
+        this.error = 1
+        this.message = 'As Passwords Não Coincidem'
+      } else {
+        axios.post('http://localhost:8080/procura4patas/Canil', this.c)
+          .then(response => {
+            if (response.data.msg === true) {
+              this.message = 'Foi Registado Com Sucesso'
+              this.error = 0
+              this.success = 1
+            }
+          }).catch(e => {
+            this.message = 'Não Foi Possível Registar o Utilizador'
+            this.success = 0
+            this.error = 1
+          })
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
+    .Success {
+        padding: 20px;
+        background-color: green;
+        color: white;
+    }
+    .Error {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .closebtn:hover {
+        color: black;
+    }
   body{
     margin:0;
     color:#6a6f8c;
@@ -138,8 +247,7 @@ export default {
     font:600 16px/18px 'Open Sans',sans-serif;
   }
   *,:after,:before{box-sizing:border-box}
-  .clearfix:after,.clearfix:before{content:'';display:table}
-  .clearfix:after{clear:both;display:block}
+
   a{color:inherit;text-decoration:none}
 
   .login-wrap{
@@ -186,7 +294,7 @@ export default {
     border-bottom:2px solid transparent;
   }
   .login-html .sign-in:checked + .tab,
-  .login-html .sign-up:checked + .tab{
+  .login-html .sign-up:checked + .tab {
     color: #0031ff; /* Cor das letras da tab */
     border-color:#1161ee; /* Cor da seleção da tab */
   }
