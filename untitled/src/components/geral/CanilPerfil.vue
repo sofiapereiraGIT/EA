@@ -92,10 +92,10 @@ export default {
     methods: {
         FetchData: function () {
             var value;
-            if(this.$session.has('user')) value = this.$session.get('user');
+            if(this.$session.has('user')) value = this.$session.get('user')[0];
             else value = null;
 
-            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value[0] + "&emailPedido=" + this.$session.get('email')).then(response => {
+            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value + "&emailPedido=" + this.$session.get('email')).then(response => {
                 this.utilizador = response.data;
             })
         },

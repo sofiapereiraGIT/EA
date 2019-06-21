@@ -43,19 +43,28 @@
 import axios from 'axios'
 
 export default {
-  name: 'UserPerfil',
-  data: () => ({
-    UserInfo: {}
-  }),
+    name: 'UserPerfil',
+    data: () => ({
+        UserInfo: {}
+    }),
 
-  mounted: function () {
-    axios.defaults.headers['Content-Type'] = 'application/json'
-    axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
-      .then(response => {
-        this.UserInfo = response.data
-        console.log(this.UserInfo)
-      }).catch()
-  }
+    mounted: function () {
+        axios.defaults.headers['Content-Type'] = 'application/json'
+        this.FetchData();
+    },
+
+    methods: {
+        FetchData: function () {
+            var value;
+            if(this.$session.has('user')) value = this.$session.get('user')[0];
+            else value = null;
+
+            axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + value).then(response => {
+                this.UserInfo = response.data;
+                console.log(this.UserInfo)
+            })
+        }
+    }
 }
 
 </script>
