@@ -16,6 +16,7 @@ import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.Canil;
 import procura4patas.CanilDAO;
+import procura4patas.Pedido;
 import procura4patas.Utilizador;
 import procura4patas.UtilizadorComum;
 import procura4patas.UtilizadorComumDAO;
@@ -148,13 +149,13 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
     }
     
     @Override
-    public List<Animal> getPedidosUser(PersistentSession sessao, String email) {
+    public List<Pedido> getPedidosUser(PersistentSession sessao, String email) {
         
-        List<Animal> pedidosTotal = new ArrayList<>();
+        List<Pedido> pedidosTotal = new ArrayList<>();
         
         try {
             Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
-            pedidosTotal = (List<Animal>) (user.listaPedidos);
+            pedidosTotal = Arrays.asList(user.listaPedidos.toArray() );
         } catch(PersistentException e) {
             System.out.println(e);
         }

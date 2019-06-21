@@ -21,6 +21,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
+import procura4patas.Pedido;
 import src.P4P;
 import src.Util;
 
@@ -80,7 +81,7 @@ public class PedidosUserServlet extends HttpServlet {
                  session = Util.getSession(request, email);
             }
             
-            List<Animal> onlyPedidos = P4P.getPedidosUser(session, emailQuemQuero);
+            List<Pedido> onlyPedidos = P4P.getPedidosUser(session, emailQuemQuero);
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();
@@ -90,22 +91,19 @@ public class PedidosUserServlet extends HttpServlet {
             
             JSONArray ja = new JSONArray();
             
-            for(Animal g : onlyPedidos) {
+            for(Pedido p : onlyPedidos) {
                 
                 jsonObjArr = new JSONObject();
-                jsonObjArr.put("ID",g.getID());
-                jsonObjArr.put("Nome",g.getNome());
-                jsonObjArr.put("Fotografia", g.getFotografia());
-                jsonObjArr.put("Sexo", String.valueOf(g.getSexo())  );
-                jsonObjArr.put("Idade",String.valueOf(g.getIdade()));
-                jsonObjArr.put("Raca",g.getRaça());
-                jsonObjArr.put("Porte",String.valueOf(g.getPorte()));
-                jsonObjArr.put("CorPelo",String.valueOf(g.getCorPelo()));
-                jsonObjArr.put("CompPelo",String.valueOf(g.getCompPelo()));
-                jsonObjArr.put("Estado",String.valueOf(g.getEstado()));
-                jsonObjArr.put("Descricao",g.getDescricao());
-                jsonObjArr.put("Concelho",g.getConcelho());
-                jsonObjArr.put("Discriminator",String.valueOf(g.getDiscriminator()));     
+                
+                String animNome = p.getAnimal().getNome();
+                jsonObjArr.put("ID",p.getID());
+                jsonObjArr.put("UtilizadorEmail",p.getUtilizadorComum());
+                jsonObjArr.put("UtilizadorComumUtilizadorEmail", email);
+                jsonObjArr.put("AnimalNome", animNome);
+                jsonObjArr.put("Data", p.getData());
+                jsonObjArr.put("DataUltimoContacto", p.getDataUltimoContacto());
+                jsonObjArr.put("Discriminator",String.valueOf(p.getDiscriminator()));
+                jsonObjArr.put("Estado",String.valueOf(p.getEstado()));            
                 ja.add(jsonObjArr);
             }
             

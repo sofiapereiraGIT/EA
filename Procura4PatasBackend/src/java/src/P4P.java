@@ -18,6 +18,7 @@ import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.Canil;
+import procura4patas.Pedido;
 import procura4patas.Utilizador;
 import procura4patas.UtilizadorComum;
 
@@ -102,7 +103,7 @@ public class P4P {
         return utilizadorBean.getTodosGatos(sessao, email);
     }
      
-    public static List<Animal> getPedidosUser(PersistentSession sessao, String email) {
+    public static List<Pedido> getPedidosUser(PersistentSession sessao, String email) {
         return utilizadorBean.getPedidosUser(sessao, email);
     }
      

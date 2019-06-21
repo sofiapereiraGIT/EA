@@ -35,13 +35,27 @@
 </template>
 
 <script>
+
+import axios from 'axios'
 import route from '../../router/index'
+
 export default {
   name: 'Pedidos',
+  data: () => ({
+    pedidosList: {}
+  }),
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
     }
+
+    axios.defaults.headers['Content-Type'] = 'application/json'
+    axios.get('http://localhost:8080/procura4patas/PedidosUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
+      .then(response => {
+        this.pedidosList = response.data.pedidos
+        console.log(this.pedidosList)
+      }).catch()
   }
 }
 </script>

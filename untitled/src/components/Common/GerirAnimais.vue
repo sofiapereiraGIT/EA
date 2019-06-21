@@ -14,22 +14,22 @@
         <br>
         <br>
         <label>
-          <select style="width: 100%; height: 30px; background-color: white">
-            <option value="0">Estado</option>
-            <option value="1">Adotado</option>
-            <option value="2">Não Adotado</option>
-            <option value="3">Encontrado</option>
-            <option value="4">Falecido</option>
-            <option value="5">Em FAT</option>
-            <option value="6">Em Pedido de FAT</option>
-            <option value="7">Sem Pedido de FAT</option>
+          <select style="width: 100%; height: 30px; background-color: white"  v-model="selEstado">
+            <option value="Es">Estado</option>
+            <option value="A">Adotado</option>
+            <option value="P">Não Adotado</option>
+            <option value="E">Encontrado</option>
+            <option value="M">Falecido</option>
+            <option value="F">Em FAT</option>
+            <option value="EF">Em Pedido de FAT</option>
+            <option value="SF">Sem Pedido de FAT</option>
           </select>
         </label>
       </form>
     </div>
     <div class="rightMenu">
       <label>
-        <input type="text" name="search" placeholder="Nome do Animal">
+        <input type="text" v-model="selNome" name="search" placeholder="Nome do Animal">
       </label>
       <br>
       <br>
@@ -41,7 +41,7 @@
          </div>
     </div>
     <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
-    <button class="button" @click="$router.push('#')">Comunicar Desaparecimento</button>
+    <button class="button" v-if="tipo===0" @click="$router.push('#')">Comunicar Desaparecimento</button>
   </div>
 </template>
 
@@ -53,7 +53,10 @@ export default {
   name: 'GerirAnimais',
   data: () => ({
     gatosList: {},
-    selDiscr: 'T'
+    selDiscr: 'T',
+    selEstado: 'Es',
+    tipo: -1,
+    selNome: ''
   }),
 
   mounted: function () {
@@ -62,27 +65,38 @@ export default {
     }
 
     axios.defaults.headers['Content-Type'] = 'application/json'
-    axios.get('http://localhost:8080/procura4patas/GatoAdocaoUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
+    axios.get('http://localhost:8080/procura4patas/TodosAnimaisUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
       .then(response => {
         console.log(this.$session.get('user')[0])
-        this.gatosList = response.data.gatos
-        console.log(this.gatosList[0].Nome)
+        this.gatosList = response.data.todos
+        this.tipo = this.$session.get('user')[1]
+        console.log(this.tipo)
       }).catch()
   },
 
   computed: {
     animaisFilter: function () {
       var list = []
+      var usado = false
 
-      if (this.selDiscr === 'T') {
+      console.log(usado)
+
+      if (this.selDiscr === 'T' && this.selEstado === 'Es' && this.selNome === '') {
         list = this.gatosList
         return list
       }
 
       for (var g in this.gatosList) {
         var gato = this.gatosList[g]
-        console.log(gato)
-        if (gato.Discriminator === this.selDiscr) {
+
+        if (gato.Nome === this.selNome) {
+          usado = true
+          list.push(gato)
+        } else if (gato.Nome === '') {
+          usado = false
+        }
+
+        if (usado === false && ((gato.Discriminator === this.selDiscr && this.selEstado === 'Es') || (gato.Estado === this.selEstado && this.selDiscr === 'T') || (gato.Estado === this.selEstado && gato.Discriminator === this.selDiscr))) {
           list.push(gato)
         }
       }

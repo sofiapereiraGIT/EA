@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Local;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
+import procura4patas.Pedido;
 import procura4patas.Utilizador;
 
 /**
@@ -28,7 +29,7 @@ public interface UtilizadorBeanLocal {
     
     List<Animal> getTodosGatos(PersistentSession sessao, String email);
     
-    List<Animal> getPedidosUser(PersistentSession sessao, String email);
+    List<Pedido> getPedidosUser(PersistentSession sessao, String email);
 
     int getUserType(PersistentSession session, String email);
     
