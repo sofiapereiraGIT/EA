@@ -33,4 +33,6 @@ public interface UtilizadorBeanLocal {
 
     int getUserType(PersistentSession session, String email);
     
+    Utilizador getUtilizador(PersistentSession session, String email);
+    
 }

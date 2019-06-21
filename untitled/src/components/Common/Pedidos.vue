@@ -9,26 +9,12 @@
                 <th>Nome do candidato</th>
                 <th>E-mail do candidato</th>
             </tr>
-            <tr>
-                <td>Data</td>
-                <td>Sim/Não</td>
-                <td>info</td>
-                <td>info</td>
-                <td>info</td>
-            </tr>
-            <tr>
-                <td>Data</td>
-                <td>Sim/Não</td>
-                <td>info</td>
-                <td>info</td>
-                <td>info</td>
-            </tr>
-            <tr>
-                <td>Data</td>
-                <td>Sim/Não</td>
-                <td>info</td>
-                <td>info</td>
-                <td>info</td>
+            <tr v-for="p in pedidosList" :key="p.ID">
+                <td>{{p.Data}}</td>
+                <td>{{p.Adotado}}</td>
+                <td>{{p.AnimalNome}}</td>
+                <td>{{p.PessoaNome}}</td>
+                <td>{{p.UtilizadorComumUtilizadorEmail}}</td>
             </tr>
         </table>
     </div>

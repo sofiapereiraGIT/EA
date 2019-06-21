@@ -59,6 +59,20 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
     }
     
     @Override
+    public Utilizador getUtilizador(PersistentSession session, String email) {
+        
+        Utilizador user = null;
+        
+        try {
+            user = UtilizadorDAO.getUtilizadorByORMID(email);
+        } catch (PersistentException ex) {
+            Logger.getLogger(UtilizadorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return user;           
+   }
+    
+    @Override
     public List<Animal> getCaoAdocaoUser(PersistentSession sessao, String email) {
         
         List<Animal> onlyDogs = new ArrayList<>();

@@ -83,6 +83,10 @@ public class P4P {
         return utilizadorBean.login(session, email, password);
     }
     
+    public static Utilizador getUtilizador(PersistentSession session, String email) {
+        return utilizadorBean.getUtilizador(session,email);
+    }
+    
     public static int getUserType(PersistentSession session, String email) {
         return utilizadorBean.getUserType(session, email);
     }

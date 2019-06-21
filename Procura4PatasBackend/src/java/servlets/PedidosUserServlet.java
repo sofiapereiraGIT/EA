@@ -7,6 +7,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.Pedido;
+import procura4patas.UtilizadorDAO;
 import src.P4P;
 import src.Util;
 
@@ -76,6 +79,7 @@ public class PedidosUserServlet extends HttpServlet {
             String emailQuemQuero = request.getParameter("emailQuemQuero");
     
             if(email  ==  null ) {
+                 System.out.println("Passei aqui!");
                  session = Util.getSessionWithoutAut(request);
             } else {
                  session = Util.getSession(request, email);
@@ -89,21 +93,34 @@ public class PedidosUserServlet extends HttpServlet {
             myJson.put("email", email);
             myJson.put("pedidos", null);
             
+            String pattern = "dd/MM/yyyy";
+            DateFormat df = new SimpleDateFormat(pattern);
+            
+            
             JSONArray ja = new JSONArray();
+            
             
             for(Pedido p : onlyPedidos) {
                 
                 jsonObjArr = new JSONObject();
-                
                 String animNome = p.getAnimal().getNome();
+                String s = "Não";
+                String nome = P4P.getUtilizador(session, email).getNome();
+                
+                if(p.getEstado() == 'A') {
+                    s = "Sim";
+                }
+                
                 jsonObjArr.put("ID",p.getID());
-                jsonObjArr.put("UtilizadorEmail",p.getUtilizadorComum());
+                jsonObjArr.put("UtilizadorEmail",""+p.getUtilizadorComum() );
                 jsonObjArr.put("UtilizadorComumUtilizadorEmail", email);
                 jsonObjArr.put("AnimalNome", animNome);
-                jsonObjArr.put("Data", p.getData());
-                jsonObjArr.put("DataUltimoContacto", p.getDataUltimoContacto());
+                jsonObjArr.put("PessoaNome", nome);
+                jsonObjArr.put("Data", df.format(p.getData()));
+                jsonObjArr.put("DataUltimoContacto", df.format(p.getDataUltimoContacto()));
                 jsonObjArr.put("Discriminator",String.valueOf(p.getDiscriminator()));
-                jsonObjArr.put("Estado",String.valueOf(p.getEstado()));            
+                jsonObjArr.put("Estado",String.valueOf(p.getEstado()));  
+                jsonObjArr.put("Adotado", s);
                 ja.add(jsonObjArr);
             }
             
