@@ -1,27 +1,28 @@
 <template>
     <div style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
-        <form action="/action_page.php" target="_blank">
+        <form class="review-form" @submit.prevent="submitUtilizador">
             <div class="w3-row w3-padding-32 w3-section">
                 <div class="w3-col m6 w3-container">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image">
+                    <img v-bind:src="utilizador.fotografia" style="margin-bottom: 10px" class="img w3-image">
                     <br><br>
-                    <button class="w3-button">Mudar imagem</button>
+                    <button v-if="!mudarFoto" class="w3-button" @click="mudarFoto = true">Mudar imagem</button>
+                    <input v-if="mudarFoto" v-model="novoUtilizador.fotografia" class="w3-input w3-border" type="text" placeholder="Fotografia">
                 </div>
                 <div class="w3-col m3 w3-panel">
-                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
-                        <div class="w3-col m1">
-                            <i class="fas fa-user fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
-                        </div>
-                        <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Nome" required name="nome">
-                        </div>
-                    </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
                         <div class="w3-col m1">
                             <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <input class="w3-input w3-border" type="email" placeholder="Email" required name="email">
+                           {{this.utilizador.email}}
+                        </div>
+                    </div>
+                    <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                        <div class="w3-col m1">
+                            <i class="fas fa-user fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                        </div>
+                        <div class="w3-half">
+                            <input v-model="novoUtilizador.nome" class="w3-input w3-border" type="text" placeholder="Nome" required>
                         </div>
                     </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -29,7 +30,7 @@
                             <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Contacto" required name="contacto">
+                            <input v-model="novoUtilizador.telemovel" class="w3-input w3-border" type="text" placeholder="Contacto">
                         </div>
                     </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -37,7 +38,7 @@
                             <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Concelho" required name="concelho">
+                            <input v-model="novoUtilizador.concelho" class="w3-input w3-border" type="text" placeholder="Concelho" required>
                         </div>
                     </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -45,7 +46,7 @@
                             <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <input class="w3-input w3-border" type="text" placeholder="Descrição" required name="descricao">
+                            <input v-model="novoUtilizador.descricao" class="w3-input w3-border" type="text" placeholder="Descrição">
                         </div>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
                             <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <input class="w3-input w3-border" type="password" placeholder="Password" required name="password">
+                            <input v-model="novoUtilizador.password" class="w3-input w3-border" type="password" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -63,11 +64,20 @@
                             <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <input class="w3-input w3-border" type="password" placeholder="Confirme Password" required name="password2">
+                            <input v-model="confirmPass" class="w3-input w3-border" type="password" placeholder="Confirme Password" required>
                         </div>
                     </div>
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
-                        <button class="w3-button">Guardar</button>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <input type="submit" value="Guardar">
                     </div>
                 </div>
             </div>
@@ -76,20 +86,89 @@
 </template>
 
 <script>
+import axios from 'axios'
 import route from '../../router/index'
+
 export default {
-  name: 'UserPerfilEdit',
-  mounted: function () {
-    if (this.$session.has('user') === false) {
-      route.push('/Login')
-    } else {
-      const value = this.$session.get('user')
-      if (value[1] === 1) {
-        /* Redirecionar para a Página de Acesso Negado */
-        route.push(('/AccessDenied'))
-      }
+    name: 'UserPerfilEdit',
+    data: function () {
+        return {
+            utilizador: null,
+            novoUtilizador: {
+                email: null,
+                password: null,
+                nome: null,
+                fotografia: null,
+                concelho: null,
+                telemovel: null,
+                descricao: null
+            },
+            mudarFoto: false,
+            confirmPass: null,
+        }
+    },
+    mounted: function () {
+        if (this.$session.has('user') === false) {
+            route.push('/Login')
+        } else {
+            const value = this.$session.get('user');
+            if (value[1] === 1) {
+                /* Redirecionar para a Página de Acesso Negado */
+                route.push(('/AccessDenied'))
+            }
+        }
+        this.FetchData()
+    },
+    methods: {
+        FetchData: function () {
+            const value = this.$session.get('user');
+            axios.get("http://localhost:8080/procura4patas/UtilizadorComum?email=" + value[0] + "&emailPedido=" + value[0]).then(response => {
+                this.utilizador = response.data;
+                this.novoUtilizador.email = this.utilizador.email;
+                this.novoUtilizador.password = this.utilizador.password;
+                this.novoUtilizador.nome = this.utilizador.nome;
+                this.novoUtilizador.fotografia = this.utilizador.fotografia;
+                this.novoUtilizador.concelho = this.utilizador.concelho;
+                this.novoUtilizador.telemovel = this.utilizador.telemovel;
+                this.novoUtilizador.descricao = this.utilizador.descricao;
+            })
+        },
+
+        submitUtilizador() {
+            if(this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null){
+                if(this.novoUtilizador.password == this.confirmPass){
+                    axios.post("http://localhost:8080/procura4patas/UpdateUtilizadorComum", this.novoUtilizador).then(response => {
+                        route.push('/UserPerfilEdit');
+                        this.novoUtilizador.email = null;
+                        this.novoUtilizador.password = null;
+                        this.novoUtilizador.nome = null;
+                        this.novoUtilizador.fotografia = null;
+                        this.novoUtilizador.concelho = null;
+                        this.novoUtilizador.telemovel = null;
+                        this.novoUtilizador.descricao = null;
+                        this.confirmPass = null;
+                        this.mudarFoto = false;
+                        this.updateInfo();
+                    })
+                }
+                else alert("Password não coincide, por favor tente novamente.")
+            }
+        },
+
+        updateInfo() {
+            const value = this.$session.get('user');
+            axios.get("http://localhost:8080/procura4patas/UtilizadorComum?email=" + value[0] + "&emailPedido=" + value[0]).then(response => {
+                this.utilizador = response.data;
+                this.novoUtilizador.email = this.utilizador.email;
+                this.novoUtilizador.password = this.utilizador.password;
+                this.novoUtilizador.nome = this.utilizador.nome;
+                this.novoUtilizador.fotografia = this.utilizador.fotografia;
+                this.novoUtilizador.concelho = this.utilizador.concelho;
+                this.novoUtilizador.telemovel = this.utilizador.telemovel;
+                this.novoUtilizador.descricao = this.utilizador.descricao;
+            })
+        }
     }
-  }
 }
 </script>
 

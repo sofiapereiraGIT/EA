@@ -1,29 +1,30 @@
 <template>
     <div style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
-        <form action="/action_page.php" target="_blank">
+        <form class="review-form" @submit.prevent="submitUtilizador">
             <div class="w3-row w3-padding-32 w3-section">
                 <div class="w3-col m6 w3-container">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image"><br>
+                    <img v-bind:src="utilizador.fotografia" style="margin-bottom: 10px" class="img w3-image"><br>
                     <br>
-                    <button class="w3-button">Mudar imagem</button>
+                    <button v-if="!mudarFoto" class="w3-button" @click="mudarFoto = true">Mudar imagem</button>
+                    <input v-if="mudarFoto" v-model="novoUtilizador.fotografia" class="w3-input w3-border" type="text" placeholder="Fotografia">
                 </div>
                 <div class="w3-col m6 w3-panel">
                     <div class="w3-row w3-padding-32 w3-section">
                         <div class="w3-col m6 w3-panel">
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
                                 <div class="w3-col m1">
-                                    <i class="fas fa-user fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
-                                </div>
-                                <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Nome" required name="nome">
-                                </div>
-                            </div>
-                            <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
-                                <div class="w3-col m1">
                                     <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="email" placeholder="Email" required name="email">
+                                    {{utilizador.email}}
+                                </div>
+                            </div>
+                            <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
+                                <div class="w3-col m1">
+                                    <i class="fas fa-user fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                                </div>
+                                <div class="w3-half">
+                                    <input v-model="novoUtilizador.nome" class="w3-input w3-border" type="text" placeholder="Nome" required>
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -31,7 +32,7 @@
                                     <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="password" placeholder="Password" required name="password">
+                                    <input v-model="novoUtilizador.password" class="w3-input w3-border" type="password" placeholder="Password" required>
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -39,7 +40,7 @@
                                     <i class="fa fa-lock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="password" placeholder="Confirme Password" required name="password2">
+                                    <input v-model="confirmPass" class="w3-input w3-border" type="password" placeholder="Confirme Password" required>
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -47,7 +48,7 @@
                                     <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Concelho" required name="concelho">
+                                    <input v-model="novoUtilizador.concelho" class="w3-input w3-border" type="text" placeholder="Concelho" required>
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -55,7 +56,7 @@
                                     <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Morada" required name="morada">
+                                    <input v-model="novoUtilizador.morada" class="w3-input w3-border" type="text" placeholder="Morada" required>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +66,7 @@
                                     <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Contacto" required name="contacto">
+                                    <input v-model="novoUtilizador.telemovel" class="w3-input w3-border" type="text" placeholder="Contacto">
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -73,7 +74,7 @@
                                     <i class="far fa-clock fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Horário" required name="horario">
+                                    <input v-model="novoUtilizador.horario" class="w3-input w3-border" type="text" placeholder="Horário">
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -81,7 +82,7 @@
                                     <i class="fa fa-internet-explorer fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Site" required name="site">
+                                    <input v-model="novoUtilizador.site" class="w3-input w3-border" type="text" placeholder="Site">
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -89,7 +90,7 @@
                                     <i class="fa fa-facebook-official fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Facebook" required name="facebook">
+                                    <input v-model="novoUtilizador.facebook" class="w3-input w3-border" type="text" placeholder="Facebook">
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -97,7 +98,7 @@
                                     <i class="fa fa-instagram fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input class="w3-input w3-border" type="text" placeholder="Instagram" required name="instagram">
+                                    <input v-model="novoUtilizador.instagram" class="w3-input w3-border" type="text" placeholder="Instagram">
                                 </div>
                             </div>
                         </div>
@@ -108,15 +109,14 @@
                                 <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                             </div>
                             <div class="w3-col m10">
-                                <input class="w3-input w3-border" type="text" placeholder="Descrição" required name="descricao">
+                                <input v-model="novoUtilizador.descricao" class="w3-input w3-border" type="text" placeholder="Descrição">
                             </div>
                             <div class="w3-col m1" style="margin:0 -200px 8px -16px">
                                 <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
-                                    <button class="w3-button">Guardar</button>
+                                    <input type="submit" value="Guardar">
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -125,20 +125,110 @@
 </template>
 
 <script>
+import axios from 'axios'
 import route from '../../router/index'
+
 export default {
-  name: 'CanilPerfilEdit',
-  mounted: function () {
-    if (this.$session.has('user') === false) {
-      route.push('/Login')
-    } else {
-      const value = this.$session.get('user')
-      if (value[1] === 0) {
-        /* Redirecionar para a Página de Acesso Negado */
-        route.push(('/AccessDenied'))
-      }
+    name: 'CanilPerfilEdit',
+    data: function () {
+        return {
+            utilizador: null,
+            novoUtilizador: {
+                email: null,
+                password: null,
+                nome: null,
+                fotografia: null,
+                concelho: null,
+                morada: null,
+                telemovel: null,
+                descricao: null,
+                horario: null,
+                site: null,
+                facebook: null,
+                instagram: null
+            },
+            mudarFoto: false,
+            confirmPass: null,
+        }
+    },
+    mounted: function () {
+        if (this.$session.has('user') === false) {
+          route.push('/Login')
+        } else {
+          const value = this.$session.get('user');
+          if (value[1] === 0) {
+            /* Redirecionar para a Página de Acesso Negado */
+            route.push(('/AccessDenied'))
+          }
+        }
+        this.FetchData();
+    },
+
+    methods: {
+        FetchData: function () {
+            const value = this.$session.get('user');
+            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value[0] + "&emailPedido=" + value[0]).then(response => {
+                this.utilizador = response.data;
+                this.novoUtilizador.email = this.utilizador.email;
+                this.novoUtilizador.password = this.utilizador.password;
+                this.novoUtilizador.nome = this.utilizador.nome;
+                this.novoUtilizador.fotografia = this.utilizador.fotografia;
+                this.novoUtilizador.concelho = this.utilizador.concelho;
+                this.novoUtilizador.morada = this.utilizador.morada;
+                this.novoUtilizador.telemovel = this.utilizador.telemovel;
+                this.novoUtilizador.descricao = this.utilizador.descricao;
+                this.novoUtilizador.horario = this.utilizador.horario;
+                this.novoUtilizador.site = this.utilizador.site;
+                this.novoUtilizador.facebook = this.utilizador.facebook;
+                this.novoUtilizador.instagram = this.utilizador.instagram;
+            })
+        },
+
+        submitUtilizador() {
+            if(this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null){
+                if(this.novoUtilizador.password == this.confirmPass){
+                    axios.post("http://localhost:8080/procura4patas/UpdateCanil", this.novoUtilizador).then(response => {
+                        route.push('/CanilPerfilEdit');
+                        this.novoUtilizador.email = null;
+                        this.novoUtilizador.password = null;
+                        this.novoUtilizador.nome = null;
+                        this.novoUtilizador.fotografia = null;
+                        this.novoUtilizador.concelho = null;
+                        this.novoUtilizador.morada = null;
+                        this.novoUtilizador.telemovel = null;
+                        this.novoUtilizador.descricao = null;
+                        this.novoUtilizador.horario = null;
+                        this.novoUtilizador.site = null;
+                        this.novoUtilizador.facebook = null;
+                        this.novoUtilizador.instagram = null;
+                        this.confirmPass = null;
+                        this.mudarFoto = false;
+                        this.updateInfo();
+                    })
+                }
+                else alert("Password não coincide, por favor tente novamente.")
+            }
+        },
+
+        updateInfo() {
+            const value = this.$session.get('user');
+            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value[0] + "&emailPedido=" + value[0]).then(response => {
+                this.utilizador = response.data;
+                this.novoUtilizador.email = this.utilizador.email;
+                this.novoUtilizador.password = this.utilizador.password;
+                this.novoUtilizador.nome = this.utilizador.nome;
+                this.novoUtilizador.fotografia = this.utilizador.fotografia;
+                this.novoUtilizador.concelho = this.utilizador.concelho;
+                this.novoUtilizador.morada = this.utilizador.morada;
+                this.novoUtilizador.telemovel = this.utilizador.telemovel;
+                this.novoUtilizador.descricao = this.utilizador.descricao;
+                this.novoUtilizador.horario = this.utilizador.horario;
+                this.novoUtilizador.site = this.utilizador.site;
+                this.novoUtilizador.facebook = this.utilizador.facebook;
+                this.novoUtilizador.instagram = this.utilizador.instagram;
+            })
+        }
     }
-  }
 }
 </script>
 
