@@ -79,62 +79,47 @@
 import axios from 'axios'
 
 export default {
-    name: 'CanilPerfil',
-    data: function () {
-        return {
-            utilizador: null,
-        }
-    },
-    mounted: function () {
-        this.FetchData();
-    },
-
-    methods: {
-        FetchData: function () {
-            var value;
-            if(this.$session.has('user')) value = this.$session.get('user')[0];
-            else value = null;
-
-            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value + "&emailPedido=" + this.$session.get('email')).then(response => {
-                this.utilizador = response.data;
-            })
-        },
-
-        temFotografia() {
-            if(this.utilizador.fotografia != null && this.utilizador.fotografia != "") return true;
-            return false;
-        },
-
-        temTelemovel() {
-            if(this.utilizador.telemovel != null && this.utilizador.telemovel != "") return true;
-            return false;
-        },
-
-        temDescricao() {
-            if(this.utilizador.descricao != null && this.utilizador.descricao != "") return true;
-            return false;
-        },
-
-        temHorario() {
-            if(this.utilizador.horario != null && this.utilizador.horario != "") return true;
-            return false;
-        },
-
-        temSite() {
-            if(this.utilizador.site != null && this.utilizador.site != "") return true;
-            return false;
-        },
-
-        temFacebook() {
-            if(this.utilizador.facebook != null && this.utilizador.facebook != "") return true;
-            return false;
-        },
-
-        temInstagram() {
-            if(this.utilizador.instagram != null && this.utilizador.instagram != "") return true;
-            return false;
-        }
+  name: 'CanilPerfil',
+  data: function () {
+    return {
+      utilizador: null
     }
+  },
+  mounted: function () {
+    this.FetchData()
+  },
+  methods: {
+    FetchData: function () {
+      var value
+      if (this.$session.has('user')) value = this.$session.get('user')[0]
+      else value = null
+
+      axios.get('http://localhost:8080/procura4patas/Canil?email=' + value + '&emailPedido=' + this.$session.get('email')).then(response => {
+        this.utilizador = response.data
+      })
+    },
+    temFotografia () {
+      return this.utilizador.fotografia != null && this.utilizador.fotografia !== ''
+    },
+    temTelemovel () {
+      return this.utilizador.telemovel != null && this.utilizador.telemovel !== ''
+    },
+    temDescricao () {
+      return this.utilizador.descricao != null && this.utilizador.descricao !== ''
+    },
+    temHorario () {
+      return this.utilizador.horario != null && this.utilizador.horario !== ''
+    },
+    temSite () {
+      return this.utilizador.site != null && this.utilizador.site !== ''
+    },
+    temFacebook () {
+      return this.utilizador.facebook != null && this.utilizador.facebook !== ''
+    },
+    temInstagram () {
+      return this.utilizador.instagram != null && this.utilizador.instagram !== ''
+    }
+  }
 }
 </script>
 

@@ -55,59 +55,59 @@ import axios from 'axios'
 import route from '../../router/index'
 
 export default {
-    name: "ComunicarDesaparecimento",
-    data: function() {
-        return {
-            tipoOptions: ['Cão', 'Gato'],
-            sexoOptions: ['Macho', 'Fêmea'],
-            corPeloOptions: ['Bege', 'Branco', 'Castanho', 'Cinzento', 'Laranja', 'Preto', 'Indefinido'],
-            idadeOptions: ['Bebé (menos de 6 meses)', 'Jovem', 'Adulto'],
-            porteOptions: ['Pequeno', 'Médio', 'Grande'],
-            comprimentoPeloOptions: ['Sem Pélo', 'Curto', 'Médio', 'Longo'],
-            racaCaoOptions: ['Sem Raça Definida', 'Beagle', 'Buldogue', 'Golden Retriever', 'Lavrador', 'Pastor Alemão', 'Poodle', 'Rottwiller'],
-            racaGatoOptions: ['Sem Raça Definida', 'Persa', 'Ragdoll', 'Siamês', 'Scottish Fold'],
+  name: 'ComunicarDesaparecimento',
+  data: function () {
+    return {
+      tipoOptions: ['Cão', 'Gato'],
+      sexoOptions: ['Macho', 'Fêmea'],
+      corPeloOptions: ['Bege', 'Branco', 'Castanho', 'Cinzento', 'Laranja', 'Preto', 'Indefinido'],
+      idadeOptions: ['Bebé (menos de 6 meses)', 'Jovem', 'Adulto'],
+      porteOptions: ['Pequeno', 'Médio', 'Grande'],
+      comprimentoPeloOptions: ['Sem Pélo', 'Curto', 'Médio', 'Longo'],
+      racaCaoOptions: ['Sem Raça Definida', 'Beagle', 'Buldogue', 'Golden Retriever', 'Lavrador', 'Pastor Alemão', 'Poodle', 'Rottwiller'],
+      racaGatoOptions: ['Sem Raça Definida', 'Persa', 'Ragdoll', 'Siamês', 'Scottish Fold'],
 
-            animal: {
-                email: null,
-                Nome: null,
-                Fotografia: null,
-                Sexo: null,
-                Idade: null,
-                Raca: null,
-                Porte: null,
-                CorPelo: null,
-                CompPelo: null,
-                Estado: null,
-                Descricao: null,
-                Concelho: null,
-                Discriminator: null
-            }
-        }
-    },
-    mounted: function () {
-        if (this.$session.has('user') === false) {
-            route.push('/Login')
-        }
-    },
-    methods: {
-        submitAnimal(){
-            if(this.animal.Sexo != null && this.animal.Idade != null && this.animal.Raca != null && this.animal.Porte != null && this.animal.CorPelo != null && this.animal.CompPelo != null && this.animal.Discriminator != null){
-                this.animal.email = this.$session.get('user')[0];
-
-                if(this.animal.Descricao == null) this.animal.Descricao = "";
-                if(this.animal.Fotografia == null) this.animal.Fotografia = "";
-                if(this.animal.Nome == null) this.animal.Nome = "";
-
-                axios.post("http://localhost:8080/procura4patas/AddAnimal", this.animal).then(response => {
-                    this.$router.push('#')
-                })
-            }
-        },
-
-        uploadFotografia(){
-            this.animal.Fotografia = this.getElementById('fotoAnimal')
-        }
+      animal: {
+        email: null,
+        Nome: null,
+        Fotografia: null,
+        Sexo: null,
+        Idade: null,
+        Raca: null,
+        Porte: null,
+        CorPelo: null,
+        CompPelo: null,
+        Estado: null,
+        Descricao: null,
+        Concelho: null,
+        Discriminator: null
+      }
     }
+  },
+  mounted: function () {
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    }
+  },
+  methods: {
+    submitAnimal () {
+      if (this.animal.Sexo != null && this.animal.Idade != null && this.animal.Raca != null && this.animal.Porte != null && this.animal.CorPelo != null && this.animal.CompPelo != null && this.animal.Discriminator != null) {
+        this.animal.email = this.$session.get('user')[0]
+
+        if (this.animal.Descricao == null) this.animal.Descricao = ''
+        if (this.animal.Fotografia == null) this.animal.Fotografia = ''
+        if (this.animal.Nome == null) this.animal.Nome = ''
+
+        axios.post('http://localhost:8080/procura4patas/AddAnimal', this.animal).then(response => {
+          this.$router.push('#')
+        })
+      }
+    },
+
+    uploadFotografia () {
+      this.animal.Fotografia = this.getElementById('fotoAnimal')
+    }
+  }
 }
 
 </script>

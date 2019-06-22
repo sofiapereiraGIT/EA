@@ -129,119 +129,117 @@ import axios from 'axios'
 import route from '../../router/index'
 
 export default {
-    name: 'CanilPerfilEdit',
-    data: function () {
-        return {
-            utilizador: null,
-            novoUtilizador: {
-                email: null,
-                password: null,
-                nome: null,
-                fotografia: null,
-                concelho: null,
-                morada: null,
-                telemovel: null,
-                descricao: null,
-                horario: null,
-                site: null,
-                facebook: null,
-                instagram: null
-            },
-            mudarFoto: false,
-            confirmPass: null,
-        }
-    },
-    mounted: function () {
-        if (this.$session.has('user') === false) {
-          route.push('/Login')
-        } else {
-          const value = this.$session.get('user');
-          if (value[1] === 0) {
-            /* Redirecionar para a Página de Acesso Negado */
-            route.push(('/AccessDenied'))
-          }
-        }
-        this.FetchData();
-    },
-
-    methods: {
-        FetchData: function () {
-            const value = this.$session.get('user');
-            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value[0] + "&emailPedido=" + value[0]).then(response => {
-                this.utilizador = response.data;
-                this.novoUtilizador.email = this.utilizador.email;
-                this.novoUtilizador.password = this.utilizador.password;
-                this.novoUtilizador.nome = this.utilizador.nome;
-                this.novoUtilizador.fotografia = this.utilizador.fotografia;
-                this.novoUtilizador.concelho = this.utilizador.concelho;
-                this.novoUtilizador.morada = this.utilizador.morada;
-                this.novoUtilizador.telemovel = this.utilizador.telemovel;
-                this.novoUtilizador.descricao = this.utilizador.descricao;
-                this.novoUtilizador.horario = this.utilizador.horario;
-                this.novoUtilizador.site = this.utilizador.site;
-                this.novoUtilizador.facebook = this.utilizador.facebook;
-                this.novoUtilizador.instagram = this.utilizador.instagram;
-            })
-        },
-
-        submitUtilizador() {
-            if(this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null && this.novoUtilizador.morada != null){
-                if(this.novoUtilizador.password == this.confirmPass){
-
-                    if(this.novoUtilizador.fotografia == null) this.novoUtilizador.fotografia = "";
-                    if(this.novoUtilizador.telemovel == null) this.novoUtilizador.telemovel = "";
-                    if(this.novoUtilizador.descricao == null) this.novoUtilizador.descricao = "";
-                    if(this.novoUtilizador.horario == null) this.novoUtilizador.horario = "";
-                    if(this.novoUtilizador.site == null) this.novoUtilizador.site = "";
-                    if(this.novoUtilizador.facebook == null) this.novoUtilizador.facebook = "";
-                    if(this.novoUtilizador.instagram == null) this.novoUtilizador.instagram = "";
-
-                    axios.post("http://localhost:8080/procura4patas/UpdateCanil", this.novoUtilizador).then(response => {
-                        route.push('/CanilPerfilEdit');
-                        this.novoUtilizador.email = null;
-                        this.novoUtilizador.password = null;
-                        this.novoUtilizador.nome = null;
-                        this.novoUtilizador.fotografia = null;
-                        this.novoUtilizador.concelho = null;
-                        this.novoUtilizador.morada = null;
-                        this.novoUtilizador.telemovel = null;
-                        this.novoUtilizador.descricao = null;
-                        this.novoUtilizador.horario = null;
-                        this.novoUtilizador.site = null;
-                        this.novoUtilizador.facebook = null;
-                        this.novoUtilizador.instagram = null;
-                        this.confirmPass = null;
-                        this.mudarFoto = false;
-                        this.updateInfo();
-                    })
-                }
-                else alert("Password não coincide, por favor tente novamente.")
-            }
-        },
-
-        updateInfo() {
-            const value = this.$session.get('user');
-            axios.get("http://localhost:8080/procura4patas/Canil?email=" + value[0] + "&emailPedido=" + value[0]).then(response => {
-                this.utilizador = response.data;
-                this.novoUtilizador.email = this.utilizador.email;
-                this.novoUtilizador.password = this.utilizador.password;
-                this.novoUtilizador.nome = this.utilizador.nome;
-                this.novoUtilizador.fotografia = this.utilizador.fotografia;
-                this.novoUtilizador.concelho = this.utilizador.concelho;
-                this.novoUtilizador.morada = this.utilizador.morada;
-                this.novoUtilizador.telemovel = this.utilizador.telemovel;
-                this.novoUtilizador.descricao = this.utilizador.descricao;
-                this.novoUtilizador.horario = this.utilizador.horario;
-                this.novoUtilizador.site = this.utilizador.site;
-                this.novoUtilizador.facebook = this.utilizador.facebook;
-                this.novoUtilizador.instagram = this.utilizador.instagram;
-            })
-        },
-
-        uploadFotografia() {
-            this.novoUtilizador.fotografia = this.getElementById('foto');
-        }
+  name: 'CanilPerfilEdit',
+  data: function () {
+    return {
+      utilizador: null,
+      novoUtilizador: {
+        email: null,
+        password: null,
+        nome: null,
+        fotografia: null,
+        concelho: null,
+        morada: null,
+        telemovel: null,
+        descricao: null,
+        horario: null,
+        site: null,
+        facebook: null,
+        instagram: null
+      },
+      mudarFoto: false,
+      confirmPass: null
     }
+  },
+  mounted: function () {
+    if (this.$session.has('user') === false) {
+      route.push('/Login')
+    } else {
+      const value = this.$session.get('user')
+      if (value[1] === 0) {
+        /* Redirecionar para a Página de Acesso Negado */
+        route.push(('/AccessDenied'))
+      }
+    }
+    this.FetchData()
+  },
+
+  methods: {
+    FetchData: function () {
+      const value = this.$session.get('user')
+      axios.get('http://localhost:8080/procura4patas/Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
+        this.utilizador = response.data
+        this.novoUtilizador.email = this.utilizador.email
+        this.novoUtilizador.password = this.utilizador.password
+        this.novoUtilizador.nome = this.utilizador.nome
+        this.novoUtilizador.fotografia = this.utilizador.fotografia
+        this.novoUtilizador.concelho = this.utilizador.concelho
+        this.novoUtilizador.morada = this.utilizador.morada
+        this.novoUtilizador.telemovel = this.utilizador.telemovel
+        this.novoUtilizador.descricao = this.utilizador.descricao
+        this.novoUtilizador.horario = this.utilizador.horario
+        this.novoUtilizador.site = this.utilizador.site
+        this.novoUtilizador.facebook = this.utilizador.facebook
+        this.novoUtilizador.instagram = this.utilizador.instagram
+      })
+    },
+
+    submitUtilizador () {
+      if (this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null && this.novoUtilizador.morada != null) {
+        if (this.novoUtilizador.password === this.confirmPass) {
+          if (this.novoUtilizador.fotografia == null) this.novoUtilizador.fotografia = ''
+          if (this.novoUtilizador.telemovel == null) this.novoUtilizador.telemovel = ''
+          if (this.novoUtilizador.descricao == null) this.novoUtilizador.descricao = ''
+          if (this.novoUtilizador.horario == null) this.novoUtilizador.horario = ''
+          if (this.novoUtilizador.site == null) this.novoUtilizador.site = ''
+          if (this.novoUtilizador.facebook == null) this.novoUtilizador.facebook = ''
+          if (this.novoUtilizador.instagram == null) this.novoUtilizador.instagram = ''
+
+          axios.post('http://localhost:8080/procura4patas/UpdateCanil', this.novoUtilizador).then(response => {
+            route.push('/CanilPerfilEdit')
+            this.novoUtilizador.email = null
+            this.novoUtilizador.password = null
+            this.novoUtilizador.nome = null
+            this.novoUtilizador.fotografia = null
+            this.novoUtilizador.concelho = null
+            this.novoUtilizador.morada = null
+            this.novoUtilizador.telemovel = null
+            this.novoUtilizador.descricao = null
+            this.novoUtilizador.horario = null
+            this.novoUtilizador.site = null
+            this.novoUtilizador.facebook = null
+            this.novoUtilizador.instagram = null
+            this.confirmPass = null
+            this.mudarFoto = false
+            this.updateInfo()
+          })
+        } else alert('Password não coincide, por favor tente novamente.')
+      }
+    },
+
+    updateInfo () {
+      const value = this.$session.get('user')
+      axios.get('http://localhost:8080/procura4patas/Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
+        this.utilizador = response.data
+        this.novoUtilizador.email = this.utilizador.email
+        this.novoUtilizador.password = this.utilizador.password
+        this.novoUtilizador.nome = this.utilizador.nome
+        this.novoUtilizador.fotografia = this.utilizador.fotografia
+        this.novoUtilizador.concelho = this.utilizador.concelho
+        this.novoUtilizador.morada = this.utilizador.morada
+        this.novoUtilizador.telemovel = this.utilizador.telemovel
+        this.novoUtilizador.descricao = this.utilizador.descricao
+        this.novoUtilizador.horario = this.utilizador.horario
+        this.novoUtilizador.site = this.utilizador.site
+        this.novoUtilizador.facebook = this.utilizador.facebook
+        this.novoUtilizador.instagram = this.utilizador.instagram
+      })
+    },
+
+    uploadFotografia () {
+      this.novoUtilizador.fotografia = this.getElementById('foto')
+    }
+  }
 }
 </script>
 
