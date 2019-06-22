@@ -55,14 +55,18 @@ export default {
 
   methods: {
     FetchData: function () {
-      var value
-      if (this.$session.has('user')) value = this.$session.get('user')[0]
-      else value = null
-
-      axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + value).then(response => {
-        this.UserInfo = response.data
-        console.log(this.UserInfo)
-      })
+      if (this.$session.has('user')){
+          axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
+              this.UserInfo = response.data
+              console.log(this.UserInfo)
+          })
+      }
+      else{
+          axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email')).then(response => {
+              this.UserInfo = response.data
+              console.log(this.UserInfo)
+          })
+      }
     }
   }
 }

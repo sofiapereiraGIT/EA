@@ -1,7 +1,7 @@
 <template>
     <div class="background">
         <div class="transbox">
-            <h1>Adicionar Animal</h1>
+            <h1>Comunicar Desaparecimento</h1>
             <form class="review-form" @submit.prevent="submitAnimal">
                 <input v-model="animal.Nome" class="w3-input w3-border" type="text" placeholder="Nome">
                 <br>
