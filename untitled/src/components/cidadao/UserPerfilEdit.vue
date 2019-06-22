@@ -6,7 +6,7 @@
                     <img v-bind:src="utilizador.fotografia" style="margin-bottom: 10px" class="img w3-image">
                     <br><br>
                     <button v-if="!mudarFoto" class="w3-button" @click="mudarFoto = true">Mudar imagem</button>
-                    <input v-if="mudarFoto" v-model="novoUtilizador.fotografia" class="w3-input w3-border" type="text" placeholder="Fotografia">
+                    <input id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
                 </div>
                 <div class="w3-col m3 w3-panel">
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -137,6 +137,11 @@ export default {
         submitUtilizador() {
             if(this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null){
                 if(this.novoUtilizador.password == this.confirmPass){
+
+                    if(this.novoUtilizador.fotografia == null) this.novoUtilizador.fotografia = "";
+                    if(this.novoUtilizador.telemovel == null) this.novoUtilizador.telemovel = "";
+                    if(this.novoUtilizador.descricao == null) this.novoUtilizador.descricao = "";
+
                     axios.post("http://localhost:8080/procura4patas/UpdateUtilizadorComum", this.novoUtilizador).then(response => {
                         route.push('/UserPerfilEdit');
                         this.novoUtilizador.email = null;
@@ -167,6 +172,10 @@ export default {
                 this.novoUtilizador.telemovel = this.utilizador.telemovel;
                 this.novoUtilizador.descricao = this.utilizador.descricao;
             })
+        },
+
+        uploadFotografia() {
+            this.novoUtilizador.fotografia = this.getElementById('foto');
         }
     }
 }

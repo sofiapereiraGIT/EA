@@ -41,7 +41,7 @@
          </div>
     </div>
     <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
-    <button class="button" v-if="tipo===0" @click="$router.push('#')">Comunicar Desaparecimento</button>
+    <button class="button" v-if="tipo===0" @click="$router.push('/ComunicarDesaparecimento')">Comunicar Desaparecimento</button>
   </div>
 </template>
 

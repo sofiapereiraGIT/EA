@@ -25,6 +25,7 @@ import VerAnimalAdotarUC from '../components/geral/VerAnimalAdotarUC'
 import VerAnimalPerdido from '../components/geral/VerAnimalPerdido'
 import Pedidos from '../components/Common/Pedidos'
 import AccessDenied from '../components/Common/AccessDenied'
+import ComunicarDesaparecimento from '../components/cidadao/ComunicarDesaparecimento'
 import VueSession from 'vue-session'
 
 Vue.use(Router)
@@ -157,6 +158,11 @@ export default new Router({
       path: '/AccessDenied',
       name: 'AccessDenied',
       component: AccessDenied
+    },
+    {
+      path: '/ComunicarDesaparecimento',
+      name: 'ComunicarDesaparecimento',
+      component: ComunicarDesaparecimento
     }
   ]
 })
