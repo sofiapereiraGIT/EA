@@ -2,11 +2,10 @@
     <div class="login-wrap">
         <br>
         <div v-if="error===1" class="Error">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <span class="closebtn" @click="closeErrorNotification()">&times;</span>
             <strong>Info!</strong> {{ message }}
         </div>
         <div v-if="success===1" class="Success">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <strong>Info!</strong> {{ message }}
         </div>
         <div class="login-html">
@@ -138,6 +137,7 @@
 
 <script>
 import axios from 'axios'
+import route from '../../router/index'
 export default {
   name: 'Registar',
   data: () => ({
@@ -170,6 +170,16 @@ export default {
     }
   }),
   methods: {
+    closeErrorNotification () {
+      this.error = 0
+    },
+    stateChange (newState) {
+      setTimeout(function () {
+        if (newState === -1) {
+          route.push('/Login')
+        }
+      }, 3000)
+    },
     registarUC () {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       if (this.uc.password !== this.uc.confPassword) {
@@ -179,12 +189,17 @@ export default {
       } else {
         axios.post('http://localhost:8080/procura4patas/UtilizadorComum', this.uc)
           .then(response => {
+            console.log('Utilizador Registado')
             if (response.data.msg === true) {
-              this.message = 'Foi Registado Com Sucesso'
+              console.log('Utilizador Registado Com Sucesso')
+              this.message = 'Foi Registado Com Sucesso. Irá ser Redirecionado Dentro de 3 Segundos.'
               this.error = 0
               this.success = 1
+              this.stateChange(-1)
             }
           }).catch(e => {
+            console.log(e)
+            console.log('Utilizador Não Registado Com Sucesso')
             this.message = 'Não Foi Possível Registar o Utilizador'
             this.success = 0
             this.error = 1
@@ -201,9 +216,10 @@ export default {
         axios.post('http://localhost:8080/procura4patas/Canil', this.c)
           .then(response => {
             if (response.data.msg === true) {
-              this.message = 'Foi Registado Com Sucesso'
+              this.message = 'Foi Registado Com Sucesso. Irá ser Redirecionado Dentro de 3 Segundos.'
               this.error = 0
               this.success = 1
+              this.stateChange(-1)
             }
           }).catch(e => {
             this.message = 'Não Foi Possível Registar o Utilizador'

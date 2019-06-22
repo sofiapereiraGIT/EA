@@ -147,7 +147,7 @@ export default {
             route.push('/CanilHomePage')
           }
         }
-      }, 5000)
+      }, 3000)
     },
     addAnimal () {
       this.animal['email'] = this.$session.get('user')[0]
