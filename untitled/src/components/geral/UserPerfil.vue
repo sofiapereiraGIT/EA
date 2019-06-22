@@ -2,7 +2,7 @@
     <div>
         <div class="w3-row w3-padding-32 w3-section" style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
             <div class="w3-col m6 w3-container">
-                <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image"><br>
+                <img v-if="temFotografia()" src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image"><br>
                 <br>
                 <router-link to="/AdotarCaes">Veja os cães deste utilizador</router-link><br>
                 <router-link to="/AdotarGatos">Veja os gatos deste utilizador</router-link>
@@ -13,7 +13,7 @@
                         <i class="fas fa-user fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>{{UserInfo.nome}}<br>
                     </div>
                 </div>
-                <div class="w3-row-padding w3-container" style="clear: both; float: left">
+                <div v-if="temDescricao()" class="w3-row-padding w3-container" style="clear: both; float: left">
                     <div class="w3-large w3-margin-bottom">
                         <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>{{UserInfo.descricao}}<br>
                     </div>
@@ -23,7 +23,7 @@
                         <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>{{UserInfo.email}}<br>
                     </div>
                 </div>
-                <div class="w3-row-padding w3-container" style="clear: both; float: left">
+                <div v-if="temTelemovel()" class="w3-row-padding w3-container" style="clear: both; float: left">
                     <div class="w3-large w3-margin-bottom">
                         <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>{{UserInfo.telemovel}}<br>
                     </div>
@@ -55,18 +55,29 @@ export default {
 
   methods: {
     FetchData: function () {
-      if (this.$session.has('user')){
-          axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
-              this.UserInfo = response.data
-              console.log(this.UserInfo)
-          })
+      if (this.$session.has('user')) {
+        axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
+          this.UserInfo = response.data
+          console.log(this.UserInfo)
+        })
+      } else {
+        axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email')).then(response => {
+          this.UserInfo = response.data
+          console.log(this.UserInfo)
+        })
       }
-      else{
-          axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email')).then(response => {
-              this.UserInfo = response.data
-              console.log(this.UserInfo)
-          })
-      }
+    },
+
+    temFotografia () {
+      return this.UserInfo.fotografia != null && this.UserInfo.fotografia !== ''
+    },
+
+    temTelemovel () {
+      return this.UserInfo.telemovel != null && this.UserInfo.telemovel !== ''
+    },
+
+    temDescricao () {
+      return this.UserInfo.descricao != null && this.UserInfo.descricao !== ''
     }
   }
 }

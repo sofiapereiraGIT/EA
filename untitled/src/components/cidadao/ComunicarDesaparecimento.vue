@@ -1,50 +1,98 @@
 <template>
     <div class="background">
         <div class="transbox">
+            <br>
+            <div v-if="error===1" class="Error">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Info!</strong> {{ message }}
+            </div>
+            <div v-if="success===1" class="Success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Info!</strong> {{ message }}
+            </div>
             <h1>Comunicar Desaparecimento</h1>
-            <form class="review-form" @submit.prevent="submitAnimal">
-                <input v-model="animal.Nome" class="w3-input w3-border" type="text" placeholder="Nome">
+            <form @submit.prevent="submitAnimal">
+                <label><input v-model="animal.Nome" type="text" name="animalName" placeholder="Nome" required></label>
+                <label><input v-model="animal.Concelho" type="text" name="concelho" placeholder="Concelho onde perdeu o animal" required></label>
                 <br>
                 <br>
                 <input id="fotoAnimal" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
                 <br>
                 <br>
-                <multiselect v-model="animal.Discriminator" style="width: 25%" placeholder="Selecione espécie" :options="tipoOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                </multiselect>
-                <multiselect v-model="animal.Sexo" style="width: 25%" placeholder="Selecione sexo" :options="sexoOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                </multiselect>
+                <label><select v-model="animal.Discriminator" style="width: 25%" required>
+                    <option value="" disabled>Raça</option>
+                    <option value="C">Cão</option>
+                    <option value="G">Gato</option>
+                </select></label>
+                <label><select v-model="animal.Sexo" style="width: 25%" required>
+                    <option value="" disabled>Sexo</option>
+                    <option value="M">Macho</option>
+                    <option value="F">Fêmea</option>
+                </select></label>
                 <br>
                 <br>
-                <multiselect v-model="animal.Idade" style="width: 25%" placeholder="Selecione idade" :options="idadeOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                </multiselect>
-                <multiselect v-model="animal.Porte" style="width: 25%" placeholder="Selecione porte" :options="porteOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                </multiselect>
+                <label><select v-model="animal.Idade" style="width: 25%" required>
+                    <option value="" disabled>Idade</option>
+                    <option value="B">Bebé (Menos de 6 Meses)</option>
+                    <option value="J">Jovem</option>
+                    <option value="A">Adulto</option>
+                </select></label>
+                <label><select v-model="animal.Porte" style="width: 25%" required>
+                    <option value="" disabled>Porte</option>
+                    <option value="P">Pequeno</option>
+                    <option value="M">Médio</option>
+                    <option value="G">Grande</option>
+                    <option value="I">Indefinido</option>
+                </select></label>
                 <br>
                 <br>
-                <multiselect v-model="animal.CorPelo" style="width: 25%" placeholder="Selecione cor do pèlo" :options="corPeloOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                </multiselect>
-                <multiselect v-model="animal.CompPelo" style="width: 25%" placeholder="Selecione comprimento do pèlo" :options="comprimentoPeloOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                </multiselect>
+                <label><select v-model="animal.CorPelo" style="width: 25%" required>
+                    <option value="" disabled>Cor do Pêlo</option>
+                    <option value="Amarelo">Laranja</option>
+                    <option value="Bege">Bege</option>
+                    <option value="Branco">Branco</option>
+                    <option value="Castanho">Castanho</option>
+                    <option value="Cinzento">Cinzento</option>
+                    <option value="Preto">Preto</option>
+                    <option value="Indefinido">Indefinido</option>
+                </select></label>
+                <label><select v-model="animal.CompPelo" style="width: 25%" required>
+                    <option value="" disabled>Comprimento de Pêlo</option>
+                    <option value="S">Sem Pêlo</option>
+                    <option value="C">Curto</option>
+                    <option value="M">Médio</option>
+                    <option value="L">Longo</option>
+                </select></label>
+                <br v-if="animal.Discriminator==='C'">
+                <br v-if="animal.Discriminator==='C'">
+                <label><select v-if="animal.Discriminator==='C'" v-model="animal.Raca" style="width: 50%" required>
+                    <option value="" disabled>Raça Cão</option>
+                    <option value="Pastor Alemao">Pastor Alemão</option>
+                    <option value="Lavrador">Lavrador</option>
+                    <option value="Buldogue">Buldogue</option>
+                    <option value="Beagle">Beagle</option>
+                    <option value="Poodle">Poodle</option>
+                    <option value="Rottwiller">Rottwiller</option>
+                    <option value="Golden Retriever">Golden Retriever</option>
+                    <option value="Outro">Outro</option>
+                </select></label>
+                <br v-if="animal.Discriminator==='G'">
+                <br v-if="animal.Discriminator==='G'">
+                <label><select v-if="animal.Discriminator==='G'" v-model="animal.Raca" style="width: 50%" required>
+                    <option value="" disabled>Raça Gato</option>
+                    <option value="Persa">Persa</option>
+                    <option value="Siamês">Siamês</option>
+                    <option value="Ragdoll">Ragdoll</option>
+                    <option value="Scottish Fold">Scottish Fold</option>
+                    <option value="Outro">Outro</option>
+                </select></label>
                 <br>
                 <br>
-                <div v-if="animal.Discriminator != null && animal.Discriminator === 'Cão'">
-                    <multiselect v-model="animal.Raca" style="width: 25%" placeholder="Selecione raça" :options="racaCaoOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                    </multiselect>
-                </div>
-                <div v-if="animal.Discriminator != null && animal.Discriminator === 'Gato'">
-                    <multiselect v-model="animal.Raca" style="width: 25%" placeholder="Selecione raça" :options="racaGatoOptions" :searchable="false" :close-on-select="true" :show-labels="false">
-                    </multiselect>
-                </div>
+                <label><input v-model="animal.Descricao" type="text" name="descricao" placeholder="Descrição"></label>
                 <br>
                 <br>
-                <input v-model="animal.Concelho" class="w3-input w3-border" type="text" placeholder="Concelho onde o animal desapareceu" required>
-                <br>
-                <br>
-                <input v-model="animal.Descricao" class="w3-input w3-border" type="text" placeholder="Descrição">
-                <br>
-                <br>
-                <button class="button">Registar</button>
-                <button @click="$router.push('#')" class="button">Cancelar</button> <!-- mandar para o perfil do cidadao ou canil-->
+                <input type="submit" class="button" placeholder="Registar"/>
+                <button  @click="$router.push('/GerirAnimais')" class="button">Cancelar</button>
             </form>
         </div>
     </div>
@@ -58,29 +106,23 @@ export default {
   name: 'ComunicarDesaparecimento',
   data: function () {
     return {
-      tipoOptions: ['Cão', 'Gato'],
-      sexoOptions: ['Macho', 'Fêmea'],
-      corPeloOptions: ['Bege', 'Branco', 'Castanho', 'Cinzento', 'Laranja', 'Preto', 'Indefinido'],
-      idadeOptions: ['Bebé (menos de 6 meses)', 'Jovem', 'Adulto'],
-      porteOptions: ['Pequeno', 'Médio', 'Grande'],
-      comprimentoPeloOptions: ['Sem Pélo', 'Curto', 'Médio', 'Longo'],
-      racaCaoOptions: ['Sem Raça Definida', 'Beagle', 'Buldogue', 'Golden Retriever', 'Lavrador', 'Pastor Alemão', 'Poodle', 'Rottwiller'],
-      racaGatoOptions: ['Sem Raça Definida', 'Persa', 'Ragdoll', 'Siamês', 'Scottish Fold'],
-
+      success: 0,
+      error: 0,
+      message: '',
       animal: {
-        email: null,
-        Nome: null,
-        Fotografia: null,
-        Sexo: null,
-        Idade: null,
-        Raca: null,
-        Porte: null,
-        CorPelo: null,
-        CompPelo: null,
-        Estado: null,
-        Descricao: null,
-        Concelho: null,
-        Discriminator: null
+        email: '',
+        Nome: '',
+        Fototografia: '',
+        Sexo: '',
+        Idade: '',
+        Raca: '',
+        Porte: '',
+        CorPelo: '',
+        CompPelo: '',
+        Estado: '',
+        Descricao: '',
+        Concelho: '',
+        Discriminator: ''
       }
     }
   },
@@ -90,18 +132,32 @@ export default {
     }
   },
   methods: {
+    stateChange (newState) {
+      setTimeout(function () {
+        if (newState === -1) {
+          route.push('/GerirAnimais')
+        }
+      }, 3000)
+    },
+
     submitAnimal () {
-      if (this.animal.Sexo != null && this.animal.Idade != null && this.animal.Raca != null && this.animal.Porte != null && this.animal.CorPelo != null && this.animal.CompPelo != null && this.animal.Discriminator != null) {
-        this.animal.email = this.$session.get('user')[0]
+      this.animal.email = this.$session.get('user')[0]
+      this.animal.Estado = 'P'
 
-        if (this.animal.Descricao == null) this.animal.Descricao = ''
-        if (this.animal.Fotografia == null) this.animal.Fotografia = ''
-        if (this.animal.Nome == null) this.animal.Nome = ''
-
-        axios.post('http://localhost:8080/procura4patas/AddAnimal', this.animal).then(response => {
-          this.$router.push('#')
+      axios.defaults.headers.post['Content-Type'] = 'application/json'
+      axios.post('http://localhost:8080/procura4patas/AddAnimal', this.animal)
+        .then(response => {
+          if (response.data.msg === true) {
+            this.error = 0
+            this.success = 1
+            this.message = 'O desaparecimento foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos'
+            this.stateChange(-1)
+          }
+        }).catch(e => {
+          this.success = 0
+          this.error = 1
+          this.message = 'Não foi possível comunicar o desaparecimento.'
         })
-      }
     },
 
     uploadFotografia () {
@@ -113,6 +169,16 @@ export default {
 </script>
 
 <style scoped>
+    .Success {
+        padding: 20px;
+        background-color: green;
+        color: white;
+    }
+    .Error {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
     .background {
         width: 100%;
         height: 100vh;

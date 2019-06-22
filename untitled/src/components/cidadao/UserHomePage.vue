@@ -19,6 +19,7 @@
 
 <script>
 import route from '../../router/index'
+
 export default {
   name: 'UserHomePage',
   mounted: function () {

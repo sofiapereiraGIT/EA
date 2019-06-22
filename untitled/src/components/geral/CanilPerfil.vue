@@ -90,15 +90,14 @@ export default {
   },
   methods: {
     FetchData: function () {
-      if (this.$session.has('user')){
-          axios.get('http://localhost:8080/procura4patas/Canil?email=' + this.$session.get('user')[0] + '&emailPedido=' + this.$session.get('email')).then(response => {
-              this.utilizador = response.data
-          })
-      }
-      else{
-          axios.get('http://localhost:8080/procura4patas/Canil?emailPedido=' + this.$session.get('email')).then(response => {
-              this.utilizador = response.data
-          })
+      if (this.$session.has('user')) {
+        axios.get('http://localhost:8080/procura4patas/Canil?email=' + this.$session.get('user')[0] + '&emailPedido=' + this.$session.get('email')).then(response => {
+          this.utilizador = response.data
+        })
+      } else {
+        axios.get('http://localhost:8080/procura4patas/Canil?emailPedido=' + this.$session.get('email')).then(response => {
+          this.utilizador = response.data
+        })
       }
     },
 

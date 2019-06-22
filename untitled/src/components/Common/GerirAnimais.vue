@@ -40,8 +40,13 @@
           </router-link>
          </div>
     </div>
-    <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
-    <button class="button" v-if="tipo===0" @click="$router.push('/ComunicarDesaparecimento')">Comunicar Desaparecimento</button>
+    <div>
+      <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
+      <button class="button" v-if="tipo===0" @click="$router.push('/ComunicarDesaparecimento')">Comunicar Desaparecimento</button>
+      <br>
+      <br>
+      <br>
+    </div>
   </div>
 </template>
 
