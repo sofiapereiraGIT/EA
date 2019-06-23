@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.hibernate.Query;
+import org.hibernate.ScrollableResults;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.AnimalDAO;
@@ -24,6 +25,7 @@ public class AnimalBean implements AnimalBeanLocal {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
+    @Override
     public List getCaesAdotar(PersistentSession session) {
         List caesAdotar = null;
         
@@ -40,6 +42,7 @@ public class AnimalBean implements AnimalBeanLocal {
     }
 
     
+    @Override
     public List getGatosAdotar(PersistentSession session) {
         List gatosAdotar = null;
         
@@ -55,6 +58,7 @@ public class AnimalBean implements AnimalBeanLocal {
         return gatosAdotar;
     }
     
+    @Override
     public List getCaesPerdidos(PersistentSession session) {
         List caesPerdidos = null;
         
@@ -70,6 +74,7 @@ public class AnimalBean implements AnimalBeanLocal {
         return caesPerdidos;
     }
 
+    @Override
     public List getGatosPerdidos(PersistentSession session) {
         List gatosPerdidos = null;
         
@@ -85,6 +90,7 @@ public class AnimalBean implements AnimalBeanLocal {
         return gatosPerdidos;
     }
     
+    @Override
     public boolean addAnimal(PersistentSession session, String UtilizadorEmail, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
        
@@ -108,6 +114,7 @@ public class AnimalBean implements AnimalBeanLocal {
         }
     }
     
+    @Override
     public boolean updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade,
         String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator){ 
                 
@@ -131,6 +138,7 @@ public class AnimalBean implements AnimalBeanLocal {
         }        
     }
     
+    @Override
     public boolean deleteAnimalPerdido(PersistentSession session, int ID){ 
         try {
             session.beginTransaction();
@@ -153,17 +161,22 @@ public class AnimalBean implements AnimalBeanLocal {
     public Animal getAnimal(PersistentSession session, int id) {
         Animal animal = null;
         try {
-            session.beginTransaction();
-            
             animal = AnimalDAO.getAnimalByORMID(session, id);
-            
-            session.getTransaction().commit();
-            return animal;
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-        }
+        } catch (Exception e) {}
         return animal;
     }
-    
-    
+
+    @Override
+    public String getUtilizadorEmail(PersistentSession session, int id) {
+        String email = null;
+        try {
+            session.beginTransaction();
+            
+            Query query = session.createSQLQuery("Select UtilizadorEmail from Animal where id = :idAnimal")
+                                 .setParameter("idAnimal", id);
+            List result = query.list();
+            email = result.get(0).toString();
+        } catch (Exception e) {}
+        return email;
+    }  
 }

@@ -32,5 +32,7 @@ public interface AnimalBeanLocal {
     public boolean deleteAnimalPerdido(PersistentSession session, int ID);
 
     public Animal getAnimal(PersistentSession session, int id);
+
+    public String getUtilizadorEmail(PersistentSession session, int id);
     
 }

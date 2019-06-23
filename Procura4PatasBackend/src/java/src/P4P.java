@@ -35,23 +35,27 @@ public class P4P {
     
     /** animalBean methods **/
     
-    public static Animal getAnimal(PersistentSession session, int id){
+    public static Animal getAnimal(PersistentSession session, int id) {
         return animalBean.getAnimal(session, id);
     }
     
-    public static List getCaesAdotar(PersistentSession session){
+    public static String getUtilizadorEmail(PersistentSession session, int id) {
+        return animalBean.getUtilizadorEmail(session, id);
+    }
+    
+    public static List getCaesAdotar(PersistentSession session) {
         return animalBean.getCaesAdotar(session);
     }
     
-    public static List getGatosAdotar(PersistentSession session){
+    public static List getGatosAdotar(PersistentSession session) {
         return animalBean.getGatosAdotar(session);
     }
     
-    public static List getCaesPerdidos(PersistentSession session){
+    public static List getCaesPerdidos(PersistentSession session) {
         return animalBean.getCaesPerdidos(session);
     }
     
-    public static List getGatosPerdidos(PersistentSession session){
+    public static List getGatosPerdidos(PersistentSession session) {
         return animalBean.getGatosPerdidos(session);
     }
     
