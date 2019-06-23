@@ -29,16 +29,16 @@
                 <router-link to="/CanilPerfil">
                     <img
                         v-if="canil.fotografia==='' || canil.fotografia===null"
-                        v-on:click="selCanilEmail=canil.email; this.$session.set('email', selCanilEmail)"
+                        v-on:click="selCanilEmail=canil.email"
                         src="../../assets/user.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                     <img
                         v-else
-                        v-on:click="selCanilEmail=canil.email; this.$session.set('email', selCanilEmail)"
+                        v-on:click="selCanilEmail=canil.email"
                         v-bind:src="canil.fotografia" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
                 <div class="w3-container w3-white">
                     <router-link to="/CanilPerfil"
-                         v-on:click="selCanilEmail=canil.email; this.$session.set('email', selCanilEmail)"
+                         v-on:click="selCanilEmail=canil.email"
                          style="text-decoration: none; color: black">
                         <strong>{{canil.nome}}</strong>
                     </router-link>
