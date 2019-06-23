@@ -19,7 +19,7 @@
         <br>
         <br>
         <label><select v-model="animal.Discriminator" style="width: 25%" required>
-          <option value="" disabled>Raça</option>
+          <option value="" disabled>Espécie</option>
           <option value="C">Cão</option>
           <option value="G">Gato</option>
         </select></label>
@@ -47,7 +47,7 @@
         <br>
         <label><select v-model="animal.CorPelo" style="width: 25%" required>
           <option value="" disabled>Cor do Pêlo</option>
-          <option value="Laranja">Amarelo</option>
+          <option value="Laranja">Laranja</option>
           <option value="Bege">Bege</option>
           <option value="Branco">Branco</option>
           <option value="Castanho">Castanho</option>
@@ -66,6 +66,7 @@
         <br v-if="animal.Discriminator==='C'">
         <label><select v-if="animal.Discriminator==='C'" v-model="animal.Raca" style="width: 50%" required>
           <option value="" disabled>Raça Cão</option>
+          <option value="Sem Raça Definida">Sem Raça Definida</option>
           <option value="Pastor Alemao">Pastor Alemão</option>
           <option value="Lavrador">Lavrador</option>
           <option value="Buldogue">Buldogue</option>
@@ -73,17 +74,18 @@
           <option value="Poodle">Poodle</option>
           <option value="Rottwiller">Rottwiller</option>
           <option value="Golden Retriever">Golden Retriever</option>
-            <option value="Sem Raça Definida">Outro</option>
+          <option value="Outro">Outro</option>
         </select></label>
         <br v-if="animal.Discriminator==='G'">
         <br v-if="animal.Discriminator==='G'">
         <label><select v-if="animal.Discriminator==='G'" v-model="animal.Raca" style="width: 50%" required>
           <option value="" disabled>Raça Gato</option>
+          <option value="Sem Raça Definida">Sem Raça Definida</option>
           <option value="Persa">Persa</option>
           <option value="Siamês">Siamês</option>
           <option value="Ragdoll">Ragdoll</option>
           <option value="Scottish Fold">Scottish Fold</option>
-            <option value="Sem Raça Definida">Outro</option>
+          <option value="Outro">Outro</option>
         </select></label>
         <br>
         <br>

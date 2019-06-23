@@ -88,6 +88,14 @@
                                 <label for="ConcelhoC" class="label">Concelho</label>
                                 <input v-model="c.concelho" id="ConcelhoC" type="text" class="input">
                             </div>
+                            <div class="group">
+                                <label for="FotoC" class="label">Insira uma foto que represente o canil </label>
+                                <input id="FotoC" type="file">
+                            </div>
+                            <div class="group">
+                                <input id="check" type="checkbox" class="check" checked>
+                                <label for="check"><span class="icon"></span> Aceito os termos e condições</label>
+                            </div>
                         </div>
                         <div class="column">
                             <div class="group">
@@ -116,17 +124,9 @@
                                 <label for="DescricaoC" class="label">Descrição</label>
                                 <textarea v-model="c.descricao" id="DescricaoC" class="input"></textarea>
                             </div>
-                        </div>
-                        <div class="group">
-                            <label for="FotoC" class="label">Insira uma foto que represente o canil </label>
-                            <input id="FotoC" type="file">
-                        </div>
-                        <div class="group">
-                            <input id="check" type="checkbox" class="check" checked>
-                            <label for="check"><span class="icon"></span> Aceito os termos e condições</label>
-                        </div>
-                        <div class="group">
-                            <input type="submit" class="button" value="Registar">
+                            <div class="group">
+                                <input type="submit" class="button" value="Registar">
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -278,7 +278,7 @@ export default {
     width:100%;
     height:100%;
     position:absolute;
-    padding:90px 70px 50px 70px;
+    padding:0 70px 50px 70px;
     background: transparent; /* Mudar a cor do fundo */
   }
   .login-html .sign-in-htm,
