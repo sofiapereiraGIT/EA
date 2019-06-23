@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.hibernate.Query;
 import org.orm.PersistentSession;
+import procura4patas.Animal;
 import procura4patas.AnimalDAO;
 
 /**
@@ -147,4 +148,22 @@ public class AnimalBean implements AnimalBeanLocal {
             return false;
         }
     }
+
+    @Override
+    public Animal getAnimal(PersistentSession session, int id) {
+        Animal animal = null;
+        try {
+            session.beginTransaction();
+            
+            animal = AnimalDAO.getAnimalByORMID(session, id);
+            
+            session.getTransaction().commit();
+            return animal;
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
+        return animal;
+    }
+    
+    
 }

@@ -8,6 +8,7 @@ package beans;
 import java.util.List;
 import javax.ejb.Local;
 import org.orm.PersistentSession;
+import procura4patas.Animal;
 
 /**
  *
@@ -29,5 +30,7 @@ public interface AnimalBeanLocal {
     public boolean updateAnimal(PersistentSession session, int ID, String nome, String fotografia, char sexo, char idade, String raca, char porte, String corPelo, char compPelo, char estado, String descricao, String concelho, char discriminator);
 
     public boolean deleteAnimalPerdido(PersistentSession session, int ID);
+
+    public Animal getAnimal(PersistentSession session, int id);
     
 }

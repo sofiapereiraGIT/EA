@@ -35,6 +35,10 @@ public class P4P {
     
     /** animalBean methods **/
     
+    public static Animal getAnimal(PersistentSession session, int id){
+        return animalBean.getAnimal(session, id);
+    }
+    
     public static List getCaesAdotar(PersistentSession session){
         return animalBean.getCaesAdotar(session);
     }
