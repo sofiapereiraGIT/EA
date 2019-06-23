@@ -111,59 +111,132 @@
             </div>
         </div>
 
+        <div v-if="selAnimal!==''"> {{this.$session.set('ID', selAnimal)}} </div>
+
         <!-- First Photo Grid-->
         <div class="w3-row-padding" style="margin-top: 25px;">
-            <div class="w3-quarter w3-container w3-margin-bottom">
+            <div class="w3-quarter w3-container w3-margin-bottom"
+                 v-for="cao in caesFilter[page]" :key="cao.ID">
                 <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/logo.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/homepage.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                    <img
+                        v-if="cao.Fotografia==='' || cao.Fotografia===null"
+                        v-on:click="selAnimal=cao.ID"
+                        src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                    <img
+                        v-else
+                        v-on:click="selAnimal=cao.ID"
+                        v-bind:src="cao.Fotografia" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
         </div>
 
-        <!-- Second Photo Grid-->
-        <div class="w3-row-padding">
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
+        <!-- Pagination -->
+        <nav class="w3-center" v-if="caesFilter.length>8" style="margin-bottom: 25px;">
+            <div class="w3-bar">
+                <button class="w3-button" v-bind:disabled="page===0" v-on:click="page -= 1">
+                    Anterior
+                </button>
+                <button class="w3-button"
+                        v-if="page<Math.floor(caesFilter.length/nrPerPage) && p+page>=1"
+                        v-bind:class="{ 'w3-green':  page  === p+page-1 }"
+                        v-for="p in [0,1,2]" :key="p+page"
+                        v-on:click="page = p+page-1">
+                    {{p+page}}
+                </button>
+                <button class="w3-button"
+                        v-if="page===Math.floor(caesFilter.length/nrPerPage)"
+                        v-bind:class="{ 'w3-green':  page  === Math.floor(caesFilter.length/nrPerPage)+p-1 }"
+                        v-for="p in [-1,0,1]" :key="Math.floor(caesFilter.length/nrPerPage)+p"
+                        v-on:click="page = Math.floor(caesFilter.length/nrPerPage)-p-1">
+                    {{Math.floor(caesFilter.length/nrPerPage)+p}}
+                </button>
+                <button class="w3-button"
+                        v-bind:disabled="page===Math.floor(caesFilter.length/nrPerPage)"
+                        v-on:click="page += 1">
+                    Próximo
+                </button>
             </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalAdotarUC">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-        </div>
+        </nav>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'AdotarCaes'
+  name: 'AdotarCaes',
+
+  data: () => ({
+    caes: [],
+    page: 0,
+    nrPerPage: 12,
+    selAnimal: ''
+  }),
+
+  mounted: function () {
+    if (!this.$session.has('caesAdotar') || this.$session.get('caesAdotar')[1] > 10) {
+      console.log('getCaesAdotar')
+
+      if (this.$session.has('user')) {
+        axios.defaults.headers['Content-Type'] = 'application/json'
+        axios
+          .get('http://localhost:8080/procura4patas/CaesAdotar?email=' + this.$session.get('user')[0])
+          .then(response => {
+            this.caes = response.data.caes
+            this.$session.set('caesAdotar', [this.caes, 1])
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        axios.defaults.headers['Content-Type'] = 'application/json'
+        axios
+          .get('http://localhost:8080/procura4patas/CaesAdotar')
+          .then(response => {
+            this.caes = response.data.caes
+            this.$session.set('caesAdotar', [this.caes, 1])
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    } else {
+      this.caes = this.$session.get('caesAdotar')[0]
+      var times = this.$session.get('caesAdotar')[1] + 1
+      this.$session.set('caesAdotar', [this.caes, times])
+      console.log('reutilizar caes da sessão pela ' + times + ' vez')
+    }
+  },
+
+  computed: {
+    caesFilter: function () {
+      // todo: aplica filtros
+      var caesFilter = this.caes
+
+      var i = 0
+      var p = 0
+      var page = []
+      page[p] = []
+      var nrPerPage = this.nrPerPage
+
+      caesFilter.forEach(function (c) {
+        if (i < nrPerPage) {
+          page[p].push(c)
+          page.push(c)
+          i++
+        } else {
+          p++
+          page[p] = []
+          i = 0
+          i++
+          page[p].push(c)
+          page.push(c)
+        }
+      })
+
+      return page
+    }
+  }
 }
 </script>
 
