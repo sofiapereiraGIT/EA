@@ -6,7 +6,7 @@
                     <img v-bind:src="utilizador.fotografia" style="margin-bottom: 10px" class="img w3-image">
                     <br><br>
                     <button v-if="!mudarFoto" class="w3-button" @click="mudarFoto = true">Mudar imagem</button>
-                    <input id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
+                    <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
                 </div>
                 <div class="w3-col m3 w3-panel">
                     <div class="w3-row-padding" style="margin:0 -200px 8px -16px">

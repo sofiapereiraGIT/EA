@@ -90,14 +90,17 @@ export default {
   },
   methods: {
     FetchData: function () {
-      var value
-      if (this.$session.has('user')) value = this.$session.get('user')[0]
-      else value = null
-
-      axios.get('http://localhost:8080/procura4patas/Canil?email=' + value + '&emailPedido=' + this.$session.get('email')).then(response => {
-        this.utilizador = response.data
-      })
+      if (this.$session.has('user')) {
+        axios.get('http://localhost:8080/procura4patas/Canil?email=' + this.$session.get('user')[0] + '&emailPedido=' + this.$session.get('email')).then(response => {
+          this.utilizador = response.data
+        })
+      } else {
+        axios.get('http://localhost:8080/procura4patas/Canil?emailPedido=' + this.$session.get('email')).then(response => {
+          this.utilizador = response.data
+        })
+      }
     },
+
     temFotografia () {
       return this.utilizador.fotografia != null && this.utilizador.fotografia !== ''
     },

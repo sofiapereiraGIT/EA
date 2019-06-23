@@ -15,7 +15,7 @@
         <label><input v-model="animal.Nome" type="text" name="animalName" placeholder="Nome" required></label>
         <br>
         <br>
-        <input type="file" name="picture" accept="image/*">
+        <input id="fotoAnimal" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
         <br>
         <br>
         <label><select v-model="animal.Discriminator" style="width: 25%" required>
@@ -30,30 +30,30 @@
         </select></label>
         <br>
         <br>
-        <label><select v-model="animal.CorPelo" style="width: 25%" required>
-          <option value="" disabled>Cor do Pêlo</option>
-          <option value="Amarelo">Amarelo</option>
-          <option value="Bege">Bege</option>
-          <option value="Branco">Branco</option>
-          <option value="Castanho">Castanho</option>
-          <option value="Cinzento">Cinzento</option>
-          <option value="Preto">Preto</option>
-          <option value="Indefinido">Indefinido</option>
-        </select></label>
         <label><select v-model="animal.Idade" style="width: 25%" required>
           <option value="" disabled>Idade</option>
           <option value="B">Bebé (Menos de 6 Meses)</option>
           <option value="J">Jovem</option>
           <option value="A">Adulto</option>
         </select></label>
-        <br>
-        <br>
         <label><select v-model="animal.Porte" style="width: 25%" required>
           <option value="" disabled>Porte</option>
           <option value="P">Pequeno</option>
           <option value="M">Médio</option>
           <option value="G">Grande</option>
           <option value="I">Indefinido</option>
+        </select></label>
+        <br>
+        <br>
+        <label><select v-model="animal.CorPelo" style="width: 25%" required>
+          <option value="" disabled>Cor do Pêlo</option>
+          <option value="Laranja">Amarelo</option>
+          <option value="Bege">Bege</option>
+          <option value="Branco">Branco</option>
+          <option value="Castanho">Castanho</option>
+          <option value="Cinzento">Cinzento</option>
+          <option value="Preto">Preto</option>
+          <option value="Indefinido">Indefinido</option>
         </select></label>
         <label><select v-model="animal.CompPelo" style="width: 25%" required>
           <option value="" disabled>Comprimento de Pêlo</option>
@@ -73,7 +73,7 @@
           <option value="Poodle">Poodle</option>
           <option value="Rottwiller">Rottwiller</option>
           <option value="Golden Retriever">Golden Retriever</option>
-          <option value="Outro">Outro</option>
+            <option value="Sem Raça Definida">Outro</option>
         </select></label>
         <br v-if="animal.Discriminator==='G'">
         <br v-if="animal.Discriminator==='G'">
@@ -83,7 +83,7 @@
           <option value="Siamês">Siamês</option>
           <option value="Ragdoll">Ragdoll</option>
           <option value="Scottish Fold">Scottish Fold</option>
-          <option value="Outro">Outro</option>
+            <option value="Sem Raça Definida">Outro</option>
         </select></label>
         <br>
         <br>
@@ -100,8 +100,7 @@
         <br>
         <br>
         <input type="submit" class="button" placeholder="Registar"/>
-        <button v-if="this.$session.get('user')[1]===0" @click="$router.push('/UserHomePage')" class="button">Cancelar</button>
-        <button v-if="this.$session.get('user')[1]===1" @click="$router.push('/CanilHomePage')" class="button">Cancelar</button>
+        <button @click="$router.push('/GerirAnimais')" class="button">Cancelar</button>
       </form>
     </div>
   </div>
@@ -138,14 +137,10 @@ export default {
     }
   },
   methods: {
-    stateChange (newState, userType) {
+    stateChange (newState) {
       setTimeout(function () {
         if (newState === -1) {
-          if (userType === 0) {
-            route.push('/UserHomePage')
-          } else if (userType === 1) {
-            route.push('/CanilHomePage')
-          }
+          route.push('/GerirAnimais')
         }
       }, 3000)
     },
@@ -157,14 +152,18 @@ export default {
           if (response.data.msg === true) {
             this.error = 0
             this.success = 1
-            this.message = 'O Animal Foi Registado Com Sucesso. Irá Ser Redirecionado Dentro de 3 Segundos'
-            this.stateChange(-1, this.$session.get('user')[1])
+            this.message = 'O animal foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos'
+            this.stateChange(-1)
           }
         }).catch(e => {
           this.success = 0
           this.error = 1
-          this.message = 'Não Foi Possível Inserir o Animal.'
+          this.message = 'Não foi possível inserir o animal.'
         })
+    },
+
+    uploadFotografia () {
+      this.animal.Fotografia = this.getElementById('fotoAnimal')
     }
   }
 }

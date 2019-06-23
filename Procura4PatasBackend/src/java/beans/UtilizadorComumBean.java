@@ -40,10 +40,6 @@ public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
     public boolean addUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
         boolean criado = false;
         
-        if(foto == null) foto = "";
-        if(tlm == null) tlm = "";
-        if(descricao == null) descricao = "";
-        
         try {
             sessao.beginTransaction();
             
@@ -68,10 +64,6 @@ public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
     @Override
     public boolean updateUtilizadorComum(PersistentSession sessao, String email, String pass, String nome, String foto, String concelho, String tlm, String descricao) {
         boolean atualizado = false;
-            
-        if(foto==null) foto = "";
-        if(tlm==null) tlm = "";
-        if(descricao==null) descricao = "";
         
         try {
             sessao.beginTransaction();

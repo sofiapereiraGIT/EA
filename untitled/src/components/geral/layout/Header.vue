@@ -6,7 +6,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="w3-bar" id="myNavbar">
             <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-            <router-link to="/" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</router-link>
+            <router-link v-if="!userLogin()" to="/" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</router-link>
+            <router-link v-if="userLogin() && utilizadorC()" to="/UserHomePage" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</router-link>
+            <router-link v-if="userLogin() && !utilizadorC()" to="/CanilHomePage" class="w3-bar-item w3-button" style="float:left"><i class="fa fa-home"></i> PROCURA4PATAS</router-link>
             <router-link to="/Login" class="w3-bar-item w3-button w3-hide-small" style="float:right" v-if="user == null"><i class="fa fa-user"></i> LOGIN</router-link>
             <button class="w3-bar-item w3-button w3-hide-small" style="float:right" v-if="user != null" v-on:click="logout()"><i class="fa fa-user"></i> LOGOUT</button>
             <router-link to="/AboutUs" class="w3-bar-item w3-button w3-hide-small" style="float:right"><i class="fa fa-drivers-license-o"></i> SOBRE NÓS</router-link>
@@ -39,6 +41,14 @@ export default {
         router.push('/')
         // this.$forceUpdate()
       }
+    },
+
+    userLogin () {
+      return this.$session.has('user')
+    },
+
+    utilizadorC () {
+      return this.$session.get('user')[1] === 0
     }
   }
 }

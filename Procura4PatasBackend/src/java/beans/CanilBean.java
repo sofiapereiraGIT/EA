@@ -54,14 +54,6 @@ public class CanilBean implements CanilBeanLocal {
         
         boolean criado = false;
         
-        if(foto==null) foto = "";
-        if(tlm==null) tlm = "";
-        if(descricao==null) descricao = "";
-        if(horario==null) horario = "";
-        if(site==null) site = "";
-        if(face==null) face = "";
-        if(insta==null) insta = "";
-        
         try {
             sessao.beginTransaction();
             
@@ -89,14 +81,6 @@ public class CanilBean implements CanilBeanLocal {
             String morada, String horario, String site, String face, String insta) {
         
         boolean atualizado = false;
-            
-        if(foto==null) foto = "";
-        if(tlm==null) tlm = "";
-        if(descricao==null) descricao = "";
-        if(horario==null)  horario = "";
-        if(site==null) site = "";
-        if(face==null) face = "";
-        if(insta==null) insta = "";
 
         try {
             sessao.beginTransaction();
