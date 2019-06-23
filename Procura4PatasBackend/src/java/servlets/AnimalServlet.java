@@ -73,6 +73,7 @@ public class AnimalServlet extends HttpServlet {
         
         Animal animal = P4P.getAnimal(session, id);
         String utilizadorEmail = P4P.getUtilizadorEmail(session, id);
+        int usertype = P4P.getUserType(session, utilizadorEmail);
         
         JSONObject animalJson = new JSONObject();
         animalJson.put("ID",animal.getID());
@@ -89,6 +90,7 @@ public class AnimalServlet extends HttpServlet {
         animalJson.put("Concelho",animal.getConcelho());
         animalJson.put("Discriminator",String.valueOf(animal.getDiscriminator()));
         animalJson.put("UtilizadorEmail", utilizadorEmail);
+        animalJson.put("UserType", usertype);
         
         PrintWriter out = response.getWriter();
         out.println(animalJson);

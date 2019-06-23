@@ -32,9 +32,7 @@ public class serFatAnimalServlet extends HttpServlet {
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    {        
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -59,8 +57,7 @@ public class serFatAnimalServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+            throws ServletException, IOException {}
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -83,10 +80,8 @@ public class serFatAnimalServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-        System.out.println("[POST] PASSEI AQUI");
         
         String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-        System.out.println("Body " + body);
         
         JSONParser parser = new JSONParser();
         JSONObject json;
