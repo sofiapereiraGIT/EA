@@ -47,41 +47,35 @@ export default {
   data: () => ({
     UserInfo: {}
   }),
-
   mounted: function () {
     axios.defaults.headers['Content-Type'] = 'application/json'
     this.FetchData()
   },
-
   methods: {
     FetchData: function () {
       if (this.$session.has('user')) {
-        axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
+        axios.get(this.$axiosurl + '/UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
           this.UserInfo = response.data
           console.log(this.UserInfo)
         })
       } else {
-        axios.get('http://localhost:8080/procura4patas//UtilizadorComum?emailPedido=' + this.$session.get('email')).then(response => {
+        axios.get(this.$axiosurl + 'UtilizadorComum?emailPedido=' + this.$session.get('email')).then(response => {
           this.UserInfo = response.data
           console.log(this.UserInfo)
         })
       }
     },
-
     temFotografia () {
       return this.UserInfo.fotografia != null && this.UserInfo.fotografia !== ''
     },
-
     temTelemovel () {
       return this.UserInfo.telemovel != null && this.UserInfo.telemovel !== ''
     },
-
     temDescricao () {
       return this.UserInfo.descricao != null && this.UserInfo.descricao !== ''
     }
   }
 }
-
 </script>
 
 <style scoped>

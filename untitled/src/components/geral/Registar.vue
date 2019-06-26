@@ -187,7 +187,7 @@ export default {
         this.error = 1
         this.message = 'As Passwords Não Coincidem'
       } else {
-        axios.post('http://localhost:8080/procura4patas/UtilizadorComum', this.uc)
+        axios.post(this.$axiosurl + 'UtilizadorComum', this.uc)
           .then(response => {
             console.log('Utilizador Registado')
             if (response.data.msg === true) {
@@ -213,7 +213,7 @@ export default {
         this.error = 1
         this.message = 'As Passwords Não Coincidem'
       } else {
-        axios.post('http://localhost:8080/procura4patas/Canil', this.c)
+        axios.post(this.$axiosurl + 'Canil', this.c)
           .then(response => {
             if (response.data.msg === true) {
               this.message = 'Foi Registado Com Sucesso. Irá ser Redirecionado Dentro de 3 Segundos.'

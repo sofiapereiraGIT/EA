@@ -147,7 +147,7 @@ export default {
       this.animal.Estado = 'P'
 
       axios.defaults.headers.post['Content-Type'] = 'application/json'
-      axios.post('http://localhost:8080/procura4patas/AddAnimal', this.animal)
+      axios.post(this.$axiosurl + 'AddAnimal', this.animal)
         .then(response => {
           if (response.data.msg === true) {
             this.error = 0

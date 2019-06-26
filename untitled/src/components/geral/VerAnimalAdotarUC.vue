@@ -117,7 +117,7 @@ export default {
   }),
   mounted: function () {
     let idAnimal = this.$session.get('ID')
-    axios.get('http://localhost:8080/procura4patas/Animal?id=' + idAnimal)
+    axios.get(this.$axiosurl + 'Animal?id=' + idAnimal)
       .then(response => {
         this.animalData = response.data
         if (this.animalData.Descricao === null) {
@@ -188,7 +188,7 @@ export default {
       this.pedidoData.ID = this.$session.get('ID')
       this.pedidoData.emailUtilComum = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
-      axios.post('http://localhost:8080/procura4patas/AdotarAnimal', this.pedidoData)
+      axios.post(this.$axiosurl + 'AdotarAnimal', this.pedidoData)
         .then(response => {
           if (response.data.msg === true) {
             this.message = 'O Seu Pedido Foi Registado Com Sucesso.'
@@ -206,7 +206,7 @@ export default {
       this.pedidoData.ID = this.$session.get('ID')
       this.pedidoData.emailUtilComum = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
-      axios.post('http://localhost:8080/procura4patas/serFatAnimal', this.pedidoData)
+      axios.post(this.$axiosurl + 'serFatAnimal', this.pedidoData)
         .then(response => {
           if (response.data.msg === true) {
             this.message = 'O Seu Pedido Foi Registado Com Sucesso.'
@@ -228,7 +228,6 @@ export default {
   }
 }
 </script>
-
 <!--suppress CssInvalidPropertyValue -->
 <style scoped>
 form {

@@ -149,7 +149,7 @@ export default {
     addAnimal () {
       this.animal['email'] = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
-      axios.post('http://localhost:8080/procura4patas/AddAnimal', this.animal)
+      axios.post(this.$axiosurl + 'AddAnimal', this.animal)
         .then(response => {
           if (response.data.msg === true) {
             this.error = 0

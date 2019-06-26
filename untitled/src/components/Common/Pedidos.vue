@@ -37,7 +37,7 @@ export default {
     }
 
     axios.defaults.headers['Content-Type'] = 'application/json'
-    axios.get('http://localhost:8080/procura4patas/PedidosUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
+    axios.get(this.$axiosurl + 'PedidosUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
       .then(response => {
         this.pedidosList = response.data.pedidos
         console.log(this.pedidosList)

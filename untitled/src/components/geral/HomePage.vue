@@ -75,7 +75,7 @@ export default {
   }),
   mounted: function () {
     axios.defaults.headers['Content-Type'] = 'application/json'
-    axios.get('http://localhost:8080/procura4patas/NumeroAnimais', this.credentials)
+    axios.get(this.$axiosurl + 'NumeroAnimais', this.credentials)
       .then(response => {
         this.nrCaes = response.data.caes
         this.nrGatos = response.data.gatos

@@ -44,7 +44,7 @@ export default {
   methods: {
     login () {
       axios.defaults.headers['Content-Type'] = 'application/json'
-      axios.post('http://localhost:8080/procura4patas/Login', this.credentials)
+      axios.post(this.$axiosurl + 'Login', this.credentials)
         .then(response => {
           var userType = response.data.userType
           this.$session.start()

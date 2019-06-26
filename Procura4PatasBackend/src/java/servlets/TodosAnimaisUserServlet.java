@@ -71,7 +71,7 @@ public class TodosAnimaisUserServlet extends HttpServlet {
          String email = (String) request.getParameter("email");
          String emailQuemQuero = (String) request.getParameter("emailQuemQuero");
     
-         if(email  ==  null ) {
+         if ( email  ==  null ) {
                session = Util.getSessionWithoutAut(request);
          } else {
                session = Util.getSession(request, email);
@@ -131,18 +131,5 @@ public class TodosAnimaisUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
 }

@@ -97,8 +97,7 @@ export default {
 
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get('http://localhost:8080/procura4patas/Canis?email=' + this.$session.get('user')[0])
+        axios.get(this.$axios + 'Canis?email=' + this.$session.get('user')[0])
           .then(response => {
             this.canis = response.data
 
@@ -116,8 +115,7 @@ export default {
           })
       } else {
         axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get('http://localhost:8080/procura4patas/Canis')
+        axios.get(this.$axiosurl + 'Canis')
           .then(response => {
             this.canis = response.data
 

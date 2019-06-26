@@ -122,7 +122,7 @@ export default {
   methods: {
     FetchData: function () {
       const value = this.$session.get('user')
-      axios.get('http://localhost:8080/procura4patas/UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
+      axios.get(this.$axiosurl + 'UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
         this.utilizador = response.data
         this.novoUtilizador.email = this.utilizador.email
         this.novoUtilizador.password = this.utilizador.password
@@ -140,7 +140,7 @@ export default {
           if (this.novoUtilizador.telemovel == null) this.novoUtilizador.telemovel = ''
           if (this.novoUtilizador.descricao == null) this.novoUtilizador.descricao = ''
 
-          axios.post('http://localhost:8080/procura4patas/UpdateUtilizadorComum', this.novoUtilizador)
+          axios.post(this.$axiosurl + 'UpdateUtilizadorComum', this.novoUtilizador)
             .then(response => {
               route.push('/UserPerfilEdit')
               this.novoUtilizador.email = null
@@ -159,7 +159,7 @@ export default {
     },
     updateInfo () {
       const value = this.$session.get('user')
-      axios.get('http://localhost:8080/procura4patas/UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
+      axios.get(this.$axiosurl + 'UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
         this.utilizador = response.data
         this.novoUtilizador.email = this.utilizador.email
         this.novoUtilizador.password = this.utilizador.password

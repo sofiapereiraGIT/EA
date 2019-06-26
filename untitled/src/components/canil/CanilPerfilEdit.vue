@@ -163,11 +163,10 @@ export default {
     }
     this.FetchData()
   },
-
   methods: {
     FetchData: function () {
       const value = this.$session.get('user')
-      axios.get('http://localhost:8080/procura4patas/Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
+      axios.get(this.$axiosurl + 'Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
         this.utilizador = response.data
         this.novoUtilizador.email = this.utilizador.email
         this.novoUtilizador.password = this.utilizador.password
@@ -183,7 +182,6 @@ export default {
         this.novoUtilizador.instagram = this.utilizador.instagram
       })
     },
-
     submitUtilizador () {
       if (this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null && this.novoUtilizador.morada != null) {
         if (this.novoUtilizador.password === this.confirmPass) {
@@ -195,7 +193,7 @@ export default {
           if (this.novoUtilizador.facebook == null) this.novoUtilizador.facebook = ''
           if (this.novoUtilizador.instagram == null) this.novoUtilizador.instagram = ''
 
-          axios.post('http://localhost:8080/procura4patas/UpdateCanil', this.novoUtilizador).then(response => {
+          axios.post(this.$axiosurl + 'UpdateCanil', this.novoUtilizador).then(response => {
             route.push('/CanilPerfilEdit')
             this.novoUtilizador.email = null
             this.novoUtilizador.password = null
@@ -216,10 +214,9 @@ export default {
         } else alert('Password não coincide, por favor tente novamente.')
       }
     },
-
     updateInfo () {
       const value = this.$session.get('user')
-      axios.get('http://localhost:8080/procura4patas/Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
+      axios.get(this.$axiosurl + 'Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
         this.utilizador = response.data
         this.novoUtilizador.email = this.utilizador.email
         this.novoUtilizador.password = this.utilizador.password
@@ -235,7 +232,6 @@ export default {
         this.novoUtilizador.instagram = this.utilizador.instagram
       })
     },
-
     uploadFotografia () {
       this.novoUtilizador.fotografia = this.getElementById('foto')
     }
