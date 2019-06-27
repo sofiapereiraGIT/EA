@@ -46,7 +46,7 @@ export default {
       axios.defaults.headers['Content-Type'] = 'application/json'
       axios.post(this.$axiosurl + 'Login', this.credentials)
         .then(response => {
-          var userType = response.data.userType
+          const userType = response.data.userType
           this.$session.start()
           this.$session.set('user', [ this.credentials.email, userType ])
 
