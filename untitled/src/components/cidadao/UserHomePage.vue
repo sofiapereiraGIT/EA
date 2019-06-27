@@ -22,6 +22,13 @@ import route from '../../router/index'
 export default {
   name: 'UserHomePage',
   mounted: function () {
+    if (localStorage.getItem('reloaded')) {
+      // localStorage.removeItem('reloaded') // Se quiserem que a recarga aconteca apenas uma vez é só comentar esta linha
+    } else {
+      localStorage.setItem('reloaded', '1')
+      location.reload()
+    }
+
     if (this.$session.has('user') === false) {
       route.push('/Login')
     } else {
