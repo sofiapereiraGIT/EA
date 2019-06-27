@@ -12,11 +12,15 @@ License Type: Academic
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/procura4patas</property>
+                <!-- UnComment and Change IP to Deploy
+                <property name="connection.url">jdbc:mysql://34.74.104.153:3306/procura4patas</property>
+                -->
 		<property name="connection.username">p4p</property>
 		<property name="connection.password">p4p</property>
 		<property name="show_sql">false</property>
 		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
-		<!-- mapping files -->
+                <!-- property name="hibernate.c3p0.max_size" value="50"/>
+                <property name="hibernate.c3p0.max_size" value="50"/-->
 		<mapping resource="ormmapping/procura4patas/Animal.hbm.xml" />
 		<mapping resource="ormmapping/procura4patas/Pedido.hbm.xml" />
 		<mapping resource="ormmapping/procura4patas/Utilizador.hbm.xml" />
