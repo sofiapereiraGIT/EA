@@ -15,7 +15,8 @@
                 <form class="login100-form validate-form">
                     <div class="columnAlign">
                         <div class="login100-form-avatar">
-                            <img src="../../assets/cat.jpg" class="center" alt="">
+                            <img v-if="animalData.Fotografia==='' || animalData.Fotografia===null" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                            <img v-else :src="require('../../../img/'+animalData.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                         </div>
                         <br>
                         <div>
@@ -116,20 +117,16 @@ export default {
     pedidoData: {}
   }),
   mounted: function () {
-    let idAnimal = this.$session.get('ID')
-    axios.get(this.$axiosurl + 'Animal?id=' + idAnimal)
-      .then(response => {
-        this.animalData = response.data
-        if (this.animalData.Descricao === null) {
-          this.animalData.Descricao = 'Sem Descrição'
-        }
-        this.animalData.Discriminator = this.getDiscriminator(this.animalData.Discriminator)
-        this.animalData.Sexo = this.getSexo(this.animalData.Sexo)
-        this.animalData.Idade = this.getIdade(this.animalData.Idade)
-        this.animalData.CompPelo = this.getCompPelo(this.animalData.CompPelo)
-        this.animalData.Porte = this.getPorte(this.animalData.Porte)
-        this.$session.set('animalOwner', this.animalData.UtilizadorEmail)
-      })
+    this.animalData = this.$session.get('animal')
+    if (this.animalData.Descricao === null) {
+      this.animalData.Descricao = 'Sem Descrição'
+    }
+    this.animalData.Discriminator = this.getDiscriminator(this.animalData.Discriminator)
+    this.animalData.Sexo = this.getSexo(this.animalData.Sexo)
+    this.animalData.Idade = this.getIdade(this.animalData.Idade)
+    this.animalData.CompPelo = this.getCompPelo(this.animalData.CompPelo)
+    this.animalData.Porte = this.getPorte(this.animalData.Porte)
+    this.$session.set('email', this.animalData.UtilizadorEmail)
   },
   methods: {
     getDiscriminator (discriminator) {
@@ -233,6 +230,15 @@ export default {
 form {
     display: inline;
 }
+
+.img {
+    height: 300px;
+    width: 300px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    object-fit: cover;
+}
+
 .Success {
     padding: 20px;
     background-color: green;
