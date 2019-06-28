@@ -8,11 +8,15 @@
     </div>
     <!-- Nº de Gatos e Cães para Adotar-->
     <div class="w3-row w3-center w3-light-grey w3-padding-16">
-      <div class="w3-half w3-section">
+      <div class="w3-third w3-section">
         <span class="w3-xlarge">{{nrCaes}}</span><br>
           Cães Para Adotar
       </div>
-      <div class="w3-half w3-section">
+      <div class="w3-third w3-section" style="color: saddlebrown">
+        <span class="w3-xlarge">Factos</span><br>
+          {{randomFact}}
+      </div>
+      <div class="w3-third w3-section">
         <span class="w3-xlarge">{{nrGatos}}</span><br>
           Gatos Para Adotar
       </div>
@@ -71,8 +75,11 @@ export default {
   name: 'HomePage',
   data: () => ({
     nrCaes: 0,
-    nrGatos: 0
+    nrGatos: 0,
+    factsList: {},
+    randomFact: ''
   }),
+
   mounted: function () {
     axios.defaults.headers['Content-Type'] = 'application/json'
     axios.get(this.$axiosurl + 'NumeroAnimais', this.credentials)
@@ -82,6 +89,27 @@ export default {
         console.log(this.nrCaes)
         console.log(this.nrGatos)
       }).catch()
+
+    if (!this.$session.has('catFacts')) {
+      console.log('getCatFacts')
+
+      axios.defaults.headers['Content-Type'] = 'Accept: application/json'
+      axios.get('http://www.catfact.info/api/v1/facts.json?page=:page&per_page=:per_page')
+        .then(response => {
+          this.factsList = response.data.facts
+          this.$session.set('catFacts', [this.factsList, 1])
+          this.randomFact = this.factsList[Math.floor(Math.random() * this.factsList.length)].details
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    } else {
+      this.factsList = this.$session.get('catFacts')[0]
+      var times = this.$session.get('catFacts')[1] + 1
+      this.$session.set('catFacts', [this.factsList, times])
+      console.log('reutilizar catsFacts da sessão pela ' + times + ' vez')
+      this.randomFact = this.factsList[Math.floor(Math.random() * this.factsList.length)].details
+    }
   }
 }
 </script>
