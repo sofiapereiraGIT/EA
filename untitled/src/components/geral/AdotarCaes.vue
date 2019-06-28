@@ -125,7 +125,7 @@
                     <img
                         v-else
                         v-on:click="selAnimal=cao.ID"
-                        v-bind:src="cao.Fotografia" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                        :src="require('../../../img/'+cao.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
         </div>
