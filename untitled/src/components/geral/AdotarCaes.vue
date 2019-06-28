@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <div v-if="selAnimal!==''"> {{this.$session.set('ID', selAnimal)}} </div>
+        <div v-if="selAnimal!==null"> {{this.$session.set('animal', selAnimal)}} </div>
 
         <!-- First Photo Grid-->
         <div class="w3-row-padding" style="margin-top: 25px;">
@@ -120,11 +120,11 @@
                 <router-link to="/VerAnimalAdotarUC">
                     <img
                         v-if="cao.Fotografia==='' || cao.Fotografia===null"
-                        v-on:click="selAnimal=cao.ID"
+                        v-on:click="selAnimal=cao"
                         src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                     <img
                         v-else
-                        v-on:click="selAnimal=cao.ID"
+                        v-on:click="selAnimal=cao"
                         :src="require('../../../img/'+cao.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
@@ -170,7 +170,7 @@ export default {
     caes: [],
     page: 0,
     nrPerPage: 12,
-    selAnimal: ''
+    selAnimal: null
   }),
 
   mounted: function () {

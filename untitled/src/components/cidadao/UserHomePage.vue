@@ -23,7 +23,7 @@ export default {
   name: 'UserHomePage',
   mounted: function () {
     if (localStorage.getItem('reloaded')) {
-      // localStorage.removeItem('reloaded') // Se quiserem que a recarga aconteca apenas uma vez é só comentar esta linha
+      localStorage.removeItem('reloaded') // Se quiserem que a recarga aconteca apenas uma vez é só comentar esta linha
     } else {
       localStorage.setItem('reloaded', '1')
       location.reload()

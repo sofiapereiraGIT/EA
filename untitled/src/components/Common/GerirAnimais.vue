@@ -26,7 +26,7 @@
             </div>
             <br>
             <button class="button" @click="$router.push('/AddAnimalParaAdocao')">Adicionar Animal</button>
-            <button class="button" @click="$router.push('/ComunicarDesaparecimento')">Comunicar Desaparecimento</button>
+            <button class="button" v-if="utilizadorComum" @click="$router.push('/ComunicarDesaparecimento')">Comunicar Desaparecimento</button>
         </div>
         <br>
         <br>
@@ -106,6 +106,10 @@ export default {
         nameList = stateList
       }
       return nameList
+    },
+
+    utilizadorComum: function () {
+      return this.$session.get('user')[1] === 0
     }
   }
 }

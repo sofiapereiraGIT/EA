@@ -3,7 +3,8 @@
         <form class="review-form" @submit.prevent="submitUtilizador">
             <div class="w3-row w3-padding-32 w3-section">
                 <div class="w3-col m6 w3-container">
-                    <img v-bind:src="utilizador.fotografia" style="margin-bottom: 10px" class="img w3-image">
+                    <img v-if="utilizador.fotografia===null || utilizador.fotografia===''" src="../../assets/user.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                    <img v-else :src="require('../../../img/'+utilizador.fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                     <br><br>
                     <button v-if="!mudarFoto" class="w3-button" @click="mudarFoto = true">Mudar imagem</button>
                     <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
