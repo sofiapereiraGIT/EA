@@ -13,7 +13,18 @@
             <h1>Comunicar Desaparecimento</h1>
             <form @submit.prevent="submitAnimal">
                 <label><input v-model="animal.Nome" type="text" name="animalName" placeholder="Nome" required></label>
-                <label><input v-model="animal.Concelho" type="text" name="concelho" placeholder="Concelho onde perdeu o animal" required></label>
+                <br>
+                <br>
+                <label><select v-model="animal.Concelho" style="width: 25%" required>
+                    <option value="" disabled>Concelho onde perdeu o animal</option>
+                    <option value="Amarante">Amarante</option>
+                    <option value="Braga">Braga</option>
+                    <option value="Coimbra">Coimbra</option>
+                    <option value="Faro">Faro</option>
+                    <option value="Lisboa">Lisboa</option>
+                    <option value="Porto">Porto</option>
+                    <option value="Viana do Castelo">Viana do Castelo</option>
+                </select></label>
                 <br>
                 <br>
                 <input id="fotoAnimal" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">

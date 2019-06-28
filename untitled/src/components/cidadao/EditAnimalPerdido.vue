@@ -3,101 +3,142 @@
         <div class="limiter ">
             <div class="container-login100">
                 <div class="wrap-login100 p-t-190 p-b-30 row">
-                    <form class="login100-form validate-form">
+                    <form class="login100-form validate-form" @submit.prevent="submitAnimal">
                         <div class="columnAlign">
                             <div class="login100-form-avatar">
-                                <img src="../../assets/cat.jpg" class="center">
+                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'G'" src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                                <img v-else :src="require('../../../img/'+animalNovo.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                             </div>
                             <br>
                             <div>
-                                <input type="file">
+                                <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Mudar imagem</button>
+                                <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
+                                <br>
+                                <br>
+                                <button class="login100-form-btn" @click="eliminarAnimal()">Eliminar Animal</button>
                             </div>
                             <br>
                         </div>
                         <div class="column">
                             <br>
                             <div class="wrap-input100 validate-input m-b-10">
-                                <label><input class="input100" type="text" name="Nome" placeholder="Nome*" required></label>
+                                <label><input v-model="animalNovo.Nome" class="input100" type="text" name="Nome" placeholder="Nome" required></label>
                             </div>
                             <div class="wrap-input100 validate-input m-b-10">
-                                <label><textarea class="input100" type="text" name="Descrição" placeholder="Descrição*" required></textarea></label>
+                                <label><input v-model="animalNovo.Descricao" class="input100" type="text" name="Descrição" placeholder="Descrição"></label>
                             </div>
                             <div class="column2">
                                 <div class="select">
-                                    <select name="slct" id="slct1">
-                                        <option selected disabled>Escolha um tipo*</option>
-                                        <option value="Cao">Cão</option>
-                                        <option value="Gato">Gato</option>
+                                    <select v-model="animalNovo.Concelho" required>
+                                        <option v-bind:value="animalNovo.Concelho">{{animalNovo.Concelho}}</option>
+                                        <option value="Amarante">Amarante</option>
+                                        <option value="Braga">Braga</option>
+                                        <option value="Coimbra">Coimbra</option>
+                                        <option value="Faro">Faro</option>
+                                        <option value="Lisboa">Lisboa</option>
+                                        <option value="Porto">Porto</option>
+                                        <option value="Viana do Castelo">Viana do Castelo</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct2">
-                                        <option selected disabled>Escolha o sexo*</option>
-                                        <option value="Macho">Macho</option>
-                                        <option value="Femea">Fêmea</option>
+                                    <select v-model="animalNovo.Discriminator" required>
+                                        <option v-if="animalNovo.Discriminator === 'C'" v-bind:value="animalNovo.Discriminator">Cão</option>
+                                        <option v-if="animalNovo.Discriminator === 'G'" v-bind:value="animalNovo.Discriminator">Gato</option>
+                                        <option value="C">Cão</option>
+                                        <option value="G">Gato</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct3">
-                                        <option selected disabled>Escolha a idade*</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                    <select v-model="animalNovo.Sexo" required>
+                                        <option v-if="animalNovo.Sexo === 'M'" v-bind:value="animalNovo.Sexo">Macho</option>
+                                        <option v-if="animalNovo.Sexo === 'F'" v-bind:value="animalNovo.Sexo">Fêmea</option>
+                                        <option value="M">Macho</option>
+                                        <option value="F">Fêmea</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct4">
-                                        <option selected disabled>Escolha a raça*</option>
-                                        <option value="Lavrador">Lavrador</option>
-                                        <option value="Golden">Golden</option>
+                                    <select v-model="animalNovo.Idade" required>
+                                        <option v-if="animalNovo.Idade === 'B'" v-bind:value="animalNovo.Idade">Bebé (Menos de 6 Meses)</option>
+                                        <option v-if="animalNovo.Idade === 'J'" v-bind:value="animalNovo.Idade">Jovem</option>
+                                        <option v-if="animalNovo.Idade === 'A'" v-bind:value="animalNovo.Idade">Adulto</option>
+                                        <option value="B">Bebé (Menos de 6 Meses)</option>
+                                        <option value="J">Jovem</option>
+                                        <option value="A">Adulto</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct">
-                                        <option selected disabled>Escolha o concelho*</option>
-                                        <option value="Grande">Marco de Canaveses</option>
-                                        <option value="Pequeno">Vila Verde</option>
+                                    <select v-model="animalNovo.Porte" required>
+                                        <option v-if="animalNovo.Porte === 'P'" v-bind:value="animalNovo.Porte">Pequeno</option>
+                                        <option v-if="animalNovo.Porte === 'M'" v-bind:value="animalNovo.Porte">Médio</option>
+                                        <option v-if="animalNovo.Porte === 'G'" v-bind:value="animalNovo.Porte">Grande</option>
+                                        <option v-if="animalNovo.Porte === 'I'" v-bind:value="animalNovo.Porte">Indefinido</option>
+                                        <option value="P">Pequeno</option>
+                                        <option value="M">Médio</option>
+                                        <option value="G">Grande</option>
+                                        <option value="I">Indefinido</option>
                                     </select>
                                 </div>
+                                <br>
                             </div>
                             <div class="column2">
                                 <div class="select">
-                                    <select name="slct" id="slct">
-                                        <option selected disabled>Escolha a cor do pelo*</option>
-                                        <option value="Castanho">Castanho</option>
+                                    <select v-model="animalNovo.CorPelo" required>
+                                        <option v-bind:value="animalNovo.CorPelo">{{animalNovo.CorPelo}}</option>
+                                        <option value="Laranja">Laranja</option>
+                                        <option value="Bege">Bege</option>
                                         <option value="Branco">Branco</option>
+                                        <option value="Castanho">Castanho</option>
+                                        <option value="Cinzento">Cinzento</option>
+                                        <option value="Preto">Preto</option>
+                                        <option value="Indefinido">Indefinido</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct">
-                                        <option selected disabled>Escolha o tipo do pelo*</option>
-                                        <option value="Liso">Liso</option>
-                                        <option value="Ondulado">Ondulado</option>
+                                    <select v-model="animalNovo.CompPelo" required>
+                                        <option v-if="animalNovo.CompPelo === 'S'" v-bind:value="animalNovo.CompPelo">Sem Pêlo</option>
+                                        <option v-if="animalNovo.CompPelo === 'C'" v-bind:value="animalNovo.CompPelo">Curto</option>
+                                        <option v-if="animalNovo.CompPelo === 'M'" v-bind:value="animalNovo.CompPelo">Médio</option>
+                                        <option v-if="animalNovo.CompPelo === 'L'" v-bind:value="animalNovo.CompPelo">Longo</option>
+                                        <option value="S">Sem Pêlo</option>
+                                        <option value="C">Curto</option>
+                                        <option value="M">Médio</option>
+                                        <option value="L">Longo</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
-                                    <select name="slct" id="slct">
-                                        <option selected disabled>Escolha o tamanho do pelo*</option>
-                                        <option value="Curto">Curto</option>
-                                        <option value="Comprido">Comprido</option>
+                                    <select v-if="animalNovo.Discriminator==='C'" v-model="animalNovo.Raca" required>
+                                        <option v-bind:value="animalNovo.Raca">{{animalNovo.Raca}}</option>
+                                        <option value="Sem Raça Definida">Sem Raça Definida</option>
+                                        <option value="Pastor Alemao">Pastor Alemão</option>
+                                        <option value="Lavrador">Lavrador</option>
+                                        <option value="Buldogue">Buldogue</option>
+                                        <option value="Beagle">Beagle</option>
+                                        <option value="Poodle">Poodle</option>
+                                        <option value="Rottwiller">Rottwiller</option>
+                                        <option value="Golden Retriever">Golden Retriever</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                    <select v-if="animalNovo.Discriminator==='G'" v-model="animalNovo.Raca" required>
+                                        <option v-bind:value="animalNovo.Raca">{{animalNovo.Raca}}</option>
+                                        <option value="" disabled>Raça Gato</option>
+                                        <option value="Sem Raça Definida">Sem Raça Definida</option>
+                                        <option value="Persa">Persa</option>
+                                        <option value="Siamês">Siamês</option>
+                                        <option value="Ragdoll">Ragdoll</option>
+                                        <option value="Scottish Fold">Scottish Fold</option>
+                                        <option value="Outro">Outro</option>
                                     </select>
                                 </div>
                                 <br>
-                                <div class="select">
-                                    <select name="slct" id="slct">
-                                        <option selected disabled>Escolha o porte*</option>
-                                        <option value="Grande">Grande porte</option>
-                                        <option value="Pequeno">Pequeno porte</option>
-                                    </select>
-                                </div>
                                 <div class="columnBtn">
-                                    <button class="login100-form-btn">Eliminar</button>
-                                    <button class="login100-form-btn">Guardar</button>
+                                    <input class="login100-form-btn" type="submit" value="Guardar">
                                     <br>
                                 </div>
                             </div>
@@ -113,9 +154,31 @@
 </template>
 
 <script>
+import axios from 'axios'
 import route from '../../router/index'
 export default {
   name: 'EditAnimalPerdido',
+  data: function () {
+    return {
+      animal: null,
+      animalNovo: {
+        CorPelo: '',
+        Raca: '',
+        Sexo: '',
+        Discriminator: '',
+        Estado: '',
+        Descricao: '',
+        Idade: '',
+        CompPelo: '',
+        Concelho: '',
+        Fotografia: '',
+        ID: '',
+        Nome: '',
+        Porte: ''
+      },
+      mudarFoto: false
+    }
+  },
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -125,6 +188,43 @@ export default {
         /* Redirecionar para a Página de Acesso Negado */
         route.push(('/AccessDenied'))
       }
+    }
+
+    this.animal = this.$session.get('animal')
+    this.animalNovo.CorPelo = this.animal.CorPelo
+    this.animalNovo.Raca = this.animal.Raca
+    this.animalNovo.Sexo = this.animal.Sexo
+    this.animalNovo.Discriminator = this.animal.Discriminator
+    this.animalNovo.Estado = this.animal.Estado
+    this.animalNovo.Descricao = this.animal.Descricao
+    this.animalNovo.Idade = this.animal.Idade
+    this.animalNovo.CompPelo = this.animal.CompPelo
+    this.animalNovo.Concelho = this.animal.Concelho
+    this.animalNovo.Fotografia = this.animal.Fotografia
+    this.animalNovo.ID = this.animal.ID
+    this.animalNovo.Nome = this.animal.Nome
+    this.animalNovo.Porte = this.animal.Porte
+  },
+  methods: {
+    uploadFotografia () {
+      this.animalNovo.Fotografia = this.getElementById('foto')
+    },
+
+    submitAnimal () {
+      axios.post(this.$axiosurl + 'UpdateAnimal', this.animalNovo).then(response => {
+        route.push('/EditAnimalPerdido')
+        this.mudarFoto = false
+      })
+    },
+
+    eliminarAnimal () {
+      var dados = {}
+      dados['ID'] = this.animalNovo.ID
+      dados['email'] = this.$session.get('user')[0]
+
+      axios.post(this.$axiosurl + 'DeleteAnimalPerdido', dados).then(response => {
+        route.push('/GerirAnimais')
+      })
     }
   }
 }
@@ -151,6 +251,14 @@ export default {
         position: absolute;
         opacity: 0;
         cursor: pointer;
+    }
+
+    .img {
+        height: 300px;
+        width: 300px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        object-fit: cover;
     }
 
     /* Create a custom radio button */

@@ -49,7 +49,16 @@
                                     <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                                 </div>
                                 <div class="w3-half">
-                                    <input v-model="novoUtilizador.concelho" class="w3-input w3-border" type="text" placeholder="Concelho" required>
+                                    <label><select v-model="novoUtilizador.concelho" style="width: 25%" required>
+                                        <option v-bind:value="novoUtilizador.concelho">{{novoUtilizador.concelho}}</option>
+                                        <option value="Amarante">Amarante</option>
+                                        <option value="Braga">Braga</option>
+                                        <option value="Coimbra">Coimbra</option>
+                                        <option value="Faro">Faro</option>
+                                        <option value="Lisboa">Lisboa</option>
+                                        <option value="Porto">Porto</option>
+                                        <option value="Viana do Castelo">Viana do Castelo</option>
+                                    </select></label>
                                 </div>
                             </div>
                             <div class="w3-row-padding" style="margin:0 -200px 8px -16px">
@@ -196,43 +205,12 @@ export default {
 
           axios.post(this.$axiosurl + 'UpdateCanil', this.novoUtilizador).then(response => {
             route.push('/CanilPerfilEdit')
-            this.novoUtilizador.email = null
-            this.novoUtilizador.password = null
-            this.novoUtilizador.nome = null
-            this.novoUtilizador.fotografia = null
-            this.novoUtilizador.concelho = null
-            this.novoUtilizador.morada = null
-            this.novoUtilizador.telemovel = null
-            this.novoUtilizador.descricao = null
-            this.novoUtilizador.horario = null
-            this.novoUtilizador.site = null
-            this.novoUtilizador.facebook = null
-            this.novoUtilizador.instagram = null
-            this.confirmPass = null
             this.mudarFoto = false
-            this.updateInfo()
           })
         } else alert('Password não coincide, por favor tente novamente.')
       }
     },
-    updateInfo () {
-      const value = this.$session.get('user')
-      axios.get(this.$axiosurl + 'Canil?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
-        this.utilizador = response.data
-        this.novoUtilizador.email = this.utilizador.email
-        this.novoUtilizador.password = this.utilizador.password
-        this.novoUtilizador.nome = this.utilizador.nome
-        this.novoUtilizador.fotografia = this.utilizador.fotografia
-        this.novoUtilizador.concelho = this.utilizador.concelho
-        this.novoUtilizador.morada = this.utilizador.morada
-        this.novoUtilizador.telemovel = this.utilizador.telemovel
-        this.novoUtilizador.descricao = this.utilizador.descricao
-        this.novoUtilizador.horario = this.utilizador.horario
-        this.novoUtilizador.site = this.utilizador.site
-        this.novoUtilizador.facebook = this.utilizador.facebook
-        this.novoUtilizador.instagram = this.utilizador.instagram
-      })
-    },
+
     uploadFotografia () {
       this.novoUtilizador.fotografia = this.getElementById('foto')
     }

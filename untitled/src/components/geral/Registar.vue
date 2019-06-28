@@ -25,8 +25,16 @@
                                 <input v-model="uc.email" id="EmailUC" type="email" class="input" required>
                             </div>
                             <div class="group">
-                                <label for="ConcelhoUC" class="label">Concelho</label>
-                                <input v-model="uc.concelho" id="ConcelhoUC" type="text" class="input" required>
+                                <label><select v-model="uc.concelho" style="width: 25%" required>
+                                    <option value="" disabled>Concelho</option>
+                                    <option value="Amarante">Amarante</option>
+                                    <option value="Braga">Braga</option>
+                                    <option value="Coimbra">Coimbra</option>
+                                    <option value="Faro">Faro</option>
+                                    <option value="Lisboa">Lisboa</option>
+                                    <option value="Porto">Porto</option>
+                                    <option value="Viana do Castelo">Viana do Castelo</option>
+                                </select></label>
                             </div>
                         </div>
                         <div class="column">
@@ -85,8 +93,16 @@
                                 <input v-model="c.telemovel" id="PhoneC" type="number" class="input">
                             </div>
                             <div class="group">
-                                <label for="ConcelhoC" class="label">Concelho</label>
-                                <input v-model="c.concelho" id="ConcelhoC" type="text" class="input">
+                                <label><select v-model="c.concelho" style="width: 25%" required>
+                                    <option value="" disabled>Concelho</option>
+                                    <option value="Amarante">Amarante</option>
+                                    <option value="Braga">Braga</option>
+                                    <option value="Coimbra">Coimbra</option>
+                                    <option value="Faro">Faro</option>
+                                    <option value="Lisboa">Lisboa</option>
+                                    <option value="Porto">Porto</option>
+                                    <option value="Viana do Castelo">Viana do Castelo</option>
+                                </select></label>
                             </div>
                             <div class="group">
                                 <label for="FotoC" class="label">Insira uma foto que represente o canil </label>

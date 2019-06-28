@@ -30,9 +30,37 @@
         </div>
         <br>
         <br>
+
+        <div v-if="selAnimal!==null"> {{this.$session.set('animal', selAnimal)}} </div>
+
         <div class="animalCol" v-for="g in filteredAnimals" :key="g.ID" >
-            <router-link to="/EditAnimalAdocao">
-                <img v-on:click="id=1" src="../../assets/cat.jpg" style="width:100%"  alt="">
+            <router-link v-if="g.Estado === 'P'" to="/EditAnimalPerdido">
+                <img
+                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'C'"
+                    v-on:click="selAnimal=g"
+                    src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                <img
+                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'G'"
+                    v-on:click="selAnimal=g"
+                    src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                <img
+                    v-else
+                    v-on:click="selAnimal=g"
+                    :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+            </router-link>
+            <router-link v-else to="/EditAnimalAdocao">
+                <img
+                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'C'"
+                    v-on:click="selAnimal=g"
+                    src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                <img
+                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'G'"
+                    v-on:click="selAnimal=g"
+                    src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                <img
+                    v-else
+                    v-on:click="selAnimal=g"
+                    :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
             </router-link>
         </div>
     </div>
@@ -48,7 +76,8 @@ export default {
     animais: {},
     selectedName: '',
     selectedState: 'Es',
-    selectedDiscriminator: 'T'
+    selectedDiscriminator: 'T',
+    selAnimal: null
   }),
   mounted: function () {
     if (this.$session.has('user') === false) {
@@ -116,6 +145,13 @@ export default {
 </script>
 
 <style scoped>
+.img {
+    height: 300px;
+    width: 300px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    object-fit: cover;
+}
 .row {
     margin-top: 38px;
 }
