@@ -10,6 +10,7 @@ import Perdidos from '../components/geral/Perdidos'
 import PerdidosCaes from '../components/geral/PerdidosCaes'
 import PerdidosGatos from '../components/geral/PerdidosGatos'
 import UserPerfil from '../components/geral/UserPerfil'
+import CatsFacts from '../components/geral/API_CatsFacts'
 import AboutUs from '../components/geral/AboutUs'
 import Login from '../components/geral/Login'
 import Registar from '../components/geral/Registar'
@@ -83,6 +84,11 @@ export default new Router({
       path: '/UserPerfil',
       name: 'UserPerfil',
       component: UserPerfil
+    },
+    {
+      path: '/CatsFacts',
+      name: 'CatsFacts',
+      component: CatsFacts
     },
     {
       path: '/AboutUs',
