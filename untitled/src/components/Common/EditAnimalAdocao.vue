@@ -6,8 +6,8 @@
                     <form class="login100-form validate-form" @submit.prevent="submitAnimal">
                         <div class="columnAlign">
                             <div class="login100-form-avatar">
-                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'G'" src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
+                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'G'" src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image">
                                 <img v-else :src="require('../../../img/'+animalNovo.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                             </div>
                             <br>
@@ -16,12 +16,44 @@
                                 <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
                             </div>
                             <br>
-                            <label class="container">Encontrei este animal na rua
-                                <input type="radio" checked="checked" name="radio">
+                            <label v-if="this.animalNovo.Estado === 'E'" class="container">Encontrei este animal na rua
+                                <input type="radio" checked="checked" name="radio" value="E" v-model="animalNovo.Estado">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="container">Falecido
-                                <input type="radio" name="radio">
+                            <label v-else class="container">Encontrei este animal na rua
+                                <input type="radio" name="radio" value="E" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-if="this.$session.get('user')[1] === 1 && this.animalNovo.Estado === 'F'" class="container">Encontra-se em FAT
+                                <input type="radio" checked="checked" name="radio" value="F" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-if="this.$session.get('user')[1] === 1 && this.animalNovo.Estado != 'F'" class="container">Encontra-se em FAT
+                                <input type="radio" name="radio" value="F" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-if="this.$session.get('user')[1] === 1 && this.animalNovo.Estado === 'C'" class="container">Procuro FAT
+                                <input type="radio" checked="checked" name="radio" value="C" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-if="this.$session.get('user')[1] === 1 && this.animalNovo.Estado != 'C'" class="container">Procuro FAT
+                                <input type="radio" name="radio" value="C" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-if="this.animalNovo.Estado === 'A'" class="container">Adotado
+                                <input type="radio" checked="checked" name="radio" value="A" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-else class="container">Adotado
+                                <input type="radio" name="radio" value="A" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-if="this.animalNovo.Estado === 'M'" class="container">Falecido
+                                <input type="radio" checked="checked" name="radio" value="M" v-model="animalNovo.Estado">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label v-else class="container">Falecido
+                                <input type="radio" name="radio" value="M" v-model="animalNovo.Estado">
                                 <span class="checkmark"></span>
                             </label>
                         </div>

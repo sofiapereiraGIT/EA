@@ -15,8 +15,8 @@
                 <form class="login100-form validate-form">
                     <div class="columnAlign">
                         <div class="login100-form-avatar">
-                            <img v-if="animalData.Fotografia==='' || animalData.Fotografia===null" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                            <img v-else :src="require('../../../img/'+animalData.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                            <img v-if="animalData.Fotografia==='' || animalData.Fotografia===null" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
+                            <img v-else :src="require('../../../img/'+animalData.Fotografia)" style="margin-bottom: 10px" class="img w3-image">
                         </div>
                         <br>
                         <div>
@@ -26,6 +26,10 @@
                             <router-link v-if="animalData.UserType===1" class="txt1" to="/CanilPerfil">
                                 Ver Perfil do Canil
                             </router-link>
+                        </div>
+                        <br>
+                        <div>
+                            <p v-if="animalData.Estado === 'E'">Este animal foi encontrado na rua.</p>
                         </div>
                     </div>
                     <div class="column">
@@ -70,13 +74,6 @@
                             <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-margin-right"></i>
                             Descrição: {{ animalData.Descricao }}<br>
                         </div>
-                        <!--
-                        <div class="container" style="text-align: left">
-                            Este Animal Foi Encontrado
-                            <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                        </div>
-                        -->
                         <div class="columnBtn">
                             <router-link v-if="this.$session.has('user')===false" to="/Login">
                                 <button class="login100-form-btn">Adotar</button>
@@ -90,7 +87,7 @@
                                    class="login100-form-btn" value="Adotar"/>
                             </form>
                             <form @submit.prevent="fatRequest">
-                            <input type="submit" v-if="this.$session.has('user') && this.$session.get('user')[1]===0"
+                            <input type="submit" v-if="this.$session.has('user') && this.$session.get('user')[1]===0 && animalData.Estado === 'C'"
                                    class="login100-form-btn" value="Ser Fat"/>
                             </form>
                         </div>

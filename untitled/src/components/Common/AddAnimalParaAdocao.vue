@@ -92,13 +92,22 @@
         <label><input v-model="animal.Descricao" type="text" name="descricao" placeholder="Descrição"></label>
         <br>
         <br>
-        <label><select v-model="animal.Estado" style="width: 50%" required>
-          <option value="" disabled>Estado</option>
-          <option v-if="this.$session.get('user')[1]===1" value="A">Adotado</option>
-          <option value="E">Encontrado</option>
-          <option v-if="this.$session.get('user')[1]===1" value="F">Pedido FAT</option>
-          <!-- <option v-if="this.$session.get('user')[1]===1" value="">Em FAT</option> -->
-        </select></label>
+          <label class="container">Encontrei este animal na rua
+              <input type="radio" name="radio" value="E" v-model="animal.Estado">
+              <span class="checkmark"></span>
+          </label>
+          <label v-if="this.$session.get('user')[1] === 1" class="container">Encontra-se em FAT
+              <input type="radio" name="radio" value="F" v-model="animal.Estado">
+              <span class="checkmark"></span>
+          </label>
+          <label v-if="this.$session.get('user')[1] === 1" class="container">Procuro FAT
+              <input type="radio" name="radio" value="C" v-model="animal.Estado">
+              <span class="checkmark"></span>
+          </label>
+          <label class="container">Adotado
+              <input type="radio" name="radio" value="A" v-model="animal.Estado">
+              <span class="checkmark"></span>
+          </label>
         <br>
         <br>
         <input type="submit" class="button" placeholder="Registar"/>
@@ -228,5 +237,14 @@ input[type=text] {
 }
 .button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
 }
 </style>

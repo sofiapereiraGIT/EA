@@ -6,8 +6,8 @@
                     <form class="login100-form validate-form" @submit.prevent="submitAnimal">
                         <div class="columnAlign">
                             <div class="login100-form-avatar">
-                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'G'" src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
+                                <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'G'" src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image">
                                 <img v-else :src="require('../../../img/'+animalNovo.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                             </div>
                             <br>

@@ -66,6 +66,8 @@ public class CaesAdotarServlet extends HttpServlet {
             JSONArray ja = new JSONArray();
             
             for(Animal g : caesAdotar) {
+                String utilizadorEmail = P4P.getUtilizadorEmail(session, g.getID());
+                int usertype = P4P.getUserType(session, utilizadorEmail);
                      
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("ID",g.getID());
@@ -80,7 +82,9 @@ public class CaesAdotarServlet extends HttpServlet {
                 jsonObj.put("Estado",String.valueOf(g.getEstado()));
                 jsonObj.put("Descricao",g.getDescricao());
                 jsonObj.put("Concelho",g.getConcelho());
-                jsonObj.put("Discriminator",String.valueOf(g.getDiscriminator()));     
+                jsonObj.put("Discriminator",String.valueOf(g.getDiscriminator()));      
+                jsonObj.put("UtilizadorEmail", utilizadorEmail);
+                jsonObj.put("UserType", usertype);
                 ja.add(jsonObj);
             }
             
