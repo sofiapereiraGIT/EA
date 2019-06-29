@@ -39,7 +39,7 @@
                             <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
                         </div>
                         <div class="w3-half">
-                            <label><select v-model="novoUtilizador.concelho" style="width: 25%" required>
+                            <label><select v-model="novoUtilizador.concelho" style="width: 100%" required>
                                 <option v-bind:value="novoUtilizador.concelho">{{novoUtilizador.concelho}}</option>
                                 <option value="Amarante">Amarante</option>
                                 <option value="Braga">Braga</option>
