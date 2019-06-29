@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="row">
         <div style="position: -webkit-sticky; position: sticky; top: 30px; background-color: white; padding-top: 20px">
             <div class="navbar">
@@ -62,7 +63,10 @@
                     v-on:click="selAnimal=g"
                     :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
             </router-link>
+            <br/>
+            <label v-if="g.Nome!==''">{{ g.Nome }}</label>
         </div>
+    </div>
     </div>
 </template>
 
@@ -153,12 +157,13 @@ export default {
     object-fit: cover;
 }
 .row {
-    margin-top: 38px;
+    margin: auto;
 }
 .animalCol {
     float: left;
     width: 25%;
-    padding: 10px;
+    padding-bottom: 60px;
+
 }
 input[type=text] {
     width: 20%;
