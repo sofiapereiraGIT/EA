@@ -63,6 +63,8 @@
                     v-on:click="selAnimal=g"
                     :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
             </router-link>
+            <br/>
+            {{g.Nome}}
         </div>
     </div>
     </div>
