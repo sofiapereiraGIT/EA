@@ -11,10 +11,8 @@ import javax.ejb.Stateless;
 import org.hibernate.Query;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import procura4patas.Utilizador;
 import procura4patas.UtilizadorComum;
 import procura4patas.UtilizadorComumDAO;
-import procura4patas.UtilizadorDAO;
 
 /**
  *

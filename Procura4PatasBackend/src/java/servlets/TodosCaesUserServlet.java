@@ -8,8 +8,6 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import src.P4P;
@@ -31,7 +27,6 @@ import src.Util;
 @WebServlet(name = "TodosCaesUserServlet", urlPatterns = {"/TodosCaesUser"})
 public class TodosCaesUserServlet extends HttpServlet {
 
-    
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException

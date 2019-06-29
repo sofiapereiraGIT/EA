@@ -5,27 +5,12 @@
  */
 package beans;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.hibernate.Query;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
-import procura4patas.Animal;
-import procura4patas.AnimalDAO;
-import procura4patas.Pedido;
-import procura4patas.PedidoDAO;
-import procura4patas.Utilizador;
-import procura4patas.UtilizadorComum;
-import procura4patas.UtilizadorDAO;
 
 /**
  *
@@ -82,8 +67,6 @@ public class PedidoBean implements PedidoBeanLocal {
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dataUltimoContacto = sdf2.format(dt2);
         char discriminator = 'F';
-        
-        
         
         try {
     
