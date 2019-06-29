@@ -165,6 +165,9 @@ export default {
       if (compPelo === 'I') {
         return 'Indefinido'
       }
+      if (compPelo === 'S') {
+        return 'Sem pêlo'
+      }
     },
     getPorte (porte) {
       if (porte === 'P') {
