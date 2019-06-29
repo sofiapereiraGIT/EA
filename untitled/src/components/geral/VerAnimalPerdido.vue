@@ -6,52 +6,66 @@
                     <form class="login100-form validate-form">
                         <div class="columnAlign">
                             <div class="login100-form-avatar">
-                                <img src="../../assets/cat.jpg" class="center">
+                                <img v-if="animalData.Fotografia==='' || animalData.Fotografia===null" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
+                                <img v-else :src="require('../../../img/'+animalData.Fotografia)" style="margin-bottom: 10px" class="img w3-image">
                             </div>
                             <br>
                             <div>
-                                <router-link class="txt1" to="/UserPerfil">
-                                    Inserir nome da pessoa ou canil
+                                <router-link v-if="animalData.UserType===0" class="txt1" to="/UserPerfil">
+                                    Ver Perfil do Utilizador
+                                </router-link>
+                                <router-link v-if="animalData.UserType===1" class="txt1" to="/CanilPerfil">
+                                    Ver Perfil do Canil
                                 </router-link>
                             </div>
+                            <br>
                         </div>
                         <div class="column">
                             <br>
-                            <div class="w3-large w3-margin-bottom">
-                                <i class="fas fa-building fa-fw w3-hover-text-black w3-margin-right"></i> Concelho<br>
-                            </div>
-                            <div class="w3-large w3-margin-bottom">
-                                <i class="fas fa-user fa-fw w3-hover-text-black w3-margin-right"></i> Nome<br>
-                            </div>
-                            <div class="w3-large w3-margin-bottom">
-                                <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-margin-right"></i> Descrição<br>
+                            <div class="column2">
+                                <div class="w3-large w3-margin-bottom">
+                                    <i class="fas fa-user fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Nome: {{ animalData.Nome }}<br>
+                                </div>
+                                <div class="w3-large w3-margin-bottom">
+                                    <i class="fas fa-paw fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Tipo: {{ animalData.Discriminator }}<br>
+                                </div>
+                                <div class="w3-large w3-margin-bottom">
+                                    <i class="fas fa-id-card-alt fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Raça: {{ animalData.Raca }} <br>
+                                </div>
+                                <div class="w3-large w3-margin-bottom">
+                                    <i class="fas fa-venus-mars fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Sexo: {{ animalData.Sexo }}<br>
+                                </div>
+                                <div class="w3-large w3-margin-bottom">
+                                    <i class="fas fa-building fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Concelho: {{ animalData.Concelho }}
+                                    <br>
+                                    <div class="w3-large w3-margin-bottom" style="text-align: left">
+                                        <br/>
+                                        <i class="fas fa-info-circle fa-fw w3-hover-text-black w3-margin-right"></i>
+                                        Descrição: {{ animalData.Descricao }}<br>
+                                    </div>
+                                </div>
                             </div>
                             <div class="column2">
                                 <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-paw fa-fw w3-hover-text-black w3-margin-right"></i> Tipo<br>
+                                    <i class="fas fa-hourglass-half fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Idade: {{ animalData.Idade }}<br>
                                 </div>
                                 <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-venus-mars fa-fw w3-hover-text-black w3-margin-right"></i> Sexo<br>
+                                    <i class="fas fa-ruler-combined fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Porte: {{ animalData.Porte }}<br>
                                 </div>
                                 <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-hourglass-half fa-fw w3-hover-text-black w3-margin-right"></i> Idade<br>
+                                    <i class="fas fa-palette fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Cor do Pêlo: {{ animalData.CorPelo }}<br>
                                 </div>
                                 <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-id-card-alt fa-fw w3-hover-text-black w3-margin-right"></i> Raça<br>
-                                </div>
-                            </div>
-                            <div class="column2">
-                                <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-palette fa-fw w3-hover-text-black w3-margin-right"></i> Cor do pelo<br>
-                                </div>
-                                <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-cut fa-fw w3-hover-text-black w3-margin-right"></i> Tipo do pelo<br>
-                                </div>
-                                <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-ruler-horizontal fa-fw w3-hover-text-black w3-margin-right"></i> Comprimento do pelo<br>
-                                </div>
-                                <div class="w3-large w3-margin-bottom">
-                                    <i class="fas fa-ruler-combined fa-fw w3-hover-text-black w3-margin-right"></i> Porte<br>
+                                    <i class="fas fa-ruler-horizontal fa-fw w3-hover-text-black w3-margin-right"></i>
+                                    Comprimento do Pêlo: {{ animalData.CompPelo }}<br>
                                 </div>
                             </div>
                             <div>
@@ -66,24 +80,92 @@
 </template>
 
 <script>
+
 export default {
-  name: 'VerAnimalPerdidos'
+  name: 'VerAnimalPerdidos',
+  data: () => ({
+    animalData: {}
+  }),
+  mounted: function () {
+    this.animalData = this.$session.get('animal')
+    if (this.animalData.Descricao === null) {
+      this.animalData.Descricao = 'Sem Descrição'
+    }
+    this.animalData.Discriminator = this.getDiscriminator(this.animalData.Discriminator)
+    this.animalData.Sexo = this.getSexo(this.animalData.Sexo)
+    this.animalData.Idade = this.getIdade(this.animalData.Idade)
+    this.animalData.CompPelo = this.getCompPelo(this.animalData.CompPelo)
+    this.animalData.Porte = this.getPorte(this.animalData.Porte)
+    this.animalData.Concelho = this.animalData.Concelho
+  },
+  methods: {
+    getDiscriminator (discriminator) {
+      if (discriminator === 'C') {
+        return 'Cão'
+      }
+      if (discriminator === 'G') {
+        return 'Gato'
+      }
+    },
+    getSexo (sexo) {
+      if (sexo === 'M') {
+        return 'Macho'
+      } else {
+        return 'Fêmea'
+      }
+    },
+    getIdade (idade) {
+      if (idade === 'B') {
+        return 'Bebe (Menos de 6 Meses)'
+      }
+      if (this.animalData.Idade === 'J') {
+        return 'Jovem'
+      }
+      if (idade === 'A') {
+        return 'Adulto'
+      }
+    },
+    getCompPelo (compPelo) {
+      if (compPelo === 'C') {
+        return 'Curto'
+      }
+      if (compPelo === 'M') {
+        return 'Médio'
+      }
+      if (compPelo === 'L') {
+        return 'Longo'
+      }
+      if (compPelo === 'I') {
+        return 'Indefinido'
+      }
+      if (compPelo === 'S') {
+        return 'Sem pêlo'
+      }
+    },
+    getPorte (porte) {
+      if (porte === 'P') {
+        return 'Pequeno'
+      }
+      if (porte === 'M') {
+        return 'Médio'
+      }
+      if (porte === 'G') {
+        return 'Grande'
+      }
+    }
+  }
 }
+
 </script>
 
 <style scoped>
-    /* The container */
-    .container {
-        display: inline-block;
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 15px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+
+    .img {
+        height: 300px;
+        width: 300px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        object-fit: cover;
     }
 
     /* Hide the browser's default checkbox */
@@ -95,16 +177,6 @@ export default {
         width: 0;
     }
 
-    /* Create a custom checkbox */
-    .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        background-color: #eee;
-    }
-
     /* On mouse-over, add a grey background color */
     .container:hover input ~ .checkmark {
         background-color: #ccc;
@@ -113,13 +185,6 @@ export default {
     /* When the checkbox is checked, add a blue background */
     .container input:checked ~ .checkmark {
         background-color: #2196F3;
-    }
-
-    /* Create the checkmark/indicator (hidden when not checked) */
-    .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
     }
 
     /* Show the checkmark when checked */
@@ -140,19 +205,11 @@ export default {
         transform: rotate(45deg);
     }
 
-    .center {
-        margin-left: auto;
-        margin-right: auto;
-        width: 250px;
-        height: 250px;
-        background-size: cover;
-    }
-
     /* Create two equal columns that floats next to each other */
     .columnAlign {
         float: left;
         width: 50%;
-        padding: 100px 0;
+        padding: 60px 0;
         text-align: center;
 
     }
@@ -160,20 +217,15 @@ export default {
     .column {
         float: left;
         width: 50%;
-        padding: 70px 0;
-    }
-
-    .columnBtn {
-        float: right;
-        width: 50%;
-        padding: 70px 0;
+        padding: 60px 0px;
     }
 
     .column2 {
         float: left;
         width: 50%;
-        padding: 0px;
+        padding: 10px;
         display:inline-block;
+        text-align: left;
     }
 
     /* Clear floats after the columns */
@@ -182,34 +234,7 @@ export default {
         display: table;
         clear: both;
     }
-    .login100-form-btn {
-        font-family: Montserrat-Bold, serif;
-        font-size: 15px;
-        line-height: 1.5;
-        color: #fff;
-        text-transform: uppercase;
 
-        width: 25%;
-        height: 50px;
-        border-radius: 25px;
-        background: gray;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: inline-block;
-        justify-content: right;
-        align-items: center;
-        padding: 0 25px;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-    .login100-form-btn:hover {
-        background: black;
-    }
     @font-face {
         font-family: Poppins-Regular;
         src: url('../../fonts/poppins/Poppins-Regular.ttf');
@@ -361,259 +386,13 @@ export default {
         width: 100%;
     }
 
-    .login100-form-title {
-        display: block;
-        font-family: Poppins-Bold,serif;
-        font-size: 30px;
-        color: #333333;
-        line-height: 1.2;
-        text-align: center;
-    }
     .login100-form-title i {
         font-size: 60px;
-    }
-
-    .wrap-input100 {
-        width: 100%;
-        position: relative;
-        border-bottom: 2px solid #adadad;
-        margin-bottom: 37px;
-    }
-
-    .input100 {
-        font-family: Poppins-Regular, serif;
-        font-size: 15px;
-        color: #555555;
-        line-height: 1.2;
-
-        display: block;
-        width: 100%;
-        height: 45px;
-        background: transparent;
-        padding: 0 5px;
-    }
-
-    .focus-input100 {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-    }
-
-    .focus-input100::before {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-
-        background: #6a7dfe;
-        background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-        background: -o-linear-gradient(left, #21d4fd, #b721ff);
-        background: -moz-linear-gradient(left, #21d4fd, #b721ff);
-        background: linear-gradient(left, #21d4fd, #b721ff);
-    }
-
-    .focus-input100::after {
-        font-family: Poppins-Regular, serif;
-        font-size: 15px;
-        color: #999999;
-        line-height: 1.2;
-
-        content: attr(data-placeholder);
-        display: block;
-        width: 100%;
-        position: absolute;
-        top: 16px;
-        left: 0px;
-        padding-left: 5px;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
-    .input100:focus + .focus-input100::after {
-        top: -15px;
-    }
-
-    .input100:focus + .focus-input100::before {
-        width: 100%;
-    }
-
-    .has-val.input100 + .focus-input100::after {
-        top: -15px;
-    }
-
-    .has-val.input100 + .focus-input100::before {
-        width: 100%;
-    }
-
-    .btn-show-pass {
-        font-size: 15px;
-        color: #999999;
-
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        align-items: center;
-        position: absolute;
-        height: 100%;
-        top: 0;
-        right: 0;
-        padding-right: 5px;
-        cursor: pointer;
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
-    .container-login100-form-btn {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding-top: 13px;
-    }
-
-    .wrap-login100-form-btn {
-        width: 100%;
-        display: block;
-        position: relative;
-        z-index: 1;
-        border-radius: 25px;
-        overflow: hidden;
-        margin: 0 auto;
-    }
-
-    .login100-form-bgbtn {
-        position: absolute;
-        z-index: -1;
-        width: 300%;
-        height: 100%;
-        background: #a64bf4;
-        background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        background: -o-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        background: -moz-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        background: linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-        top: 0;
-        left: -100%;
-
-        -webkit-transition: all 0.4s;
-        -o-transition: all 0.4s;
-        -moz-transition: all 0.4s;
-        transition: all 0.4s;
-    }
-
-    .login100-form-btn {
-        font-family: Poppins-Medium, serif;
-        font-size: 15px;
-        color: #fff;
-        line-height: 1.2;
-        text-transform: uppercase;
-
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: inline-block;
-        justify-content: right;
-        align-items: right;
-        padding: 0 20px;
-        width: 40%;
-        height: 50px;
-    }
-
-    .wrap-login100-form-btn:hover .login100-form-bgbtn {
-        left: 0;
     }
 
     @media (max-width: 576px) {
         .wrap-login100 {
             padding: 77px 15px 33px 15px;
-        }
-    }
-
-    .validate-input {
-        position: relative;
-    }
-
-    .alert-validate::before {
-        content: attr(data-validate);
-        position: absolute;
-        max-width: 70%;
-        background-color: #fff;
-        border: 1px solid #c80000;
-        border-radius: 2px;
-        padding: 4px 25px 4px 10px;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 0;
-        pointer-events: none;
-
-        font-family: Poppins-Regular, serif;
-        color: #c80000;
-        font-size: 13px;
-        line-height: 1.4;
-        text-align: left;
-
-        visibility: hidden;
-        opacity: 0;
-
-        -webkit-transition: opacity 0.4s;
-        -o-transition: opacity 0.4s;
-        -moz-transition: opacity 0.4s;
-        transition: opacity 0.4s;
-    }
-
-    .alert-validate::after {
-        content: "\f06a";
-        font-family: FontAwesome, serif;
-        font-size: 16px;
-        color: #c80000;
-
-        display: block;
-        position: absolute;
-        background-color: #fff;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -o-transform: translateY(-50%);
-        transform: translateY(-50%);
-        right: 5px;
-    }
-
-    .alert-validate:hover:before {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    @media (max-width: 992px) {
-        .alert-validate::before {
-            visibility: visible;
-            opacity: 1;
         }
     }
 </style>
