@@ -36,10 +36,10 @@ public class Util {
         
         try {
             session = userSessions.get(email);
-            if(session!=null) {
-                System.out.println("Reusing persistent session for user " + email);
+            if(session != null) {
+                /* System.out.println("Reusing persistent session for user " + email); */
             } else {
-                System.out.println("Creating new persistent session for user " + email);
+                /* System.out.println("Creating new persistent session for user " + email); */
                 session = Procura4patasPersistentManager.instance().getSession();
             }
         } catch (Exception e) {

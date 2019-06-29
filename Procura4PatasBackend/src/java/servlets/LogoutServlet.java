@@ -22,13 +22,10 @@ import src.Util;
  */
 @WebServlet(name = "LogoutServlet", urlPatterns = {"/Logout"})
 public class LogoutServlet extends HttpServlet {
-
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    {   
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -52,8 +49,8 @@ public class LogoutServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException
+    {
         try {
             response.setContentType("text/html;charset=UTF-8");
             response.setContentType("application/json");
@@ -65,9 +62,7 @@ public class LogoutServlet extends HttpServlet {
             String email = request.getParameter("email");
             Util.removeSession(email);
             
-        } catch(Exception e) {
-             System.out.println(e);
-        }
+        } catch(Exception e) {}
         
     }
 
@@ -81,17 +76,5 @@ public class LogoutServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
 }

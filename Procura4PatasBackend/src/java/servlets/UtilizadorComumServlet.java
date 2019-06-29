@@ -29,7 +29,20 @@ import src.Util;
  */
 @WebServlet(name = "UtilizadorComumServlet", urlPatterns = {"/UtilizadorComum"})
 public class UtilizadorComumServlet extends HttpServlet {
-
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PrintWriter out = response.getWriter();
+        out.flush();
+        out.close();
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,7 +72,7 @@ public class UtilizadorComumServlet extends HttpServlet {
         
         UtilizadorComum uc = P4P.getUtilizadorComum(session, emailPedido);
 
-        if(uc != null){
+        if(uc != null) {
             JSONObject result = new JSONObject();
             result.put("email", uc.getEmail());
             result.put("password", uc.getPassword());
@@ -70,30 +83,16 @@ public class UtilizadorComumServlet extends HttpServlet {
             result.put("descricao", uc.getDescricao());
             
             PrintWriter out = response.getWriter();
-               out.println(result);
-               out.flush();
-               out.close();
+            out.println(result);
+            out.flush();
+            out.close();
         }
-        else{
+        else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             PrintWriter out = response.getWriter();
             out.flush();
             out.close();
         }
-    }
-    
-    @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-        
-        PrintWriter out = response.getWriter();
-        out.flush();
-        out.close();
     }
 
     /**
@@ -114,7 +113,6 @@ public class UtilizadorComumServlet extends HttpServlet {
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
              
             String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-            System.out.println("Body " + body);
             
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(body);
@@ -152,15 +150,4 @@ public class UtilizadorComumServlet extends HttpServlet {
             out.close();
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

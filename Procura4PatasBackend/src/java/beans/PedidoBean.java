@@ -21,7 +21,6 @@ public class PedidoBean implements PedidoBeanLocal {
     
     @Override
     public boolean adotarAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {
-        
         Date dt  = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String data = sdf.format(dt);
@@ -34,21 +33,18 @@ public class PedidoBean implements PedidoBeanLocal {
         char discriminator = 'A';
         
         try {
-    
             sessao.beginTransaction();
             
             Query query = sessao.createSQLQuery("INSERT INTO Pedido\n" +
                     "(UtilizadorEmail, UtilizadorComumUtilizadorEmail, AnimalID, Data, Estado, DataUltimoContacto, Discriminator)\n" +
                     "VALUES \n" +
                     "("+ "'" + email+ "'" + ", "+ "'" + emailUtilComum + "'" + ", "+ id+", " + "'"+data+ "'" + ", "+ "'" + estado+ "'" + ", "+ "'" + dataUltimoContacto+ "'"  + ", "+ "'"  +discriminator + "'"  +");");
-            
             query.executeUpdate();
             
             sessao.getTransaction().commit();
             return true;
             
         } catch (PersistentException ex) {
-            System.out.println(ex);
             sessao.getTransaction().rollback();
             return false;
         }
@@ -56,7 +52,6 @@ public class PedidoBean implements PedidoBeanLocal {
     
     @Override
     public boolean serFatAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {
-        
         Date dt  = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String data = sdf.format(dt);
@@ -69,21 +64,18 @@ public class PedidoBean implements PedidoBeanLocal {
         char discriminator = 'F';
         
         try {
-    
             sessao.beginTransaction();
             
             Query query = sessao.createSQLQuery("INSERT INTO Pedido\n" +
                     "(UtilizadorEmail, UtilizadorComumUtilizadorEmail, AnimalID, Data, Estado, DataUltimoContacto, Discriminator)\n" +
                     "VALUES \n" +
                     "("+ "'" + email+ "'" + ", "+ "'" + emailUtilComum + "'" + ", "+ id+", " + "'"+data+ "'" + ", "+ "'" + estado+ "'" + ", "+ "'" + dataUltimoContacto+ "'"  + ", "+ "'"  +discriminator + "'"  +");");
-            
             query.executeUpdate();
             
             sessao.getTransaction().commit();
             return true;
             
         } catch (PersistentException ex) {
-            System.out.println(ex);
             sessao.getTransaction().rollback();
             return false;
         }

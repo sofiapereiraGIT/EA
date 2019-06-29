@@ -31,17 +31,6 @@ import src.Util;
  */
 @WebServlet(name = "CanilServlet", urlPatterns = {"/Canil"})
 public class CanilServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -131,7 +120,6 @@ public class CanilServlet extends HttpServlet {
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
              
             String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-            System.out.println("Body " + body);
             
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(body);
@@ -174,15 +162,4 @@ public class CanilServlet extends HttpServlet {
             out.close();
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

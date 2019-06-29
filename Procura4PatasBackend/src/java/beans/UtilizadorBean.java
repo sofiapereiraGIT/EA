@@ -77,7 +77,6 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
     
     @Override
     public List<Animal> getCaoAdocaoUser(PersistentSession sessao, String email) {
-        
         List<Animal> onlyDogs = new ArrayList<>();
         
         try {
@@ -93,16 +92,12 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
                             onlyDogs.add(a);
                         });
             }
-        } catch(PersistentException e) {
-            System.out.println(e);
-        }
-       
+        } catch(PersistentException e) {}
         return onlyDogs;
     }
     
     @Override
     public List<Animal> getGatoAdocaoUser(PersistentSession sessao, String email) {
-        
         List<Animal> onlyCats = new ArrayList<>();
         
         try {
@@ -116,16 +111,12 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
                 onlyCats.add(a);
                 });
             }
-        } catch(PersistentException e) {
-            System.out.println(e);
-        }
-          
+        } catch(PersistentException e) {}
         return onlyCats;
     }
     
     @Override
     public List<Animal> getTodosCaes(PersistentSession sessao, String email) {
-        
         List<Animal> todosCaes = new ArrayList<>();
         
         try {
@@ -139,16 +130,12 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
                 });
             }
             
-        } catch(PersistentException e) {
-            System.out.println(e);
-        }
-        
+        } catch(PersistentException e) {}
         return todosCaes;
     }
     
     @Override
     public List<Animal> getTodosGatos(PersistentSession sessao, String email) {
-        
         List<Animal> todosGatos = new ArrayList<>();
         
         try {
@@ -161,25 +148,18 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
                     todosGatos.add(a);
                 });
             }
-        } catch(PersistentException e) {
-            System.out.println(e);
-        }
-        
+        } catch(PersistentException e) {}
         return todosGatos;
     }
     
     @Override
     public List<Pedido> getPedidosUser(PersistentSession sessao, String email) {
-        
         List<Pedido> pedidosTotal = new ArrayList<>();
         
         try {
             Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
             pedidosTotal = Arrays.asList(user.listaPedidos.toArray() );
-        } catch(PersistentException e) {
-            System.out.println(e);
-        }
-        
+        } catch(PersistentException e) {}
         return pedidosTotal;  
     }
 }

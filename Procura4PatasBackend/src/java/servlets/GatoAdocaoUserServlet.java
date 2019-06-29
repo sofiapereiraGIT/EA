@@ -30,9 +30,7 @@ public class GatoAdocaoUserServlet extends HttpServlet {
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    { 
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -86,7 +84,6 @@ public class GatoAdocaoUserServlet extends HttpServlet {
             JSONArray ja = new JSONArray();
             
             for(Animal g : onlyCats) {
-          
                 jsonObjArr = new JSONObject();
                 jsonObjArr.put("ID",g.getID());
                 jsonObjArr.put("Nome",g.getNome());
@@ -105,7 +102,6 @@ public class GatoAdocaoUserServlet extends HttpServlet {
             }
             
             myJson.put("gatos", ja);
-            System.out.println("JsonArray = " +  myJson.get("gatos"));
             
             // Enviar JSON ARRAY
             PrintWriter out = response.getWriter();
@@ -124,17 +120,5 @@ public class GatoAdocaoUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
 }

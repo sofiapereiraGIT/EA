@@ -27,13 +27,10 @@ import src.Util;
  */
 @WebServlet(name = "TodosAnimaisUserServlet", urlPatterns = {"/TodosAnimaisUser"})
 public class TodosAnimaisUserServlet extends HttpServlet {
-
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
     {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -111,14 +108,12 @@ public class TodosAnimaisUserServlet extends HttpServlet {
           }
             
             myJson.put("todos", ja);
-            System.out.println("JsonArray = " +  myJson.get("todos"));
             
             // Enviar JSON ARRAY
             PrintWriter out = response.getWriter();
             out.println(myJson);
             out.flush();
-            out.close();
-            
+            out.close();  
     }
 
     /**

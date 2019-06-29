@@ -35,14 +35,10 @@ import src.Util;
  */
 @WebServlet(name = "CaoAdocaoUserServlet", urlPatterns = {"/CaoAdocaoUser"})
 public class CaoAdocaoUserServlet extends HttpServlet {
-
- 
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    {   
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -55,8 +51,6 @@ public class CaoAdocaoUserServlet extends HttpServlet {
         out.close();
     }
     
-
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -133,17 +127,5 @@ public class CaoAdocaoUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
 }

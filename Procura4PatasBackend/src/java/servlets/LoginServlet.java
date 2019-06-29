@@ -29,28 +29,10 @@ import src.Util;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // processRequest(request, response);
-    }
-    
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
+    {   
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -62,7 +44,20 @@ public class LoginServlet extends HttpServlet {
         out.flush();
         out.close();
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {}
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -79,14 +74,11 @@ public class LoginServlet extends HttpServlet {
             response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-             
-            System.out.println("[POST] PASSEI AQUI");
+            
             String body = request.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
-            System.out.println("Body " + body);
             
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(body);
-
             
             String email = (String) json.get("email");
             String password = (String) json.get("password");
@@ -125,15 +117,5 @@ public class LoginServlet extends HttpServlet {
             out.close();
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    // </editor-fold>
 }

@@ -30,14 +30,10 @@ import src.Util;
  */
 @WebServlet(name = "TodosGatosUserServlet", urlPatterns = {"/TodosGatosUser"})
 public class TodosGatosUserServlet extends HttpServlet {
-    
-    
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
     {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -110,7 +106,6 @@ public class TodosGatosUserServlet extends HttpServlet {
             }
             
             myJson.put("gatos", ja);
-            System.out.println("JsonArray = " +  myJson.get("gatos"));
             
             // Enviar JSON ARRAY
             PrintWriter out = response.getWriter();
@@ -129,17 +124,7 @@ public class TodosGatosUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
+    
+    // </editor-fold>
 }

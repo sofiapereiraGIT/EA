@@ -28,7 +28,22 @@ import src.Util;
  */
 @WebServlet(name = "NumeroAnimaisServlet", urlPatterns = {"/NumeroAnimais"})
 public class NumeroAnimaisServlet extends HttpServlet {
-
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException
+    {   
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        
+        PrintWriter out = response.getWriter();
+        out.flush();
+        out.close();
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -72,24 +87,6 @@ public class NumeroAnimaisServlet extends HttpServlet {
         out.close();   
     }
     
-    @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException
-    {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-        
-        PrintWriter out = response.getWriter();
-        out.flush();
-        out.close();
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -100,17 +97,5 @@ public class NumeroAnimaisServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
 }
