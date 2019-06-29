@@ -178,12 +178,13 @@ export default {
       }
     },
     adoptRequest () {
-      this.pedidoData.email = this.$session.get('animalOwner')
-      this.pedidoData.ID = this.$session.get('ID')
+      this.pedidoData.email = this.$session.get('email')
+      this.pedidoData.ID = this.$session.get('animal').ID
       this.pedidoData.emailUtilComum = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       axios.post(this.$axiosurl + 'AdotarAnimal', this.pedidoData)
         .then(response => {
+          console.log(response)
           if (response.data.msg === true) {
             this.message = 'O Seu Pedido Foi Registado Com Sucesso.'
             this.error = 0
@@ -196,8 +197,8 @@ export default {
         })
     },
     fatRequest () {
-      this.pedidoData.email = this.$session.get('animalOwner')
-      this.pedidoData.ID = this.$session.get('ID')
+      this.pedidoData.email = this.$session.get('email')
+      this.pedidoData.ID = this.$session.get('animal').ID
       this.pedidoData.emailUtilComum = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       axios.post(this.$axiosurl + 'serFatAnimal', this.pedidoData)

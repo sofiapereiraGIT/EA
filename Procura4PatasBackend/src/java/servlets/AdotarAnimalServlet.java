@@ -58,9 +58,7 @@ public class AdotarAnimalServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-  
-    }
+            throws ServletException, IOException {}
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -108,17 +106,5 @@ public class AdotarAnimalServlet extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(AdotarAnimalServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
