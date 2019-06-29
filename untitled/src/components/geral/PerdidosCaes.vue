@@ -101,7 +101,6 @@
             <div class="w3-quarter w3-container w3-margin-bottom"
                  v-for="cao in caesFilter[page]" :key="cao.ID">
                 <router-link to="/VerAnimalPerdido">
-                    {{cao.Nome}}
                     <img
                         v-if="cao.Fotografia==='' || cao.Fotografia===null"
                         v-on:click="selAnimal=cao"
@@ -111,6 +110,20 @@
                         v-on:click="selAnimal=cao"
                         :src="require('../../../img/'+cao.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
+                <div class="w3-container w3-white">
+                    <router-link to="/VerAnimalAdotarUC"
+                                 v-if="cao.Nome==='' || cao.Nome===null"
+                                 v-on:click="selAnimal=cao"
+                                 style="text-decoration: none; color: black">
+                        <strong>Sem nome</strong>
+                    </router-link>
+                    <router-link to="/VerAnimalAdotarUC"
+                                 v-else
+                                 v-on:click="selAnimal=cao"
+                                 style="text-decoration: none; color: black">
+                        <strong>{{cao.Nome}}</strong>
+                    </router-link>
+                </div>
             </div>
         </div>
 

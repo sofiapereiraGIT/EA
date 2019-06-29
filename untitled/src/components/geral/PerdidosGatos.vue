@@ -110,6 +110,20 @@
                         v-on:click="selAnimal=gato"
                         :src="require('../../../img/'+gato.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
+                <div class="w3-container w3-white">
+                    <router-link to="/VerAnimalAdotarUC"
+                                 v-if="gato.Nome==='' || gato.Nome===null"
+                                 v-on:click="selAnimal=gato"
+                                 style="text-decoration: none; color: black">
+                        <strong>Sem nome</strong>
+                    </router-link>
+                    <router-link to="/VerAnimalAdotarUC"
+                                 v-else
+                                 v-on:click="selAnimal=gato"
+                                 style="text-decoration: none; color: black">
+                        <strong>{{gato.Nome}}</strong>
+                    </router-link>
+                </div>
             </div>
         </div>
 
