@@ -64,7 +64,7 @@
                     :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
             </router-link>
             <br/>
-            {{g.Nome}}
+            <label v-if="g.Nome!==''">{{ g.Nome }}</label>
         </div>
     </div>
     </div>
