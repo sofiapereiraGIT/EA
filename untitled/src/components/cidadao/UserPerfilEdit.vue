@@ -1,12 +1,20 @@
 <template>
-    <div style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
+    <div style="padding-bottom:50px; padding-left: 50px; padding-right: 50px; padding-top: 100px">
         <form class="review-form" @submit.prevent="submitUtilizador">
+            <div v-if="error===1" class="Error">
+                <span class="closebtn" @click="closeErrorNotification()">&times;</span>
+                <strong>Info!</strong> {{ message }}
+            </div>
+            <div v-if="success===1" class="Success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Info!</strong> {{ message }}
+            </div>
             <div class="w3-row w3-padding-32 w3-section">
                 <div class="w3-col m6 w3-container">
                     <img v-if="utilizador.fotografia===null || utilizador.fotografia===''" src="../../assets/user.png" style="margin-bottom: 10px" class="img w3-image">
                     <img v-else :src="require('../../../img/'+utilizador.fotografia)" style="margin-bottom: 10px" class="img w3-image">
                     <br><br>
-                    <button v-if="!mudarFoto" class="w3-button" @click="mudarFoto = true">Mudar imagem</button>
+                    <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Mudar imagem</button>
                     <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
                 </div>
                 <div class="w3-col m3 w3-panel">
@@ -87,7 +95,7 @@
                         <br>
                         <br>
                         <br>
-                        <input type="submit" value="Guardar">
+                        <input type="submit" class="login100-form-btn" value="Guardar">
                     </div>
                 </div>
             </div>
@@ -104,6 +112,9 @@ export default {
   data: function () {
     return {
       utilizador: null,
+      success: 0,
+      error: 0,
+      message: '',
       novoUtilizador: {
         email: null,
         password: null,
@@ -130,6 +141,16 @@ export default {
     this.FetchData()
   },
   methods: {
+    stateChange (newState) {
+      setTimeout(function () {
+        if (newState === -1) {
+          route.push('/UserHomePage')
+        }
+      }, 3000)
+    },
+    closeErrorNotification () {
+      this.error = 0
+    },
     FetchData: function () {
       const value = this.$session.get('user')
       axios.get(this.$axiosurl + 'UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
@@ -155,8 +176,20 @@ export default {
             .then(response => {
               route.push('/UserPerfilEdit')
               this.mudarFoto = false
+              this.success = 1
+              this.error = 0
+              this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos'
+              this.stateChange(-1)
+            }).catch(e => {
+              this.success = 0
+              this.error = 1
+              this.message = 'Não foi possível efetuar as alterações.'
             })
-        } else alert('Password não coincide, por favor tente novamente.')
+        } else {
+          this.error = 1
+          this.success = 0
+          this.message = 'Password não coincide, por favor tente novamente.'
+        }
       }
     },
 
@@ -174,5 +207,237 @@ export default {
         overflow-y: hidden;
         overflow-x: hidden;
         object-fit: cover;
+    }
+
+    .Success {
+        padding: 20px;
+        background-color: green;
+        color: white;
+    }
+    .Error {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .login100-form-btn {
+        font-family: Montserrat-Bold, serif;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #fff;
+        text-transform: uppercase;
+
+        width: 60%;
+        height: 50px;
+        border-radius: 25px;
+        background: gray;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        padding: 0 0px;
+
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+    }
+    .login100-form-btn:hover {
+        background: black;
+    }
+    @font-face {
+        font-family: Poppins-Regular;
+        src: url('../../fonts/poppins/Poppins-Regular.ttf');
+    }
+
+    @font-face {
+        font-family: Poppins-Medium;
+        src: url('../../fonts/poppins/Poppins-Medium.ttf');
+    }
+
+    @font-face {
+        font-family: Poppins-Bold;
+        src: url('../../fonts/poppins/Poppins-Bold.ttf');
+    }
+
+    @font-face {
+        font-family: Poppins-SemiBold;
+        src: url('../../fonts/poppins/Poppins-SemiBold.ttf');
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body, html {
+        height: 100%;
+        font-family: Poppins-Regular, sans-serif;
+    }
+
+    a {
+        font-family: Poppins-Regular, serif;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #666666;
+        margin: 0;
+        transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+        margin: 0;
+    }
+
+    p {
+        font-family: Poppins-Regular, serif;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #666666;
+        margin: 0;
+    }
+
+    ul, li {
+        margin: 0;
+        list-style-type: none;
+    }
+
+    input {
+        outline: none;
+        border: none;
+    }
+
+    textarea {
+        outline: none;
+        border: none;
+    }
+
+    textarea:focus, input:focus {
+        border-color: transparent !important;
+    }
+
+    input:focus::-webkit-input-placeholder { color:transparent; }
+    input:focus:-moz-placeholder { color:transparent; }
+    input:focus::-moz-placeholder { color:transparent; }
+    input:focus:-ms-input-placeholder { color:transparent; }
+
+    textarea:focus::-webkit-input-placeholder { color:transparent; }
+    textarea:focus:-moz-placeholder { color:transparent; }
+    textarea:focus::-moz-placeholder { color:transparent; }
+    textarea:focus:-ms-input-placeholder { color:transparent; }
+
+    input::-webkit-input-placeholder { color: #adadad;}
+    input:-moz-placeholder { color: #adadad;}
+    input::-moz-placeholder { color: #adadad;}
+    input:-ms-input-placeholder { color: #adadad;}
+
+    textarea::-webkit-input-placeholder { color: #adadad;}
+    textarea:-moz-placeholder { color: #adadad;}
+    textarea::-moz-placeholder { color: #adadad;}
+    textarea:-ms-input-placeholder { color: #adadad;}
+
+    button {
+        outline: none !important;
+        border: none;
+        background: transparent;
+        display: inline-block;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    iframe {
+        border: none !important;
+    }
+
+    .login100-form-title i {
+        font-size: 60px;
+    }
+
+    .input100:focus + .focus-input100::after {
+        top: -15px;
+    }
+
+    .input100:focus + .focus-input100::before {
+        width: 100%;
+    }
+
+    .has-val.input100 + .focus-input100::after {
+        top: -15px;
+    }
+
+    .has-val.input100 + .focus-input100::before {
+        width: 100%;
+    }
+
+    .login100-form-btn {
+        font-family: Poppins-Medium, serif;
+        font-size: 15px;
+        color: #fff;
+        line-height: 1.2;
+        text-transform: uppercase;
+
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: inline-block;
+        justify-content: right;
+        padding: 0 20px;
+        width: 40%;
+        height: 50px;
+    }
+
+    @media (max-width: 576px) {
+        .wrap-login100 {
+            padding: 77px 15px 33px 15px;
+        }
     }
 </style>

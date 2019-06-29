@@ -3,7 +3,7 @@
     <div class="transbox">
       <br>
       <div v-if="error===1" class="Error">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span class="closebtn" @click="closeErrorNotification()">&times;</span>
         <strong>Info!</strong> {{ message }}
       </div>
       <div v-if="success===1" class="Success">
@@ -15,7 +15,8 @@
         <label><input v-model="animal.Nome" type="text" name="animalName" placeholder="Nome" required></label>
         <br>
         <br>
-        <input id="fotoAnimal" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
+          <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Escolher foto</button>
+          <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
         <br>
         <br>
         <label><select v-model="animal.Discriminator" style="width: 25%" required>
@@ -47,11 +48,11 @@
         <br>
         <label><select v-model="animal.CorPelo" style="width: 25%" required>
           <option value="" disabled>Cor do Pêlo</option>
-          <option value="Laranja">Laranja</option>
           <option value="Bege">Bege</option>
           <option value="Branco">Branco</option>
           <option value="Castanho">Castanho</option>
           <option value="Cinzento">Cinzento</option>
+          <option value="Laranja">Laranja</option>
           <option value="Preto">Preto</option>
           <option value="Indefinido">Indefinido</option>
         </select></label>
@@ -66,15 +67,15 @@
         <br v-if="animal.Discriminator==='C'">
         <label><select v-if="animal.Discriminator==='C'" v-model="animal.Raca" style="width: 50%" required>
           <option value="" disabled>Raça Cão</option>
-          <option value="Sem Raça Definida">Sem Raça Definida</option>
-          <option value="Pastor Alemao">Pastor Alemão</option>
-          <option value="Lavrador">Lavrador</option>
           <option value="Buldogue">Buldogue</option>
           <option value="Beagle">Beagle</option>
+          <option value="Golden Retriever">Golden Retriever</option>
+          <option value="Lavrador">Lavrador</option>
+          <option value="Pastor Alemao">Pastor Alemão</option>
           <option value="Poodle">Poodle</option>
           <option value="Rottwiller">Rottwiller</option>
-          <option value="Golden Retriever">Golden Retriever</option>
           <option value="Outro">Outro</option>
+          <option value="Sem Raça Definida">Sem Raça Definida</option>
         </select></label>
         <br v-if="animal.Discriminator==='G'">
         <br v-if="animal.Discriminator==='G'">
@@ -92,6 +93,10 @@
         <label><input v-model="animal.Descricao" type="text" name="descricao" placeholder="Descrição"></label>
         <br>
         <br>
+          <label class="container">Para adoção
+              <input type="radio" name="radio" value="A" v-model="animal.Estado">
+              <span class="checkmark"></span>
+          </label>
           <label class="container">Encontrei este animal na rua
               <input type="radio" name="radio" value="E" v-model="animal.Estado">
               <span class="checkmark"></span>
@@ -102,10 +107,6 @@
           </label>
           <label v-if="this.$session.get('user')[1] === 1" class="container">Procuro FAT
               <input type="radio" name="radio" value="C" v-model="animal.Estado">
-              <span class="checkmark"></span>
-          </label>
-          <label class="container">Adotado
-              <input type="radio" name="radio" value="A" v-model="animal.Estado">
               <span class="checkmark"></span>
           </label>
         <br>
@@ -140,7 +141,8 @@ export default {
       Descricao: '',
       Concelho: '',
       Discriminator: ''
-    }
+    },
+    mudarFoto: false
   }),
   mounted: function () {
     if (this.$session.has('user') === false) {
@@ -148,6 +150,9 @@ export default {
     }
   },
   methods: {
+    closeErrorNotification () {
+      this.error = 0
+    },
     stateChange (newState) {
       setTimeout(function () {
         if (newState === -1) {
@@ -194,13 +199,13 @@ export default {
 .background {
     width: auto;
     height: 100%;
-    margin-top: 38px;
-    border: 1px solid black;
+    margin-top: 45px;
+    border: 1px solid transparent;
     background: url("../../assets/dog4.jpg") no-repeat;
     background-size: cover;
 }
 .transbox {
-    opacity: 0.7;
+    opacity: 0.9;
     margin: 10% 25%;
     text-align: center;
     border-radius: 10px;

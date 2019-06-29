@@ -15,7 +15,7 @@
                 <label><input v-model="animal.Nome" type="text" name="animalName" placeholder="Nome" required></label>
                 <br>
                 <br>
-                <label><select v-model="animal.Concelho" style="width: 25%" required>
+                <label><select v-model="animal.Concelho" style="width: 50%" required>
                     <option value="" disabled>Concelho onde perdeu o animal</option>
                     <option value="Amarante">Amarante</option>
                     <option value="Braga">Braga</option>
@@ -27,7 +27,8 @@
                 </select></label>
                 <br>
                 <br>
-                <input id="fotoAnimal" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
+                <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Escolher foto</button>
+                <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia" >
                 <br>
                 <br>
                 <label><select v-model="animal.Discriminator" style="width: 25%" required>
@@ -136,7 +137,8 @@ export default {
         Descricao: '',
         Concelho: '',
         Discriminator: ''
-      }
+      },
+      mudarFoto: false
     }
   },
   mounted: function () {
@@ -195,12 +197,13 @@ export default {
     .background {
         width: 100%;
         height: 100vh;
-        margin-top: 38px;
-        border: 1px solid black;
+        margin-top: 45px;
+        border: 1px solid transparent;
         background: url("../../assets/dog2.jpg");
+        background-size: cover;
     }
     .transbox {
-        opacity: 0.7;
+        opacity: 0.9;
         margin: 10% 25%;
         text-align: center;
         border-radius: 10px;

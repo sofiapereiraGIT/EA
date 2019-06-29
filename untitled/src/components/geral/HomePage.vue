@@ -14,7 +14,7 @@
       </div>
       <div class="w3-third w3-section" style="color: saddlebrown">
         <span class="w3-xlarge">Factos</span><br>
-          {{randomFact}}
+          {{factCat}}
       </div>
       <div class="w3-third w3-section">
         <span class="w3-xlarge">{{nrGatos}}</span><br>
@@ -76,8 +76,7 @@ export default {
   data: () => ({
     nrCaes: 0,
     nrGatos: 0,
-    factsList: {},
-    randomFact: ''
+    factCat: {}
   }),
 
   mounted: function () {
@@ -91,24 +90,37 @@ export default {
       }).catch()
 
     if (!this.$session.has('catFacts')) {
-      console.log('getCatFacts')
+      console.log(this.factCat)
 
       axios.defaults.headers['Content-Type'] = 'Accept: application/json'
-      axios.get('http://www.catfact.info/api/v1/facts.json?page=:page&per_page=:per_page')
+      axios.defaults.headers['dataType'] = 'jsonp'
+      axios.defaults.headers['responseType'] = 'application/json'
+      axios.get('https://us-central1-cat-api-fb6de.cloudfunctions.net/fact')
         .then(response => {
-          this.factsList = response.data.facts
-          this.$session.set('catFacts', [this.factsList, 1])
-          this.randomFact = this.factsList[Math.floor(Math.random() * this.factsList.length)].details
+          console.log(response.data)
+          this.factCat = response.data
+          this.$session.set('catFacts', [this.factCat, 1])
         })
         .catch(err => {
           console.log(err)
         })
     } else {
-      this.factsList = this.$session.get('catFacts')[0]
-      var times = this.$session.get('catFacts')[1] + 1
-      this.$session.set('catFacts', [this.factsList, times])
+      axios.defaults.headers['Content-Type'] = 'Accept: application/json'
+      axios.defaults.headers['dataType'] = 'jsonp'
+      axios.defaults.headers['responseType'] = 'application/json'
+      axios.get('https://us-central1-cat-api-fb6de.cloudfunctions.net/fact')
+        .then(response => {
+          console.log(response.data)
+          this.factCat = response.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      this.factCat = this.$session.get('catFacts')[0]
+      console.log(this.factCat)
+      const times = this.$session.get('catFacts')[1] + 1
+      this.$session.set('catFacts', [this.factCat, times])
       console.log('reutilizar catsFacts da sessão pela ' + times + ' vez')
-      this.randomFact = this.factsList[Math.floor(Math.random() * this.factsList.length)].details
     }
   }
 }
