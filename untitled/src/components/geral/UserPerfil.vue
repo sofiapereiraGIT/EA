@@ -55,7 +55,7 @@ export default {
   methods: {
     FetchData: function () {
       if (this.$session.has('user')) {
-        axios.get(this.$axiosurl + '/UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
+        axios.get(this.$axiosurl + 'UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
           this.UserInfo = response.data
           console.log(this.UserInfo)
         })
