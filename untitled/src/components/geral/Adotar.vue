@@ -11,12 +11,12 @@
             <div class="w3-container w3-col l3 m1 w3-hide-small"></div>
             <div class="w3-col l2 m4">
                 <router-link to="/AdotarCaes">
-                    <img border="0" alt="W3Schools" src="../../assets/cao.png" width="350" height="350">
+                    <img border="0" alt="W3Schools" src="../../assets/cao.png">
                 </router-link>
             </div>
             <div class="w3-col m5">
                 <router-link to="/AdotarGatos">
-                    <img border="0" alt="W3Schools" src="../../assets/gato.png" width="780" height="450">
+                    <img border="0" alt="W3Schools" src="../../assets/gato.png">
                 </router-link>
             </div>
             <div class="w3-container w3-col l3 m1 w3-hide-small"></div>
@@ -31,6 +31,14 @@ export default {
 </script>
 
 <style scoped>
+    img {
+        height: 100%;
+        width: 100%;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        object-fit: cover;
+    }
+
     .texto {
         font-size: 48px;
     }
