@@ -197,7 +197,7 @@ export default {
         height: 100vh;
         margin-top: 38px;
         border: 1px solid black;
-        background: url("../../assets/cao2.jpg");
+        background: url("../../assets/dog2.jpg");
     }
     .transbox {
         opacity: 0.7;

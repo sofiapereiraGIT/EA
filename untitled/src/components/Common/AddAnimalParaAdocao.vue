@@ -192,11 +192,12 @@ export default {
     color: white;
 }
 .background {
-    width: 100%;
-    height: 100vh;
+    width: auto;
+    height: 100%;
     margin-top: 38px;
     border: 1px solid black;
-    background: url("../../assets/cao2.jpg");
+    background: url("../../assets/dog4.jpg") no-repeat;
+    background-size: cover;
 }
 .transbox {
     opacity: 0.7;
