@@ -94,59 +94,132 @@
             </div>
         </div>
 
+        <div v-if="selAnimal!==null"> {{this.$session.set('animal', selAnimal)}} </div>
+
         <!-- First Photo Grid-->
         <div class="w3-row-padding" style="margin-top: 25px;">
-            <div class="w3-quarter w3-container w3-margin-bottom">
+            <div class="w3-quarter w3-container w3-margin-bottom"
+                 v-for="gato in gatosFilter[page]" :key="gato.ID">
                 <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/logo.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/homepage.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                    <img
+                        v-if="gato.Fotografia==='' || gato.Fotografia===null"
+                        v-on:click="selAnimal=gato"
+                        src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
+                    <img
+                        v-else
+                        v-on:click="selAnimal=gato"
+                        :src="require('../../../img/'+gato.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
             </div>
         </div>
 
-        <!-- Second Photo Grid-->
-        <div class="w3-row-padding">
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
+        <!-- Pagination -->
+        <nav class="w3-center" v-if="gatosFilter.length>8" style="margin-bottom: 25px;">
+            <div class="w3-bar">
+                <button class="w3-button" v-bind:disabled="page===0" v-on:click="page -= 1">
+                    Anterior
+                </button>
+                <button class="w3-button"
+                        v-if="page<Math.floor(gatosFilter.length/nrPerPage) && p+page>=1"
+                        v-bind:class="{ 'w3-green':  page  === p+page-1 }"
+                        v-for="p in [0,1,2]" :key="p+page"
+                        v-on:click="page = p+page-1">
+                    {{p+page}}
+                </button>
+                <button class="w3-button"
+                        v-if="page===Math.floor(gatosFilter.length/nrPerPage)"
+                        v-bind:class="{ 'w3-green':  page  === Math.floor(gatosFilter.length/nrPerPage)+p-1 }"
+                        v-for="p in [-1,0,1]" :key="Math.floor(gatosFilter.length/nrPerPage)+p"
+                        v-on:click="page = Math.floor(gatosFilter.length/nrPerPage)-p-1">
+                    {{Math.floor(gatosFilter.length/nrPerPage)+p}}
+                </button>
+                <button class="w3-button"
+                        v-bind:disabled="page===Math.floor(gatosFilter.length/nrPerPage)"
+                        v-on:click="page += 1">
+                    Próximo
+                </button>
             </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-            <div class="w3-quarter w3-container w3-margin-bottom">
-                <router-link to="/VerAnimalPerdido">
-                    <img src="../../assets/FAT.jpg" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
-                </router-link>
-            </div>
-        </div>
+        </nav>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'PerdidosGatos'
+  name: 'PerdidosGatos',
+
+  data: () => ({
+    gatos: [],
+    page: 0,
+    nrPerPage: 12,
+    selAnimal: null
+  }),
+
+  mounted: function () {
+    if (!this.$session.has('gatosPerdidos') || this.$session.get('gatosPerdidos')[1] > 10) {
+      console.log('getGatosPerdidos')
+
+      if (this.$session.has('user')) {
+        axios.defaults.headers['Content-Type'] = 'application/json'
+        axios
+          .get(this.$axiosurl + 'GatosPerdidos?email=' + this.$session.get('user')[0])
+          .then(response => {
+            this.gatos = response.data.gatos
+            this.$session.set('gatosPerdidos', [this.gatos, 1])
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        axios.defaults.headers['Content-Type'] = 'application/json'
+        axios
+          .get(this.$axiosurl + 'GatosPerdidos')
+          .then(response => {
+            this.gatos = response.data.gatos
+            this.$session.set('gatosPerdidos', [this.gatos, 1])
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    } else {
+      this.gatos = this.$session.get('gatosPerdidos')[0]
+      var times = this.$session.get('gatosPerdidos')[1] + 1
+      this.$session.set('gatosPerdidos', [this.gatos, times])
+      console.log('reutilizar gatos perdidos da sessão pela ' + times + ' vez')
+    }
+  },
+
+  computed: {
+    gatosFilter: function () {
+      // todo: aplica filtros
+      var gatosFilter = this.gatos
+
+      var i = 0
+      var p = 0
+      var page = []
+      page[p] = []
+      var nrPerPage = this.nrPerPage
+
+      gatosFilter.forEach(function (c) {
+        if (i < nrPerPage) {
+          page[p].push(c)
+          page.push(c)
+          i++
+        } else {
+          p++
+          page[p] = []
+          i = 0
+          i++
+          page[p].push(c)
+          page.push(c)
+        }
+      })
+
+      return page
+    }
+  }
 }
 </script>
 

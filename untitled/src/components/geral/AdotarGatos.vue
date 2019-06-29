@@ -180,7 +180,7 @@ export default {
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios
-          .get('http://localhost:8080/procura4patas/GatosAdotar?email=' + this.$session.get('user')[0])
+          .get(this.$axiosurl + 'GatosAdotar?email=' + this.$session.get('user')[0])
           .then(response => {
             this.gatos = response.data.gatos
             this.$session.set('gatosAdotar', [this.gatos, 1])
@@ -191,7 +191,7 @@ export default {
       } else {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios
-          .get('http://localhost:8080/procura4patas/GatosAdotar')
+          .get(this.$axiosurl + 'GatosAdotar')
           .then(response => {
             this.gatos = response.data.gatos
             this.$session.set('gatosAdotar', [this.gatos, 1])
@@ -204,7 +204,7 @@ export default {
       this.gatos = this.$session.get('gatosAdotar')[0]
       var times = this.$session.get('gatosAdotar')[1] + 1
       this.$session.set('gatosAdotar', [this.gatos, times])
-      console.log('reutilizar gatos da sessão pela ' + times + ' vez')
+      console.log('reutilizar gatos adotar da sessão pela ' + times + ' vez')
     }
   },
 

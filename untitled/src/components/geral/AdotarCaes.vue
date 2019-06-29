@@ -180,7 +180,7 @@ export default {
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios
-          .get('http://localhost:8080/procura4patas/CaesAdotar?email=' + this.$session.get('user')[0])
+          .get(this.$axiosurl + 'CaesAdotar?email=' + this.$session.get('user')[0])
           .then(response => {
             this.caes = response.data.caes
             this.$session.set('caesAdotar', [this.caes, 1])
@@ -191,7 +191,7 @@ export default {
       } else {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios
-          .get('http://localhost:8080/procura4patas/CaesAdotar')
+          .get(this.$axiosurl + 'CaesAdotar')
           .then(response => {
             this.caes = response.data.caes
             this.$session.set('caesAdotar', [this.caes, 1])
@@ -204,7 +204,7 @@ export default {
       this.caes = this.$session.get('caesAdotar')[0]
       var times = this.$session.get('caesAdotar')[1] + 1
       this.$session.set('caesAdotar', [this.caes, times])
-      console.log('reutilizar caes da sessão pela ' + times + ' vez')
+      console.log('reutilizar caes adotar da sessão pela ' + times + ' vez')
     }
   },
 
