@@ -7,17 +7,22 @@
         <!-- Sticky Filter Concelho -->
         <div class="w3-container" style="position: -webkit-sticky; position: sticky; top: 30px; background-color: white; padding-top: 20px">
             <div class="w3-dropdown-hover" style="margin-bottom: 25px;">
-                <button class="w3-button w3-black fixed-top" style="padding: 10px; width: 200px;" v-if="selConcelho===''">Concelho</button>
-                <button class="w3-button w3-black fixed-top" style="padding: 10px; width: 200px;" v-else>{{selConcelho}}</button>
+                <button class="w3-button w3-black fixed-top" style="padding: 10px; width: 200px;" v-on:click="selConcelho=''" v-if="selConcelho===''">Concelho</button>
+                <button class="w3-button w3-black fixed-top" style="padding: 10px; width: 200px;" v-on:click="selConcelho=''" v-else>{{selConcelho}}</button>
                 <div class="w3-dropdown-content w3-bar-block w3-border" style="width: 200px;">
-                    <option class="w3-bar-item w3-button"
+                    <select size="4" style="width: 200px;">
+                        <option
+                            class="w3-bar-item w3-button"
                             v-for="concelho in concelhos" :key="concelho"
                             v-on:click="selConcelho=concelho, page=0">
-                        {{concelho}}
-                    </option>
-                    <option class="w3-bar-item w3-button" v-on:click="selConcelho=''">
-                        Remover filtro
-                    </option>
+                            {{concelho}}
+                        </option>
+                        <option
+                            class="w3-bar-item w3-button"
+                            v-on:click="selConcelho=''">
+                            Remover filtro
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -48,27 +53,27 @@
         </div>
 
         <!-- Pagination -->
-        <nav class="w3-center" v-if="canisDoSelconcelho.length>8" style="margin-bottom: 25px;">
+        <nav class="w3-center" v-if="(canisDoSelconcelho.length-1)>8" style="margin-bottom: 25px;">
             <div class="w3-bar">
                 <button class="w3-button" v-bind:disabled="page===0" v-on:click="page -= 1">
                     Anterior
                 </button>
                 <button class="w3-button"
-                        v-if="page<Math.floor(canisDoSelconcelho.length/nrPerPage) && p+page>=1"
+                        v-if="page<Math.floor((canisDoSelconcelho.length-1)/nrPerPage) && p+page>=1"
                         v-bind:class="{ 'w3-green':  page  === p+page-1 }"
                         v-for="p in [0,1,2]" :key="p+page"
                         v-on:click="page = p+page-1">
                     {{p+page}}
                 </button>
                 <button class="w3-button"
-                        v-if="page===Math.floor(canisDoSelconcelho.length/nrPerPage)"
-                        v-bind:class="{ 'w3-green':  page  === Math.floor(canisDoSelconcelho.length/nrPerPage)+p-1 }"
-                        v-for="p in [-1,0,1]" :key="Math.floor(canisDoSelconcelho.length/nrPerPage)+p"
-                        v-on:click="page = Math.floor(canisDoSelconcelho.length/nrPerPage)-p-1">
-                    {{Math.floor(canisDoSelconcelho.length/nrPerPage)+p}}
+                        v-if="page===Math.floor((canisDoSelconcelho.length-1)/nrPerPage)"
+                        v-bind:class="{ 'w3-green':  page  === Math.floor((canisDoSelconcelho.length-1)/nrPerPage)+p-1 }"
+                        v-for="p in [-1,0,1]" :key="Math.floor((canisDoSelconcelho.length-1)/nrPerPage)+p"
+                        v-on:click="page = Math.floor((canisDoSelconcelho.length-1)/nrPerPage)+p-1">
+                    {{Math.floor((canisDoSelconcelho.length-1)/nrPerPage)+p}}
                 </button>
                 <button class="w3-button"
-                        v-bind:disabled="page===Math.floor(canisDoSelconcelho.length/nrPerPage)"
+                        v-bind:disabled="page===Math.floor((canisDoSelconcelho.length-1)/nrPerPage)"
                         v-on:click="page += 1">
                     Próximo
                 </button>
