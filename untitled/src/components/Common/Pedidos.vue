@@ -14,7 +14,7 @@
                 <td>{{p.Adotado}}</td>
                 <td>{{p.AnimalNome}}</td>
                 <td>{{p.PessoaNome}}</td>
-                <td>{{p.UtilizadorComumUtilizadorEmail}}</td>
+                <td>{{p.UtilizadorEmail}}</td>
             </tr>
         </table>
     </div>
@@ -30,14 +30,12 @@ export default {
   data: () => ({
     pedidosList: {}
   }),
-
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
     }
-
     axios.defaults.headers['Content-Type'] = 'application/json'
-    axios.get(this.$axiosurl + 'PedidosUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
+    axios.get(this.$axiosurl + 'PedidosUser?email=' + this.$session.get('user')[0])
       .then(response => {
         this.pedidosList = response.data.pedidos
         console.log(this.pedidosList)

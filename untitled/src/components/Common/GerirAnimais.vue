@@ -6,13 +6,12 @@
                 <label><select style="width: 100%; height: 30px; background-color: white" v-model="selectedState">
                     <option value="Es">Estado</option>
                     <option value="A">Adotado</option>
-                    <option value="NA">Não Adotado</option>
+                    <option value="F">Em FAT</option>
                     <option value="E">Encontrado</option>
                     <option value="M">Falecido</option>
-                    <option value="F">Em FAT</option>
+                    <option value="NA">Para Adoção</option>
+                    <option value="C">Pedido de FAT</option>
                     <option value="P">Perdido</option>
-                    <!-- <option value="EF">Em Pedido de FAT</option> -->
-                    <!-- <option value="SF">Sem Pedido de FAT</option> -->
                 </select></label>
             </div>
             <div class="navbar">

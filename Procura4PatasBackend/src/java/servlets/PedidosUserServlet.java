@@ -40,8 +40,6 @@ public class PedidosUserServlet extends HttpServlet {
     protected void doOptions(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException
     {
-        System.out.println("[OPTIONS] PASSEI AQUI 2");
-        
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -76,16 +74,14 @@ public class PedidosUserServlet extends HttpServlet {
             
             PersistentSession session;
             String email = request.getParameter("email");
-            String emailQuemQuero = request.getParameter("emailQuemQuero");
     
             if(email  ==  null ) {
-                 System.out.println("Passei aqui!");
                  session = Util.getSessionWithoutAut(request);
             } else {
                  session = Util.getSession(request, email);
             }
             
-            List<Pedido> onlyPedidos = P4P.getPedidosUser(session, emailQuemQuero);
+            List<Pedido> onlyPedidos = P4P.getPedidosUser(session, email);
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();
@@ -99,13 +95,11 @@ public class PedidosUserServlet extends HttpServlet {
             
             JSONArray ja = new JSONArray();
             
-            
             for(Pedido p : onlyPedidos) {
-                
                 jsonObjArr = new JSONObject();
                 String animNome = p.getAnimal().getNome();
                 String s = "Não";
-                String nome = P4P.getUtilizador(session, email).getNome();
+                String nome = p.getUtilizadorComum().getNome();
                 
                 if(p.getEstado() == 'A') {
                     s = "Sim";
@@ -125,7 +119,6 @@ public class PedidosUserServlet extends HttpServlet {
             }
             
             myJson.put("pedidos", ja);
-            System.out.println("JsonArray = " +  myJson.get("pedidos"));
             
             // Enviar JSON ARRAY
             PrintWriter out = response.getWriter();
@@ -144,17 +137,5 @@ public class PedidosUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+            throws ServletException, IOException {}
 }

@@ -78,7 +78,7 @@
                             <router-link v-if="this.$session.has('user')===false" to="/Login">
                                 <button class="login100-form-btn">Adotar</button>
                             </router-link>
-                            <router-link v-if="this.$session.has('user')===false" to="/Login">
+                            <router-link v-if="this.$session.has('user')===false && animalData.Estado === 'C'" to="/Login">
                                 <button class="login100-form-btn">Ser Fat</button>
                             </router-link>
                             <br>
