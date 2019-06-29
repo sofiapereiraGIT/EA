@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.hibernate.Query;
-import org.hibernate.ScrollableResults;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.AnimalDAO;
@@ -31,7 +30,7 @@ public class AnimalBean implements AnimalBeanLocal {
         
         try {
             session.beginTransaction();
-            caesAdotar = AnimalDAO.queryAnimal(session, "Discriminator = 'C' AND Estado = 'E'", null);
+            caesAdotar = AnimalDAO.queryAnimal(session, "Discriminator = 'C' AND (Estado = 'E' OR Estado = 'D' OR Estado = 'F' OR Estado = 'C')", null);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -48,7 +47,7 @@ public class AnimalBean implements AnimalBeanLocal {
         
         try {
             session.beginTransaction();
-            gatosAdotar = AnimalDAO.queryAnimal(session, "Discriminator = 'G' AND Estado = 'E'", null);
+            gatosAdotar = AnimalDAO.queryAnimal(session, "Discriminator = 'G' AND (Estado = 'E' OR Estado = 'D' OR Estado = 'F' OR Estado = 'C')", null);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
