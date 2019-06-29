@@ -50,11 +50,14 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         try {
             UtilizadorComum uC = UtilizadorComumDAO.loadUtilizadorComumByORMID(session, email);
             return 0;
-        } catch (Exception e) {}
+        }
+        catch (Exception e) {}
+        
         try {
             Canil c = CanilDAO.loadCanilByORMID(session, email);
             return 1;
-        } catch (Exception e) {}
+        }
+        catch (Exception e) {}
         return -1;
     }
     
@@ -83,9 +86,12 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             animalTotal = Arrays.asList(user.animais.toArray());
             
             if(animalTotal != null) {
-                animalTotal.stream().filter((a) -> (a.getEstado() == 'E' && a.getDiscriminator()=='C')).forEachOrdered((a) -> {
-                onlyDogs.add(a);
-                });
+                animalTotal
+                        .stream()
+                        .filter((a) -> (((a.getEstado() == 'E' || a.getEstado() == 'D' || a.getEstado() == 'F' || a.getEstado() == 'C')) && a.getDiscriminator()=='C'))
+                        .forEachOrdered((a) -> {
+                            onlyDogs.add(a);
+                        });
             }
         } catch(PersistentException e) {
             System.out.println(e);
@@ -106,7 +112,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
             
             if(animalTotal != null) {
      
-                animalTotal.stream().filter((a) -> (a.getEstado() == 'E' && a.getDiscriminator()=='G')).forEachOrdered((a) -> {
+                animalTotal.stream().filter((a) -> (((a.getEstado() == 'E' || a.getEstado() == 'D' || a.getEstado() == 'F' || a.getEstado() == 'C')) && a.getDiscriminator()=='G')).forEachOrdered((a) -> {
                 onlyCats.add(a);
                 });
             }
