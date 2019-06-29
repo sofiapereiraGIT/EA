@@ -391,7 +391,7 @@ export default {
     .columnAlign {
         float: left;
         width: 50%;
-        padding: 100px 0;
+        padding: 5px 0;
         text-align: center;
 
     }
@@ -399,7 +399,7 @@ export default {
     .column {
         float: left;
         width: 50%;
-        padding: 70px 0;
+        padding: 5px 0;
     }
 
     .columnBtn {
