@@ -94,10 +94,7 @@ export default {
           this.$session.set('userAnimals', this.animais)
         }).catch(e => { alert(e) })
     } else {
-      console.log('[Else]')
-      console.log(this.$session.get('userAnimals').length)
       this.animais = this.$session.get('userAnimals')
-      console.log(this.animais.length)
     }
   },
   computed: {

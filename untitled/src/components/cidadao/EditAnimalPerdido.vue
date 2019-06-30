@@ -22,9 +22,6 @@
                             <div>
                                 <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Mudar imagem</button>
                                 <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
-                                <br>
-                                <br>
-                                <button class="login100-form-btn" @click="eliminarAnimal()">Eliminar Animal</button>
                             </div>
                             <br>
                         </div>
@@ -168,11 +165,13 @@
                                     <br>
                                 </div>
                             </div>
-                            <div>
-                                <br>
-                            </div>
                         </div>
                     </form>
+                    <div class="columnAlign">
+                        <form @submit.prevent="eliminarAnimal">
+                            <input type=submit class="login100-form-btn" value="Eliminar Animal"/>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -272,9 +271,7 @@ export default {
       axios.post(this.$axiosurl + 'DeleteAnimalPerdido', dados)
         .then(response => {
           var animais = this.$session.get('userAnimals')
-          console.log(animais.length)
           animais = animais.filter(item => item.ID !== dados['ID'])
-          console.log(animais.length)
           this.$session.remove('userAnimals')
           this.$session.set('userAnimals', animais)
           this.success = 1
