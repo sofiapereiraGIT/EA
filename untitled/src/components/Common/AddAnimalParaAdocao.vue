@@ -145,18 +145,15 @@ export default {
     },
     mudarFoto: false
   }),
-
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
     }
   },
-
   methods: {
     closeErrorNotification () {
       this.error = 0
     },
-
     stateChange (newState) {
       setTimeout(function () {
         if (newState === -1) {
@@ -164,19 +161,22 @@ export default {
         }
       }, 3000)
     },
-
     addAnimal () {
       this.animal['email'] = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       axios.post(this.$axiosurl + 'AddAnimal', this.animal)
         .then(response => {
           if (response.data.msg === true) {
+            var animais = this.$session.get('userAnimals')
+            animais.push(this.animal)
+            this.$session.set('userAnimals', animais)
             this.error = 0
             this.success = 1
             this.message = 'O animal foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos.'
             this.stateChange(-1)
           }
         }).catch(e => {
+          console.log(e)
           this.success = 0
           this.error = 1
           this.message = 'Não foi possível inserir o animal. Por favor, tente novamente.'

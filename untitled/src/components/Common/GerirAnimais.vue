@@ -75,7 +75,6 @@ import route from '../../router/index'
 
 export default {
   name: 'GerirAnimais',
-
   data: () => ({
     animais: {},
     selectedName: '',
@@ -83,19 +82,24 @@ export default {
     selectedDiscriminator: 'T',
     selAnimal: null
   }),
-
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
     }
-    axios.defaults.headers['Content-Type'] = 'application/json'
-    axios.get(this.$axiosurl + 'TodosAnimaisUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
-      .then(response => {
-        this.animais = response.data.todos
-        /* this.tipo = this.$session.get('user')[1] */
-      }).catch()
+    if (!this.$session.has('userAnimals')) {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios.get(this.$axiosurl + 'TodosAnimaisUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
+        .then(response => {
+          this.animais = response.data.todos
+          this.$session.set('userAnimals', this.animais)
+        }).catch(e => { alert(e) })
+    } else {
+      console.log('[Else]')
+      console.log(this.$session.get('userAnimals').length)
+      this.animais = this.$session.get('userAnimals')
+      console.log(this.animais.length)
+    }
   },
-
   computed: {
     filteredAnimals: function () {
       let nameList = []
@@ -116,7 +120,7 @@ export default {
       if (this.selectedState !== 'Es') {
         const app = this
         discriminatorList.forEach(function (a) {
-          if (app.selectedState === 'NA' && a.Estado !== 'A' && a.Estado !== 'M') {
+          if (app.selectedState === 'NA' && a.Estado !== 'A' && a.Estado !== 'M' && a.Estado !== 'P') {
             stateList.push(a)
           }
           if (app.selectedState !== 'NA') {
@@ -142,7 +146,6 @@ export default {
       }
       return nameList
     },
-
     utilizadorComum: function () {
       return this.$session.get('user')[1] === 0
     }

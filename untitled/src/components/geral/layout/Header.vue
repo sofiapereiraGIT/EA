@@ -24,32 +24,28 @@ import router from '../../../router/index'
 
 export default {
   name: 'Header',
-
   data () {
     return {
       user: null
     }
   },
-
   mounted: function () {
     if (this.$session.has('user')) {
       this.user = this.$session.get('user')
     }
   },
-
   methods: {
     logout () {
-      if (this.$session.has('user')) {
-        this.$session.remove('user')
+      if (this.$session.exists()) {
+        console.log('Session Destroyed')
+        this.$session.destroy()
         this.user = null
         router.push('/')
       }
     },
-
     userLogin () {
       return this.$session.has('user')
     },
-
     utilizadorC () {
       return this.$session.get('user')[1] === 0
     }
