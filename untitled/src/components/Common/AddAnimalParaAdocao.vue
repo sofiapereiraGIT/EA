@@ -83,8 +83,8 @@
           <option value="" disabled>Raça do gato</option>
           <option value="Persa">Persa</option>
           <option value="Ragdoll">Ragdoll</option>
-          <option value="Scottish Fold">Scottish Fold</option>
-          <option value="Siamês">Siamês</option>
+          <option value="ScottishFold">Scottish Fold</option>
+          <option value="Siames">Siamês</option>
           <option value="Outro">Outra raça</option>
           <option value="Sem Raça Definida">Sem raça definida</option>
         </select></label>
