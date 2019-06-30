@@ -191,7 +191,6 @@ import route from '../../router/index'
 
 export default {
   name: 'EditAnimalPerdido',
-
   data: function () {
     return {
       animal: null,
@@ -215,7 +214,6 @@ export default {
       error: 0
     }
   },
-
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -226,7 +224,6 @@ export default {
         route.push(('/AccessDenied'))
       }
     }
-
     this.animal = this.$session.get('animal')
     this.animalNovo.CorPelo = this.animal.CorPelo
     this.animalNovo.Raca = this.animal.Raca
@@ -242,7 +239,6 @@ export default {
     this.animalNovo.Nome = this.animal.Nome
     this.animalNovo.Porte = this.animal.Porte
   },
-
   methods: {
     stateChange (newState) {
       setTimeout(function () {
@@ -257,9 +253,12 @@ export default {
     uploadFotografia () {
       this.animalNovo.Fotografia = this.getElementById('foto')
     },
-
     submitAnimal () {
       axios.post(this.$axiosurl + 'UpdateAnimal', this.animalNovo).then(response => {
+        var animais = this.$session.get('userAnimals')
+        animais = animais.filter(item => item.ID !== this.animalNovo.ID)
+        animais.push(this.animalNovo)
+        this.$session.set('userAnimals', animais)
         this.mudarFoto = false
         this.success = 1
         this.error = 0
@@ -271,22 +270,28 @@ export default {
         this.message = 'Não foi possível efetuar as alterações. Por favor, tente novamente.'
       })
     },
-
     eliminarAnimal () {
       var dados = {}
       dados['ID'] = this.animalNovo.ID
       dados['email'] = this.$session.get('user')[0]
 
-      axios.post(this.$axiosurl + 'DeleteAnimalPerdido', dados).then(response => {
-        this.success = 1
-        this.error = 0
-        this.message = 'O animal foi removido com sucesso. Irá ser redirecionado dentro de 3 segundos.'
-        this.stateChange(-1)
-      }).catch(e => {
-        this.success = 0
-        this.error = 1
-        this.message = 'Não foi possível eliminar o animal. Por favor, tente novamente.'
-      })
+      axios.post(this.$axiosurl + 'DeleteAnimalPerdido', dados)
+        .then(response => {
+          var animais = this.$session.get('userAnimals')
+          console.log(animais.length)
+          animais = animais.filter(item => item.ID !== dados['ID'])
+          console.log(animais.length)
+          this.$session.remove('userAnimals')
+          this.$session.set('userAnimals', animais)
+          this.success = 1
+          this.error = 0
+          this.message = 'O animal foi removido com sucesso. Irá ser redirecionado dentro de 3 segundos.'
+          this.stateChange(-1)
+        }).catch(e => {
+          this.success = 0
+          this.error = 1
+          this.message = 'Não foi possível eliminar o animal. Por favor, tente novamente.'
+        })
     }
   }
 }

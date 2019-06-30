@@ -135,7 +135,6 @@ export default {
       confirmPass: null
     }
   },
-
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -148,7 +147,6 @@ export default {
     }
     this.FetchData()
   },
-
   methods: {
     stateChange (newState) {
       setTimeout(function () {
@@ -157,11 +155,9 @@ export default {
         }
       }, 3000)
     },
-
     closeErrorNotification () {
       this.error = 0
     },
-
     FetchData: function () {
       const value = this.$session.get('user')
       axios.get(this.$axiosurl + 'UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
@@ -175,7 +171,6 @@ export default {
         this.novoUtilizador.descricao = this.utilizador.descricao
       })
     },
-
     submitUtilizador () {
       if (this.novoUtilizador.password != null && this.novoUtilizador.nome != null && this.novoUtilizador.concelho != null) {
         if (this.novoUtilizador.password === this.confirmPass) {
@@ -203,7 +198,6 @@ export default {
         }
       }
     },
-
     uploadFotografia () {
       this.novoUtilizador.fotografia = this.getElementById('foto')
     }

@@ -204,7 +204,6 @@ import route from '../../router/index'
 
 export default {
   name: 'EditAnimalAdocao',
-
   data: function () {
     return {
       animal: null,
@@ -228,12 +227,10 @@ export default {
       error: 0
     }
   },
-
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
     }
-
     this.animal = this.$session.get('animal')
     this.animalNovo.CorPelo = this.animal.CorPelo
     this.animalNovo.Raca = this.animal.Raca
@@ -249,7 +246,6 @@ export default {
     this.animalNovo.Nome = this.animal.Nome
     this.animalNovo.Porte = this.animal.Porte
   },
-
   methods: {
     stateChange (newState) {
       setTimeout(function () {
@@ -264,9 +260,12 @@ export default {
     uploadFotografia () {
       this.animalNovo.Fotografia = this.getElementById('foto')
     },
-
     submitAnimal () {
       axios.post(this.$axiosurl + 'UpdateAnimal', this.animalNovo).then(response => {
+        var animais = this.$session.get('userAnimals')
+        animais = animais.filter(item => item.ID !== this.animalNovo.ID)
+        animais.push(this.animalNovo)
+        this.$session.set('userAnimals', animais)
         this.mudarFoto = false
         this.success = 1
         this.error = 0
