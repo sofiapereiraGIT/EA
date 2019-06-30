@@ -7,12 +7,15 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import src.P4P;
@@ -72,7 +75,21 @@ public class AnimalServlet extends HttpServlet {
         }
         
         Animal animal = P4P.getAnimal(session, id);
+        
+        try {
+            session.evict(animal);
+        } catch (PersistentException ex) {
+            Logger.getLogger(AnimalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         String utilizadorEmail = P4P.getUtilizadorEmail(session, id);
+        
+        try {
+            session.evict(utilizadorEmail);
+        } catch (PersistentException ex) {
+            Logger.getLogger(AnimalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         int usertype = P4P.getUserType(session, utilizadorEmail);
         
         JSONObject animalJson = new JSONObject();

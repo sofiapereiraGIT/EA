@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import src.P4P;
@@ -79,6 +82,23 @@ public class TodosAnimaisUserServlet extends HttpServlet {
          
          List<Animal> allAnimals = new ArrayList<>(allDogs);
                                    allAnimals.addAll(allCats);
+         
+         try {
+             
+           for(Animal d : allDogs) {
+            session.evict(d); }
+             
+           for(Animal g : allCats ) { 
+            session.evict(g);
+            }
+   
+         } catch (PersistentException ex) {
+            Logger.getLogger(TodosAnimaisUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+         }
+                 
+        
+                                   
+                                   
             
          // Enviar JSON ARRAY
          JSONObject myJson = new JSONObject();

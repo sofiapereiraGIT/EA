@@ -74,6 +74,10 @@ public class GatosPerdidosServlet extends HttpServlet {
             
             List<Animal> gatosPerdidos = P4P.getGatosPerdidos(session);
             
+            for(Animal g: gatosPerdidos) {
+            session.evict(g);
+            }
+            
             // Formar JSON
             JSONObject myJson = new JSONObject();        
             JSONArray ja = new JSONArray();

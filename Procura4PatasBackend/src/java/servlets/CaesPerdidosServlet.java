@@ -8,6 +8,8 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import src.P4P;
@@ -61,6 +64,14 @@ public class CaesPerdidosServlet extends HttpServlet {
             }            
             
             List<Animal> caesPerdidos = P4P.getCaesPerdidos(session);
+            
+            try {
+                for(Animal c : caesPerdidos) {
+                session.evict(c); 
+                }
+            } catch (PersistentException ex) {
+                Logger.getLogger(CaesPerdidosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             // Formar JSON
             JSONObject myJson = new JSONObject();         

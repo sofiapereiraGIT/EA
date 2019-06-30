@@ -18,6 +18,18 @@
           <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Escolher foto</button>
           <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
         <br>
+          <br>
+          <label><select v-model="animal.Concelho" style="width: 50%" required>
+              <option value="" disabled>Concelho onde se encontra o animal</option>
+              <option value="Amarante">Amarante</option>
+              <option value="Braga">Braga</option>
+              <option value="Coimbra">Coimbra</option>
+              <option value="Faro">Faro</option>
+              <option value="Lisboa">Lisboa</option>
+              <option value="Porto">Porto</option>
+              <option value="Viana do Castelo">Viana do Castelo</option>
+          </select></label>
+          <br>
         <br>
         <label><select v-model="animal.Discriminator" style="width: 25%" required>
           <option value="" disabled>Espécie</option>
@@ -131,7 +143,7 @@ export default {
     animal: {
       email: '',
       Nome: '',
-      Fototografia: '',
+      Fotografia: '',
       Sexo: '',
       Idade: '',
       Raca: '',
@@ -140,7 +152,7 @@ export default {
       CompPelo: '',
       Estado: '',
       Descricao: '',
-      Concelho: this.$session.get('user')[0].concelho,
+      Concelho: '',
       Discriminator: ''
     },
     mudarFoto: false
@@ -172,6 +184,7 @@ export default {
             this.$session.set('userAnimals', animais)
             this.error = 0
             this.success = 1
+            console.log()
             this.message = 'O animal foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos.'
             this.stateChange(-1)
           }

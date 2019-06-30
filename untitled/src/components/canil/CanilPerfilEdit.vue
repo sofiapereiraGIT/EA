@@ -58,14 +58,20 @@
                                 </div>
                                 <div class="w3-half">
                                     <label><select v-model="novoUtilizador.concelho" style="width: 100%" required>
-                                        <option v-bind:value="novoUtilizador.concelho">{{novoUtilizador.concelho}}</option>
-                                        <option value="Amarante">Amarante</option>
-                                        <option value="Braga">Braga</option>
-                                        <option value="Coimbra">Coimbra</option>
-                                        <option value="Faro">Faro</option>
-                                        <option value="Lisboa">Lisboa</option>
-                                        <option value="Porto">Porto</option>
-                                        <option value="Viana do Castelo">Viana do Castelo</option>
+                                        <option v-if="novoUtilizador.concelho === 'Amarante'" v-bind:value="novoUtilizador.concelho">Amarante</option>
+                                        <option v-else value="Amarante">Amarante</option>
+                                        <option v-if="novoUtilizador.concelho === 'Braga'" v-bind:value="novoUtilizador.concelho">Braga</option>
+                                        <option v-else value="Braga">Braga</option>
+                                        <option v-if="novoUtilizador.concelho === 'Coimbra'" v-bind:value="novoUtilizador.concelho">Coimbra</option>
+                                        <option v-else value="Coimbra">Coimbra</option>
+                                        <option v-if="novoUtilizador.concelho === 'Faro'" v-bind:value="novoUtilizador.concelho">Faro</option>
+                                        <option v-else value="Faro">Faro</option>
+                                        <option v-if="novoUtilizador.concelho === 'Lisboa'" v-bind:value="novoUtilizador.concelho">Lisboa</option>
+                                        <option v-else value="Lisboa">Lisboa</option>
+                                        <option v-if="novoUtilizador.concelho === 'Porto'" v-bind:value="novoUtilizador.concelho">Porto</option>
+                                        <option v-else value="Porto">Porto</option>
+                                        <option v-if="novoUtilizador.concelho === 'Viana do Castelo'" v-bind:value="novoUtilizador.concelho">Viana do Castelo</option>
+                                        <option v-else value="Viana do Castelo">Viana do Castelo</option>
                                     </select></label>
                                 </div>
                             </div>

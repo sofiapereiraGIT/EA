@@ -8,6 +8,8 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import src.P4P;
@@ -75,6 +78,14 @@ public class GatoAdocaoUserServlet extends HttpServlet {
             }
             
             List<Animal> onlyCats = P4P.getGatoAdocaoUser(session,emailQuemQuero);
+            
+            try {
+                for(Animal g : onlyCats) {
+                session.evict(g); 
+                }
+            } catch (PersistentException ex) {
+                Logger.getLogger(GatoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             JSONObject myJson = new JSONObject();
             JSONObject jsonObjArr = new JSONObject();

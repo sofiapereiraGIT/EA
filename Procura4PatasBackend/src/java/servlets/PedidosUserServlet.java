@@ -21,6 +21,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.Pedido;
@@ -82,6 +83,16 @@ public class PedidosUserServlet extends HttpServlet {
             }
             
             List<Pedido> onlyPedidos = P4P.getPedidosUser(session, email);
+            
+            
+            try {
+                
+                for(Pedido p: onlyPedidos) {
+                session.evict(p);
+                }
+            } catch (PersistentException ex) {
+                Logger.getLogger(PedidosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();

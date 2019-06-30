@@ -124,15 +124,15 @@
                                         <option v-if="animalNovo.CorPelo === 'Branco'" v-bind:value="animalNovo.CorPelo">Branco</option>
                                         <option v-else value="Branco">Branco</option>
                                         <option v-if="animalNovo.CorPelo === 'Castanho'" v-bind:value="animalNovo.CorPelo">Castanho</option>
-                                        <option value="Castanho">Castanho</option>
+                                        <option v-else value="Castanho">Castanho</option>
                                         <option v-if="animalNovo.CorPelo === 'Cinzento'" v-bind:value="animalNovo.CorPelo">Cinzento</option>
-                                        <option value="Cinzento">Cinzento</option>
+                                        <option v-else value="Cinzento">Cinzento</option>
                                         <option v-if="animalNovo.CorPelo === 'Laranja'" v-bind:value="animalNovo.CorPelo">Laranja</option>
-                                        <option value="Laranja">Laranja</option>
+                                        <option v-else value="Laranja">Laranja</option>
                                         <option v-if="animalNovo.CorPelo === 'Preto'" v-bind:value="animalNovo.CorPelo">Preto</option>
-                                        <option value="Preto">Preto</option>
+                                        <option v-else value="Preto">Preto</option>
                                         <option v-if="animalNovo.CorPelo === 'Indefinido'" v-bind:value="animalNovo.CorPelo">Indefinido</option>
-                                        <option value="Indefinido">Indefinido</option>
+                                        <option v-else value="Indefinido">Indefinido</option>
                                     </select>
                                 </div>
                                 <br>
@@ -141,7 +141,7 @@
                                         <option v-if="animalNovo.CompPelo === 'S'" v-bind:value="animalNovo.CompPelo">Sem pêlo</option>
                                         <option v-else value="S">Sem pêlo</option>
                                         <option v-if="animalNovo.CompPelo === 'C'" v-bind:value="animalNovo.CompPelo">Curto</option>
-                                        <option value="C">Curto</option>
+                                        <option v-else value="C">Curto</option>
                                         <option v-if="animalNovo.CompPelo === 'M'" v-bind:value="animalNovo.CompPelo">Médio</option>
                                         <option v-else value="M">Médio</option>
                                         <option v-if="animalNovo.CompPelo === 'L'" v-bind:value="animalNovo.CompPelo">Longo</option>
@@ -151,25 +151,38 @@
                                 <br>
                                 <div class="select">
                                     <select v-if="animalNovo.Discriminator==='C'" v-model="animalNovo.Raca" required>
-                                        <option v-bind:value="animalNovo.Raca">{{animalNovo.Raca}}</option>
-                                        <option value="Beagle">Beagle</option>
-                                        <option value="Buldogue">Buldogue</option>
-                                        <option value="Golden Retriever">Golden Retriever</option>
-                                        <option value="Lavrador">Lavrador</option>
-                                        <option value="Pastor Alemao">Pastor Alemão</option>
-                                        <option value="Poodle">Poodle</option>
-                                        <option value="Rottweiler">Rottweiler</option>
-                                        <option value="Outro">Outra raça</option>
-                                        <option value="Sem Raça Definida">Sem raça definida</option>
+                                        <option v-if="animalNovo.Raca ==='Beagle'" v-bind:value="animalNovo.Raca">Beagle</option>
+                                        <option v-else value="Beagle">Beagle</option>
+                                        <option v-if="animalNovo.Raca ==='Buldogue'" v-bind:value="animalNovo.Raca">Buldogue</option>
+                                        <option v-else value="Buldogue">Buldogue</option>
+                                        <option v-if="animalNovo.Raca ==='Golden Retriever'" v-bind:value="animalNovo.Raca">Golden Retriever</option>
+                                        <option v-else value="Golden Retriever">Golden Retriever</option>
+                                        <option v-if="animalNovo.Raca ==='Lavrador'" v-bind:value="animalNovo.Raca">Lavrador</option>
+                                        <option v-else value="Lavrador">Lavrador</option>
+                                        <option v-if="animalNovo.Raca ==='Pastor Alemao'" v-bind:value="animalNovo.Raca">Pastor Alemão</option>
+                                        <option v-else value="Pastor Alemao">Pastor Alemão</option>
+                                        <option v-if="animalNovo.Raca ==='Poodle'" v-bind:value="animalNovo.Raca">Poodle</option>
+                                        <option v-else value="Poodle">Poodle</option>
+                                        <option v-if="animalNovo.Raca ==='Rottweiler'" v-bind:value="animalNovo.Raca">Rottweiler</option>
+                                        <option v-else value="Rottweiler">Rottweiler</option>
+                                        <option v-if="animalNovo.Raca ==='Outro'" v-bind:value="animalNovo.Raca">Outra raça</option>
+                                        <option v-else value="Outro">Outra raça</option>
+                                        <option v-if="animalNovo.Raca ==='Sem Raça Definida'" v-bind:value="animalNovo.Raca">Sem Raça Definida</option>
+                                        <option v-else value="Sem Raça Definida">Sem raça definida</option>
                                     </select>
                                     <select v-if="animalNovo.Discriminator==='G'" v-model="animalNovo.Raca" required>
-                                        <option v-bind:value="animalNovo.Raca">{{animalNovo.Raca}}</option>
-                                        <option value="Persa">Persa</option>
-                                        <option value="Ragdoll">Ragdoll</option>
-                                        <option value="ScottishFold">Scottish Fold</option>
-                                        <option value="Siames">Siamês</option>
-                                        <option value="Outro">Outra raça</option>
-                                        <option value="Sem Raça Definida">Sem raça definida</option>
+                                        <option v-if="animalNovo.Raca==='Persa'" v-bind:value="animalNovo.Raca">Persa</option>
+                                        <option v-else value="Persa">Persa</option>
+                                        <option v-if="animalNovo.Raca==='Ragdoll'" v-bind:value="animalNovo.Raca">Ragdoll</option>
+                                        <option v-else value="Ragdoll">Ragdoll</option>
+                                        <option v-if="animalNovo.Raca==='ScottishFold'" v-bind:value="animalNovo.Raca">Scottish Fold</option>
+                                        <option v-else value="ScottishFold">Scottish Fold</option>
+                                        <option v-if="animalNovo.Raca==='Siames'" v-bind:value="animalNovo.Raca">Siamês</option>
+                                        <option v-else value="Siames">Siamês</option>
+                                        <option v-if="animalNovo.Raca==='Outro'" v-bind:value="animalNovo.Raca">Outro</option>
+                                        <option v-else value="Outro">Outra raça</option>
+                                        <option v-if="animalNovo.Raca==='Sem Raça Definida'" v-bind:value="animalNovo.Raca">Sem raça definida</option>
+                                        <option v-else value="Sem Raça Definida">Sem raça definida</option>
                                     </select>
                                 </div>
                                 <br>

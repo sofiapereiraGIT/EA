@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Canil;
 import procura4patas.UtilizadorComum;
@@ -71,6 +72,12 @@ public class UtilizadorComumServlet extends HttpServlet {
         }
         
         UtilizadorComum uc = P4P.getUtilizadorComum(session, emailPedido);
+        
+        try {
+            session.evict(uc);
+        } catch (PersistentException ex) {
+            Logger.getLogger(UtilizadorComumServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if(uc != null) {
             JSONObject result = new JSONObject();
