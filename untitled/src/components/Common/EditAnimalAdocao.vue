@@ -4,6 +4,14 @@
             <div class="container-login100">
                 <div class="wrap-login100 p-t-190 p-b-30 row">
                     <form class="login100-form validate-form" @submit.prevent="submitAnimal">
+                        <div v-if="error===1" class="Error">
+                            <span class="closebtn" @click="closeErrorNotification()">&times;</span>
+                            <strong>Info!</strong> {{ message }}
+                        </div>
+                        <div v-if="success===1" class="Success">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <strong>Info!</strong> {{ message }}
+                        </div>
                         <div class="columnAlign">
                             <div class="login100-form-avatar">
                                 <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
@@ -196,7 +204,9 @@ export default {
         Nome: '',
         Porte: ''
       },
-      mudarFoto: false
+      mudarFoto: false,
+      success: 0,
+      error: 0
     }
   },
 
@@ -222,14 +232,31 @@ export default {
   },
 
   methods: {
+    stateChange (newState) {
+      setTimeout(function () {
+        if (newState === -1) {
+          route.push('/GerirAnimais')
+        }
+      }, 3000)
+    },
+    closeErrorNotification () {
+      this.error = 0
+    },
     uploadFotografia () {
       this.animalNovo.Fotografia = this.getElementById('foto')
     },
 
     submitAnimal () {
       axios.post(this.$axiosurl + 'UpdateAnimal', this.animalNovo).then(response => {
-        route.push('/EditAnimalAdocao')
         this.mudarFoto = false
+        this.success = 1
+        this.error = 0
+        this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos.'
+        this.stateChange(-1)
+      }).catch(e => {
+        this.success = 0
+        this.error = 1
+        this.message = 'Não foi possível efetuar as alterações. Por favor, tente novamente.'
       })
     }
   }
@@ -237,6 +264,18 @@ export default {
 </script>
 
 <style scoped>
+
+    .Success {
+        padding: 20px;
+        background-color: green;
+        color: white;
+    }
+    .Error {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
+
     /* Reset Select */
     /* The container */
     .img {

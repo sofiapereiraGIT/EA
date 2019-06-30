@@ -182,7 +182,6 @@ export default {
           this.message = 'Não foi possível inserir o animal. Por favor, tente novamente.'
         })
     },
-
     uploadFotografia () {
       this.animal.Fotografia = this.getElementById('fotoAnimal')
     }
