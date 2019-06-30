@@ -98,6 +98,7 @@ export default {
     this.animalData.CompPelo = this.getCompPelo(this.animalData.CompPelo)
     this.animalData.Porte = this.getPorte(this.animalData.Porte)
     this.animalData.Concelho = this.animalData.Concelho
+    this.$session.set('email', this.animalData.UtilizadorEmail)
   },
 
   methods: {
