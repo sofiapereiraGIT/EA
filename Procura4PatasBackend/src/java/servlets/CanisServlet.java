@@ -19,6 +19,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Canil;
 import src.P4P;
@@ -58,6 +59,15 @@ public class CanisServlet extends HttpServlet {
         }
 
         List<Canil> canis = P4P.getCanis(session);
+        
+        try {
+            for(Canil c : canis) {
+            session.evict(c);
+            }
+        } catch (PersistentException ex) {
+            Logger.getLogger(CanisServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         JSONArray array = new JSONArray();
 
         for(Canil c: canis){

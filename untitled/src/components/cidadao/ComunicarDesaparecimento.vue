@@ -126,7 +126,7 @@ export default {
       animal: {
         email: '',
         Nome: '',
-        Fototografia: '',
+        Fotografia: '',
         Sexo: '',
         Idade: '',
         Raca: '',

@@ -19,10 +19,16 @@ License Type: Academic
 		<property name="connection.password">p4p</property>
 		<property name="show_sql">false</property>
 		<property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+                <property name="cache.use_query_cache">false</property>
+                <property name="cache.use_minimal_puts">false</property>
+                <property name="cache.use_second_level_cache">false</property>
+             
+                
                 <!-- property name="hibernate.c3p0.max_size" value="50"/>
                 <property name="hibernate.c3p0.max_size" value="50"/-->
 		<mapping resource="ormmapping/procura4patas/Animal.hbm.xml" />
 		<mapping resource="ormmapping/procura4patas/Pedido.hbm.xml" />
 		<mapping resource="ormmapping/procura4patas/Utilizador.hbm.xml" />
+           
 	</session-factory>
 </hibernate-configuration>

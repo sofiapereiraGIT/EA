@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.CacheMode;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -58,7 +59,16 @@ public class CanilServlet extends HttpServlet {
             session = Util.getSession(request, email);
         }
 
+        
         Canil c = P4P.getCanil(session, emailPedido);
+        
+        try {
+            session.evict(c);
+        } catch (PersistentException ex) {
+            Logger.getLogger(CanilServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
 
         if(c != null){
             JSONObject result = new JSONObject();
@@ -74,6 +84,8 @@ public class CanilServlet extends HttpServlet {
             result.put("site", c.getSiteOficial());
             result.put("facebook", c.getFacebook());
             result.put("instagram", c.getInstagram());
+            
+             System.out.println(c.getNome());
 
             PrintWriter out = response.getWriter();
                out.println(result);

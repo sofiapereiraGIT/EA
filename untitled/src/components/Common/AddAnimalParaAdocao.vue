@@ -143,7 +143,7 @@ export default {
     animal: {
       email: '',
       Nome: '',
-      Fototografia: '',
+      Fotografia: '',
       Sexo: '',
       Idade: '',
       Raca: '',
@@ -184,6 +184,7 @@ export default {
             this.$session.set('userAnimals', animais)
             this.error = 0
             this.success = 1
+            console.log()
             this.message = 'O animal foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos.'
             this.stateChange(-1)
           }
