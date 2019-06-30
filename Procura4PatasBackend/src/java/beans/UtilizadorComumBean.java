@@ -5,6 +5,8 @@
  */
 package beans;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -21,6 +23,19 @@ import procura4patas.UtilizadorComumDAO;
 @Stateless
 public class UtilizadorComumBean implements UtilizadorComumBeanLocal {
 
+    @Override
+    public List getUtilizadoresComuns(PersistentSession sessao) {
+        List<UtilizadorComum> lista = new ArrayList<>();
+        
+        try {
+            lista = UtilizadorComumDAO.queryUtilizadorComum(sessao, null, null);
+        } catch (PersistentException ex) {
+            Logger.getLogger(CanilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return lista;
+    }
+    
     @Override
     public UtilizadorComum getUtilizadorComum(PersistentSession sessao, String email) {
         UtilizadorComum uc = null;

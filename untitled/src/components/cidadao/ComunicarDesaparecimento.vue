@@ -15,7 +15,7 @@
                 <label><input v-model="animal.Nome" type="text" name="animalName" placeholder="Nome" required></label>
                 <br>
                 <br>
-                <label><select v-model="animal.Concelho" style="width: 25%" required>
+                <label><select v-model="animal.Concelho" style="width: 50%" required>
                     <option value="" disabled>Concelho onde perdeu o animal</option>
                     <option value="Amarante">Amarante</option>
                     <option value="Braga">Braga</option>
@@ -27,7 +27,8 @@
                 </select></label>
                 <br>
                 <br>
-                <input id="fotoAnimal" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">
+                <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Escolher foto</button>
+                <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia" >
                 <br>
                 <br>
                 <label><select v-model="animal.Discriminator" style="width: 25%" required>
@@ -37,14 +38,14 @@
                 </select></label>
                 <label><select v-model="animal.Sexo" style="width: 25%" required>
                     <option value="" disabled>Sexo</option>
-                    <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
+                    <option value="M">Macho</option>
                 </select></label>
                 <br>
                 <br>
                 <label><select v-model="animal.Idade" style="width: 25%" required>
                     <option value="" disabled>Idade</option>
-                    <option value="B">Bebé (Menos de 6 Meses)</option>
+                    <option value="B">Bebé (Menos de 6 meses)</option>
                     <option value="J">Jovem</option>
                     <option value="A">Adulto</option>
                 </select></label>
@@ -58,18 +59,18 @@
                 <br>
                 <br>
                 <label><select v-model="animal.CorPelo" style="width: 25%" required>
-                    <option value="" disabled>Cor do Pêlo</option>
-                    <option value="Laranja">Laranja</option>
+                    <option value="" disabled>Cor do pêlo</option>
                     <option value="Bege">Bege</option>
                     <option value="Branco">Branco</option>
                     <option value="Castanho">Castanho</option>
                     <option value="Cinzento">Cinzento</option>
+                    <option value="Laranja">Laranja</option>
                     <option value="Preto">Preto</option>
                     <option value="Indefinido">Indefinido</option>
                 </select></label>
                 <label><select v-model="animal.CompPelo" style="width: 25%" required>
-                    <option value="" disabled>Comprimento de Pêlo</option>
-                    <option value="S">Sem Pêlo</option>
+                    <option value="" disabled>Comprimento do pêlo</option>
+                    <option value="S">Sem pêlo</option>
                     <option value="C">Curto</option>
                     <option value="M">Médio</option>
                     <option value="L">Longo</option>
@@ -77,27 +78,27 @@
                 <br v-if="animal.Discriminator==='C'">
                 <br v-if="animal.Discriminator==='C'">
                 <label><select v-if="animal.Discriminator==='C'" v-model="animal.Raca" style="width: 50%" required>
-                    <option value="" disabled>Raça Cão</option>
-                    <option value="Sem Raça Definida">Sem Raça Definida</option>
-                    <option value="Pastor Alemao">Pastor Alemão</option>
-                    <option value="Lavrador">Lavrador</option>
-                    <option value="Buldogue">Buldogue</option>
+                    <option value="" disabled>Raça do cão</option>
                     <option value="Beagle">Beagle</option>
-                    <option value="Poodle">Poodle</option>
-                    <option value="Rottwiller">Rottwiller</option>
+                    <option value="Buldogue">Buldogue</option>
                     <option value="Golden Retriever">Golden Retriever</option>
-                    <option value="Outro">Outro</option>
+                    <option value="Lavrador">Lavrador</option>
+                    <option value="Pastor Alemao">Pastor Alemão</option>
+                    <option value="Poodle">Poodle</option>
+                    <option value="Rottweiler">Rottweiler</option>
+                    <option value="Outro">Outra raça</option>
+                    <option value="Sem Raça Definida">Sem raça definida</option>
                 </select></label>
                 <br v-if="animal.Discriminator==='G'">
                 <br v-if="animal.Discriminator==='G'">
                 <label><select v-if="animal.Discriminator==='G'" v-model="animal.Raca" style="width: 50%" required>
-                    <option value="" disabled>Raça Gato</option>
-                    <option value="Sem Raça Definida">Sem Raça Definida</option>
+                    <option value="" disabled>Raça do gato</option>
                     <option value="Persa">Persa</option>
-                    <option value="Siamês">Siamês</option>
                     <option value="Ragdoll">Ragdoll</option>
-                    <option value="Scottish Fold">Scottish Fold</option>
-                    <option value="Outro">Outro</option>
+                    <option value="ScottishFold">Scottish Fold</option>
+                    <option value="Siames">Siamês</option>
+                    <option value="Outro">Outra raça</option>
+                    <option value="Sem Raça Definida">Sem raça definida</option>
                 </select></label>
                 <br>
                 <br>
@@ -136,7 +137,8 @@ export default {
         Descricao: '',
         Concelho: '',
         Discriminator: ''
-      }
+      },
+      mudarFoto: false
     }
   },
   mounted: function () {
@@ -163,13 +165,13 @@ export default {
           if (response.data.msg === true) {
             this.error = 0
             this.success = 1
-            this.message = 'O desaparecimento foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos'
+            this.message = 'O desaparecimento foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos.'
             this.stateChange(-1)
           }
         }).catch(e => {
           this.success = 0
           this.error = 1
-          this.message = 'Não foi possível comunicar o desaparecimento.'
+          this.message = 'Não foi possível comunicar o desaparecimento. Por favor, tente novamente.'
         })
     },
 
@@ -195,12 +197,13 @@ export default {
     .background {
         width: 100%;
         height: 100vh;
-        margin-top: 38px;
-        border: 1px solid black;
+        margin-top: 45px;
+        border: 1px solid transparent;
         background: url("../../assets/dog2.jpg");
+        background-size: cover;
     }
     .transbox {
-        opacity: 0.7;
+        opacity: 0.9;
         margin: 10% 25%;
         text-align: center;
         border-radius: 10px;

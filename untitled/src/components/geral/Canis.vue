@@ -53,7 +53,7 @@
         </div>
 
         <!-- Pagination -->
-        <nav class="w3-center" v-if="(canisDoSelconcelho.length-1)>8" style="margin-bottom: 25px;">
+        <nav class="w3-center" v-if="(canisDoSelconcelho.length-1)>nrPerPage" style="margin-bottom: 25px;">
             <div class="w3-bar">
                 <button class="w3-button" v-bind:disabled="page===0" v-on:click="page -= 1">
                     Anterior
@@ -97,9 +97,7 @@ export default {
   }),
 
   mounted: function () {
-    if (!this.$session.has('canis') || this.$session.get('canis')[1] > 15) {
-      console.log('getCanis')
-
+    if (!this.$session.has('canis') || this.$session.get('canis')[1] > 5) {
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios.get(this.$axiosurl + 'Canis?email=' + this.$session.get('user')[0])
@@ -141,7 +139,6 @@ export default {
       this.canis = this.$session.get('canis')[0]
       var times = this.$session.get('canis')[1] + 1
       this.$session.set('canis', [this.canis, times])
-      console.log('reutilizar canis da sessão pela ' + times + ' vez')
     }
   },
 

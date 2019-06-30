@@ -14,7 +14,6 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import procura4patas.Animal;
 import procura4patas.Canil;
@@ -120,6 +119,10 @@ public class P4P {
     }
      
     /* utilizadorComumBean methods */
+    
+    public static List getUtilizadoresComuns(PersistentSession sessao) {
+        return utilizadorComumBean.getUtilizadoresComuns(sessao);
+    }
     
     public static UtilizadorComum getUtilizadorComum(PersistentSession sessao, String email){
         return utilizadorComumBean.getUtilizadorComum(sessao, email);

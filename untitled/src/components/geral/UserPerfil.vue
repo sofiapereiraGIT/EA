@@ -57,12 +57,10 @@ export default {
       if (this.$session.has('user')) {
         axios.get(this.$axiosurl + 'UtilizadorComum?emailPedido=' + this.$session.get('email') + '&email=' + this.$session.get('user')[0]).then(response => {
           this.UserInfo = response.data
-          console.log(this.UserInfo)
         })
       } else {
         axios.get(this.$axiosurl + 'UtilizadorComum?emailPedido=' + this.$session.get('email')).then(response => {
           this.UserInfo = response.data
-          console.log(this.UserInfo)
         })
       }
     },

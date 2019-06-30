@@ -9,7 +9,18 @@
         <div class="w3-row-padding" style="position: -webkit-sticky; position: sticky; top: 30px; background-color: white; padding-top: 20px">
             <div class="navbar" style="margin-bottom: 25px;">
                 <div class="dropdown">
-                    <button class="dropbtn">Concelho
+                    <button
+                        v-if="selConcelho===''"
+                        v-on:click="selConcelho='', page=0"
+                        class="dropbtn">
+                        Concelho
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <button
+                        v-else
+                        v-on:click="selConcelho='', page=0"
+                        class="dropbtn">
+                        {{selConcelho}}
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <select class="dropdown-content" size="4">
@@ -19,26 +30,47 @@
                             v-on:click="selConcelho=concelho, page=0">
                             {{concelho}}
                         </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selConcelho='', page=0">
+                            Remover filtro
+                        </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Canil
+                    <button
+                        v-if="selCanilNome===''"
+                        v-on:click="selCanilEmail='', selCanilNome='', page=0"
+                        class="dropbtn">
+                        Canil
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <button
+                        v-else
+                        v-on:click="selCanilEmail='', selCanilNome='', page=0"
+                        class="dropbtn">
+                        {{selCanilNome}}
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <select class="dropdown-content" size="4">
                         <option
                             style="color: black"
                             v-for="canil in canis" :key="canil.email"
-                            v-on:click="selCanil=canil.email, page=0">
+                            v-on:click="selCanilEmail=canil.email, selCanilNome=canil.nome, page=0">
                             {{canil.nome}}
+                        </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selCanilEmail=canil.email, selCanilNome=canil.nome, page=0">
+                            Remover filtro
                         </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Estado
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <select class="dropdown-content" size="2">
+                    <button v-if="selEstado===''" v-on:click="selEstado='', page=0" class="dropbtn"> Estado <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selEstado==='E'" v-on:click="selEstado='', page=0" class="dropbtn"> Encontrado <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selEstado==='C'" v-on:click="selEstado='', page=0" class="dropbtn"> Precisa de FAT <i class="fa fa-caret-down"></i> </button>
+                    <select class="dropdown-content" size="3">
                         <option
                             style="color: black"
                             v-on:click="selEstado='E', page=0">
@@ -49,30 +81,41 @@
                             v-on:click="selEstado='C', page=0">
                             Precisa de FAT
                         </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selEstado='', page=0">
+                            Remover filtro
+                        </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Sexo
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <select class="dropdown-content" size="2">
+                    <button v-if="selSexo===''" v-on:click="selSexo='', page=0" class="dropbtn"> Sexo <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selSexo==='F'" v-on:click="selSexo='', page=0" class="dropbtn"> Fêmea <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selSexo==='M'" v-on:click="selSexo='', page=0" class="dropbtn"> Macho <i class="fa fa-caret-down"></i> </button>
+                    <select class="dropdown-content" size="3">
                         <option
                             style="color: black"
                             v-on:click="selSexo='F', page=0">
-                            Feminino
+                            Fêmea
                         </option>
                         <option
                             style="color: black"
                             v-on:click="selSexo='M', page=0">
-                            Masculino
+                            Macho
+                        </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selSexo='', page=0">
+                            Remover filtro
                         </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Idade
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <select class="dropdown-content" size="3">
+                    <button v-if="selIdade===''" v-on:click="selIdade='', page=0" class="dropbtn"> Idade <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selIdade==='B'" v-on:click="selIdade='', page=0" class="dropbtn"> Bebé <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selIdade==='J'" v-on:click="selIdade='', page=0" class="dropbtn"> Jovem <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selIdade==='A'" v-on:click="selIdade='', page=0" class="dropbtn"> Adulto <i class="fa fa-caret-down"></i> </button>
+                    <select class="dropdown-content" size="4">
                         <option
                             style="color: black"
                             v-on:click="selIdade='B', page=0">
@@ -88,12 +131,19 @@
                             v-on:click="selIdade='A', page=0">
                             Adulto
                         </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selIdade='', page=0">
+                            Remover filtro
+                        </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Porte
-                        <i class="fa fa-caret-down"></i>
-                    </button>
+                    <button v-if="selPorte===''" v-on:click="selPorte='', page=0" class="dropbtn"> Porte <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selPorte==='P'" v-on:click="selPorte='', page=0" class="dropbtn"> Pequeno <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selPorte==='M'" v-on:click="selPorte='', page=0" class="dropbtn"> Médio <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selPorte==='G'" v-on:click="selPorte='', page=0" class="dropbtn"> Grande <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selPorte==='I'" v-on:click="selPorte='', page=0" class="dropbtn"> Indefinido <i class="fa fa-caret-down"></i> </button>
                     <select class="dropdown-content" size="4">
                         <option
                             style="color: black"
@@ -115,12 +165,24 @@
                             v-on:click="selPorte='I', page=0">
                             Indefinido
                         </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selPorte='', page=0">
+                            Remover filtro
+                        </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Raça
-                        <i class="fa fa-caret-down"></i>
-                    </button>
+                    <button v-if="selRaca===''" v-on:click="selRaca='', page=0" class="dropbtn"> Raça <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Beagle'" v-on:click="selRaca='', page=0" class="dropbtn"> Beagle <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Buldogue'" v-on:click="selRaca='', page=0" class="dropbtn"> Buldogue <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Golden Retriever'" v-on:click="selRaca='', page=0" class="dropbtn"> Golden Retriever <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Lavrador'" v-on:click="selRaca='', page=0" class="dropbtn"> Lavrador <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Pastor Alemao'" v-on:click="selRaca='', page=0" class="dropbtn"> Pastor Alemão <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Poodle'" v-on:click="selRaca='', page=0" class="dropbtn"> Poodle <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Rottweiler'" v-on:click="selRaca='', page=0" class="dropbtn"> Rottweiler <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Outro'" v-on:click="selRaca='', page=0" class="dropbtn"> Outra raça <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Sem Raça Definida'" v-on:click="selRaca='', page=0" class="dropbtn"> Sem raça definida <i class="fa fa-caret-down"></i> </button>
                     <select class="dropdown-content" size="4">
                         <option
                             style="color: black"
@@ -144,7 +206,7 @@
                         </option>
                         <option
                             style="color: black"
-                            v-on:click="selRaca='Pastor Alemão', page=0">
+                            v-on:click="selRaca='Pastor Alemao', page=0">
                             Pastor Alemão
                         </option>
                         <option
@@ -154,8 +216,8 @@
                         </option>
                         <option
                             style="color: black"
-                            v-on:click="selRaca='Rottwiller', page=0">
-                            Rottwiller
+                            v-on:click="selRaca='Rottweiler', page=0">
+                            Rottweiler
                         </option>
                         <option
                             style="color: black"
@@ -167,12 +229,19 @@
                             v-on:click="selRaca='Sem Raça Definida', page=0">
                             Sem raça definida
                         </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selRaca='', page=0">
+                            Remover filtro
+                        </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Comprimento do pêlo
-                        <i class="fa fa-caret-down"></i>
-                    </button>
+                    <button v-if="selCompPelo===''" v-on:click="selCompPelo='', page=0"  class="dropbtn"> Comprimento do pêlo <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCompPelo==='S'" v-on:click="selCompPelo='', page=0" class="dropbtn"> Sem pêlo <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCompPelo==='C'" v-on:click="selCompPelo='', page=0" class="dropbtn"> Curto <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCompPelo==='M'" v-on:click="selCompPelo='', page=0" class="dropbtn"> Médio <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCompPelo==='L'" v-on:click="selCompPelo='', page=0" class="dropbtn"> Longo <i class="fa fa-caret-down"></i> </button>
                     <select class="dropdown-content" size="4">
                         <option
                             style="color: black"
@@ -194,12 +263,22 @@
                             v-on:click="selCompPelo='L', page=0">
                             Longo
                         </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selCompPelo='', page=0">
+                            Remover filtro
+                        </option>
                     </select>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">Cor do pêlo
-                        <i class="fa fa-caret-down"></i>
-                    </button>
+                    <button v-if="selCorPelo===''" v-on:click="selCorPelo='', page=0" class="dropbtn"> Cor do pêlo <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Bege'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Bege <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Branco'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Branco <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Castanho'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Castanho <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Cinzento'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Cinzento <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Laranja'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Laranja <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Preto'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Preto <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selCorPelo==='Indefinido'" v-on:click="selCorPelo='', page=0" class="dropbtn"> Indefinido <i class="fa fa-caret-down"></i> </button>
                     <select class="dropdown-content" size="4">
                         <option
                             style="color: black"
@@ -218,7 +297,7 @@
                         </option>
                         <option
                             style="color: black"
-                            v-on:click="selCorPelo='Cizento', page=0">
+                            v-on:click="selCorPelo='Cinzento', page=0">
                             Cinzento
                         </option>
                         <option
@@ -235,6 +314,11 @@
                             style="color: black"
                             v-on:click="selCorPelo='Indefinido', page=0">
                             Indefinido
+                        </option>
+                        <option
+                            style="color: black"
+                            v-on:click="selCorPelo='', page=0">
+                            Remover filtro
                         </option>
                     </select>
                 </div>
@@ -275,7 +359,7 @@
         </div>
 
         <!-- Pagination -->
-        <nav class="w3-center" v-if="(caesFilter.length-1)>8" style="margin-bottom: 25px;">
+        <nav class="w3-center" v-if="(caesFilter.length-1)>nrPerPage" style="margin-bottom: 25px;">
             <div class="w3-bar">
                 <button class="w3-button" v-bind:disabled="page===0" v-on:click="page -= 1">
                     Anterior
@@ -291,7 +375,7 @@
                         v-if="page===Math.floor((caesFilter.length-1)/nrPerPage)"
                         v-bind:class="{ 'w3-green':  page  === Math.floor((caesFilter.length-1)/nrPerPage)+p-1 }"
                         v-for="p in [-1,0,1]" :key="Math.floor((caesFilter.length-1)/nrPerPage)+p"
-                        v-on:click="page = Math.floor((caesFilter.length-1)/nrPerPage)-p-1">
+                        v-on:click="page = Math.floor((caesFilter.length-1)/nrPerPage)+p-1">
                     {{Math.floor((caesFilter.length-1)/nrPerPage)+p}}
                 </button>
                 <button class="w3-button"
@@ -313,12 +397,17 @@ export default {
   data: () => ({
     caes: [],
     canis: [],
+    utiComuns: [],
+    concelhos: ['Amarante', 'Braga', 'Coimbra', 'Faro', 'Lisboa', 'Porto', 'Viana do Castelo'],
+
     page: 0,
     nrPerPage: 12,
+
     selAnimal: null,
 
     selConcelho: '',
-    selCanil: '',
+    selCanilEmail: '',
+    selCanilNome: '',
     selEstado: '',
     selSexo: '',
     selIdade: '',
@@ -329,42 +418,31 @@ export default {
   }),
 
   mounted: function () {
-    if (!this.$session.has('caesAdotar') || this.$session.get('caesAdotar')[1] > 10) {
-      console.log('getCaesAdotar')
-
-      if (this.$session.has('user')) {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'CaesAdotar?email=' + this.$session.get('user')[0])
-          .then(response => {
-            this.caes = response.data.caes
-            this.$session.set('caesAdotar', [this.caes, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'CaesAdotar')
-          .then(response => {
-            this.caes = response.data.caes
-            this.$session.set('caesAdotar', [this.caes, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
+    /* get Animais */
+    if (this.$session.has('user')) {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'CaesAdotar?email=' + this.$session.get('user')[0])
+        .then(response => {
+          this.caes = response.data.caes
+        })
+        .catch(err => {
+          console.log(err)
+        })
     } else {
-      this.caes = this.$session.get('caesAdotar')[0]
-      var times = this.$session.get('caesAdotar')[1] + 1
-      this.$session.set('caesAdotar', [this.caes, times])
-      console.log('reutilizar caes adotar da sessão pela ' + times + ' vez')
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'CaesAdotar')
+        .then(response => {
+          this.caes = response.data.caes
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
+    /* get Canis */
     if (!this.$session.has('canis') || this.$session.get('canis')[1] > 15) {
-      console.log('getCanis')
-
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios.get(this.$axiosurl + 'Canis?email=' + this.$session.get('user')[0])
@@ -406,38 +484,63 @@ export default {
       this.canis = this.$session.get('canis')[0]
       var timesC = this.$session.get('canis')[1] + 1
       this.$session.set('canis', [this.canis, timesC])
-      console.log('reutilizar canis da sessão pela ' + timesC + ' vez')
+    }
+
+    /* get utiComuns */
+    if (this.$session.has('user')) {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios.get(this.$axiosurl + 'UtilizadoresComuns?email=' + this.$session.get('user')[0])
+        .then(response => {
+          this.utiComuns = response.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    } else {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios.get(this.$axiosurl + 'UtilizadoresComuns')
+        .then(response => {
+          this.utiComuns = response.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
 
   computed: {
-    concelhos: function () {
-      var concelhos = []
-
-      this.canis.forEach(function (c) {
-        if (!(concelhos.includes(c.concelho))) {
-          concelhos.push(c.concelho)
-        }
-      })
-
-      return concelhos.sort()
-    },
-
     caesFilter: function () {
-      /* var canisDoSelconcelho = []
+      var utiDoSelConcelho = []
       var selConcelho = this.selConcelho
 
       this.canis.forEach(function (c) {
         if (selConcelho === '') {
-          canisDoSelconcelho.push(c)
+          utiDoSelConcelho.push(c)
         } else if (selConcelho === c.concelho) {
-          canisDoSelconcelho.push(c)
+          utiDoSelConcelho.push(c)
         }
       })
 
-      // todo canisDoSelconcelho + selCanis email
+      this.utiComuns.forEach(function (c) {
+        if (selConcelho === '') {
+          utiDoSelConcelho.push(c)
+        } else if (selConcelho === c.concelho) {
+          utiDoSelConcelho.push(c)
+        }
+      })
+
+      var caesFilterConcelho = []
+
+      this.caes.forEach(function (cao) {
+        utiDoSelConcelho.forEach(function (uti) {
+          if (uti.email === cao.UtilizadorEmail) {
+            caesFilterConcelho.push(cao)
+          }
+        })
+      })
 
       var caesFilter = []
+      var selCanilEmail = this.selCanilEmail
       var selEstado = this.selEstado
       var selSexo = this.selSexo
       var selIdade = this.selIdade
@@ -446,19 +549,18 @@ export default {
       var selCompPelo = this.selCompPelo
       var selCorPelo = this.selCorPelo
 
-      this.caes.forEach(function (c) {
-        if ((selEstado === '' || selEstado === c.Estado) &&
-            (selSexo === '' || selSexo === c.Sexo) &&
-            (selIdade === '' || selIdade === c.Idade) &&
-            (selPorte === '' || selPorte === c.Porte) &&
-            (selRaca === '' || selRaca === c.Raca) &&
-            (selCompPelo === '' || selCompPelo === c.CompPelo) &&
-            (selCorPelo === '' || selCorPelo === c.CorPelo)) {
+      caesFilterConcelho.forEach(function (c) {
+        if ((selCanilEmail === '' || selCanilEmail === c.UtilizadorEmail) &&
+              (selEstado === '' || selEstado === c.Estado) &&
+              (selSexo === '' || selSexo === c.Sexo) &&
+              (selIdade === '' || selIdade === c.Idade) &&
+              (selPorte === '' || selPorte === c.Porte) &&
+              (selRaca === '' || selRaca === c.Raca) &&
+              (selCompPelo === '' || selCompPelo === c.CompPelo) &&
+              (selCorPelo === '' || selCorPelo === c.CorPelo)) {
           caesFilter.push(c)
         }
-      }) */
-
-      var caesFilter = this.caes
+      })
 
       var i = 0
       var p = 0
@@ -541,7 +643,7 @@ export default {
         size: 3;
     }
 
-    .dropdown-content a {
+    .dropdown-content option {
         float: none;
         color: black;
         padding: 12px 16px;
@@ -550,7 +652,7 @@ export default {
         text-align: left;
     }
 
-    .dropdown-content a:hover {
+    .dropdown-content option:hover {
         background-color: #ddd;
     }
 

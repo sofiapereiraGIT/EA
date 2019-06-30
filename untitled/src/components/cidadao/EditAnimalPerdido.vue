@@ -4,6 +4,14 @@
             <div class="container-login100">
                 <div class="wrap-login100 p-t-190 p-b-30 row">
                     <form class="login100-form validate-form" @submit.prevent="submitAnimal">
+                        <div v-if="error===1" class="Error">
+                            <span class="closebtn" @click="closeErrorNotification()">&times;</span>
+                            <strong>Info!</strong> {{ message }}
+                        </div>
+                        <div v-if="success===1" class="Success">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <strong>Info!</strong> {{ message }}
+                        </div>
                         <div class="columnAlign">
                             <div class="login100-form-avatar">
                                 <img v-if="(animalNovo.Fotografia===null || animalNovo.Fotografia==='') && animalNovo.Discriminator === 'C'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
@@ -53,19 +61,19 @@
                                 <br>
                                 <div class="select">
                                     <select v-model="animalNovo.Sexo" required>
-                                        <option v-if="animalNovo.Sexo === 'M'" v-bind:value="animalNovo.Sexo">Macho</option>
                                         <option v-if="animalNovo.Sexo === 'F'" v-bind:value="animalNovo.Sexo">Fêmea</option>
-                                        <option value="M">Macho</option>
+                                        <option v-if="animalNovo.Sexo === 'M'" v-bind:value="animalNovo.Sexo">Macho</option>
                                         <option value="F">Fêmea</option>
+                                        <option value="M">Macho</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="select">
                                     <select v-model="animalNovo.Idade" required>
-                                        <option v-if="animalNovo.Idade === 'B'" v-bind:value="animalNovo.Idade">Bebé (Menos de 6 Meses)</option>
+                                        <option v-if="animalNovo.Idade === 'B'" v-bind:value="animalNovo.Idade">Bebé (Menos de 6 meses)</option>
                                         <option v-if="animalNovo.Idade === 'J'" v-bind:value="animalNovo.Idade">Jovem</option>
                                         <option v-if="animalNovo.Idade === 'A'" v-bind:value="animalNovo.Idade">Adulto</option>
-                                        <option value="B">Bebé (Menos de 6 Meses)</option>
+                                        <option value="B">Bebé (Menos de 6 meses)</option>
                                         <option value="J">Jovem</option>
                                         <option value="A">Adulto</option>
                                     </select>
@@ -89,11 +97,11 @@
                                 <div class="select">
                                     <select v-model="animalNovo.CorPelo" required>
                                         <option v-bind:value="animalNovo.CorPelo">{{animalNovo.CorPelo}}</option>
-                                        <option value="Laranja">Laranja</option>
                                         <option value="Bege">Bege</option>
                                         <option value="Branco">Branco</option>
                                         <option value="Castanho">Castanho</option>
                                         <option value="Cinzento">Cinzento</option>
+                                        <option value="Laranja">Laranja</option>
                                         <option value="Preto">Preto</option>
                                         <option value="Indefinido">Indefinido</option>
                                     </select>
@@ -101,11 +109,11 @@
                                 <br>
                                 <div class="select">
                                     <select v-model="animalNovo.CompPelo" required>
-                                        <option v-if="animalNovo.CompPelo === 'S'" v-bind:value="animalNovo.CompPelo">Sem Pêlo</option>
+                                        <option v-if="animalNovo.CompPelo === 'S'" v-bind:value="animalNovo.CompPelo">Sem pêlo</option>
                                         <option v-if="animalNovo.CompPelo === 'C'" v-bind:value="animalNovo.CompPelo">Curto</option>
                                         <option v-if="animalNovo.CompPelo === 'M'" v-bind:value="animalNovo.CompPelo">Médio</option>
                                         <option v-if="animalNovo.CompPelo === 'L'" v-bind:value="animalNovo.CompPelo">Longo</option>
-                                        <option value="S">Sem Pêlo</option>
+                                        <option value="S">Sem pêlo</option>
                                         <option value="C">Curto</option>
                                         <option value="M">Médio</option>
                                         <option value="L">Longo</option>
@@ -115,25 +123,24 @@
                                 <div class="select">
                                     <select v-if="animalNovo.Discriminator==='C'" v-model="animalNovo.Raca" required>
                                         <option v-bind:value="animalNovo.Raca">{{animalNovo.Raca}}</option>
-                                        <option value="Sem Raça Definida">Sem Raça Definida</option>
-                                        <option value="Pastor Alemao">Pastor Alemão</option>
-                                        <option value="Lavrador">Lavrador</option>
-                                        <option value="Buldogue">Buldogue</option>
                                         <option value="Beagle">Beagle</option>
-                                        <option value="Poodle">Poodle</option>
-                                        <option value="Rottwiller">Rottwiller</option>
+                                        <option value="Buldogue">Buldogue</option>
                                         <option value="Golden Retriever">Golden Retriever</option>
-                                        <option value="Outro">Outro</option>
+                                        <option value="Lavrador">Lavrador</option>
+                                        <option value="Pastor Alemao">Pastor Alemão</option>
+                                        <option value="Poodle">Poodle</option>
+                                        <option value="Rottweiler">Rottweiler</option>
+                                        <option value="Outro">Outra raça</option>
+                                        <option value="Sem Raça Definida">Sem raça definida</option>
                                     </select>
                                     <select v-if="animalNovo.Discriminator==='G'" v-model="animalNovo.Raca" required>
                                         <option v-bind:value="animalNovo.Raca">{{animalNovo.Raca}}</option>
-                                        <option value="" disabled>Raça Gato</option>
-                                        <option value="Sem Raça Definida">Sem Raça Definida</option>
                                         <option value="Persa">Persa</option>
-                                        <option value="Siamês">Siamês</option>
                                         <option value="Ragdoll">Ragdoll</option>
-                                        <option value="Scottish Fold">Scottish Fold</option>
-                                        <option value="Outro">Outro</option>
+                                        <option value="ScottishFold">Scottish Fold</option>
+                                        <option value="Siames">Siamês</option>
+                                        <option value="Outro">Outra raça</option>
+                                        <option value="Sem Raça Definida">Sem raça definida</option>
                                     </select>
                                 </div>
                                 <br>
@@ -156,8 +163,10 @@
 <script>
 import axios from 'axios'
 import route from '../../router/index'
+
 export default {
   name: 'EditAnimalPerdido',
+
   data: function () {
     return {
       animal: null,
@@ -176,9 +185,12 @@ export default {
         Nome: '',
         Porte: ''
       },
-      mudarFoto: false
+      mudarFoto: false,
+      success: 0,
+      error: 0
     }
   },
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -205,15 +217,33 @@ export default {
     this.animalNovo.Nome = this.animal.Nome
     this.animalNovo.Porte = this.animal.Porte
   },
+
   methods: {
+    stateChange (newState) {
+      setTimeout(function () {
+        if (newState === -1) {
+          route.push('/GerirAnimais')
+        }
+      }, 3000)
+    },
+    closeErrorNotification () {
+      this.error = 0
+    },
     uploadFotografia () {
       this.animalNovo.Fotografia = this.getElementById('foto')
     },
 
     submitAnimal () {
       axios.post(this.$axiosurl + 'UpdateAnimal', this.animalNovo).then(response => {
-        route.push('/EditAnimalPerdido')
         this.mudarFoto = false
+        this.success = 1
+        this.error = 0
+        this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos.'
+        this.stateChange(-1)
+      }).catch(e => {
+        this.success = 0
+        this.error = 1
+        this.message = 'Não foi possível efetuar as alterações. Por favor, tente novamente.'
       })
     },
 
@@ -223,7 +253,14 @@ export default {
       dados['email'] = this.$session.get('user')[0]
 
       axios.post(this.$axiosurl + 'DeleteAnimalPerdido', dados).then(response => {
-        route.push('/GerirAnimais')
+        this.success = 1
+        this.error = 0
+        this.message = 'O animal foi removido com sucesso. Irá ser redirecionado dentro de 3 segundos.'
+        this.stateChange(-1)
+      }).catch(e => {
+        this.success = 0
+        this.error = 1
+        this.message = 'Não foi possível eliminar o animal. Por favor, tente novamente.'
       })
     }
   }
@@ -231,6 +268,18 @@ export default {
 </script>
 
 <style scoped>
+
+    .Success {
+        padding: 20px;
+        background-color: green;
+        color: white;
+    }
+    .Error {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
+
     /* Reset Select */
     /* The container */
     .container {

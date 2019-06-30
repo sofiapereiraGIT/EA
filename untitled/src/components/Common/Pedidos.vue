@@ -27,9 +27,11 @@ import route from '../../router/index'
 
 export default {
   name: 'Pedidos',
+
   data: () => ({
     pedidosList: {}
   }),
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -38,7 +40,6 @@ export default {
     axios.get(this.$axiosurl + 'PedidosUser?email=' + this.$session.get('user')[0])
       .then(response => {
         this.pedidosList = response.data.pedidos
-        console.log(this.pedidosList)
       }).catch()
   }
 }

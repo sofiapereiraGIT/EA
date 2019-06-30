@@ -63,11 +63,11 @@
                             </div>
                             <div class="w3-large w3-margin-bottom">
                                 <i class="fas fa-palette fa-fw w3-hover-text-black w3-margin-right"></i>
-                                Cor do Pêlo: {{ animalData.CorPelo }}<br>
+                                Cor do pêlo: {{ animalData.CorPelo }}<br>
                             </div>
                             <div class="w3-large w3-margin-bottom">
                                 <i class="fas fa-ruler-horizontal fa-fw w3-hover-text-black w3-margin-right"></i>
-                                Comprimento do Pêlo: {{ animalData.CompPelo }}<br>
+                                Comprimento do pêlo: {{ animalData.CompPelo }}<br>
                             </div>
                         </div>
                         <div class="w3-large w3-margin-bottom" style="text-align: left">
@@ -104,8 +104,10 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'VerAnimalAdotarUC',
+
   data: () => ({
     error: '',
     success: '',
@@ -113,10 +115,11 @@ export default {
     animalData: {},
     pedidoData: {}
   }),
+
   mounted: function () {
     this.animalData = this.$session.get('animal')
     if (this.animalData.Descricao === null) {
-      this.animalData.Descricao = 'Sem Descrição'
+      this.animalData.Descricao = 'Sem descrição'
     }
     this.animalData.Discriminator = this.getDiscriminator(this.animalData.Discriminator)
     this.animalData.Sexo = this.getSexo(this.animalData.Sexo)
@@ -125,6 +128,7 @@ export default {
     this.animalData.Porte = this.getPorte(this.animalData.Porte)
     this.$session.set('email', this.animalData.UtilizadorEmail)
   },
+
   methods: {
     getDiscriminator (discriminator) {
       if (discriminator === 'C') {
@@ -143,7 +147,7 @@ export default {
     },
     getIdade (idade) {
       if (idade === 'B') {
-        return 'Bebe (Menos de 6 Meses)'
+        return 'Bebe (Menos de 6 meses)'
       }
       if (this.animalData.Idade === 'J') {
         return 'Jovem'
@@ -187,14 +191,13 @@ export default {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       axios.post(this.$axiosurl + 'AdotarAnimal', this.pedidoData)
         .then(response => {
-          console.log(response)
           if (response.data.msg === true) {
-            this.message = 'O Seu Pedido Foi Registado Com Sucesso.'
+            this.message = 'O seu pedido foi registado com sucesso.'
             this.error = 0
             this.success = 1
           }
         }).catch(e => {
-          this.message = 'O Seu Pedido Não Foi Registado Com Sucesso'
+          this.message = 'Não foi possível registar o seu pedido. Por favor, tente novamente.'
           this.success = 0
           this.error = 1
         })
@@ -207,12 +210,12 @@ export default {
       axios.post(this.$axiosurl + 'serFatAnimal', this.pedidoData)
         .then(response => {
           if (response.data.msg === true) {
-            this.message = 'O Seu Pedido Foi Registado Com Sucesso.'
+            this.message = 'O seu pedido foi registado com sucesso.'
             this.error = 0
             this.success = 1
           }
         }).catch(e => {
-          this.message = 'O Seu Pedido Não Foi Registado Com Sucesso'
+          this.message = 'Não foi possível registar o seu pedido. Por favor, tente novamente.'
           this.success = 0
           this.error = 1
         })

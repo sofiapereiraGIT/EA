@@ -12,10 +12,10 @@
                             <br>
                             <div>
                                 <router-link v-if="animalData.UserType===0" class="txt1" to="/UserPerfil">
-                                    Ver Perfil do Utilizador
+                                    Ver perfil do utilizador
                                 </router-link>
                                 <router-link v-if="animalData.UserType===1" class="txt1" to="/CanilPerfil">
-                                    Ver Perfil do Canil
+                                    Ver perfil do canil
                                 </router-link>
                             </div>
                             <br>
@@ -61,11 +61,11 @@
                                 </div>
                                 <div class="w3-large w3-margin-bottom">
                                     <i class="fas fa-palette fa-fw w3-hover-text-black w3-margin-right"></i>
-                                    Cor do Pêlo: {{ animalData.CorPelo }}<br>
+                                    Cor do pêlo: {{ animalData.CorPelo }}<br>
                                 </div>
                                 <div class="w3-large w3-margin-bottom">
                                     <i class="fas fa-ruler-horizontal fa-fw w3-hover-text-black w3-margin-right"></i>
-                                    Comprimento do Pêlo: {{ animalData.CompPelo }}<br>
+                                    Comprimento do pêlo: {{ animalData.CompPelo }}<br>
                                 </div>
                             </div>
                             <div>
@@ -80,16 +80,17 @@
 </template>
 
 <script>
-
 export default {
   name: 'VerAnimalPerdidos',
+
   data: () => ({
     animalData: {}
   }),
+
   mounted: function () {
     this.animalData = this.$session.get('animal')
     if (this.animalData.Descricao === null) {
-      this.animalData.Descricao = 'Sem Descrição'
+      this.animalData.Descricao = 'Sem descrição'
     }
     this.animalData.Discriminator = this.getDiscriminator(this.animalData.Discriminator)
     this.animalData.Sexo = this.getSexo(this.animalData.Sexo)
@@ -98,6 +99,7 @@ export default {
     this.animalData.Porte = this.getPorte(this.animalData.Porte)
     this.animalData.Concelho = this.animalData.Concelho
   },
+
   methods: {
     getDiscriminator (discriminator) {
       if (discriminator === 'C') {
@@ -116,7 +118,7 @@ export default {
     },
     getIdade (idade) {
       if (idade === 'B') {
-        return 'Bebe (Menos de 6 Meses)'
+        return 'Bebé (Menos de 6 meses)'
       }
       if (this.animalData.Idade === 'J') {
         return 'Jovem'

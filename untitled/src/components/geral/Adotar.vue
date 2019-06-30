@@ -3,7 +3,10 @@
         <div class="w3-row">
             <div class="w3-content w3-container w3-padding-64">
                 <h3 class="texto w3-center">Antes de adotar informe-se...</h3>
-                <h3 class="w3-center">textinho</h3>
+                <h6 class="w3-center">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                </h6>
             </div>
         </div>
         <br>
