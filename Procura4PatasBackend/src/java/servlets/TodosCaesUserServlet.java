@@ -78,13 +78,7 @@ public class TodosCaesUserServlet extends HttpServlet {
             
             List<Animal> allDogs = P4P.getTodosCaes(session, emailQuemQuero);
             
-            try {
-              for(Animal a : allDogs) {  
-                session.evict(a);
-              }
-            } catch (PersistentException ex) {
-             Logger.getLogger(TodosCaesUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            session.clear();
             
              // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();

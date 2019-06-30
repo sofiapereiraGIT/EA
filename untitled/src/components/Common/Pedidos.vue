@@ -8,6 +8,7 @@
                 <th>Nome do animal</th>
                 <th>Nome do candidato</th>
                 <th>E-mail do candidato</th>
+                <th>Tipo de pedido</th>
             </tr>
             <tr v-for="p in pedidosList" :key="p.ID">
                 <td>{{p.Data}}</td>
@@ -15,6 +16,8 @@
                 <td>{{p.AnimalNome}}</td>
                 <td>{{p.PessoaNome}}</td>
                 <td>{{p.UtilizadorEmail}}</td>
+                <td v-if="p.Discriminator === 'F'">FAT</td>
+                <td v-else>Adoção</td>
             </tr>
         </table>
     </div>

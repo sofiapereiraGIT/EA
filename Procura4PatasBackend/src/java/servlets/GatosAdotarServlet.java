@@ -74,9 +74,7 @@ public class GatosAdotarServlet extends HttpServlet {
             
             List<Animal> gatosAdotar = P4P.getGatosAdotar(session);
             
-            for(Animal g : gatosAdotar) {
-            session.evict(g);
-            }
+            session.clear();
             
             // Formar JSON
             JSONObject myJson = new JSONObject();    

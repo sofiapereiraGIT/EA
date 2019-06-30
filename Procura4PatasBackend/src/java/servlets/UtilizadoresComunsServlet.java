@@ -58,13 +58,7 @@ public class UtilizadoresComunsServlet extends HttpServlet {
 
         List<UtilizadorComum> utilizadoresComuns = P4P.getUtilizadoresComuns(session);
         
-        try {
-            for(UtilizadorComum uc : utilizadoresComuns) {
-            session.evict(uc); 
-            }
-        } catch (PersistentException ex) {
-            Logger.getLogger(UtilizadoresComunsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        session.clear();
         
         JSONArray array = new JSONArray();
 

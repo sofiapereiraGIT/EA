@@ -83,13 +83,7 @@ public class CaoAdocaoUserServlet extends HttpServlet {
         
         List<Animal> onlyDogs = P4P.getCaoAdocaoUser(session,emailQuemQuero);
         
-        try {
-            for(Animal d : onlyDogs) {
-            session.evict(d); 
-            }
-        } catch (PersistentException ex) {
-            Logger.getLogger(CaoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        session.clear();
         
         // Enviar JSON ARRAY
         JSONObject myJson = new JSONObject();

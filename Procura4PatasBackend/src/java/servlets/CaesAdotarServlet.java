@@ -76,9 +76,7 @@ public class CaesAdotarServlet extends HttpServlet {
             
             List<Animal> caesAdotar = P4P.getCaesAdotar(session);
             
-            for(Animal c : caesAdotar) {
-            session.evict(c);
-            }
+            session.clear();
             
             // Formar JSON
             JSONObject myJson = new JSONObject();        

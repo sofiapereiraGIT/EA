@@ -60,13 +60,7 @@ public class CanisServlet extends HttpServlet {
 
         List<Canil> canis = P4P.getCanis(session);
         
-        try {
-            for(Canil c : canis) {
-            session.evict(c);
-            }
-        } catch (PersistentException ex) {
-            Logger.getLogger(CanisServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        session.clear();
         
         JSONArray array = new JSONArray();
 

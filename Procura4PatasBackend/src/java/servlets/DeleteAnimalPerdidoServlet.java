@@ -84,6 +84,7 @@ public class DeleteAnimalPerdidoServlet extends HttpServlet {
             int ID = ((Long) json.get("ID")).intValue();
             
             PersistentSession session = Util.getSession(request, UtilizadorEmail);
+            
             boolean apagado = P4P.deleteAnimalPerdido(session, ID);
                 
             out.println("{ \"msg\": "+apagado+"}");

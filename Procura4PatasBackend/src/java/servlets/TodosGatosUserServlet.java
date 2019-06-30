@@ -79,13 +79,7 @@ public class TodosGatosUserServlet extends HttpServlet {
             
             List<Animal> allCats = P4P.getTodosGatos(session, emailQuemQuero);
             
-            try {
-               for(Animal g : allCats) { 
-                session.evict(g); 
-               }
-            } catch (PersistentException ex) {
-                Logger.getLogger(TodosGatosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            session.clear();
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();

@@ -7,6 +7,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.orm.PersistentSession;
+import procura4patas.Pedido;
 import src.P4P;
 import src.Util;
 
@@ -96,7 +98,24 @@ public class serFatAnimalServlet extends HttpServlet {
         
         PersistentSession session = Util.getSession(request, emailUtilComum);
         
-        boolean adotado = P4P.serFatAnimal(session, email, emailUtilComum, id);
+        List<Pedido> pedidos =  P4P.getPedidosUser(session, email);
+        
+        boolean adotado = false;
+        boolean possui = true;
+        
+        if(pedidos!=null) {
+            for(Pedido p :  pedidos) {
+                if( p.getAnimal().getID() == id) {
+                    possui = false;
+                }
+            }
+        }
+        
+        session.clear();
+        
+        if(possui) {
+            adotado = P4P.serFatAnimal(session, email, emailUtilComum, id); 
+        }
   
          out.println("{ \"msg\": "+adotado+"}");
          out.flush();

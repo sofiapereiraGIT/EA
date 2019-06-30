@@ -67,7 +67,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         Utilizador user = null;
         
         try {
-            user = UtilizadorDAO.getUtilizadorByORMID(email);
+            user = UtilizadorDAO.getUtilizadorByORMID(session, email);
         } catch (PersistentException ex) {
             Logger.getLogger(UtilizadorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,7 +80,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Animal> onlyDogs = new ArrayList<>();
         
         try {
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
             List<Animal> animalTotal = new ArrayList<>();
             animalTotal = Arrays.asList(user.animais.toArray());
             
@@ -101,7 +101,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Animal> onlyCats = new ArrayList<>();
         
         try {
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
             List<Animal> animalTotal = new ArrayList<>();
             animalTotal = Arrays.asList(user.animais.toArray());
             
@@ -120,7 +120,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Animal> todosCaes = new ArrayList<>();
         
         try {
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
             List<Animal> animalTotal = new ArrayList<>();
             animalTotal = Arrays.asList(user.animais.toArray());
 
@@ -139,7 +139,7 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Animal> todosGatos = new ArrayList<>();
         
         try {
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
             List<Animal> animalTotal = new ArrayList<>();
             animalTotal = Arrays.asList(user.animais.toArray());
 
@@ -157,8 +157,9 @@ public class UtilizadorBean implements UtilizadorBeanLocal {
         List<Pedido> pedidosTotal = new ArrayList<>();
         
         try {
-            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(email);
+            Utilizador user = UtilizadorDAO.getUtilizadorByORMID(sessao, email);
             pedidosTotal = Arrays.asList(user.listaPedidos.toArray() );
+            
         } catch(PersistentException e) {}
         return pedidosTotal;  
     }

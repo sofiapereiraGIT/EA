@@ -84,8 +84,6 @@ public class CanilServlet extends HttpServlet {
             result.put("site", c.getSiteOficial());
             result.put("facebook", c.getFacebook());
             result.put("instagram", c.getInstagram());
-            
-             System.out.println(c.getNome());
 
             PrintWriter out = response.getWriter();
                out.println(result);

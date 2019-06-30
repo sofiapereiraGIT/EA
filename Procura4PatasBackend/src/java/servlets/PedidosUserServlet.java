@@ -85,14 +85,7 @@ public class PedidosUserServlet extends HttpServlet {
             List<Pedido> onlyPedidos = P4P.getPedidosUser(session, email);
             
             
-            try {
-                
-                for(Pedido p: onlyPedidos) {
-                session.evict(p);
-                }
-            } catch (PersistentException ex) {
-                Logger.getLogger(PedidosUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            session.clear();
             
             // Enviar JSON ARRAY
             JSONObject myJson = new JSONObject();

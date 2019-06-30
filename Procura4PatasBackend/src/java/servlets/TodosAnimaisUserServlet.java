@@ -83,22 +83,7 @@ public class TodosAnimaisUserServlet extends HttpServlet {
          List<Animal> allAnimals = new ArrayList<>(allDogs);
                                    allAnimals.addAll(allCats);
          
-         try {
-             
-           for(Animal d : allDogs) {
-            session.evict(d); }
-             
-           for(Animal g : allCats ) { 
-            session.evict(g);
-            }
-   
-         } catch (PersistentException ex) {
-            Logger.getLogger(TodosAnimaisUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-         }
-                 
-        
-                                   
-                                   
+         session.clear();                        
             
          // Enviar JSON ARRAY
          JSONObject myJson = new JSONObject();

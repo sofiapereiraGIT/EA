@@ -79,13 +79,7 @@ public class GatoAdocaoUserServlet extends HttpServlet {
             
             List<Animal> onlyCats = P4P.getGatoAdocaoUser(session,emailQuemQuero);
             
-            try {
-                for(Animal g : onlyCats) {
-                session.evict(g); 
-                }
-            } catch (PersistentException ex) {
-                Logger.getLogger(GatoAdocaoUserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            session.clear();
             
             JSONObject myJson = new JSONObject();
             JSONObject jsonObjArr = new JSONObject();

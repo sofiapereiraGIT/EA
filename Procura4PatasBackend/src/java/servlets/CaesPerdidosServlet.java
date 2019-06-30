@@ -65,13 +65,7 @@ public class CaesPerdidosServlet extends HttpServlet {
             
             List<Animal> caesPerdidos = P4P.getCaesPerdidos(session);
             
-            try {
-                for(Animal c : caesPerdidos) {
-                session.evict(c); 
-                }
-            } catch (PersistentException ex) {
-                Logger.getLogger(CaesPerdidosServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            session.clear();
             
             // Formar JSON
             JSONObject myJson = new JSONObject();         
