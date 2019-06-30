@@ -74,6 +74,10 @@ public class P4P {
         return animalBean.deleteAnimalPerdido(session, ID);
     }
     
+    public static int getLastId(PersistentSession session) {
+        return animalBean.getLastId(session);
+    }
+    
     /** pedidoBean methods **/
     
     public static boolean adotarAnimal(PersistentSession sessao, String email, String emailUtilComum, int id) {

@@ -35,4 +35,6 @@ public interface AnimalBeanLocal {
 
     public String getUtilizadorEmail(PersistentSession session, int id);
     
+    public int getLastId(PersistentSession session);
+    
 }

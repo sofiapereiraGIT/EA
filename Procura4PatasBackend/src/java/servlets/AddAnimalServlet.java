@@ -96,8 +96,12 @@ public class AddAnimalServlet extends HttpServlet {
             PersistentSession session = Util.getSession(request, UtilizadorEmail);
             boolean criado = P4P.addAnimal(session, UtilizadorEmail, nome, fotografia, sexo, idade,
                 raca, porte, corPelo, compPelo, estado, descricao, concelho, discriminator);
+            
+           int ultimoId = P4P.getLastId(session);
+           
+           session.clear();
                 
-            out.println("{ \"msg\": "+criado+"}");
+            out.println("{ \"msg\": "+criado+",\"UltimoID\": "+ultimoId + "}");
             out.flush();
             out.close();
         

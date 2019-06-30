@@ -177,5 +177,22 @@ public class AnimalBean implements AnimalBeanLocal {
             email = result.get(0).toString();
         } catch (Exception e) {}
         return email;
-    }  
+    }
+    
+    @Override
+    public int getLastId(PersistentSession session) {
+         String idAux = null;
+         int id = -1;
+        try {
+            session.beginTransaction();
+            
+            Query query = session.createSQLQuery("Select max(id) from Animal");
+           
+            List result = query.list();
+            idAux = result.get(0).toString();
+            id = Integer.parseInt(idAux);
+            
+        } catch (Exception e) {}
+        return id;
+    }
 }
