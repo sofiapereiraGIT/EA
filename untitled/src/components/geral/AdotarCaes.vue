@@ -180,7 +180,7 @@
                     <button v-if="selRaca==='Lavrador'" v-on:click="selRaca='', page=0" class="dropbtn"> Lavrador <i class="fa fa-caret-down"></i> </button>
                     <button v-if="selRaca==='Pastor Alemao'" v-on:click="selRaca='', page=0" class="dropbtn"> Pastor Alemão <i class="fa fa-caret-down"></i> </button>
                     <button v-if="selRaca==='Poodle'" v-on:click="selRaca='', page=0" class="dropbtn"> Poodle <i class="fa fa-caret-down"></i> </button>
-                    <button v-if="selRaca==='Rottwiller'" v-on:click="selRaca='', page=0" class="dropbtn"> Rottwiller <i class="fa fa-caret-down"></i> </button>
+                    <button v-if="selRaca==='Rottweiler'" v-on:click="selRaca='', page=0" class="dropbtn"> Rottweiler <i class="fa fa-caret-down"></i> </button>
                     <button v-if="selRaca==='Outro'" v-on:click="selRaca='', page=0" class="dropbtn"> Outra raça <i class="fa fa-caret-down"></i> </button>
                     <button v-if="selRaca==='Sem Raça Definida'" v-on:click="selRaca='', page=0" class="dropbtn"> Sem raça definida <i class="fa fa-caret-down"></i> </button>
                     <select class="dropdown-content" size="4">
@@ -216,8 +216,8 @@
                         </option>
                         <option
                             style="color: black"
-                            v-on:click="selRaca='Rottwiller', page=0">
-                            Rottwiller
+                            v-on:click="selRaca='Rottweiler', page=0">
+                            Rottweiler
                         </option>
                         <option
                             style="color: black"
