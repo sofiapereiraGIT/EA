@@ -140,7 +140,7 @@ export default {
       CompPelo: '',
       Estado: '',
       Descricao: '',
-      Concelho: '',
+      Concelho: this.$session.get('user')[0].concelho,
       Discriminator: ''
     },
     mudarFoto: false
