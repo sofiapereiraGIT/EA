@@ -352,8 +352,6 @@ export default {
     }
 
     if (!this.$session.has('canis') || this.$session.get('canis')[1] > 15) {
-      console.log('getCanis')
-
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios.get(this.$axiosurl + 'Canis?email=' + this.$session.get('user')[0])

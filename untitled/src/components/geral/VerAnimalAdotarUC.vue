@@ -187,7 +187,6 @@ export default {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       axios.post(this.$axiosurl + 'AdotarAnimal', this.pedidoData)
         .then(response => {
-          console.log(response)
           if (response.data.msg === true) {
             this.message = 'O Seu Pedido Foi Registado Com Sucesso.'
             this.error = 0

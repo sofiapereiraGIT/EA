@@ -98,8 +98,6 @@ export default {
 
   mounted: function () {
     if (!this.$session.has('canis') || this.$session.get('canis')[1] > 5) {
-      console.log('getCanis')
-
       if (this.$session.has('user')) {
         axios.defaults.headers['Content-Type'] = 'application/json'
         axios.get(this.$axiosurl + 'Canis?email=' + this.$session.get('user')[0])
@@ -141,7 +139,6 @@ export default {
       this.canis = this.$session.get('canis')[0]
       var times = this.$session.get('canis')[1] + 1
       this.$session.set('canis', [this.canis, times])
-      console.log('reutilizar canis da sessão pela ' + times + ' vez')
     }
   },
 

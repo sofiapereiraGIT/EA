@@ -205,18 +205,14 @@ export default {
       } else {
         axios.post(this.$axiosurl + 'UtilizadorComum', this.uc)
           .then(response => {
-            console.log('Utilizador Registado')
             if (response.data.msg === true) {
-              console.log('Utilizador Registado Com Sucesso')
               this.message = 'Foi Registado Com Sucesso. Irá ser Redirecionado Dentro de 3 Segundos.'
               this.error = 0
               this.success = 1
               this.stateChange(-1)
             }
           }).catch(e => {
-            console.log(e)
-            console.log('Utilizador Não Registado Com Sucesso')
-            this.message = 'Não Foi Possível Registar o Utilizador'
+            this.message = 'Não Foi Possível Registar o Utilizador.'
             this.success = 0
             this.error = 1
           })

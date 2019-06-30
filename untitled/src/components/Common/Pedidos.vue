@@ -38,7 +38,6 @@ export default {
     axios.get(this.$axiosurl + 'PedidosUser?email=' + this.$session.get('user')[0])
       .then(response => {
         this.pedidosList = response.data.pedidos
-        console.log(this.pedidosList)
       }).catch()
   }
 }
