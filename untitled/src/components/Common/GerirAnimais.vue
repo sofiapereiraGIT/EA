@@ -36,29 +36,29 @@
         <div class="animalCol" v-for="g in filteredAnimals" :key="g.ID" >
             <router-link v-if="g.Estado === 'P'" to="/EditAnimalPerdido">
                 <img
-                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'C'"
+                    v-if="(g.Fotografia==='' || g.Fotografia==='null' || g.Fotografia===null) && g.Discriminator === 'C'"
                     v-on:click="selAnimal=g"
                     src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 <img
-                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'G'"
+                    v-if="(g.Fotografia==='' || g.Fotografia==='null' || g.Fotografia===null) && g.Discriminator === 'G'"
                     v-on:click="selAnimal=g"
                     src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 <img
-                    v-else
+                    v-if="g.Fotografia && g.Fotografia !== 'null'"
                     v-on:click="selAnimal=g"
                     :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
             </router-link>
             <router-link v-else to="/EditAnimalAdocao">
                 <img
-                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'C'"
+                    v-if="(g.Fotografia==='' || g.Fotografia==='null' || g.Fotografia===null) && g.Discriminator === 'C'"
                     v-on:click="selAnimal=g"
                     src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 <img
-                    v-if="(g.Fotografia==='' || g.Fotografia===null) && g.Discriminator === 'G'"
+                    v-if="(g.Fotografia==='' || g.Fotografia==='null' || g.Fotografia===null) && g.Discriminator === 'G'"
                     v-on:click="selAnimal=g"
                     src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 <img
-                    v-else
+                    v-if="g.Fotografia && g.Fotografia !== 'null'"
                     v-on:click="selAnimal=g"
                     :src="require('../../../img/'+g.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
             </router-link>

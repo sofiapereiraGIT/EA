@@ -11,8 +11,8 @@
             </div>
             <div class="w3-row w3-padding-32 w3-section">
                 <div class="w3-col m6 w3-container">
-                    <img v-if="utilizador.fotografia===null || utilizador.fotografia===''" src="../../../img/userCanis.png" style="margin-bottom: 10px" class="img w3-image">
-                    <img v-else :src="require('../../../img/'+utilizador.fotografia)" style="margin-bottom: 10px" class="img w3-image">
+                    <img v-if="utilizador.fotografia===null || utilizador.fotografia==='null' || utilizador.fotografia===''" src="../../../img/userCanis.png" style="margin-bottom: 10px" class="img w3-image">
+                    <img v-if="utilizador.fotografia && utilizador.fotografia==='null'" :src="require('../../../img/'+utilizador.fotografia)" style="margin-bottom: 10px" class="img w3-image">
                     <br><br>
                     <button v-if="!mudarFoto" class="login100-form-btn" @click="mudarFoto = true">Mudar imagem</button>
                     <input v-if="mudarFoto" id="foto" class="w3-input w3-border" type="file" placeholder="Imagem" accept="image/*" v-on:change="uploadFotografia">

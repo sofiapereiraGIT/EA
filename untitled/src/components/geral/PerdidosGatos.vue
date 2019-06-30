@@ -267,11 +267,11 @@
                  v-for="gato in gatosFilter[page]" :key="gato.ID">
                 <router-link to="/VerAnimalPerdido">
                     <img
-                        v-if="gato.Fotografia==='' || gato.Fotografia===null"
+                        v-if="gato.Fotografia==='' || gato.Fotografia===null || gato.Fotografia==='null'"
                         v-on:click="selAnimal=gato"
                         src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                     <img
-                        v-else
+                        v-if="gato.Fotografia && gato.Fotografia!=='null'"
                         v-on:click="selAnimal=gato"
                         :src="require('../../../img/'+gato.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>

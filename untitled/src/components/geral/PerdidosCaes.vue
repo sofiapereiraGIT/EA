@@ -285,11 +285,11 @@
                  v-for="cao in caesFilter[page]" :key="cao.ID">
                 <router-link to="/VerAnimalPerdido">
                     <img
-                        v-if="cao.Fotografia==='' || cao.Fotografia===null"
+                        v-if="cao.Fotografia==='' || cao.Fotografia===null || cao.Fotografia==='null'"
                         v-on:click="selAnimal=cao"
                         src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                     <img
-                        v-else
+                        v-if="cao.Fotografia && cao.Fotografia!=='null'"
                         v-on:click="selAnimal=cao"
                         :src="require('../../../img/'+cao.Fotografia)" style="margin-bottom: 10px" class="img w3-image w3-hover-opacity">
                 </router-link>
