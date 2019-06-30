@@ -121,7 +121,7 @@
                                         <option value="Lavrador">Lavrador</option>
                                         <option value="Pastor Alemao">Pastor Alemão</option>
                                         <option value="Poodle">Poodle</option>
-                                        <option value="Rottwiller">Rottwiller</option>
+                                        <option value="Rottweiler">Rottweiler</option>
                                         <option value="Outro">Outra raça</option>
                                         <option value="Sem Raça Definida">Sem raça definida</option>
                                     </select>
