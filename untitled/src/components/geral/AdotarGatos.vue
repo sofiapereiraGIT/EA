@@ -158,11 +158,11 @@
                     {{p+page}}
                 </button>
                 <button class="w3-button"
-                        v-if="page===Math.floor(gatosFilter.length/nrPerPage)"
-                        v-bind:class="{ 'w3-green':  page  === Math.floor(gatosFilter.length/nrPerPage)+p-1 }"
-                        v-for="p in [-1,0,1]" :key="Math.floor(gatosFilter.length/nrPerPage)+p"
-                        v-on:click="page = Math.floor(gatosFilter.length/nrPerPage)-p-1">
-                    {{Math.floor(gatosFilter.length/nrPerPage)+p}}
+                        v-if="page===Math.floor((gatosFilter.length-1)/nrPerPage)"
+                        v-bind:class="{ 'w3-green':  page  === Math.floor((gatosFilter.length-1)/nrPerPage)+p-1 }"
+                        v-for="p in [-1,0,1]" :key="Math.floor((gatosFilter.length-1)/nrPerPage)+p"
+                        v-on:click="page = Math.floor((gatosFilter.length-1)/nrPerPage)+p-1">
+                    {{Math.floor((gatosFilter.length-1)/nrPerPage)+p}}
                 </button>
                 <button class="w3-button"
                         v-bind:disabled="page===Math.floor(gatosFilter.length/nrPerPage)"
