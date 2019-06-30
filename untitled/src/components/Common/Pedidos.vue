@@ -27,9 +27,11 @@ import route from '../../router/index'
 
 export default {
   name: 'Pedidos',
+
   data: () => ({
     pedidosList: {}
   }),
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')

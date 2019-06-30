@@ -228,17 +228,17 @@ export default {
             this.mudarFoto = false
             this.success = 1
             this.error = 0
-            this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos'
+            this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos.'
             this.stateChange(-1)
           }).catch(e => {
             this.success = 0
             this.error = 1
-            this.message = 'Não foi possível efetuar as alterações.'
+            this.message = 'Não foi possível efetuar as alterações. Por favor, tente novamente.'
           })
         } else {
           this.error = 1
           this.success = 0
-          this.message = 'Password não coincide, por favor tente novamente.'
+          this.message = 'Password não coincide. Por favor, tente novamente.'
         }
       }
     },

@@ -109,6 +109,7 @@ import route from '../../router/index'
 
 export default {
   name: 'UserPerfilEdit',
+
   data: function () {
     return {
       utilizador: null,
@@ -128,6 +129,7 @@ export default {
       confirmPass: null
     }
   },
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -140,6 +142,7 @@ export default {
     }
     this.FetchData()
   },
+
   methods: {
     stateChange (newState) {
       setTimeout(function () {
@@ -148,9 +151,11 @@ export default {
         }
       }, 3000)
     },
+
     closeErrorNotification () {
       this.error = 0
     },
+
     FetchData: function () {
       const value = this.$session.get('user')
       axios.get(this.$axiosurl + 'UtilizadorComum?email=' + value[0] + '&emailPedido=' + value[0]).then(response => {
@@ -178,17 +183,17 @@ export default {
               this.mudarFoto = false
               this.success = 1
               this.error = 0
-              this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos'
+              this.message = 'As alterações foram efetuadas com sucesso. Irá ser redirecionado dentro de 3 segundos.'
               this.stateChange(-1)
             }).catch(e => {
               this.success = 0
               this.error = 1
-              this.message = 'Não foi possível efetuar as alterações.'
+              this.message = 'Não foi possível efetuar as alterações. Por favor, tente novamente.'
             })
         } else {
           this.error = 1
           this.success = 0
-          this.message = 'Password não coincide, por favor tente novamente.'
+          this.message = 'Password não coincide. Por favor, tente novamente.'
         }
       }
     },

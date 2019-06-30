@@ -26,14 +26,14 @@
         </select></label>
         <label><select v-model="animal.Sexo" style="width: 25%" required>
           <option value="" disabled>Sexo</option>
+            <option value="F">Fêmea</option>
           <option value="M">Macho</option>
-          <option value="F">Fêmea</option>
         </select></label>
         <br>
         <br>
         <label><select v-model="animal.Idade" style="width: 25%" required>
           <option value="" disabled>Idade</option>
-          <option value="B">Bebé (Menos de 6 Meses)</option>
+          <option value="B">Bebé (Menos de 6 meses)</option>
           <option value="J">Jovem</option>
           <option value="A">Adulto</option>
         </select></label>
@@ -47,7 +47,7 @@
         <br>
         <br>
         <label><select v-model="animal.CorPelo" style="width: 25%" required>
-          <option value="" disabled>Cor do Pêlo</option>
+          <option value="" disabled>Cor do pêlo</option>
           <option value="Bege">Bege</option>
           <option value="Branco">Branco</option>
           <option value="Castanho">Castanho</option>
@@ -57,8 +57,8 @@
           <option value="Indefinido">Indefinido</option>
         </select></label>
         <label><select v-model="animal.CompPelo" style="width: 25%" required>
-          <option value="" disabled>Comprimento de Pêlo</option>
-          <option value="S">Sem Pêlo</option>
+          <option value="" disabled>Comprimento de pêlo</option>
+          <option value="S">Sem pêlo</option>
           <option value="C">Curto</option>
           <option value="M">Médio</option>
           <option value="L">Longo</option>
@@ -66,27 +66,27 @@
         <br v-if="animal.Discriminator==='C'">
         <br v-if="animal.Discriminator==='C'">
         <label><select v-if="animal.Discriminator==='C'" v-model="animal.Raca" style="width: 50%" required>
-          <option value="" disabled>Raça Cão</option>
-          <option value="Buldogue">Buldogue</option>
+          <option value="" disabled>Raça do cão</option>
           <option value="Beagle">Beagle</option>
+          <option value="Buldogue">Buldogue</option>
           <option value="Golden Retriever">Golden Retriever</option>
           <option value="Lavrador">Lavrador</option>
           <option value="Pastor Alemao">Pastor Alemão</option>
           <option value="Poodle">Poodle</option>
           <option value="Rottwiller">Rottwiller</option>
-          <option value="Outro">Outro</option>
-          <option value="Sem Raça Definida">Sem Raça Definida</option>
+          <option value="Outro">Outra raça</option>
+          <option value="Sem Raça Definida">Sem raça definida</option>
         </select></label>
         <br v-if="animal.Discriminator==='G'">
         <br v-if="animal.Discriminator==='G'">
         <label><select v-if="animal.Discriminator==='G'" v-model="animal.Raca" style="width: 50%" required>
-          <option value="" disabled>Raça Gato</option>
-          <option value="Sem Raça Definida">Sem Raça Definida</option>
+          <option value="" disabled>Raça do gato</option>
           <option value="Persa">Persa</option>
-          <option value="Siamês">Siamês</option>
           <option value="Ragdoll">Ragdoll</option>
           <option value="Scottish Fold">Scottish Fold</option>
-          <option value="Outro">Outro</option>
+          <option value="Siamês">Siamês</option>
+          <option value="Outro">Outra raça</option>
+          <option value="Sem Raça Definida">Sem raça definida</option>
         </select></label>
         <br>
         <br>
@@ -121,6 +121,7 @@
 <script>
 import axios from 'axios'
 import route from '../../router/index'
+
 export default {
   name: 'AddAnimalParaAdocao',
   data: () => ({
@@ -144,15 +145,18 @@ export default {
     },
     mudarFoto: false
   }),
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
     }
   },
+
   methods: {
     closeErrorNotification () {
       this.error = 0
     },
+
     stateChange (newState) {
       setTimeout(function () {
         if (newState === -1) {
@@ -160,6 +164,7 @@ export default {
         }
       }, 3000)
     },
+
     addAnimal () {
       this.animal['email'] = this.$session.get('user')[0]
       axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -168,13 +173,13 @@ export default {
           if (response.data.msg === true) {
             this.error = 0
             this.success = 1
-            this.message = 'O animal foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos'
+            this.message = 'O animal foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos.'
             this.stateChange(-1)
           }
         }).catch(e => {
           this.success = 0
           this.error = 1
-          this.message = 'Não foi possível inserir o animal.'
+          this.message = 'Não foi possível inserir o animal. Por favor, tente novamente.'
         })
     },
 

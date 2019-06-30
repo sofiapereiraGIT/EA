@@ -3,7 +3,7 @@
     <div class="transbox">
       <h1 style="text-align: center">Sobre nós</h1>
       <hr>
-      <p>Somos um Grupo de Alunos de EA</p>
+      <p>Somos um grupo de alunos de EA com carinho por animais.</p>
     </div>
   </div>
 </template>

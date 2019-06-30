@@ -75,6 +75,7 @@ import route from '../../router/index'
 
 export default {
   name: 'GerirAnimais',
+
   data: () => ({
     animais: {},
     selectedName: '',
@@ -82,6 +83,7 @@ export default {
     selectedDiscriminator: 'T',
     selAnimal: null
   }),
+
   mounted: function () {
     if (this.$session.has('user') === false) {
       route.push('/Login')
@@ -93,6 +95,7 @@ export default {
         /* this.tipo = this.$session.get('user')[1] */
       }).catch()
   },
+
   computed: {
     filteredAnimals: function () {
       let nameList = []

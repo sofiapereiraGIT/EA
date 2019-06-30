@@ -61,7 +61,7 @@
                         </div>
                         <div class="group">
                             <input id="TermsUC" type="checkbox" class="check" checked>
-                            <label for="TermsUC"><span class="icon"></span> Aceito os Termos e Condições</label>
+                            <label for="TermsUC"><span class="icon"></span> Aceito os termos e condições</label>
                         </div>
                         <div class="group">
                             <input type="submit" class="button" value="Registar">
@@ -154,8 +154,10 @@
 <script>
 import axios from 'axios'
 import route from '../../router/index'
+
 export default {
   name: 'Registar',
+
   data: () => ({
     success: 0,
     error: 0,
@@ -185,10 +187,12 @@ export default {
       fotografia: ''
     }
   }),
+
   methods: {
     closeErrorNotification () {
       this.error = 0
     },
+
     stateChange (newState) {
       setTimeout(function () {
         if (newState === -1) {
@@ -196,45 +200,47 @@ export default {
         }
       }, 3000)
     },
+
     registarUC () {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       if (this.uc.password !== this.uc.confPassword) {
         this.success = 0
         this.error = 1
-        this.message = 'As Passwords Não Coincidem'
+        this.message = 'As passwords não coincidem. Por favor, tente novamente.'
       } else {
         axios.post(this.$axiosurl + 'UtilizadorComum', this.uc)
           .then(response => {
             if (response.data.msg === true) {
-              this.message = 'Foi Registado Com Sucesso. Irá ser Redirecionado Dentro de 3 Segundos.'
+              this.message = 'Conta registada com sucesso. Irá ser redirecionado dentro de 3 segundos.'
               this.error = 0
               this.success = 1
               this.stateChange(-1)
             }
           }).catch(e => {
-            this.message = 'Não Foi Possível Registar o Utilizador.'
+            this.message = 'Não foi possível registar a sua conta. Por favor, tente novamente.'
             this.success = 0
             this.error = 1
           })
       }
     },
+
     registarCanil () {
       axios.defaults.headers.post['Content-Type'] = 'application/json'
       if (this.c.password !== this.c.confPassword) {
         this.success = 0
         this.error = 1
-        this.message = 'As Passwords Não Coincidem'
+        this.message = 'As passwords não coincidem. Por favor, tente novamente.'
       } else {
         axios.post(this.$axiosurl + 'Canil', this.c)
           .then(response => {
             if (response.data.msg === true) {
-              this.message = 'Foi Registado Com Sucesso. Irá ser Redirecionado Dentro de 3 Segundos.'
+              this.message = 'Conta registada com sucesso. Irá ser redirecionado dentro de 3 segundos.'
               this.error = 0
               this.success = 1
               this.stateChange(-1)
             }
           }).catch(e => {
-            this.message = 'Não Foi Possível Registar o Utilizador'
+            this.message = 'Não foi possível registar a sua conta. Por favor, tente novamente.'
             this.success = 0
             this.error = 1
           })

@@ -21,18 +21,22 @@
 
 <script>
 import router from '../../../router/index'
+
 export default {
   name: 'Header',
+
   data () {
     return {
       user: null
     }
   },
+
   mounted: function () {
     if (this.$session.has('user')) {
       this.user = this.$session.get('user')
     }
   },
+
   methods: {
     logout () {
       if (this.$session.has('user')) {
@@ -41,9 +45,11 @@ export default {
         router.push('/')
       }
     },
+
     userLogin () {
       return this.$session.has('user')
     },
+
     utilizadorC () {
       return this.$session.get('user')[1] === 0
     }
