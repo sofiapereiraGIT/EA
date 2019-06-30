@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <div class="w3-row w3-padding-32 w3-section" style="padding-bottom:50px; padding-left: 50px; padding-right: 50px;">
+    <div class="w3-container w3-card w3-light-blue" style="margin-top: 10em; margin-bottom:10em; margin-left: 5em; margin-right: 5em;">
+       <div class="w3-row w3-section">
             <div class="w3-col m6 w3-container">
                 <img v-if="utilizador.fotografia===null || utilizador.fotografia==='' || utilizador.fotografia==='null'" src="../../../img/userCanis.png" style="margin-bottom: 10px" class="img w3-image">
                 <img v-else :src="require('../../../img/'+utilizador.fotografia)" style="margin-bottom: 10px" class="img w3-image">
-                <br>
-                <router-link to="/AdotarCaes">Veja os cães deste canil</router-link><br>
-                <router-link to="/AdotarGatos">Veja os gatos deste canil</router-link>
             </div>
             <div class="w3-col m6 w3-container">
                 <div class="w3-row w3-padding-32 w3-section">
