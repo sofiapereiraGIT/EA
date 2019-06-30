@@ -85,43 +85,18 @@ export default {
       .then(response => {
         this.nrCaes = response.data.caes
         this.nrGatos = response.data.gatos
-        console.log(this.nrCaes)
-        console.log(this.nrGatos)
       }).catch()
 
-    if (!this.$session.has('catFacts')) {
-      console.log(this.factCat)
-
-      axios.defaults.headers['Content-Type'] = 'Accept: application/json'
-      axios.defaults.headers['dataType'] = 'jsonp'
-      axios.defaults.headers['responseType'] = 'application/json'
-      axios.get('https://us-central1-cat-api-fb6de.cloudfunctions.net/fact')
-        .then(response => {
-          console.log(response.data)
-          this.factCat = response.data
-          this.$session.set('catFacts', [this.factCat, 1])
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    } else {
-      axios.defaults.headers['Content-Type'] = 'Accept: application/json'
-      axios.defaults.headers['dataType'] = 'jsonp'
-      axios.defaults.headers['responseType'] = 'application/json'
-      axios.get('https://us-central1-cat-api-fb6de.cloudfunctions.net/fact')
-        .then(response => {
-          console.log(response.data)
-          this.factCat = response.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      this.factCat = this.$session.get('catFacts')[0]
-      console.log(this.factCat)
-      const times = this.$session.get('catFacts')[1] + 1
-      this.$session.set('catFacts', [this.factCat, times])
-      console.log('reutilizar catsFacts da sessão pela ' + times + ' vez')
-    }
+    axios.defaults.headers['Content-Type'] = 'Accept: application/json'
+    axios.defaults.headers['dataType'] = 'jsonp'
+    axios.defaults.headers['responseType'] = 'application/json'
+    axios.get('https://us-central1-cat-api-fb6de.cloudfunctions.net/fact')
+      .then(response => {
+        this.factCat = response.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>
