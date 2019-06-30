@@ -180,6 +180,7 @@ export default {
         .then(response => {
           if (response.data.msg === true) {
             var animais = this.$session.get('userAnimals')
+            this.animal.ID = response.data.UltimoID
             animais.push(this.animal)
             this.$session.set('userAnimals', animais)
             this.error = 0
