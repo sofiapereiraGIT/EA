@@ -329,37 +329,26 @@ export default {
   }),
 
   mounted: function () {
-    if (!this.$session.has('caesAdotar') || this.$session.get('caesAdotar')[1] > 10) {
-      console.log('getCaesAdotar')
-
-      if (this.$session.has('user')) {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'CaesAdotar?email=' + this.$session.get('user')[0])
-          .then(response => {
-            this.caes = response.data.caes
-            this.$session.set('caesAdotar', [this.caes, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'CaesAdotar')
-          .then(response => {
-            this.caes = response.data.caes
-            this.$session.set('caesAdotar', [this.caes, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
+    if (this.$session.has('user')) {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'CaesAdotar?email=' + this.$session.get('user')[0])
+        .then(response => {
+          this.caes = response.data.caes
+        })
+        .catch(err => {
+          console.log(err)
+        })
     } else {
-      this.caes = this.$session.get('caesAdotar')[0]
-      var times = this.$session.get('caesAdotar')[1] + 1
-      this.$session.set('caesAdotar', [this.caes, times])
-      console.log('reutilizar caes adotar da sessão pela ' + times + ' vez')
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'CaesAdotar')
+        .then(response => {
+          this.caes = response.data.caes
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
     if (!this.$session.has('canis') || this.$session.get('canis')[1] > 15) {
@@ -406,7 +395,6 @@ export default {
       this.canis = this.$session.get('canis')[0]
       var timesC = this.$session.get('canis')[1] + 1
       this.$session.set('canis', [this.canis, timesC])
-      console.log('reutilizar canis da sessão pela ' + timesC + ' vez')
     }
   },
 

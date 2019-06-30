@@ -171,37 +171,26 @@ export default {
   }),
 
   mounted: function () {
-    if (!this.$session.has('gatosPerdidos') || this.$session.get('gatosPerdidos')[1] > 10) {
-      console.log('getGatosPerdidos')
-
-      if (this.$session.has('user')) {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'GatosPerdidos?email=' + this.$session.get('user')[0])
-          .then(response => {
-            this.gatos = response.data.gatos
-            this.$session.set('gatosPerdidos', [this.gatos, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'GatosPerdidos')
-          .then(response => {
-            this.gatos = response.data.gatos
-            this.$session.set('gatosPerdidos', [this.gatos, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
+    if (this.$session.has('user')) {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'GatosPerdidos?email=' + this.$session.get('user')[0])
+        .then(response => {
+          this.gatos = response.data.gatos
+        })
+        .catch(err => {
+          console.log(err)
+        })
     } else {
-      this.gatos = this.$session.get('gatosPerdidos')[0]
-      var times = this.$session.get('gatosPerdidos')[1] + 1
-      this.$session.set('gatosPerdidos', [this.gatos, times])
-      console.log('reutilizar gatos perdidos da sessão pela ' + times + ' vez')
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'GatosPerdidos')
+        .then(response => {
+          this.gatos = response.data.gatos
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
 

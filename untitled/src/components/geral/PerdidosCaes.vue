@@ -171,37 +171,26 @@ export default {
   }),
 
   mounted: function () {
-    if (!this.$session.has('caesPerdidos') || this.$session.get('caesPerdidos')[1] > 10) {
-      console.log('getCaesPerdidos')
-
-      if (this.$session.has('user')) {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'CaesPerdidos?email=' + this.$session.get('user')[0])
-          .then(response => {
-            this.caes = response.data.caes
-            this.$session.set('caesPerdidos', [this.caes, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } else {
-        axios.defaults.headers['Content-Type'] = 'application/json'
-        axios
-          .get(this.$axiosurl + 'CaesPerdidos')
-          .then(response => {
-            this.caes = response.data.caes
-            this.$session.set('caesPerdidos', [this.caes, 1])
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
+    if (this.$session.has('user')) {
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'CaesPerdidos?email=' + this.$session.get('user')[0])
+        .then(response => {
+          this.caes = response.data.caes
+        })
+        .catch(err => {
+          console.log(err)
+        })
     } else {
-      this.caes = this.$session.get('caesPerdidos')[0]
-      var times = this.$session.get('caesPerdidos')[1] + 1
-      this.$session.set('caesPerdidos', [this.caes, times])
-      console.log('reutilizar caes perdidos da sessão pela ' + times + ' vez')
+      axios.defaults.headers['Content-Type'] = 'application/json'
+      axios
+        .get(this.$axiosurl + 'CaesPerdidos')
+        .then(response => {
+          this.caes = response.data.caes
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
 

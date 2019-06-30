@@ -97,7 +97,7 @@ export default {
   }),
 
   mounted: function () {
-    if (!this.$session.has('canis') || this.$session.get('canis')[1] > 15) {
+    if (!this.$session.has('canis') || this.$session.get('canis')[1] > 5) {
       console.log('getCanis')
 
       if (this.$session.has('user')) {
