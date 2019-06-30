@@ -118,7 +118,7 @@ export default {
     },
     getIdade (idade) {
       if (idade === 'B') {
-        return 'Bebe (Menos de 6 meses)'
+        return 'Bebé (Menos de 6 meses)'
       }
       if (this.animalData.Idade === 'J') {
         return 'Jovem'
