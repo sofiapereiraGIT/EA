@@ -467,61 +467,12 @@ export default {
       var timesC = this.$session.get('canis')[1] + 1
       this.$session.set('canis', [this.canis, timesC])
     }
-
-    /* get utiComuns */
-    if (this.$session.has('user')) {
-      axios.defaults.headers['Content-Type'] = 'application/json'
-      axios.get(this.$axiosurl + 'UtilizadoresComuns?email=' + this.$session.get('user')[0])
-        .then(response => {
-          this.utiComuns = response.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    } else {
-      axios.defaults.headers['Content-Type'] = 'application/json'
-      axios.get(this.$axiosurl + 'UtilizadoresComuns')
-        .then(response => {
-          this.utiComuns = response.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
   },
 
   computed: {
     gatosFilter: function () {
-      var utiDoSelConcelho = []
-      var selConcelho = this.selConcelho
-
-      this.canis.forEach(function (c) {
-        if (selConcelho === '') {
-          utiDoSelConcelho.push(c)
-        } else if (selConcelho === c.concelho) {
-          utiDoSelConcelho.push(c)
-        }
-      })
-
-      this.utiComuns.forEach(function (c) {
-        if (selConcelho === '') {
-          utiDoSelConcelho.push(c)
-        } else if (selConcelho === c.concelho) {
-          utiDoSelConcelho.push(c)
-        }
-      })
-
-      var gatosFilterConcelho = []
-
-      this.gatos.forEach(function (gato) {
-        utiDoSelConcelho.forEach(function (uti) {
-          if (uti.email === gato.UtilizadorEmail) {
-            gatosFilterConcelho.push(gato)
-          }
-        })
-      })
-
       var gatosFilter = []
+      var selConcelho = this.selConcelho
       var selCanilEmail = this.selCanilEmail
       var selEstado = this.selEstado
       var selSexo = this.selSexo
@@ -531,8 +482,9 @@ export default {
       var selCompPelo = this.selCompPelo
       var selCorPelo = this.selCorPelo
 
-      gatosFilterConcelho.forEach(function (g) {
-        if ((selCanilEmail === '' || selCanilEmail === g.UtilizadorEmail) &&
+      this.gatos.forEach(function (g) {
+        if ((selConcelho === '' || selConcelho === g.Concelho) &&
+            (selCanilEmail === '' || selCanilEmail === g.UtilizadorEmail) &&
             (selEstado === '' || selEstado === g.Estado) &&
             (selSexo === '' || selSexo === g.Sexo) &&
             (selIdade === '' || selIdade === g.Idade) &&

@@ -104,7 +104,7 @@
                                         <option value="Castanho">Castanho</option>
                                         <option v-if="animalNovo.CorPelo === 'Cinzento'" v-bind:value="animalNovo.CorPelo">Cinzento</option>
                                         <option value="Cinzento">Cinzento</option>
-                                        <option v-if="animalNovo.CorPelo === 'Laraja'" v-bind:value="animalNovo.CorPelo">Laranja</option>
+                                        <option v-if="animalNovo.CorPelo === 'Laranja'" v-bind:value="animalNovo.CorPelo">Laranja</option>
                                         <option value="Laranja">Laranja</option>
                                         <option v-if="animalNovo.CorPelo === 'Preto'" v-bind:value="animalNovo.CorPelo">Preto</option>
                                         <option value="Preto">Preto</option>

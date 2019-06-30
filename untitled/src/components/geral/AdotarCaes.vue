@@ -485,61 +485,12 @@ export default {
       var timesC = this.$session.get('canis')[1] + 1
       this.$session.set('canis', [this.canis, timesC])
     }
-
-    /* get utiComuns */
-    if (this.$session.has('user')) {
-      axios.defaults.headers['Content-Type'] = 'application/json'
-      axios.get(this.$axiosurl + 'UtilizadoresComuns?email=' + this.$session.get('user')[0])
-        .then(response => {
-          this.utiComuns = response.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    } else {
-      axios.defaults.headers['Content-Type'] = 'application/json'
-      axios.get(this.$axiosurl + 'UtilizadoresComuns')
-        .then(response => {
-          this.utiComuns = response.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
   },
 
   computed: {
     caesFilter: function () {
-      var utiDoSelConcelho = []
-      var selConcelho = this.selConcelho
-
-      this.canis.forEach(function (c) {
-        if (selConcelho === '') {
-          utiDoSelConcelho.push(c)
-        } else if (selConcelho === c.concelho) {
-          utiDoSelConcelho.push(c)
-        }
-      })
-
-      this.utiComuns.forEach(function (c) {
-        if (selConcelho === '') {
-          utiDoSelConcelho.push(c)
-        } else if (selConcelho === c.concelho) {
-          utiDoSelConcelho.push(c)
-        }
-      })
-
-      var caesFilterConcelho = []
-
-      this.caes.forEach(function (cao) {
-        utiDoSelConcelho.forEach(function (uti) {
-          if (uti.email === cao.UtilizadorEmail) {
-            caesFilterConcelho.push(cao)
-          }
-        })
-      })
-
       var caesFilter = []
+      var selConcelho = this.selConcelho
       var selCanilEmail = this.selCanilEmail
       var selEstado = this.selEstado
       var selSexo = this.selSexo
@@ -549,8 +500,9 @@ export default {
       var selCompPelo = this.selCompPelo
       var selCorPelo = this.selCorPelo
 
-      caesFilterConcelho.forEach(function (c) {
-        if ((selCanilEmail === '' || selCanilEmail === c.UtilizadorEmail) &&
+      this.caes.forEach(function (c) {
+        if ((selConcelho === '' || selConcelho === c.Concelho) &&
+              (selCanilEmail === '' || selCanilEmail === c.UtilizadorEmail) &&
               (selEstado === '' || selEstado === c.Estado) &&
               (selSexo === '' || selSexo === c.Sexo) &&
               (selIdade === '' || selIdade === c.Idade) &&
