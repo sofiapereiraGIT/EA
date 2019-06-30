@@ -154,7 +154,6 @@ export default {
         }
       }, 3000)
     },
-
     submitAnimal () {
       this.animal.email = this.$session.get('user')[0]
       this.animal.Estado = 'P'
@@ -163,6 +162,9 @@ export default {
       axios.post(this.$axiosurl + 'AddAnimal', this.animal)
         .then(response => {
           if (response.data.msg === true) {
+            let animais = this.$session.get('userAnimals')
+            animais.push(this.animal)
+            this.$session.set('userAnimals', animais)
             this.error = 0
             this.success = 1
             this.message = 'O desaparecimento foi registado com sucesso. Irá ser redirecionado dentro de 3 segundos.'
@@ -174,13 +176,11 @@ export default {
           this.message = 'Não foi possível comunicar o desaparecimento. Por favor, tente novamente.'
         })
     },
-
     uploadFotografia () {
       this.animal.Fotografia = this.getElementById('fotoAnimal')
     }
   }
 }
-
 </script>
 
 <style scoped>
