@@ -53,7 +53,7 @@
         </div>
 
         <!-- Pagination -->
-        <nav class="w3-center" v-if="(canisDoSelconcelho.length-1)>8" style="margin-bottom: 25px;">
+        <nav class="w3-center" v-if="(canisDoSelconcelho.length-1)>nrPerPage" style="margin-bottom: 25px;">
             <div class="w3-bar">
                 <button class="w3-button" v-bind:disabled="page===0" v-on:click="page -= 1">
                     Anterior
