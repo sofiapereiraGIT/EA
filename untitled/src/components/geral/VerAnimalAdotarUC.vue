@@ -15,7 +15,8 @@
                 <form class="login100-form validate-form">
                     <div class="columnAlign">
                         <div class="login100-form-avatar">
-                            <img v-if="animalData.Fotografia==='' || animalData.Fotografia===null || animalData.Fotografia==='null'" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
+                            <img v-if="(animalData.Discriminator==='Cão' && (animalData.Fotografia==='' || animalData.Fotografia===null || animalData.Fotografia==='null'))" src="../../assets/cao.png" style="margin-bottom: 10px" class="img w3-image">
+                            <img v-if="(animalData.Discriminator==='Gato' && (animalData.Fotografia==='' || animalData.Fotografia===null || animalData.Fotografia==='null'))" src="../../assets/gato.png" style="margin-bottom: 10px" class="img w3-image">
                             <img v-if="animalData.Fotografia && animalData.Fotografia!=='null'" :src="require('../../../img/'+animalData.Fotografia)" style="margin-bottom: 10px" class="img w3-image">
                         </div>
                         <br>
@@ -195,6 +196,10 @@ export default {
             this.message = 'O seu pedido foi registado com sucesso.'
             this.error = 0
             this.success = 1
+          } else {
+            this.message = 'Já possui um pedido para esse animal.'
+            this.error = 1
+            this.success = 0
           }
         }).catch(e => {
           this.message = 'Não foi possível registar o seu pedido. Por favor, tente novamente.'
@@ -213,6 +218,10 @@ export default {
             this.message = 'O seu pedido foi registado com sucesso.'
             this.error = 0
             this.success = 1
+          } else {
+            this.message = 'Já possui um pedido para esse animal.'
+            this.error = 1
+            this.success = 0
           }
         }).catch(e => {
           this.message = 'Não foi possível registar o seu pedido. Por favor, tente novamente.'
