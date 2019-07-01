@@ -167,7 +167,7 @@
                                 </div>
                                 <br>
                                 <div class="columnBtn">
-                                    <input class="login100-form-btn" type="submit" value="Guardar">
+                                    <input class="login100-form-btn" type="submit" value="Guardar" style="float: left">
                                     <br>
                                 </div>
                             </div>
