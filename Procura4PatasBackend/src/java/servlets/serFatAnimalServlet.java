@@ -107,6 +107,7 @@ public class serFatAnimalServlet extends HttpServlet {
             for(Pedido p :  pedidos) {
                 if( p.getAnimal().getID() == id) {
                     possui = false;
+                    break;
                 }
             }
         }
@@ -117,7 +118,7 @@ public class serFatAnimalServlet extends HttpServlet {
             adotado = P4P.serFatAnimal(session, email, emailUtilComum, id); 
         }
   
-         out.println("{ \"msg\": "+adotado+"}");
+         out.println("{ \"msg\": "+adotado+",\"possui\": "+possui+"}");
          out.flush();
          out.close();
         
