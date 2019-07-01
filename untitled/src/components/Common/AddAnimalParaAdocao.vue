@@ -106,7 +106,7 @@
         <br>
         <br>
           <label class="container">Para adoção
-              <input type="radio" name="radio" value="A" v-model="animal.Estado">
+              <input type="radio" name="radio" value="D" v-model="animal.Estado">
               <span class="checkmark"></span>
           </label>
           <label class="container">Encontrei este animal na rua
