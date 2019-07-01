@@ -120,7 +120,7 @@ public class AdotarAnimalServlet extends HttpServlet {
         }
         
        
-        out.println("{ \"msg\": "+adotado+"}");
+        out.println("{ \"msg\": "+adotado+",\"possui\": "+possui+"}");
         out.flush();
         out.close();
        
