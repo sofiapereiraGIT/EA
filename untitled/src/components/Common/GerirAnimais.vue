@@ -90,11 +90,19 @@ export default {
       axios.defaults.headers['Content-Type'] = 'application/json'
       axios.get(this.$axiosurl + 'TodosAnimaisUser?emailQuemQuero=' + this.$session.get('user')[0] + '&email=' + this.$session.get('user')[0])
         .then(response => {
-          this.animais = response.data.todos
+          this.animais = response.data.todos.sort(function compare (a, b) {
+            if (a.Nome < b.Nome) { return -1 }
+            if (a.Nome > b.Nome) { return 1 }
+            return 0
+          })
           this.$session.set('userAnimals', this.animais)
         }).catch(e => { alert(e) })
     } else {
-      this.animais = this.$session.get('userAnimals')
+      this.animais = this.$session.get('userAnimals').sort(function compare (a, b) {
+        if (a.Nome < b.Nome) { return -1 }
+        if (a.Nome > b.Nome) { return 1 }
+        return 0
+      })
     }
   },
   computed: {
